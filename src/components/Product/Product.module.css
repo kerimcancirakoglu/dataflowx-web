@@ -1,0 +1,142 @@
+.section {
+  padding: 12vh 6vw;
+}
+
+.inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr;
+  align-items: center;
+}
+
+.left {
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+  max-width: 850px;
+}
+
+.eyebrow {
+  /* label-mono applied globally */
+}
+
+.title {
+  /* display-lg applied globally */
+}
+
+.desc {
+  /* body-text applied globally */
+  text-align: justify;
+  max-width: none; /* Override the 48ch from body-text to let it expand */
+}
+
+.features {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-top: 16px;
+  align-items: flex-start;
+}
+
+.featureRow {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  padding: 8px 24px 8px 8px;
+  border-radius: 100px;
+  width: fit-content;
+  backdrop-filter: blur(12px);
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.2);
+}
+
+.featureIcon {
+  flex-shrink: 0;
+}
+
+.featureText {
+  font-size: 1.1rem;
+  color: var(--color-text);
+  line-height: 1.5;
+  font-weight: 400;
+}
+
+.cta {
+  align-self: flex-start;
+}
+
+/* Right visual */
+.right {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.productVisual {
+  position: relative;
+  width: 100%;
+  max-width: 480px;
+  aspect-ratio: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.productGlow {
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  background: radial-gradient(ellipse at center,
+    rgba(0, 180, 255, 0.08) 0%,
+    rgba(245, 167, 6, 0.05) 50%,
+    transparent 70%
+  );
+  animation: breathe 4s ease-in-out infinite;
+}
+
+.productPlaceholder {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  height: 100%;
+  border: none;
+  background: transparent;
+  backdrop-filter: none;
+}
+
+.productLogoImage {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 24px;
+  display: block;
+  transform: scale(1.15);
+  transition: transform 0.4s ease;
+}
+
+@keyframes breathe {
+  0%, 100% { opacity: 0.6; transform: scale(1); }
+  50% { opacity: 1; transform: scale(1.05); }
+}
+
+@media (max-width: 900px) {
+  .inner {
+    grid-template-columns: 1fr;
+    gap: 48px;
+  }
+
+  .right {
+    order: -1;
+  }
+
+  .productVisual {
+    max-width: 320px;
+    aspect-ratio: 1;
+  }
+}

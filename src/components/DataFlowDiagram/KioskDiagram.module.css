@@ -1,0 +1,107 @@
+.container {
+  width: 100%;
+  height: 400px;
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+}
+
+.imageWrapper {
+  position: relative;
+  height: 90%;
+  display: inline-block;
+}
+
+.kioskImage {
+  height: 100%;
+  width: auto;
+  display: block;
+  filter: drop-shadow(0 20px 30px rgba(0, 0, 0, 0.5));
+}
+
+/* USB Drive */
+.usbDrive {
+  position: absolute;
+  top: 48.5%; /* Approximate height of the deck's right edge */
+  right: -50px; /* Start outside */
+  width: 35px;
+  height: 12px;
+  background: #2a2a35;
+  border-radius: 2px;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.5);
+  border: 1px solid rgba(255,255,255,0.1);
+  z-index: 30;
+}
+
+.usbConnector {
+  width: 8px;
+  height: 8px;
+  background: #d4d4d4;
+  border-radius: 1px 0 0 1px;
+}
+
+.usbBody {
+  flex: 1;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #111;
+  transition: background 0.5s ease;
+}
+
+.usbIcon {
+  width: 8px;
+  height: 8px;
+  color: #ff3333; /* Infected red */
+}
+
+/* Screen Area */
+.screenArea {
+  position: absolute;
+  top: 10%;
+  left: 14%;
+  width: 72%;
+  height: 28%;
+  z-index: 20;
+  overflow: hidden;
+  border-radius: 2px;
+  transform: perspective(600px) rotateX(-5deg); /* Slight perspective matching the screen slant */
+}
+
+.laser {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background: #00B4FF;
+  box-shadow: 0 0 10px #00B4FF, 0 0 20px #00B4FF;
+  opacity: 0;
+}
+
+/* Particles Container */
+.particlesContainer {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 25;
+  pointer-events: none;
+}
+
+.particle {
+  position: absolute;
+  width: 4px;
+  height: 4px;
+  background: #ff3333;
+  border-radius: 50%;
+  box-shadow: 0 0 8px #ff3333;
+  opacity: 0;
+}

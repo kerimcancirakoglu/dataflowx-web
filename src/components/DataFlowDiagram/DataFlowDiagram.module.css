@@ -1,0 +1,156 @@
+.container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1.5rem;
+  width: 100%;
+  height: 100%;
+  padding: 1.5rem;
+  border-radius: 12px;
+  box-sizing: border-box;
+  position: relative;
+}
+
+.networkBox {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(145deg, #16223a, #0b1120);
+  border: 1px solid rgba(0, 229, 255, 0.2);
+  border-radius: 12px;
+  padding: 1rem;
+  width: 100px;
+  z-index: 2;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5);
+  flex-shrink: 0;
+}
+
+.networkIcon {
+  width: 36px;
+  height: 36px;
+  margin-bottom: 0.75rem;
+  color: #00E5FF;
+}
+
+.networkLabel {
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: #a0aec0;
+  text-align: center;
+}
+
+.centerGateway {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 2rem;
+  margin: 0;
+  position: relative;
+  z-index: 1;
+  flex-shrink: 0;
+}
+
+/* Air gap striped visual */
+.airGap {
+  position: relative;
+  width: 40px;
+  height: 150px;
+  background: repeating-linear-gradient(45deg,
+      rgba(255, 255, 255, 0.02),
+      rgba(255, 255, 255, 0.02) 10px,
+      rgba(255, 255, 255, 0.05) 10px,
+      rgba(255, 255, 255, 0.05) 20px);
+  border-left: 1px dashed rgba(245, 167, 6, 0.5);
+  border-right: 1px dashed rgba(245, 167, 6, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 4px;
+}
+
+.airGapLabel {
+  color: #F5A706;
+  font-size: 0.75rem;
+  font-weight: bold;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  transform: rotate(-90deg);
+  white-space: nowrap;
+}
+
+.diodeBox {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: rgba(0, 0, 0, 0.6);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  padding: 0.5rem 0.75rem;
+  border-radius: 8px;
+  z-index: 2;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.4);
+}
+
+.txBox {
+  border-color: rgba(245, 167, 6, 0.4);
+}
+
+.rxBox {
+  border-color: rgba(0, 229, 255, 0.4);
+}
+
+.diodeLabel {
+  font-weight: bold;
+  font-size: 1rem;
+}
+
+.txLabel {
+  color: #F5A706;
+}
+
+.rxLabel {
+  color: #00E5FF;
+}
+
+.diodeText {
+  color: #cbd5e0;
+  font-size: 0.75rem;
+  display: flex;
+  flex-direction: column;
+}
+
+.diodeText span {
+  font-size: 0.6rem;
+  color: #718096;
+}
+
+.connectionLine {
+  position: absolute;
+  top: 50%;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2) 10%, rgba(255, 255, 255, 0.2) 90%, transparent);
+  transform: translateY(-50%);
+  z-index: 0;
+}
+
+.packet {
+  position: absolute;
+  top: 50%;
+  width: 12px;
+  height: 12px;
+  background: #00E5FF;
+  border-radius: 50%;
+  transform: translateY(-50%);
+  box-shadow: 0 0 10px #00E5FF, 0 0 20px #00E5FF;
+  opacity: 0;
+  z-index: 3;
+}
+
+.packetReverse {
+  background: #F5A706;
+  box-shadow: 0 0 10px #F5A706, 0 0 20px #F5A706;
+}
+
+/* Animations are handled via GSAP in the component */

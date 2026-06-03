@@ -1,0 +1,220 @@
+.container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  padding: 2rem;
+  border-radius: 12px;
+  perspective: 2000px;
+  overflow: hidden;
+}
+
+.scene {
+  position: relative;
+  width: 400px;
+  height: 400px;
+  transform-style: preserve-3d;
+  /* Isometric view */
+  transform: rotateX(60deg) rotateZ(-45deg);
+}
+
+/* Floor (Background Space) */
+.floor {
+  position: absolute;
+  width: 200%;
+  height: 200%;
+  left: -50%;
+  top: -50%;
+  background-image: 
+    linear-gradient(rgba(46, 138, 255, 0.05) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(46, 138, 255, 0.05) 1px, transparent 1px);
+  background-size: 50px 50px;
+  transform: translateZ(-20px);
+}
+
+/* ── Sandbox Box Construction ── */
+.sandboxContainer {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 240px;
+  height: 160px;
+  margin-left: -120px;
+  margin-top: -80px;
+  transform-style: preserve-3d;
+}
+
+.sandboxFloor {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(255, 77, 77, 0.15);
+  background-image: 
+    linear-gradient(rgba(255, 77, 77, 0.5) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 77, 77, 0.5) 1px, transparent 1px);
+  background-size: 20px 20px;
+  box-shadow: 0 0 30px rgba(255, 77, 77, 0.4) inset;
+  transform: translateZ(0);
+}
+
+/* Duvarlar (Walls) - Mavi Çerçeve */
+.wall {
+  position: absolute;
+  background: rgba(13, 55, 140, 0.85);
+  border: 1px solid rgba(100, 180, 255, 0.6);
+  box-shadow: 0 0 10px rgba(0, 100, 255, 0.3);
+  transform-style: preserve-3d;
+}
+
+.wallTop {
+  width: 100%;
+  height: 20px; /* thickness */
+  top: 0;
+  left: 0;
+  transform-origin: top;
+  transform: rotateX(-90deg);
+}
+
+.wallBottom {
+  width: 100%;
+  height: 20px;
+  bottom: 0;
+  left: 0;
+  transform-origin: bottom;
+  transform: rotateX(90deg);
+}
+
+.wallLeft {
+  width: 20px;
+  height: 100%;
+  top: 0;
+  left: 0;
+  transform-origin: left;
+  transform: rotateY(90deg);
+}
+
+.wallRight {
+  width: 20px;
+  height: 100%;
+  top: 0;
+  right: 0;
+  transform-origin: right;
+  transform: rotateY(-90deg);
+}
+
+/* Lazer Taraması (Scanner Plane) */
+.scanPlane {
+  position: absolute;
+  width: 100%;
+  height: 20px;
+  background: linear-gradient(to right, transparent, rgba(0, 255, 255, 0.8), transparent);
+  box-shadow: 0 0 15px rgba(0, 255, 255, 0.6);
+  transform: rotateX(90deg) translateZ(10px);
+  opacity: 0;
+}
+
+/* ── Dosya ve Parçacıklar ── */
+.fileWrapper {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 40px;
+  height: 50px;
+  margin-left: -20px;
+  margin-top: -25px;
+  transform-style: preserve-3d;
+}
+
+.fileIcon {
+  width: 100%;
+  height: 100%;
+  background: white;
+  border-radius: 4px;
+  border: 2px solid #ddd;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  top: 0;
+  left: 0;
+  transform-style: preserve-3d;
+  /* Icon usually stands upright, facing the camera */
+  transform: rotateX(-90deg);
+}
+
+.fileIcon::before {
+  content: '';
+  position: absolute;
+  top: 8px; left: 8px;
+  width: 16px; height: 3px;
+  background: #ccc;
+  border-radius: 2px;
+}
+.fileIcon::after {
+  content: '';
+  position: absolute;
+  top: 16px; left: 8px;
+  width: 24px; height: 3px;
+  background: #ccc;
+  border-radius: 2px;
+  box-shadow: 0 8px 0 #ccc, 0 16px 0 #ccc;
+}
+
+.maliciousFile {
+  border-color: #ff4d4d;
+  box-shadow: 0 0 15px rgba(255, 77, 77, 0.6);
+}
+
+.cleanFile {
+  border-color: #00ffff;
+  box-shadow: 0 0 15px rgba(0, 255, 255, 0.6);
+}
+
+/* Parçacık Konteyneri */
+.particleContainer {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  transform-style: preserve-3d;
+  pointer-events: none;
+}
+
+.particle {
+  position: absolute;
+  width: 6px;
+  height: 6px;
+  background-color: #ff4d4d;
+  border-radius: 1px;
+  box-shadow: 0 0 5px rgba(255, 77, 77, 0.8);
+  opacity: 0;
+  transform-style: preserve-3d;
+}
+
+/* ── İkon İçi Dikey ve Yatay Lazer Taraması ── */
+.malwareLaserHorizontal {
+  position: absolute;
+  top: 0; 
+  left: 0;
+  width: 100%; 
+  height: 2px;
+  background: #ff4d4d;
+  box-shadow: 0 0 10px #ff4d4d, 0 0 20px #ff4d4d;
+  opacity: 0;
+  transform: translateZ(5px);
+}
+
+.malwareLaserVertical {
+  position: absolute;
+  top: 0; 
+  left: 0;
+  width: 2px; 
+  height: 100%;
+  background: #ff4d4d;
+  box-shadow: 0 0 10px #ff4d4d, 0 0 20px #ff4d4d;
+  opacity: 0;
+  transform: translateZ(5px);
+}

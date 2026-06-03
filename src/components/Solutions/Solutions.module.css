@@ -1,0 +1,187 @@
+.section {
+  position: relative;
+  width: 100%;
+  padding: 100px 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.inner {
+  max-width: 1200px;
+  width: 90%;
+  margin: 0 auto;
+}
+
+.title {
+  margin-bottom: 60px;
+  text-align: center;
+}
+
+/* ── NEW LAYOUT (TABS + UNIFIED CARD) ── */
+
+.tabsContainer {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 12px;
+  margin-bottom: 40px;
+}
+
+.tab {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  color: rgba(255, 255, 255, 0.7);
+  padding: 12px 24px;
+  border-radius: 30px;
+  font-family: var(--font-display);
+  font-size: 0.95rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.tab:hover {
+  background: rgba(255, 255, 255, 0.1);
+  border-color: rgba(255, 255, 255, 0.3);
+  color: #fff;
+}
+
+.activeTab {
+  background: rgba(0, 180, 255, 0.1);
+  border-color: #F5A706;
+  color: #F5A706;
+  box-shadow: 0 0 15px rgba(0, 180, 255, 0.3);
+}
+
+.unifiedCard {
+  display: flex;
+  background: rgba(10, 15, 30, 0.6);
+  border: 1px solid rgba(0, 180, 255, 0.3);
+  border-radius: 24px;
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5), 0 0 30px rgba(0, 180, 255, 0.1) inset;
+  overflow: hidden;
+  min-height: 500px;
+}
+
+.cardLeft {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: radial-gradient(circle at center, rgba(0, 180, 255, 0.05) 0%, transparent 70%);
+  position: relative;
+  min-height: 500px;
+}
+
+.cardRight {
+  flex: 1;
+  padding: 60px 40px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  border-left: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.cardTitle {
+  font-family: var(--font-display);
+  font-size: 2rem;
+  font-weight: 600;
+  color: #fff;
+  margin-bottom: 24px;
+}
+
+.cardTitle .highlight {
+  color: #F5A706;
+}
+
+.description {
+  color: rgba(255, 255, 255, 0.7);
+  font-size: 1rem;
+  line-height: 1.6;
+  margin-bottom: 24px;
+}
+
+/* PROTECT BOX */
+.protectBox {
+  background: rgba(255, 255, 255, 0.02);
+  border-left: 3px solid #F5A706;
+  padding: 20px;
+  border-radius: 0 8px 8px 0;
+  margin-bottom: 30px;
+}
+
+.protectTitle {
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: #F5A706;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  margin-bottom: 12px;
+}
+
+.protectText {
+  color: rgba(255, 255, 255, 0.85);
+  font-size: 0.95rem;
+  line-height: 1.5;
+}
+
+/* FEATURE BADGES */
+.featuresList {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.featureBadge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  color: rgba(255, 255, 255, 0.9);
+  padding: 8px 16px;
+  border-radius: 8px;
+  font-size: 0.85rem;
+  font-weight: 500;
+  transition: background 0.3s ease, border-color 0.3s ease;
+}
+
+.featureBadge:hover {
+  background: rgba(255, 255, 255, 0.08);
+  border-color: rgba(255, 255, 255, 0.3);
+}
+
+.featureBadge svg {
+  color: #F5A706;
+}
+
+@media (max-width: 900px) {
+  .unifiedCard {
+    flex-direction: column;
+  }
+
+  .cardRight {
+    border-left: none;
+    border-top: 1px solid rgba(255, 255, 255, 0.05);
+    padding: 30px 20px;
+  }
+
+  .cardLeft {
+    min-height: 300px;
+    overflow: hidden;
+    position: relative;
+    display: block;
+  }
+
+  /* Force diagrams to perfectly center and scale down */
+  .cardLeft > * {
+    position: absolute !important;
+    top: 50% !important;
+    left: 50% !important;
+    transform: translate(-50%, -50%) scale(0.55) !important;
+    transform-origin: center center !important;
+    margin: 0 !important;
+  }
+}
