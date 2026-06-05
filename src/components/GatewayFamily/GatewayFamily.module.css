@@ -1,0 +1,503 @@
+/* ── Section — Background matching site design language ── */
+.section {
+  padding: 5rem 2rem;
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid rgba(255, 255, 255, 0.07);
+  border-radius: 24px;
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.25), 0 0 40px rgba(245, 167, 6, 0.04) inset;
+  max-width: 1400px;
+  margin: 0 auto;
+  position: relative;
+  overflow: hidden;
+}
+
+.section::before {
+  content: '';
+  position: absolute;
+  top: 40%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 70vw;
+  height: 50vh;
+  background: radial-gradient(ellipse, rgba(245, 167, 6, 0.05) 0%, transparent 65%);
+  pointer-events: none;
+  z-index: 0;
+}
+
+.inner {
+  position: relative;
+  z-index: 1;
+}
+
+/* ── Header ── */
+.header {
+  margin-bottom: 3.5rem;
+  text-align: center;
+}
+
+.overTitle {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.22em;
+  color: #F5A706;
+  text-transform: uppercase;
+  margin-bottom: 0.75rem;
+}
+
+.title {
+  font-family: var(--font-display);
+  font-size: clamp(1.8rem, 3.5vw, 2.6rem);
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  color: #ffffff;
+  margin-bottom: 0.85rem;
+}
+
+.highlight {
+  color: #F5A706;
+}
+
+.subtitle {
+  font-family: var(--font-mono);
+  font-size: 0.88rem;
+  color: rgba(255, 255, 255, 0.45);
+  max-width: 620px;
+  margin: 0 auto;
+  line-height: 1.65;
+}
+
+/* ── Flow Container ── */
+.flowContainer {
+  display: flex;
+  align-items: flex-start;
+  /* top-aligned so we can offset sub-items manually */
+  position: relative;
+  padding: 2.5rem 0 0;
+  overflow-x: auto;
+  gap: 0;
+  min-height: 280px;
+}
+
+/* ── Network Block buttons ── */
+.networkBlock {
+  width: 100px;
+  min-width: 100px;
+  padding: 1.5rem 0.5rem 1rem;
+  border-radius: 12px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  transition: border-color 0.25s ease, background 0.25s ease, transform 0.2s ease;
+  position: relative;
+  z-index: 2;
+  margin-top: 0;
+  /* Aligns top with featureColumn */
+}
+
+.networkBlock:hover,
+.networkBlock.activeNode {
+  border-color: rgba(245, 167, 6, 0.5);
+  background: rgba(245, 167, 6, 0.06);
+  transform: translateY(-3px);
+}
+
+.networkIcons {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+  margin-bottom: 1.25rem;
+}
+
+.networkIcons svg {
+  width: 26px;
+  height: 26px;
+  color: rgba(255, 255, 255, 0.65);
+}
+
+.networkLabel {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  font-weight: 600;
+  color: #ffffff;
+  text-align: center;
+  line-height: 1.3;
+}
+
+.clickHint {
+  font-family: var(--font-mono);
+  font-size: 0.6rem;
+  color: rgba(245, 167, 6, 0.5);
+  margin-top: 0.4rem;
+  letter-spacing: 0.05em;
+}
+
+/* ── Connection Lines ── */
+.connectionLine {
+  position: relative;
+  height: 1px;
+  background: rgba(255, 255, 255, 0.12);
+  flex-shrink: 0;
+  align-self: auto;
+  /* Vertically center the line with the diode boxes (height ~120px, networkBlock ~160px) */
+  margin-top: 60px;
+  /* ~half of the networkBlock height to center on diode center */
+}
+
+/* ── Animated Packet ── */
+.packet {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 4;
+  display: flex;
+  align-items: center;
+}
+
+.packet svg {
+  width: 22px;
+  height: 22px;
+  color: #ffffff;
+}
+
+.packetCheck {
+  position: absolute;
+  bottom: -5px;
+  right: -5px;
+  width: 13px;
+  height: 13px;
+  background: #00E676;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 7px;
+  font-weight: bold;
+  color: #000;
+  border: 1.5px solid rgba(10, 15, 30, 0.8);
+}
+
+/* ── Feature Column (Diode + label below) ── */
+.featureColumn {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+  z-index: 2;
+  flex-shrink: 0;
+  /* No margin — diode box starts at top, connection line offsets to match center */
+}
+
+/* ── Diode Boxes ── */
+.diodeBox {
+  width: 140px;
+  min-width: 140px;
+  height: 120px;
+  border-radius: 14px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 1rem;
+  cursor: pointer;
+  transition: transform 0.2s ease, box-shadow 0.25s ease, border-color 0.25s ease;
+  background: rgba(10, 15, 30, 0.9);
+  border: 1px solid rgba(245, 167, 6, 0.5);
+  /* Brand orange — not blue/red */
+  margin-bottom: 0;
+}
+
+.txBox {
+  box-shadow: 0 0 20px rgba(245, 167, 6, 0.15), inset 0 0 12px rgba(245, 167, 6, 0.06);
+}
+
+.rxBox {
+  box-shadow: 0 0 20px rgba(245, 167, 6, 0.15), inset 0 0 12px rgba(245, 167, 6, 0.06);
+}
+
+.diodeBox:hover,
+.diodeBox.activeNode {
+  transform: translateY(-4px);
+  border-color: #F5A706;
+  box-shadow: 0 0 30px rgba(245, 167, 6, 0.3), inset 0 0 15px rgba(245, 167, 6, 0.1);
+}
+
+.diodeIconWrapper {
+  width: 28px;
+  height: 28px;
+  color: #F5A706;
+  margin-bottom: 0.65rem;
+}
+
+.diodeIconWrapper svg {
+  width: 100%;
+  height: 100%;
+}
+
+.diodeName {
+  font-family: var(--font-display);
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: #ffffff;
+  /* White as requested */
+  line-height: 1.2;
+  margin-bottom: 0.3rem;
+}
+
+.diodeRole {
+  font-family: var(--font-mono);
+  font-size: 0.58rem;
+  color: rgba(255, 255, 255, 0.5);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+/* ── Feature Info Text ── */
+.featureInfo {
+  text-align: center;
+  max-width: 160px;
+  padding-top: 1.25rem;
+}
+
+.featureInfo h4 {
+  font-family: var(--font-display);
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: #ffffff;
+  margin-bottom: 0.35rem;
+}
+
+.featureInfo p {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  color: rgba(255, 255, 255, 0.4);
+  line-height: 1.5;
+}
+
+/* ── Middle (Air Gap) Section ── */
+.middleSection {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+  flex-shrink: 0;
+  /* The connectionLine inside has margin-top: 60px, so airGapZone sits at top */
+}
+
+.airGapZone {
+  position: absolute;
+  top: 0px;
+  /* Sits at the same top as featureColumn diode */
+  left: 50%;
+  transform: translateX(-50%);
+  width: 56px;
+  height: 120px;
+  /* Matches diode box height */
+  border-radius: 6px;
+  overflow: hidden;
+  cursor: pointer;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  background: rgba(255, 255, 255, 0.02);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: border-color 0.25s ease, background 0.25s ease;
+  z-index: 3;
+}
+
+.airGapZone:hover,
+.airGapZone.activeNode {
+  border-color: rgba(245, 167, 6, 0.5);
+  background: rgba(245, 167, 6, 0.05);
+}
+
+.airGapPattern {
+  position: absolute;
+  inset: 0;
+  background: repeating-linear-gradient(45deg,
+      transparent,
+      transparent 8px,
+      rgba(255, 255, 255, 0.04) 8px,
+      rgba(255, 255, 255, 0.04) 16px);
+}
+
+.airGapLabelBox {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background: rgba(10, 15, 30, 0.7);
+  border: 1px solid rgba(245, 167, 6, 0.4);
+  border-radius: 4px;
+  padding: 0.25rem 0.5rem;
+  gap: 0;
+}
+
+.airGapLabelTop,
+.airGapLabelBot {
+  font-family: var(--font-mono);
+  font-size: 0.6rem;
+  font-weight: 700;
+  color: #F5A706;
+  letter-spacing: 0.12em;
+  line-height: 1.3;
+}
+
+/* ── Info Panel ── */
+.infoPanel {
+  margin-top: 3.5rem;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 18px;
+  padding: 2.5rem;
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  animation: slideUp 0.3s ease;
+}
+
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.infoPanelHeader {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  margin-bottom: 2rem;
+  padding-bottom: 1.5rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.infoPanelRole {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  color: #F5A706;
+  text-transform: uppercase;
+  margin-bottom: 0.4rem;
+}
+
+.infoPanelTitle {
+  font-family: var(--font-display);
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: #ffffff;
+}
+
+.closeBtn {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  background: transparent;
+  color: rgba(255, 255, 255, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  flex-shrink: 0;
+  transition: border-color 0.2s ease, color 0.2s ease;
+}
+
+.closeBtn:hover {
+  border-color: rgba(245, 167, 6, 0.5);
+  color: #F5A706;
+}
+
+.closeBtn svg {
+  width: 16px;
+  height: 16px;
+}
+
+/* ── 3-Step Grid ── */
+.stepsGrid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.5rem;
+}
+
+.stepCard {
+  background: rgba(255, 255, 255, 0.025);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  border-radius: 12px;
+  padding: 1.75rem 1.5rem;
+  position: relative;
+  overflow: hidden;
+  transition: border-color 0.25s ease;
+}
+
+.stepCard::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, rgba(245, 167, 6, 0.6), transparent);
+  opacity: 0.5;
+}
+
+.stepCard:hover {
+  border-color: rgba(245, 167, 6, 0.2);
+}
+
+.stepNumber {
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  color: rgba(245, 167, 6, 0.5);
+  border: 1px solid rgba(245, 167, 6, 0.2);
+  border-radius: 100px;
+  padding: 0.15rem 0.55rem;
+  display: inline-block;
+  margin-bottom: 1rem;
+}
+
+.stepLabel {
+  font-family: var(--font-display);
+  font-size: 1rem;
+  font-weight: 600;
+  color: #ffffff;
+  margin-bottom: 0.65rem;
+}
+
+.stepText {
+  font-family: var(--font-mono);
+  font-size: 0.82rem;
+  color: rgba(255, 255, 255, 0.5);
+  line-height: 1.7;
+}
+
+/* ── Responsive ── */
+@media (max-width: 1024px) {
+  .stepsGrid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 768px) {
+  .flowContainer {
+    overflow-x: auto;
+    padding-bottom: 2rem;
+  }
+
+  .section {
+    padding: 4rem 1.25rem;
+  }
+}

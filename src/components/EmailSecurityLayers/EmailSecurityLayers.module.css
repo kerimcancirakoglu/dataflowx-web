@@ -1,0 +1,238 @@
+.section {
+  padding: 6rem 0;
+  color: #fff;
+}
+
+.inner {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.header {
+  text-align: center;
+  margin-bottom: 5rem;
+}
+
+.overTitle {
+  font-family: var(--font-mono);
+  font-size: 0.9rem;
+  letter-spacing: 0.1em;
+  color: #F5A706;
+  margin-bottom: 1rem;
+  text-transform: uppercase;
+}
+
+.title {
+  font-family: var(--font-display);
+  font-size: 3rem;
+  margin-bottom: 1.5rem;
+}
+
+.highlight {
+  color: var(--color-primary);
+}
+
+.subtitle {
+  font-size: 1.15rem;
+  color: var(--color-text-muted);
+  max-width: 700px;
+  margin: 0 auto;
+  line-height: 1.6;
+}
+
+.contentSplit {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 4rem;
+  margin-top: 4rem;
+  min-height: 600px;
+}
+
+/* Left Text Area */
+.textContainer {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  justify-content: center;
+}
+
+.textBox {
+  width: 100%;
+  opacity: 0;
+  padding: 1.25rem 1.5rem;
+  border-radius: 12px;
+  border-left: 2px solid transparent;
+  cursor: pointer;
+  transition: background 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+  user-select: none;
+}
+
+.textBox:hover {
+  background: rgba(255, 255, 255, 0.04);
+  border-left-color: rgba(255, 255, 255, 0.15);
+}
+
+.textBox:active {
+  transform: scale(0.98);
+}
+
+/* Applied via GSAP when this layer is active */
+.textBoxActive {
+  background: rgba(0, 163, 255, 0.06) !important;
+  border-left-color: var(--color-primary) !important;
+  box-shadow: inset 0 0 20px rgba(0, 163, 255, 0.05) !important;
+}
+
+.layerTitle {
+  font-family: var(--font-display);
+  font-size: 1.5rem;
+  margin-bottom: 0.25rem;
+  color: #fff;
+  transition: color 0.3s ease;
+}
+
+.layerDesc {
+  font-size: 0.95rem;
+  line-height: 1.5;
+  color: var(--color-text-muted);
+}
+
+.layerIndex {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  color: #F5A706;
+  margin-bottom: 0.25rem;
+  display: block;
+  letter-spacing: 0.05em;
+}
+
+/* Right Stack Area */
+.stackVisualContainer {
+  flex: 1.5;
+  display: flex;
+  justify-content: flex-end; /* Shift to the right */
+  align-items: center;
+  padding-right: 2rem;
+}
+
+.stackWrapper {
+  position: relative;
+  width: 100%;
+  max-width: 900px;
+  height: 600px;
+  transform: translateX(40px); /* Explicit right shift requested by user */
+}
+
+.stackedLayer, .combinedLayer {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  will-change: transform, opacity;
+}
+
+.combinedLayer {
+  opacity: 0;
+}
+
+.layerImage {
+  width: 100%;
+  height: auto;
+  object-fit: contain;
+  transform: scale(1.6);
+  transform-origin: center;
+  filter: drop-shadow(0px 20px 30px rgba(0, 0, 0, 0.3));
+}
+
+@media (max-width: 900px) {
+  .contentSplit {
+    flex-direction: column;
+    gap: 2rem;
+    min-height: auto;
+  }
+  .textContainer {
+    height: 200px;
+    width: 100%;
+    text-align: center;
+  }
+  .textBox {
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+  .stackWrapper {
+    height: 350px;
+  }
+}
+
+/* ── CTA Buttons ── */
+.ctaRow {
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+  padding: 1.5rem 1.5rem 0.5rem;
+  margin-top: 0.5rem;
+}
+
+.ctaDownload {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  background: #F5A706;
+  color: #0A0D14;
+  font-family: var(--font-display);
+  font-size: 1rem;
+  font-weight: 700;
+  padding: 0.9rem 1.8rem;
+  border-radius: 12px;
+  text-decoration: none;
+  transition: background 0.25s ease, transform 0.2s ease, box-shadow 0.25s ease;
+  white-space: nowrap;
+  box-shadow: 0 4px 20px rgba(245, 167, 6, 0.3);
+}
+
+.ctaDownload svg {
+  width: 18px;
+  height: 18px;
+  flex-shrink: 0;
+}
+
+.ctaDownload:hover {
+  background: #FFB82E;
+  box-shadow: 0 6px 28px rgba(245, 167, 6, 0.5);
+  transform: translateY(-2px);
+}
+
+.ctaDocs {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: rgba(255, 255, 255, 0.75);
+  font-family: var(--font-display);
+  font-size: 1rem;
+  font-weight: 600;
+  text-decoration: none;
+  transition: color 0.25s ease, gap 0.25s ease;
+  white-space: nowrap;
+}
+
+.ctaDocs svg {
+  width: 18px;
+  height: 18px;
+  flex-shrink: 0;
+  transition: transform 0.25s ease;
+}
+
+.ctaDocs:hover {
+  color: #fff;
+  gap: 0.8rem;
+}
+
+.ctaDocs:hover svg {
+  transform: translateX(4px);
+}

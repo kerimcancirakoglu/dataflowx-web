@@ -1,6 +1,7 @@
 'use client';
 
 import { useRef, useEffect } from 'react';
+import Link from 'next/link';
 import styles from './HowItWorks.module.css';
 
 const CARDS = [
@@ -18,8 +19,8 @@ const CARDS = [
     overlay: 'linear-gradient(to bottom, rgba(0, 15, 40, 0.4) 0%, rgba(0, 5, 20, 0.95) 100%)',
     description: 'Hardware-based unidirectional gateways provide physical isolation for critical SCADA and ICS networks.',
     links: [
-      { text: 'DFX Unidirectional Gateway', url: '#' },
-      { text: 'DFX Secure Remote Access', url: '#' }
+      { text: 'DFX Unidirectional Gateway', url: '/unidirectional-gateway' },
+      { text: 'DFX Secure Remote Access', url: '/secure-remote-access' }
     ]
   },
   {
@@ -52,7 +53,7 @@ const CARDS = [
     overlay: 'linear-gradient(to bottom, rgba(10, 20, 30, 0.4) 0%, rgba(0, 5, 15, 0.95) 100%)',
     description: 'Advanced email gateway with AI-driven threat detection and deep content disarm & reconstruction (CDR).',
     links: [
-      { text: 'DFX Email Security Platform', url: '#' },
+      { text: 'DFX Email Security Platform', url: '/email-security' },
       { text: 'DFX IntelRoom', url: '#' },
       { text: 'DFX CDR', url: '#' }
     ]
@@ -137,13 +138,22 @@ export default function HowItWorks() {
 
                 <div className={styles.links}>
                   {card.links.map((link, idx) => (
-                    <a key={idx} href={link.url} className={styles.linkItem}>
+                    <Link 
+                      key={idx} 
+                      href={link.url} 
+                      className={styles.linkItem}
+                      onClick={(e) => {
+                        if (link.url !== '#') {
+                          window.location.href = link.url;
+                        }
+                      }}
+                    >
                       <span>{link.text}</span>
                       <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={{ marginLeft: '6px' }}>
                         <line x1="7" y1="17" x2="17" y2="7"></line>
                         <polyline points="7 7 17 7 17 17"></polyline>
                       </svg>
-                    </a>
+                    </Link>
                   ))}
                 </div>
               </div>

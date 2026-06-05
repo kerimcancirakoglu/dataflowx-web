@@ -1,0 +1,476 @@
+.section {
+  padding: 4rem 2rem;
+  background: var(--color-bg-alt);
+  border-radius: 16px;
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  margin: 2rem auto;
+  max-width: 1400px;
+  position: relative;
+  overflow: hidden;
+}
+
+.inner {
+  position: relative;
+  z-index: 2;
+}
+
+.header {
+  text-align: center;
+  margin-bottom: 3rem;
+}
+
+.overTitle {
+  font-family: var(--font-mono);
+  font-size: 0.85rem;
+  color: var(--color-text-muted);
+  letter-spacing: 0.1em;
+  margin-bottom: 0.5rem;
+}
+
+.title {
+  font-family: var(--font-display);
+  font-size: 2.5rem;
+  color: #ffffff;
+  margin-bottom: 1rem;
+}
+
+.highlight {
+  color: #F5A706;
+}
+
+.subtitle {
+  font-family: var(--font-sans);
+  font-size: 1.1rem;
+  color: var(--color-text-muted);
+  max-width: 700px;
+  margin: 0 auto;
+}
+
+/* ── Flow Container ── */
+.flowContainer {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  position: relative;
+  padding: 2rem 0;
+  overflow-x: auto;
+  min-height: 350px;
+  gap: 0;
+}
+
+/* ── Common Block Styles ── */
+.networkBlock {
+  width: 140px;
+  height: 120px;
+  background: rgba(10, 15, 30, 0.8);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 8px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+  text-align: center;
+  cursor: pointer;
+  transition: transform 0.2s ease, box-shadow 0.25s ease, border-color 0.25s ease;
+  position: relative;
+  z-index: 2;
+  flex-shrink: 0;
+}
+
+.networkBlock:hover,
+.networkBlock.activeNode {
+  transform: translateY(-4px);
+  border-color: rgba(255, 255, 255, 0.3);
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.3);
+}
+
+.networkIcons {
+  display: flex;
+  gap: 0.25rem;
+  margin-bottom: 0.75rem;
+  color: rgba(255, 255, 255, 0.6);
+}
+
+.networkIcons svg {
+  width: 24px;
+  height: 24px;
+}
+
+.networkLabel {
+  font-family: var(--font-display);
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: #ffffff;
+}
+
+.clickHint {
+  position: absolute;
+  bottom: -24px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  color: var(--color-text-muted);
+  opacity: 0;
+  transition: opacity 0.2s ease;
+  white-space: nowrap;
+}
+.networkBlock:hover .clickHint,
+.brokerBox:hover .clickHint,
+.diodeBox:hover .clickHint {
+  opacity: 1;
+}
+
+/* ── Broker Box ── */
+.brokerBox {
+  width: 130px;
+  height: 120px;
+  background: rgba(10, 15, 30, 0.9);
+  border: 1px solid rgba(0, 180, 216, 0.5); /* Cyan */
+  border-radius: 8px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+  cursor: pointer;
+  transition: transform 0.2s ease, box-shadow 0.25s ease, border-color 0.25s ease;
+  position: relative;
+  z-index: 2;
+  flex-shrink: 0;
+}
+
+.brokerBox:hover,
+.brokerBox.activeNode {
+  transform: translateY(-4px);
+  border-color: #00b4d8;
+  box-shadow: 0 8px 30px rgba(0, 180, 216, 0.15);
+}
+
+.brokerIconWrapper {
+  width: 32px;
+  height: 32px;
+  margin-bottom: 0.5rem;
+  color: #00b4d8;
+}
+
+.brokerName {
+  font-family: var(--font-display);
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: #ffffff;
+  line-height: 1.2;
+  margin-bottom: 0.2rem;
+  text-align: center;
+}
+
+.brokerRole {
+  font-family: var(--font-mono);
+  font-size: 0.6rem;
+  color: #00b4d8;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+/* ── Stacked Diodes ── */
+.diodeStack {
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+  position: relative;
+  z-index: 2;
+  flex-shrink: 0;
+}
+
+.diodeBox {
+  width: 120px;
+  height: 90px;
+  background: rgba(10, 15, 30, 0.9);
+  border-radius: 8px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 0.5rem;
+  cursor: pointer;
+  transition: transform 0.2s ease, box-shadow 0.25s ease, border-color 0.25s ease;
+  position: relative;
+}
+
+.rxBox {
+  border: 1px solid rgba(0, 180, 216, 0.5); /* Cyan */
+}
+.txBox {
+  border: 1px solid rgba(245, 167, 6, 0.5); /* Orange */
+}
+
+.diodeBox:hover,
+.diodeBox.activeNode {
+  transform: translateY(-4px);
+}
+.rxBox:hover, .rxBox.activeNode {
+  border-color: #00b4d8;
+  box-shadow: 0 8px 30px rgba(0, 180, 216, 0.15);
+}
+.txBox:hover, .txBox.activeNode {
+  border-color: #F5A706;
+  box-shadow: 0 8px 30px rgba(245, 167, 6, 0.15);
+}
+
+.diodeRole {
+  font-family: var(--font-display);
+  font-size: 1.1rem;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+.rxText { color: #00b4d8; }
+.txText { color: #F5A706; }
+
+.diodeDot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+}
+.rxDot { background: #00b4d8; box-shadow: 0 0 8px #00b4d8; }
+.txDot { background: #F5A706; box-shadow: 0 0 8px #F5A706; }
+
+.diodeName {
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  color: rgba(255, 255, 255, 0.6);
+  margin-top: 0.25rem;
+}
+
+/* ── Connection Lines & Forks ── */
+.straightLine {
+  flex: 1;
+  min-width: 30px;
+  height: 2px;
+  background: rgba(255, 255, 255, 0.1);
+  position: relative;
+}
+
+.forkContainer {
+  width: 40px;
+  height: 210px; /* 90 + 30 + 90 */
+  position: relative;
+  flex-shrink: 0;
+}
+
+.forkSvg {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+.pathLine {
+  fill: none;
+  stroke: rgba(255, 255, 255, 0.1);
+  stroke-width: 2;
+}
+
+/* ── Air Gap Center ── */
+.airGapCenter {
+  flex: 1.5;
+  min-width: 120px;
+  height: 210px;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.horizontalLineTop,
+.horizontalLineBottom {
+  position: absolute;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: rgba(255, 255, 255, 0.1);
+  z-index: 1;
+}
+
+.horizontalLineTop { top: 44px; } /* Center of top diode (90/2) */
+.horizontalLineBottom { bottom: 44px; } /* Center of bottom diode */
+
+.pathLabelReq, .pathLabelRes {
+  position: absolute;
+  top: -20px;
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  font-weight: 600;
+}
+.pathLabelReq {
+  right: 10px;
+  color: #F5A706; /* Request (Right to Left in user mockup) */
+}
+.pathLabelRes {
+  left: 10px;
+  color: #00b4d8; /* Response (Left to Right in user mockup) */
+}
+
+.airGapVertical {
+  width: 60px;
+  height: 100%;
+  border: 2px dashed rgba(255, 255, 255, 0.2);
+  border-radius: 8px;
+  background: repeating-linear-gradient(
+    45deg,
+    transparent,
+    transparent 8px,
+    rgba(255, 255, 255, 0.02) 8px,
+    rgba(255, 255, 255, 0.02) 16px
+  );
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  z-index: 2;
+  cursor: pointer;
+  transition: border-color 0.2s ease;
+}
+
+.airGapVertical:hover,
+.airGapVertical.activeNode {
+  border-color: rgba(255, 255, 255, 0.5);
+}
+
+.airGapText {
+  font-family: var(--font-display);
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: #F5A706;
+  transform: rotate(-90deg);
+  letter-spacing: 0.1em;
+  white-space: nowrap;
+}
+
+/* ── Packets ── */
+.packet {
+  position: absolute;
+  top: -6px;
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.9);
+  box-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+  z-index: 3;
+}
+
+.packetReq { background: #F5A706; box-shadow: 0 0 10px #F5A706; }
+.packetRes { background: #00b4d8; box-shadow: 0 0 10px #00b4d8; }
+
+/* ── Info Panel ── */
+.infoPanel {
+  margin-top: 3rem;
+  background: rgba(10, 15, 30, 0.6);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 12px;
+  padding: 2rem;
+  position: relative;
+  animation: slideUp 0.3s ease-out forwards;
+}
+
+@keyframes slideUp {
+  from { opacity: 0; transform: translateY(16px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.infoPanelHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 2rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  padding-bottom: 1rem;
+}
+
+.infoPanelRole {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  color: #F5A706;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  margin-bottom: 0.25rem;
+}
+
+.infoPanelTitle {
+  font-family: var(--font-display);
+  font-size: 1.5rem;
+  color: #ffffff;
+}
+
+.closeBtn {
+  background: none;
+  border: none;
+  color: var(--color-text-muted);
+  cursor: pointer;
+  padding: 0.5rem;
+  transition: color 0.2s;
+}
+
+.closeBtn:hover {
+  color: #ffffff;
+}
+
+.closeBtn svg {
+  width: 24px;
+  height: 24px;
+}
+
+.stepsGrid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2rem;
+}
+
+.stepCard {
+  position: relative;
+  padding-top: 1.5rem;
+}
+
+.stepCard::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, rgba(245, 167, 6, 0.6), transparent);
+  opacity: 0.5;
+}
+
+.stepNumber {
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  color: #F5A706;
+  margin-bottom: 0.5rem;
+}
+
+.stepLabel {
+  font-family: var(--font-display);
+  font-size: 1.1rem;
+  color: #ffffff;
+  margin-bottom: 0.5rem;
+}
+
+.stepText {
+  font-family: var(--font-sans);
+  font-size: 0.95rem;
+  color: var(--color-text-muted);
+  line-height: 1.5;
+}
+
+@media (max-width: 1024px) {
+  .stepsGrid { grid-template-columns: 1fr; }
+}
+
+@media (max-width: 768px) {
+  .flowContainer {
+    padding-bottom: 2rem;
+  }
+  .section { padding: 4rem 1.25rem; }
+}

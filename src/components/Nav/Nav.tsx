@@ -29,30 +29,31 @@ const NAV_LINKS: NavLink[] = [
       {
         groupLabel: 'Network Security',
         items: [
-          { label: 'DFX Unidirectional Gateway', href: '#unidirectional' },
-          { label: 'DFX Secure Remote Access', href: '#secure-remote-access' },
+          { label: 'DFX Unidirectional Gateway', href: '/unidirectional-gateway' },
+          { label: 'DFX Secure Remote Access', href: '/secure-remote-access' },
+          { label: 'DFX Advanced Threat Mitigation', href: '/advanced-threat-mitigation' },
         ]
       },
       {
         groupLabel: 'File Security',
         items: [
-          { label: 'DFX Sandbox', href: '#sandbox' },
-          { label: 'DFX NDR', href: '#ndr' },
-          { label: 'DFX Media Transfer Station', href: '#media-transfer' },
+          { label: 'DFX Sandbox', href: '/sandbox' },
+          { label: 'DFX NDR', href: '/ndr' },
+          { label: 'DFX Media Transfer Station', href: '/media-transfer-station' },
         ]
       },
       {
         groupLabel: 'E-Mail Security',
         items: [
-          { label: 'DFX E-Mail Security Platform', href: '#email-security' },
-          { label: 'DFX IntelRoom', href: '#intelroom' },
-          { label: 'DFX CDR', href: '#cdr' },
+          { label: 'DFX E-Mail Security Platform', href: '/email-security-platform' },
+          { label: 'DFX IntelRoom', href: '/intelroom' },
+          { label: 'DFX CDR', href: '/cdr' },
         ]
       },
       {
         groupLabel: 'OT Security',
         items: [
-          { label: 'DFX PortX', href: '#portx' },
+          { label: 'DFX PortX', href: '/portx' },
         ]
       }
     ],

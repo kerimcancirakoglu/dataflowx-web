@@ -1,0 +1,389 @@
+.section {
+  padding: 4rem 0;
+  width: 100%;
+}
+
+.header {
+  text-align: center;
+  margin-bottom: 3rem;
+}
+
+.overTitle {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.22em;
+  color: #F5A706;
+  text-transform: uppercase;
+  margin-bottom: 0.75rem;
+}
+
+.title {
+  font-family: var(--font-display);
+  font-size: clamp(1.8rem, 3.5vw, 2.8rem);
+  font-weight: 700;
+  color: #ffffff;
+  margin-bottom: 1rem;
+}
+
+.highlight {
+  color: #F5A706;
+}
+
+.subtitle {
+  font-family: var(--font-mono);
+  font-size: 0.95rem;
+  line-height: 1.75;
+  color: rgba(255, 255, 255, 0.5);
+  max-width: 640px;
+  margin: 0 auto;
+}
+
+/* === Main wrapper: fixed-aspect so we can position absolutely === */
+.wrapper {
+  position: relative;
+  width: 100%;
+  max-width: 900px;
+  margin: 0 auto;
+  aspect-ratio: 16 / 9;
+  min-height: 400px;
+}
+
+/* SVG overlay sits behind everything but above the section bg */
+.svgOverlay {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+  pointer-events: none;
+}
+
+/* === Source nodes === */
+.sourceNode {
+  position: absolute;
+  width: 130px;
+  background: rgba(10, 12, 20, 0.85);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 12px;
+  padding: 1rem 0.75rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  z-index: 50;
+  cursor: pointer;
+  transition: border-color 0.4s ease, box-shadow 0.4s ease, background-color 0.4s ease, transform 0.2s ease;
+  backdrop-filter: blur(8px);
+}
+
+.sourceNode:hover {
+  background: rgba(25, 30, 45, 0.95);
+  border-color: rgba(255, 255, 255, 0.2);
+}
+
+.sourceNode.sourceActive {
+  border-color: var(--node-color);
+  box-shadow: 0 0 20px color-mix(in srgb, var(--node-color) 30%, transparent);
+}
+
+.sourceIcon {
+  width: 56px;
+  height: 56px;
+  margin-bottom: 0.6rem;
+}
+.sourceIcon svg {
+  width: 100%;
+  height: 100%;
+}
+
+.sourceLabel {
+  font-family: var(--font-display);
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: #ffffff;
+  margin-bottom: 0.2rem;
+}
+
+.sourceSublabel {
+  font-family: var(--font-mono);
+  font-size: 0.6rem;
+  color: rgba(255,255,255,0.35);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.sourcePulse {
+  position: absolute;
+  inset: -6px;
+  border-radius: 16px;
+  border: 1.5px solid transparent;
+  animation: pulseRing 1.2s ease-out infinite;
+}
+
+@keyframes pulseRing {
+  0%   { opacity: 1; transform: scale(1); }
+  100% { opacity: 0; transform: scale(1.15); }
+}
+
+/* === Center Sandbox === */
+.sandboxCenter {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  width: 160px;
+  height: 160px;
+  background: rgba(10, 10, 16, 0.95);
+  border: 2px solid #F5A706;
+  border-radius: 16px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  z-index: 5;
+  box-shadow:
+    0 0 0 1px rgba(245, 167, 6, 0.2),
+    0 0 30px rgba(245, 167, 6, 0.15),
+    inset 0 0 20px rgba(245, 167, 6, 0.04);
+  overflow: visible;
+}
+
+/* Orbit rings */
+.orbitRing {
+  position: absolute;
+  width: 220px;
+  height: 220px;
+  border-radius: 50%;
+  border: 1px dashed rgba(245, 167, 6, 0.2);
+  animation: orbitSpin 12s linear infinite;
+  pointer-events: none;
+}
+
+.orbitRing2 {
+  position: absolute;
+  width: 280px;
+  height: 280px;
+  border-radius: 50%;
+  border: 1px dashed rgba(245, 167, 6, 0.1);
+  animation: orbitSpin 20s linear infinite reverse;
+  pointer-events: none;
+}
+
+@keyframes orbitSpin {
+  100% { transform: rotate(360deg); }
+}
+
+/* Scanner line inside sandbox */
+.scannerLine {
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 2px;
+  background: #F5A706;
+  box-shadow: 0 0 12px 4px rgba(245, 167, 6, 0.5);
+  animation: scan 2.5s ease-in-out infinite alternate;
+  border-radius: 2px;
+  pointer-events: none;
+}
+@keyframes scan {
+  0%   { transform: translateY(0); }
+  100% { transform: translateY(158px); }
+}
+
+.sandboxIcon {
+  width: 56px;
+  height: 56px;
+  margin-bottom: 0.4rem;
+  position: relative;
+  z-index: 1;
+}
+.sandboxIcon svg { width: 100%; height: 100%; }
+
+.sandboxLabel {
+  font-family: var(--font-display);
+  font-size: 0.9rem;
+  font-weight: 800;
+  color: #F5A706;
+  letter-spacing: 0.05em;
+  position: relative;
+  z-index: 1;
+}
+.sandboxSublabel {
+  font-family: var(--font-mono);
+  font-size: 0.55rem;
+  color: rgba(255,255,255,0.5);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  margin-bottom: 0.5rem;
+  position: relative;
+  z-index: 1;
+}
+
+.liveTicker {
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+  background: rgba(0,0,0,0.4);
+  border: 1px solid rgba(245,167,6,0.2);
+  border-radius: 20px;
+  padding: 0.25rem 0.6rem;
+  max-width: 140px;
+  position: relative;
+  z-index: 1;
+}
+.liveIndicator {
+  width: 6px;
+  height: 6px;
+  background: #F5A706;
+  border-radius: 50%;
+  flex-shrink: 0;
+  animation: blink 1s ease-in-out infinite;
+}
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50%  { opacity: 0.2; }
+}
+.liveText {
+  font-family: var(--font-mono);
+  font-size: 0.5rem;
+  color: rgba(255,255,255,0.7);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* === Floating metric badges along the paths === */
+.metricBadge {
+  position: absolute;
+  z-index: 4;
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+  background: rgba(0,0,0,0.7);
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 20px;
+  padding: 0.3rem 0.7rem;
+  font-family: var(--font-mono);
+  font-size: 0.6rem;
+  font-weight: 600;
+  color: rgba(255,255,255,0.8);
+  white-space: nowrap;
+  backdrop-filter: blur(4px);
+  animation: floatBadge 3s ease-in-out infinite;
+}
+@keyframes floatBadge {
+  0%, 100% { transform: translateY(0); }
+  50%  { transform: translateY(-4px); }
+}
+
+.badgeDot {
+  width: 6px; height: 6px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.metricBadgeTL { top: 30%; left: 24%; animation-delay: 0s; }
+.metricBadgeTR { top: 30%; right: 24%; animation-delay: 0.8s; }
+.metricBadgeBL { bottom: 30%; left: 24%; animation-delay: 1.6s; }
+.metricBadgeBR { bottom: 30%; right: 24%; animation-delay: 2.4s; }
+
+/* === Bottom metrics bar === */
+.metricsContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  background: rgba(10, 12, 20, 0.85);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 12px;
+  padding: 2rem;
+  margin: 0 auto;
+  max-width: 900px;
+}
+
+.metricsRow {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 2rem;
+  width: 100%;
+  flex-wrap: wrap;
+}
+
+.metricItem {
+  flex: 1;
+  min-width: 120px;
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+}
+
+.metricValue {
+  font-family: var(--font-display);
+  font-size: 1.5rem;
+  font-weight: 700;
+}
+
+.metricLabel {
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  color: rgba(255,255,255,0.45);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+.metricBarTrack {
+  height: 3px;
+  background: rgba(255,255,255,0.06);
+  border-radius: 2px;
+  overflow: hidden;
+}
+.metricBarFill {
+  height: 100%;
+  border-radius: 2px;
+  transition: width 0.1s linear;
+}
+
+.metricStatus {
+  display: flex;
+  flex-direction: column;
+  padding-top: 1.5rem;
+  border-top: 1px solid rgba(255,255,255,0.06);
+  width: 100%;
+}
+.metricStatusTitle {
+  font-family: var(--font-display);
+  font-size: 0.8rem;
+  font-weight: 700;
+  transition: color 0.3s ease;
+  margin-bottom: 0.4rem;
+}
+.metricStatusSub {
+  font-family: var(--font-sans);
+  font-size: 0.85rem;
+  line-height: 1.6;
+  color: rgba(255,255,255,0.7);
+  max-width: 100%;
+}
+
+@media (max-width: 768px) {
+  .section {
+    overflow-x: auto;
+    overflow-y: hidden;
+    -webkit-overflow-scrolling: touch;
+    padding-bottom: 2rem;
+  }
+  .section::-webkit-scrollbar {
+    height: 4px;
+  }
+  .section::-webkit-scrollbar-thumb {
+    background: rgba(245, 167, 6, 0.5);
+    border-radius: 4px;
+  }
+  .wrapper { 
+    min-width: 800px; 
+    min-height: 500px; 
+    margin-bottom: 1rem;
+  }
+  .metricsContainer { padding: 1.5rem; }
+  .metricsRow { flex-direction: column; align-items: stretch; gap: 1rem; }
+}

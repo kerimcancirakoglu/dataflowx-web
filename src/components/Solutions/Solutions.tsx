@@ -15,6 +15,7 @@ const SOLUTIONS = [
     titleHighlight: 'Gateway',
     description: 'DFX UDG is a diode-based gateway operating on Zero Trust principles. It physically isolates critical networks, allowing only authorized one-way data transmission.',
     protects: 'Secures sensitive infrastructures by completely neutralizing threats and making reverse data flow physically impossible.',
+    link: '/unidirectional-gateway',
     features: [
       { text: 'Security Management Singularity', icon: <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg> },
       { text: 'OT Visibility', icon: <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path><circle cx="12" cy="12" r="3"></circle></svg> },
@@ -30,6 +31,7 @@ const SOLUTIONS = [
     titleHighlight: 'Access',
     description: 'Built directly upon and seamlessly integrated with DFX UDG hardware, DFX CDS enables request-response based data transmission between isolated networks.',
     protects: 'Provides complete and uncompromising control over inter-network data traffic, blocking unauthorized lateral movement.',
+    link: '/secure-remote-access',
     features: [
       { text: 'Zero Trust Access', icon: <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg> },
       { text: 'Granular Filtering', icon: <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><polygon points="22 3 2 3 10 12.46 10 19 14 21 14 12.46 22 3"></polygon></svg> },
@@ -45,6 +47,7 @@ const SOLUTIONS = [
     titleHighlight: 'Platform',
     description: 'DFX ESP holistically addresses enterprise security needs, combining high precision, flexibility, and control. Built for modern messaging threats.',
     protects: 'Establishes active defense against SPAM, Phishing, BEC (Business Email Compromise), Malware, and Exploit attacks.',
+    link: '/email-security',
     features: [
       { text: 'YARA Engine', icon: <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><circle cx="12" cy="12" r="10"></circle><line x1="2" y1="12" x2="22" y2="12"></line><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path></svg> },
       { text: 'LDAP Integration', icon: <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg> },
@@ -172,6 +175,15 @@ export default function Solutions() {
                 </div>
               ))}
             </div>
+
+            {/* Using activeSolution.link explicitly if it exists */}
+            {activeSolution.link && (
+              <div style={{ display: 'flex', justifyContent: 'flex-end', width: '100%', marginTop: 'auto', paddingTop: '2rem' }}>
+                <a href={activeSolution.link} className={styles.productLink} style={{ marginTop: 0 }}>
+                  Go to Product Page ➔
+                </a>
+              </div>
+            )}
           </div>
         </div>
       </div>

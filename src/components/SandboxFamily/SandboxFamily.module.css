@@ -1,0 +1,330 @@
+.section {
+  padding: 4rem 2rem;
+  background: var(--color-bg-alt);
+  border-radius: 16px;
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  margin: 2rem auto;
+  max-width: 1400px;
+  position: relative;
+  overflow: hidden;
+}
+
+.inner {
+  position: relative;
+  z-index: 2;
+}
+
+.header {
+  text-align: center;
+  margin-bottom: 3rem;
+}
+
+.overTitle {
+  font-family: var(--font-mono);
+  font-size: 0.85rem;
+  color: var(--color-text-muted);
+  letter-spacing: 0.1em;
+  margin-bottom: 0.5rem;
+}
+
+.title {
+  font-family: var(--font-display);
+  font-size: 2.5rem;
+  color: #ffffff;
+  margin-bottom: 1rem;
+}
+
+.highlight {
+  color: #F5A706; /* Sandbox Orange */
+}
+
+.subtitle {
+  font-family: var(--font-sans);
+  font-size: 1.1rem;
+  color: var(--color-text-muted);
+  max-width: 700px;
+  margin: 0 auto;
+}
+
+/* ── Flow Container ── */
+.flowContainer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  position: relative;
+  padding: 2rem 0;
+  overflow-x: auto;
+  min-height: 250px;
+}
+
+/* ── Common Node Styles ── */
+.nodeBox {
+  background: rgba(10, 15, 30, 0.8);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 8px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 1.5rem;
+  text-align: center;
+  cursor: pointer;
+  transition: transform 0.2s ease, box-shadow 0.25s ease, border-color 0.25s ease;
+  position: relative;
+  z-index: 2;
+  flex-shrink: 0;
+  width: 160px;
+  height: 140px;
+}
+
+.nodeBox:hover,
+.nodeBox.activeNode {
+  transform: translateY(-4px);
+  border-color: rgba(255, 255, 255, 0.3);
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.3);
+}
+
+.espBox:hover, .espBox.activeNode {
+  border-color: #F5A706;
+  box-shadow: 0 8px 30px rgba(245, 167, 6, 0.15);
+}
+
+.nodeIcon {
+  display: flex;
+  margin-bottom: 0.75rem;
+  color: rgba(255, 255, 255, 0.6);
+}
+.nodeIcon svg {
+  width: 32px;
+  height: 32px;
+}
+.espBox .nodeIcon { color: #F5A706; }
+
+.nodeName {
+  font-family: var(--font-display);
+  font-size: 0.9rem;
+  font-weight: 700;
+  color: #ffffff;
+  margin-bottom: 0.25rem;
+}
+
+.nodeRole {
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  color: var(--color-text-muted);
+  text-transform: uppercase;
+}
+.espBox .nodeRole { color: #F5A706; }
+
+.clickHint {
+  position: absolute;
+  bottom: -24px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  color: var(--color-text-muted);
+  opacity: 0;
+  transition: opacity 0.2s ease;
+  white-space: nowrap;
+}
+.nodeBox:hover .clickHint,
+.sandboxChamber:hover .clickHint {
+  opacity: 1;
+}
+
+/* ── Sandbox Chamber ── */
+.sandboxChamber {
+  width: 200px;
+  height: 180px;
+  background: rgba(10, 15, 30, 0.9);
+  border: 2px solid #F5A706;
+  border-radius: 12px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  z-index: 2;
+  cursor: pointer;
+  overflow: hidden;
+  box-shadow: 0 0 20px rgba(245, 167, 6, 0.15);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.sandboxChamber:hover,
+.sandboxChamber.activeNode {
+  transform: translateY(-4px);
+  box-shadow: 0 10px 40px rgba(245, 167, 6, 0.3);
+}
+
+.sandboxChamber .nodeName {
+  font-size: 1rem;
+  color: #F5A706;
+}
+
+.sandboxChamber .nodeIcon {
+  color: #F5A706;
+  width: 40px;
+  height: 40px;
+  margin-bottom: 1rem;
+}
+
+/* Scanner Animation inside Sandbox */
+.scannerLine {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: #F5A706;
+  box-shadow: 0 0 15px 5px rgba(245, 167, 6, 0.5);
+  animation: scan 2.5s ease-in-out infinite alternate;
+  opacity: 0.8;
+  pointer-events: none;
+}
+
+@keyframes scan {
+  0% { transform: translateY(0); }
+  100% { transform: translateY(180px); }
+}
+
+/* ── Connection Lines ── */
+.straightLine {
+  flex: 1;
+  height: 2px;
+  background: rgba(255, 255, 255, 0.1);
+  position: relative;
+  min-width: 40px;
+}
+
+.packet {
+  position: absolute;
+  top: -5px;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.8);
+  box-shadow: 0 0 10px rgba(255, 255, 255, 0.4);
+  z-index: 3;
+}
+
+.packetDanger {
+  background: #ff3333;
+  box-shadow: 0 0 12px #ff3333;
+}
+
+.packetSafe {
+  background: #00e676;
+  box-shadow: 0 0 12px #00e676;
+}
+
+.packetYellow {
+  background: #F5A706;
+  box-shadow: 0 0 12px #F5A706;
+}
+
+/* ── Info Panel ── */
+.infoPanel {
+  margin-top: 3rem;
+  background: rgba(10, 15, 30, 0.6);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 12px;
+  padding: 2rem;
+  position: relative;
+  animation: slideUp 0.3s ease-out forwards;
+}
+
+@keyframes slideUp {
+  from { opacity: 0; transform: translateY(16px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.infoPanelHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 2rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  padding-bottom: 1rem;
+}
+
+.infoPanelRole {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  color: #F5A706;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  margin-bottom: 0.25rem;
+}
+
+.infoPanelTitle {
+  font-family: var(--font-display);
+  font-size: 1.5rem;
+  color: #ffffff;
+}
+
+.closeBtn {
+  background: none;
+  border: none;
+  color: var(--color-text-muted);
+  cursor: pointer;
+  padding: 0.5rem;
+  transition: color 0.2s;
+}
+
+.closeBtn:hover {
+  color: #ffffff;
+}
+
+.closeBtn svg {
+  width: 24px;
+  height: 24px;
+}
+
+.stepsGrid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2rem;
+}
+
+.stepCard {
+  position: relative;
+  padding-top: 1.5rem;
+}
+
+.stepCard::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, rgba(245, 167, 6, 0.6), transparent);
+  opacity: 0.5;
+}
+
+.stepNumber {
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  color: #F5A706;
+  margin-bottom: 0.5rem;
+}
+
+.stepLabel {
+  font-family: var(--font-display);
+  font-size: 1.1rem;
+  color: #ffffff;
+  margin-bottom: 0.5rem;
+}
+
+.stepText {
+  font-family: var(--font-sans);
+  font-size: 0.95rem;
+  color: var(--color-text-muted);
+  line-height: 1.5;
+}
+
+@media (max-width: 1024px) {
+  .stepsGrid { grid-template-columns: 1fr; }
+  .flowContainer { flex-direction: column; gap: 2rem; padding-bottom: 3rem; }
+  .straightLine { width: 2px; height: 40px; flex: none; }
+}

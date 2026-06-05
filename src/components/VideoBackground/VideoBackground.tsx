@@ -16,73 +16,93 @@ export default function VideoBackground() {
     let targetTime = 0;
     let smoothTime = 0;
     let rafHandle: number | null = null;
-    let started = false;
+    let isReady = false;
+    let isPriming = false; // ← çakışma önleyici flag
 
-    // ── Scroll: sadece targetTime'ı güncelle ─────────────────────────────────
-    const onScroll = () => {
-      if (!video.duration) return;
-      const maxScroll =
-        document.documentElement.scrollHeight - window.innerHeight;
-      if (maxScroll <= 0) return;
+    const computeTarget = () => {
+      if (!video.duration || Number.isNaN(video.duration)) return;
+      const maxScroll = Math.max(
+        1,
+        document.documentElement.scrollHeight - window.innerHeight
+      );
       const progress = Math.max(0, Math.min(1, window.scrollY / maxScroll));
       targetTime = progress * video.duration;
     };
 
-    window.addEventListener('scroll', onScroll, { passive: true });
-    window.addEventListener('resize', onScroll, { passive: true });
-
-    // ── Saf RAF döngüsü ───────────────────────────────────────────────────────
-    // RVFC kullanılmıyor — RVFC sadece video yeni frame render ettiğinde tetiklenir.
-    // Video pause + seek yoksa callback asla ateşlenmez → loop ölür.
-    // RAF saniyede sabit 60 kez çalışır, loop ölmez.
     const tick = () => {
-      smoothTime = lerp(smoothTime, targetTime, 0.15);
-      if (Math.abs(video.currentTime - smoothTime) > 0.001) {
-        video.currentTime = smoothTime;
+      if (isReady && video.duration) {
+        smoothTime = lerp(smoothTime, targetTime, 0.08);
+        const delta = Math.abs(video.currentTime - smoothTime);
+        if (delta > 0.033) {
+          try {
+            video.currentTime = smoothTime;
+          } catch (_) {}
+        }
       }
       rafHandle = requestAnimationFrame(tick);
     };
 
-    const startLoop = () => {
-      if (rafHandle !== null) return;
-      onScroll();
-      rafHandle = requestAnimationFrame(tick);
+    const primeVideo = async () => {
+      // Çift tetiklenmeyi engelle
+      if (isReady || isPriming) return;
+      isPriming = true;
+
+      try {
+        video.muted = true;
+        video.volume = 0;
+        await video.play();
+        video.pause();
+        video.currentTime = 0;
+      } catch (err) {
+        console.warn('[Video] play() failed, seek-only mode:', err);
+      }
+
+      isReady = true;
+      isPriming = false;
+      computeTarget();
+      smoothTime = targetTime;
     };
 
-    // ── Primer: decoder'ı uyandırmak için play→pause ──────────────────────────
-    const prime = () => {
-      if (started) return;
-      video
-        .play()
-        .then(() => {
-          started = true;
-          video.pause();
-          video.currentTime = 0;
-          smoothTime = 0;
-          startLoop();
-        })
-        .catch(() => {
-          // autoplay engellendi — gesture fallback'ler retry eder
-        });
+    const onScroll = () => computeTarget();
+
+    const onVisibilityChange = () => {
+      if (document.visibilityState === 'visible' && isReady) {
+        computeTarget();
+        smoothTime = targetTime;
+      }
     };
 
-    if (video.readyState >= 1) prime();
-    video.addEventListener('loadedmetadata', prime, { once: true });
-    video.addEventListener('canplay', prime, { once: true });
+    window.addEventListener('scroll', onScroll, { passive: true });
+    window.addEventListener('resize', onScroll, { passive: true });
+    document.addEventListener('visibilitychange', onVisibilityChange);
 
-    const onGesture = () => {
-      if (!started) prime();
+    // Tek bir event handler — removeEventListener ile temizle
+    const onVideoReady = () => {
+      video.removeEventListener('loadeddata', onVideoReady);
+      video.removeEventListener('canplay', onVideoReady);
+      video.removeEventListener('canplaythrough', onVideoReady);
+      primeVideo();
     };
-    window.addEventListener('pointerdown', onGesture, { once: true });
-    window.addEventListener('keydown', onGesture, { once: true });
-    window.addEventListener('scroll', onGesture, { once: true, passive: true });
+
+    if (video.readyState >= 2) {
+      primeVideo();
+    } else {
+      video.addEventListener('loadeddata', onVideoReady);
+      video.addEventListener('canplay', onVideoReady);
+      video.addEventListener('canplaythrough', onVideoReady);
+    }
+
+    computeTarget();
+    smoothTime = targetTime;
+    rafHandle = requestAnimationFrame(tick);
 
     return () => {
+      video.removeEventListener('loadeddata', onVideoReady);
+      video.removeEventListener('canplay', onVideoReady);
+      video.removeEventListener('canplaythrough', onVideoReady);
       window.removeEventListener('scroll', onScroll);
       window.removeEventListener('resize', onScroll);
-      window.removeEventListener('pointerdown', onGesture);
-      window.removeEventListener('keydown', onGesture);
-      window.removeEventListener('scroll', onGesture);
+      document.removeEventListener('visibilitychange', onVisibilityChange);
       if (rafHandle !== null) cancelAnimationFrame(rafHandle);
     };
   }, []);
@@ -104,19 +124,17 @@ export default function VideoBackground() {
       <video
         ref={videoRef}
         src="/dynamic-particle-flow.mp4"
-        poster="/Kapak/New-Project-2025-08-02T043719.908.jpg"
         preload="auto"
-        autoPlay
         muted
         playsInline
         style={{
           width: '100%',
           height: '100%',
           objectFit: 'cover',
-          opacity: 0.35, // <-- Opacity buradan ayarlanır
+          opacity: 0.35,
           display: 'block',
           transform: 'translateZ(0)',
-          willChange: 'transform', // 'contents' geçersiz değerdi
+          willChange: 'transform',
         }}
       />
       <div

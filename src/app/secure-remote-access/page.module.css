@@ -1,0 +1,76 @@
+/* UG Details — text-only section replacing the old diagram's right column */
+
+.ugDetails {
+  width: 100%;
+}
+
+.ugDetailsHeader {
+  margin-bottom: 2.5rem;
+}
+
+.ugDetailsOverTitle {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.22em;
+  color: #F5A706;
+  text-transform: uppercase;
+  margin-bottom: 0.75rem;
+}
+
+.ugDetailsTitle {
+  font-family: var(--font-display);
+  font-size: clamp(1.8rem, 3.5vw, 2.8rem);
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  color: #ffffff;
+  margin-bottom: 1rem;
+}
+
+.ugDetailsDesc {
+  font-family: var(--font-mono);
+  font-size: 0.95rem;
+  line-height: 1.75;
+  color: rgba(255, 255, 255, 0.5);
+  max-width: 700px;
+}
+
+.ugDetailsGrid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.5rem;
+}
+
+.ugDetailCard {
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid rgba(255, 255, 255, 0.07);
+  border-left: 3px solid #F5A706;
+  border-radius: 0 12px 12px 0;
+  padding: 1.75rem 1.5rem;
+  transition: background 0.25s ease;
+}
+
+.ugDetailCard:hover {
+  background: rgba(255, 255, 255, 0.04);
+}
+
+.ugDetailLabel {
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.15em;
+  color: #F5A706;
+  text-transform: uppercase;
+  margin-bottom: 0.85rem;
+}
+
+.ugDetailText {
+  font-family: var(--font-mono);
+  font-size: 0.875rem;
+  line-height: 1.7;
+  color: rgba(255, 255, 255, 0.55);
+}
+
+@media (max-width: 1024px) {
+  .ugDetailsGrid { grid-template-columns: 1fr; }
+}

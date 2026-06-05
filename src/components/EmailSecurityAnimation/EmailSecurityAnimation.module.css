@@ -1,0 +1,527 @@
+.section {
+  padding: 4rem 0;
+  color: #fff;
+}
+
+.inner {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.header {
+  text-align: center;
+  margin-bottom: 4rem;
+}
+
+.overTitle {
+  font-family: var(--font-mono);
+  font-size: 0.9rem;
+  letter-spacing: 0.1em;
+  color: #F5A706;
+  margin-bottom: 1rem;
+}
+
+.title {
+  font-family: var(--font-display);
+  font-size: 3rem;
+  margin-bottom: 1.5rem;
+}
+
+.highlight {
+  color: var(--color-primary);
+}
+
+.subtitle {
+  font-size: 1.15rem;
+  color: var(--color-text-muted);
+  max-width: 700px;
+  margin: 0 auto;
+  line-height: 1.6;
+}
+
+/* Flow Container */
+.flowContainer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  position: relative;
+  background: rgba(10, 15, 30, 0.6);
+  border: 1px solid rgba(245, 167, 6, 0.3);
+  border-radius: 24px;
+  padding: 3rem 4rem;
+  backdrop-filter: blur(20px);
+  margin: 3rem auto;
+  max-width: 1400px;
+  min-height: 500px;
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5), 0 0 30px rgba(245, 167, 6, 0.1) inset;
+  overflow: visible;
+}
+
+/* SVG path overlay */
+.pathSvg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 0;
+  overflow: visible;
+}
+
+/* Spacer replacing old horizontalLine */
+.lineSpacer {
+  flex-grow: 1;
+  flex-shrink: 1;
+  min-width: 60px;
+}
+
+/* Nodes */
+.nodeBlock {
+  background: linear-gradient(145deg, rgba(30, 35, 45, 0.9) 0%, rgba(15, 20, 25, 0.95) 100%);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 16px;
+  padding: 1.5rem 1rem; /* Reduced padding */
+  text-align: center;
+  width: 180px;
+  cursor: pointer;
+  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  color: #fff;
+  position: relative;
+  overflow: hidden;
+}
+
+.nodeBlock::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0; height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+}
+
+.nodeBlock:hover {
+  /* No translateY — no layout shift */
+  border-color: rgba(255, 255, 255, 0.3);
+  box-shadow: 0 0 20px rgba(255, 255, 255, 0.08);
+  background: linear-gradient(145deg, rgba(40, 45, 60, 0.9) 0%, rgba(20, 25, 35, 0.95) 100%);
+}
+
+.activeNode {
+  background: linear-gradient(145deg, rgba(40, 50, 65, 0.9) 0%, rgba(20, 25, 35, 0.95) 100%);
+  border-color: var(--color-primary);
+  box-shadow: 0 0 30px rgba(0, 163, 255, 0.3), inset 0 0 20px rgba(0, 163, 255, 0.1);
+  transform: scale(1.05);
+}
+
+.nodeIcon {
+  width: 48px; /* Slightly smaller */
+  height: 48px;
+  margin: 0 auto 1rem;
+  color: #fff;
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 50%;
+  padding: 10px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  transition: all 0.3s ease;
+}
+
+.activeNode .nodeIcon {
+  background: rgba(0, 163, 255, 0.2);
+  color: #00A3FF;
+  border-color: rgba(0, 163, 255, 0.5);
+}
+
+.nodeLabel {
+  font-family: var(--font-mono);
+  font-weight: 600;
+  font-size: 0.85rem; /* Smaller text */
+  letter-spacing: 0.05em;
+}
+
+/* Vertical line (ESP → Sandbox) */
+.verticalLine {
+  width: 2px;
+  height: 40px;
+  background: linear-gradient(180deg, rgba(0, 163, 255, 0.6), rgba(245, 167, 6, 0.6));
+  margin: 0 auto;
+  flex-shrink: 0;
+}
+
+/* Animated email packet — positioned INSIDE centerColumn, not flowContainer */
+.emailPacket {
+  position: absolute;
+  width: 40px;
+  height: 40px;
+  background: #1A1F2B;
+  border-radius: 50%;
+  border: 2px solid #00A3FF;
+  color: #00A3FF;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  /* Center it horizontally over the hub, vertically at hub midpoint */
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 20;
+  /* Color transitions via inline style, not class swap */
+  transition: border-color 0.25s ease, color 0.25s ease, box-shadow 0.25s ease;
+}
+
+.emailPacket svg {
+  width: 20px;
+  height: 20px;
+}
+
+/* Center Column */
+.centerColumn {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+  z-index: 10;
+  gap: 2rem; /* Clear space between hub and sandbox */
+}
+
+.hubNode {
+  background: linear-gradient(145deg, rgba(0, 163, 255, 0.1) 0%, rgba(0, 80, 150, 0.3) 100%);
+  border: 1px solid rgba(0, 163, 255, 0.4);
+  border-radius: 16px;
+  padding: 0;
+  width: 600px;
+  height: 280px; /* Tall enough for 2 rows of 3 threat categories */
+  display: flex;
+  cursor: pointer;
+  transition: box-shadow 0.3s ease, border-color 0.3s ease;
+  color: #fff;
+  box-shadow: 0 10px 40px rgba(0, 163, 255, 0.1), inset 0 0 20px rgba(0, 163, 255, 0.05);
+  position: relative;
+  overflow: hidden;
+}
+
+.hubNode::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0; height: 2px;
+  background: linear-gradient(90deg, transparent, #00A3FF, transparent);
+}
+
+.hubNode:hover {
+  /* No transform — prevents layout shifts and screen shake */
+  box-shadow: 0 0 30px rgba(0, 163, 255, 0.3), 0 10px 50px rgba(0, 163, 255, 0.2), inset 0 0 30px rgba(0, 163, 255, 0.15);
+  border-color: #00A3FF;
+}
+
+.hubNode.activeNode {
+  background: linear-gradient(145deg, rgba(0, 163, 255, 0.2) 0%, rgba(0, 80, 150, 0.5) 100%);
+  border-color: #fff;
+  box-shadow: 0 0 40px rgba(0, 163, 255, 0.5), inset 0 0 30px rgba(0, 163, 255, 0.2);
+}
+
+/* Internal Layout of DFX ESP */
+.hubNodeLeft {
+  flex: 0 0 200px;
+  width: 200px;
+  height: 100%;
+  padding: 2.5rem 1.5rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  border-right: 1px solid rgba(0, 163, 255, 0.2);
+  background: rgba(0, 163, 255, 0.05);
+  position: relative;
+  z-index: 2;
+}
+
+.hubNodeLeft .nodeIcon {
+  background: rgba(0, 163, 255, 0.2);
+  color: #00A3FF;
+  border-color: rgba(0, 163, 255, 0.4);
+  width: 56px; height: 56px; padding: 12px;
+}
+
+.hubNodeRight {
+  position: absolute;
+  top: 0;
+  left: 200px; /* starts after hubNodeLeft */
+  right: 0;
+  bottom: 0;
+  padding: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  background: rgba(10, 15, 25, 0.4);
+  opacity: 0.3;
+  transition: opacity 0.3s ease;
+  overflow: hidden;
+  /* Isolated compositing layer — no reflow ever escapes */
+  will-change: opacity;
+  transform: translateZ(0);
+  isolation: isolate;
+}
+
+.hubNode.activeNode .hubNodeRight,
+.hubNode:hover .hubNodeRight {
+  opacity: 1;
+}
+
+.nodeName {
+  font-family: var(--font-display);
+  font-size: 1.4rem;
+  margin-bottom: 0.5rem;
+  font-weight: 700;
+}
+
+.nodeRole {
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  color: #00A3FF;
+  letter-spacing: 0.1em;
+}
+
+.sandboxNode {
+  background: linear-gradient(145deg, rgba(245, 167, 6, 0.15) 0%, rgba(150, 100, 0, 0.4) 100%);
+  border: 1px solid rgba(245, 167, 6, 0.5);
+  border-radius: 16px;
+  padding: 2rem 1.5rem;
+  width: 220px;
+  text-align: center;
+  cursor: pointer;
+  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  color: #fff;
+  box-shadow: 0 10px 30px rgba(245, 167, 6, 0.1);
+  position: relative;
+}
+
+.sandboxNode::after {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background-image: repeating-linear-gradient(45deg, transparent, transparent 10px, rgba(245, 167, 6, 0.05) 10px, rgba(245, 167, 6, 0.05) 20px);
+  border-radius: 15px;
+  pointer-events: none;
+}
+
+.sandboxNode .nodeRole {
+  color: #F5A706;
+}
+
+.sandboxNode .nodeIcon {
+  background: rgba(245, 167, 6, 0.15);
+  color: #F5A706;
+  border-color: rgba(245, 167, 6, 0.4);
+}
+
+.sandboxNode:hover {
+  /* No translateY — no layout shift */
+  box-shadow: 0 0 25px rgba(245, 167, 6, 0.4);
+  border-color: #F5A706;
+  background: linear-gradient(145deg, rgba(245, 167, 6, 0.2) 0%, rgba(150, 100, 0, 0.5) 100%);
+}
+
+.sandboxNode.activeNode {
+  background: linear-gradient(145deg, rgba(245, 167, 6, 0.25) 0%, rgba(150, 100, 0, 0.6) 100%);
+  border-color: #fff;
+  box-shadow: 0 0 40px rgba(245, 167, 6, 0.5);
+}
+
+/* Info Panel */
+.infoPanel {
+  margin-top: 3rem;
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 12px;
+  padding: 2.5rem;
+  animation: fadeIn 0.3s ease forwards;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.infoPanelHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 2rem;
+  padding-bottom: 1.5rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.infoPanelRole {
+  font-family: var(--font-mono);
+  color: #F5A706;
+  font-size: 0.85rem;
+  letter-spacing: 0.1em;
+  margin-bottom: 0.5rem;
+}
+
+.infoPanelTitle {
+  font-family: var(--font-display);
+  font-size: 2rem;
+}
+
+.closeBtn {
+  background: none;
+  border: none;
+  color: rgba(255, 255, 255, 0.5);
+  cursor: pointer;
+  transition: color 0.3s ease;
+}
+
+.closeBtn:hover {
+  color: #fff;
+}
+
+.closeBtn svg {
+  width: 24px;
+  height: 24px;
+}
+
+.stepsGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 2rem;
+}
+
+.stepNumber {
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  color: rgba(255, 255, 255, 0.3);
+  margin-bottom: 0.5rem;
+}
+
+.stepLabel {
+  font-size: 1.1rem;
+  margin-bottom: 0.75rem;
+  color: #fff;
+}
+
+.stepText {
+  color: var(--color-text-muted);
+  line-height: 1.6;
+  font-size: 0.95rem;
+}
+
+@media (max-width: 900px) {
+  .flowContainer {
+    justify-content: flex-start;
+    overflow-x: auto;
+    overflow-y: hidden;
+    -webkit-overflow-scrolling: touch;
+    padding-bottom: 2rem;
+  }
+  
+  .flowContainer::-webkit-scrollbar {
+    height: 4px;
+  }
+  
+  .flowContainer::-webkit-scrollbar-thumb {
+    background: rgba(0, 163, 255, 0.5);
+    border-radius: 4px;
+  }
+  
+  .nodeBlock, .sandboxNode, .centerColumn {
+    flex-shrink: 0;
+  }
+  
+  .emailPacket {
+    top: 50%;
+    left: 50%;
+  }
+}
+
+/* Internal Dashboard Details */
+.dashHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  border-bottom: 1px solid rgba(0, 163, 255, 0.2);
+  padding-bottom: 0.5rem;
+  margin-bottom: 0.75rem;
+}
+
+.dashTitle {
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  color: #00A3FF;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+.dashNumbers {
+  font-family: var(--font-display);
+  font-size: 1.8rem;
+  font-weight: 700;
+  color: #fff;
+  line-height: 1;
+}
+
+.counterTarget {
+  display: inline-block;
+  min-width: 4.5ch;
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+.dashSubNum {
+  font-size: 1.2rem;
+  color: rgba(255, 255, 255, 0.5);
+  font-variant-numeric: tabular-nums;
+}
+
+.dashGrid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr); /* 3 cols = 2 rows of 6 items */
+  gap: 0.5rem;
+}
+
+.dashItem {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: rgba(255, 255, 255, 0.03);
+  padding: 0.5rem 0.6rem;
+  border-radius: 6px;
+  border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.dashItemIcon {
+  width: 28px;
+  height: 28px;
+  border-radius: 6px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid;
+  flex-shrink: 0;
+}
+
+.dashItemIcon svg {
+  width: 14px;
+  height: 14px;
+}
+
+.dashItemText {
+  text-align: left;
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  color: #fff;
+}
+
+.riskLevel {
+  color: rgba(255, 255, 255, 0.5);
+  font-size: 0.65rem;
+  margin-top: 2px;
+}
+
+.scanLine {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  height: 2px;
+  background: #00A3FF;
+  box-shadow: 0 0 10px #00A3FF, 0 0 30px #00A3FF;
+  opacity: 0;
+  will-change: transform;
+}
