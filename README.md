@@ -1,36 +1,54 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# DataFlowX Zero Trust Web Application
 
-## Getting Started
+DataFlowX, kritik IT ve OT ağlarını korumak için geliştirilmiş, donanım tabanlı siber güvenlik çözümleri (Unidirectional Gateway, Media Transfer Station, Secure Remote Access vb.) sunan bir platformdur. Bu proje, DataFlowX'in modern, dinamik ve "Glassmorphism" odaklı Zero Trust konseptli yeni web sitesidir.
 
-First, run the development server:
+Proje **Next.js**, **React**, ve **CSS Modules** kullanılarak geliştirilmiş olup, interaktif şemalar, 3D model renderları ve veri akışı animasyonlarına ev sahipliği yapmaktadır.
+
+---
+
+## 🚀 Başlangıç
+
+Geliştirme sunucusunu çalıştırmak için:
 
 ```bash
 npm run dev
-# or
+# veya
 yarn dev
-# or
+# veya
 pnpm dev
-# or
+# veya
 bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Tarayıcınızda [http://localhost:3000](http://localhost:3000) adresini açarak projeyi görüntüleyebilirsiniz.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+---
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## 📅 Geliştirme Günlüğü (Changelog)
 
-## Learn More
+### 05 Haziran 2026 (Bugün)
+- **Yeni Ürün Sayfaları:** `Media Transfer Station (MTS)`, `Email Security` ve `Sandbox` sayfaları sıfırdan oluşturuldu ve tasarlandı.
+- **Dinamik Diyagramlar:** MTS'nin USB tarama ve aktarım animasyonu, Email Security'nin tehdit algılama ağı ve Sandbox'ın dosya izolasyon/analiz mimarisi interaktif kod bileşenleri (CSS animasyonları) olarak geliştirildi.
+- **Tasarım Dili Standardizasyonu:** Tüm diyagram kapsayıcıları (container) için `1400px` genişliğinde, koyu *Glassmorphism* tabanlı (iç/dış parlamalı ve turuncu/sarımsı ince kenarlıklı) standart bir arka plan tasarımı oluşturuldu ve bu kural AI Agent Hafızasına (Memory) kalıcı olarak eklendi.
+- **Model Görselleri Optimizasyonu:** Diode ve MTS Kiosk "Models" sekmelerine ait gerçek yüksek kaliteli ürün fotoğrafları (`diode.png`, `kiosk.png`) sisteme entegre edildi. MTS'deki ağır 3D Canvas yükü kaldırılarak sayfalar hızlandırıldı.
+- **Mobil Uyumluluk (Responsive):** Diode, MTS, Email ve Sandbox sayfalarındaki geniş diyagramların mobilde sayfayı bozması veya aşağı doğru şişirmesi engellendi. Dar ekranlarda (mobile) bu diyagramlara **"yatay kaydırma" (horizontal swipe/scroll)** özelliği eklendi, böylece orantıları korundu.
+- **Hata Düzeltmeleri:** Anasayfadaki arka plan videosunun (`VideoBackground`) mobil cihazlarda veya güç tasarrufu modunda yüklenmeden önce eski bir "inşaat işçisi" kapak fotoğrafını (`poster`) gösterme sorunu düzeltildi. Kapak fotoğrafı kaldırılarak orijinal siyah (#000) arka planın pürüzsüzce devreye girmesi sağlandı.
+- **GitHub Push:** Yapılan tüm yenilikler ve eklentiler `feat: Update product pages, diagrams, models, and responsive mobile layouts` commit mesajıyla GitHub repository'sine gönderildi (Push).
 
-To learn more about Next.js, take a look at the following resources:
+### 03 Haziran 2026 - 04 Haziran 2026 (Hazırlık ve İlk Sayfalar)
+- **Proje Kurulumu:** Next.js (App Router) altyapısı, `create-next-app` ile başlatıldı.
+- **Core Bileşenler:** Navigasyon çubuğu (`Nav`), Alt bilgi (`Footer`) ve interaktif video arka planı (`VideoBackground`) geliştirildi.
+- **İlk Ürün Sayfaları:** `Unidirectional Gateway (Diode)` ve `Secure Remote Access` ürün sayfalarının temelleri atıldı.
+- **Tasarım Konsepti:** Koyu tema, parıltılı (glowing) efektler, "Data Movement Under Control" yaklaşımı ve DFX Zero Trust kurumsal renk kodları entegre edildi.
+- **3D Denemeleri:** `@react-three/fiber` entegrasyonu ile `.glb` formatlı üç boyutlu cihaz modellerinin (Diode) tarayıcı üzerinde render edilmesi sağlandı.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+---
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## 🛠️ Teknolojiler
+- **Framework:** Next.js (App Router)
+- **Stil & Tasarım:** Vanilla CSS (CSS Modules), CSS Variables
+- **Animasyon & 3D:** CSS Keyframes, React Three Fiber (Fiber & Drei)
+- **Platform:** Vercel
 
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## 🌐 Yayına Alma (Deployment)
+Proje Vercel üzerinde canlıya (Production) otomatik olarak çıkacak şekilde yapılandırılmıştır. `main` branch'ine yapılan her bir *push* işleminde Vercel yeni bir *build* alıp projeyi günceller. Manuel çıkmak isterseniz `npx vercel --prod` komutunu kullanabilirsiniz.
