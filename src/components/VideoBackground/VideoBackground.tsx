@@ -43,18 +43,18 @@ export default function VideoBackground() {
     };
 
     const primeVideo = async () => {
-      // Çift tetiklenmeyi engelle
       if (isReady || isPriming) return;
       isPriming = true;
 
       try {
         video.muted = true;
         video.volume = 0;
+        
         await video.play();
         video.pause();
         video.currentTime = 0;
       } catch (err) {
-        console.warn('[Video] play() failed, seek-only mode:', err);
+        console.warn('[Video] play() failed:', err);
       }
 
       isReady = true;
@@ -125,13 +125,14 @@ export default function VideoBackground() {
         ref={videoRef}
         src="/dynamic-particle-flow.mp4"
         preload="auto"
+        autoPlay
         muted
         playsInline
         style={{
           width: '100%',
           height: '100%',
           objectFit: 'cover',
-          opacity: 0.35,
+          opacity: 0.45,
           display: 'block',
           transform: 'translateZ(0)',
           willChange: 'transform',

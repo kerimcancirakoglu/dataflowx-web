@@ -79,9 +79,9 @@ export default function GatewayFamily() {
             repeat: -1,
             delay: 0,
             keyframes: {
-              '0%':   { opacity: 0, left: '0%' },
-              '15%':  { opacity: 1 },
-              '85%':  { opacity: 1 },
+              '0%': { opacity: 0, left: '0%' },
+              '15%': { opacity: 1 },
+              '85%': { opacity: 1 },
               '100%': { opacity: 0, left: '100%' }
             }
           }
@@ -99,9 +99,9 @@ export default function GatewayFamily() {
             repeat: -1,
             delay: 1.2,
             keyframes: {
-              '0%':   { opacity: 0, left: '0%' },
-              '10%':  { opacity: 1 },
-              '90%':  { opacity: 1 },
+              '0%': { opacity: 0, left: '0%' },
+              '10%': { opacity: 1 },
+              '90%': { opacity: 1 },
               '100%': { opacity: 0, left: '100%' }
             }
           }
@@ -119,9 +119,9 @@ export default function GatewayFamily() {
             repeat: -1,
             delay: 3.5,
             keyframes: {
-              '0%':   { opacity: 0, left: '0%' },
-              '15%':  { opacity: 1 },
-              '85%':  { opacity: 1 },
+              '0%': { opacity: 0, left: '0%' },
+              '15%': { opacity: 1 },
+              '85%': { opacity: 1 },
               '100%': { opacity: 0, left: '100%' }
             }
           }

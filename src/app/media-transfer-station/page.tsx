@@ -1,3 +1,4 @@
+import type { Metadata } from 'next';
 import Nav from '@/components/Nav/Nav';
 import Contact from '@/components/Contact/Contact';
 import VideoBackground from '@/components/VideoBackground/VideoBackground';
@@ -8,9 +9,32 @@ import MTSModels from '@/components/MTSModels/MTSModels';
 import MTSFeaturesGrid from '@/components/MTSFeaturesGrid/MTSFeaturesGrid';
 import styles from './page.module.css';
 
-export const metadata = {
-  title: 'Media Transfer Station | DataFlowX',
-  description: 'Secure media transfer kiosk designed to securely manage the use of removable media within sensitive network environments.',
+export const metadata: Metadata = {
+  title: 'Media Transfer Station — Secure USB & Removable Media Sanitization',
+  description:
+    'DFX Media Transfer Station: secure kiosk for USB and removable media sanitization using multi-engine AV and CDR. Prevents physical malware attacks on critical infrastructure.',
+  keywords: [
+    'media transfer station',
+    'USB security kiosk',
+    'removable media security',
+    'CDR content disarm reconstruction',
+    'USB sanitization',
+    'physical attack vector',
+    'malware prevention',
+    'OT air gap USB',
+    'USB güvenlik kiosk',
+    'çıkarılabilir medya güvenliği',
+  ],
+  alternates: {
+    canonical: 'https://dataflowx.com/media-transfer-station',
+  },
+  openGraph: {
+    title: 'DFX Media Transfer Station — USB & Removable Media Security',
+    description:
+      'Secure USB kiosk with multi-engine AV + CDR. Prevents physical malware attacks on critical OT networks.',
+    url: 'https://dataflowx.com/media-transfer-station',
+    images: [{ url: '/og-image.jpg', width: 1200, height: 630 }],
+  },
 };
 
 export default function MediaTransferStationPage() {

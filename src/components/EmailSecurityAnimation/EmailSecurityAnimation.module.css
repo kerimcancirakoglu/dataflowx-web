@@ -525,3 +525,36 @@
   opacity: 0;
   will-change: transform;
 }
+
+.swipeContainer {
+  width: 100%;
+}
+
+@media (max-width: 768px) {
+  .swipeContainer {
+    overflow-x: auto;
+    overflow-y: hidden;
+    -webkit-overflow-scrolling: touch;
+    margin: 0 -1.5rem;
+    padding: 0 1.5rem 2rem 1.5rem;
+    display: flex;
+    justify-content: flex-start;
+  }
+  .swipeContainer::-webkit-scrollbar {
+    height: 4px;
+  }
+  .swipeContainer::-webkit-scrollbar-thumb {
+    background: rgba(245, 167, 6, 0.5);
+    border-radius: 4px;
+  }
+  .flowContainer {
+    width: 1200px;
+    min-width: 1200px;
+    max-width: 1200px;
+    margin: 0 !important;
+    padding: 3rem 2rem;
+  }
+  .hubNode, .nodeBlock, .centerColumn {
+    flex-shrink: 0;
+  }
+}

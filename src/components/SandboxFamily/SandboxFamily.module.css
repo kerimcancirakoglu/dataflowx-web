@@ -323,8 +323,31 @@
   line-height: 1.5;
 }
 
+.swipeContainer {
+  width: 100%;
+}
+
 @media (max-width: 1024px) {
   .stepsGrid { grid-template-columns: 1fr; }
-  .flowContainer { flex-direction: column; gap: 2rem; padding-bottom: 3rem; }
-  .straightLine { width: 2px; height: 40px; flex: none; }
+  
+  .swipeContainer {
+    overflow-x: auto;
+    overflow-y: hidden;
+    -webkit-overflow-scrolling: touch;
+    margin: 0 -1.5rem;
+    padding: 0 1.5rem 2rem 1.5rem;
+  }
+  .swipeContainer::-webkit-scrollbar { height: 4px; }
+  .swipeContainer::-webkit-scrollbar-thumb {
+    background: rgba(245, 167, 6, 0.5);
+    border-radius: 4px;
+  }
+
+  .flowContainer { 
+    flex-direction: row; 
+    gap: 1rem; 
+    padding-bottom: 1rem; 
+    min-width: 900px; /* Force wide layout for swiping */
+  }
+  .straightLine { width: 40px; height: 2px; flex: 1; }
 }

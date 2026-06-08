@@ -1,3 +1,4 @@
+import type { Metadata } from 'next';
 import Nav from '@/components/Nav/Nav';
 import Contact from '@/components/Contact/Contact';
 import DiodeModelViewerWrapper from '@/components/DiodeModelViewer/DiodeModelViewerWrapper';
@@ -8,9 +9,31 @@ import BrokerFamily from '@/components/BrokerFamily/BrokerFamily';
 import SecureRemoteAccessHero from '@/components/SecureRemoteAccessHero/SecureRemoteAccessHero';
 import styles from './page.module.css';
 
-export const metadata = {
-  title: 'DFX Secure Remote Access | DataFlowX',
-  description: 'Secure cross-domain solution enabling request-response based transmission between isolated networks via integrated DataBrokerX modules.',
+export const metadata: Metadata = {
+  title: 'Secure Remote Access — Zero Trust Cross-Domain Solution',
+  description:
+    'DFX DataBrokerX: request-response based secure remote access across isolated OT/IT networks. Zero Trust architecture with Active Directory integration and ICAP sandbox support.',
+  keywords: [
+    'secure remote access',
+    'cross-domain solution',
+    'zero trust network access',
+    'ZTNA OT security',
+    'isolated network access',
+    'ICS remote access',
+    'SCADA remote access',
+    'DataBrokerX',
+    'güvenli uzak erişim',
+  ],
+  alternates: {
+    canonical: 'https://dataflowx.com/secure-remote-access',
+  },
+  openGraph: {
+    title: 'DFX Secure Remote Access (DataBrokerX) — Zero Trust OT Access',
+    description:
+      'Request-response based secure access across isolated networks. Active Directory integration. ICAP sandbox support.',
+    url: 'https://dataflowx.com/secure-remote-access',
+    images: [{ url: '/og-image.jpg', width: 1200, height: 630 }],
+  },
 };
 
 export default function SecureRemoteAccessPage() {

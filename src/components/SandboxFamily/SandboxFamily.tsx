@@ -105,82 +105,84 @@ export default function SandboxFamily() {
             Detect, Disarm, <span className={styles.highlight}>Defend</span>
           </h2>
           <p className={styles.subtitle}>
-            Click any element to understand how DFX Advanced Threat Mitigation purifies suspicious files 
+            Click any element to understand how DFX Sandbox purifies suspicious files 
             in isolation and stops zero-day threats before they cause damage.
           </p>
         </div>
 
-        <div className={styles.flowContainer}>
+        <div className={styles.swipeContainer}>
+          <div className={styles.flowContainer}>
 
-          {/* 1. Source */}
-          <button className={`${styles.nodeBox} ${activeElement === 'source' ? styles.activeNode : ''}`} onClick={() => handleClick('source')}>
-            <div className={styles.nodeIcon}>
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
-                <path d="M21 12V7H5a2 2 0 0 1 0-4h14v4" />
-                <path d="M3 5v14a2 2 0 0 0 2 2h16v-5" />
-                <path d="M18 12a2 2 0 0 0 0 4h4v-4Z" />
-              </svg>
+            {/* 1. Source */}
+            <button className={`${styles.nodeBox} ${activeElement === 'source' ? styles.activeNode : ''}`} onClick={() => handleClick('source')}>
+              <div className={styles.nodeIcon}>
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
+                  <path d="M21 12V7H5a2 2 0 0 1 0-4h14v4" />
+                  <path d="M3 5v14a2 2 0 0 0 2 2h16v-5" />
+                  <path d="M18 12a2 2 0 0 0 0 4h4v-4Z" />
+                </svg>
+              </div>
+              <div className={styles.nodeName}>Ethernet</div>
+              <div className={styles.nodeRole}>Source Network</div>
+              <div className={styles.clickHint}>Click to explore</div>
+            </button>
+
+            <div className={styles.straightLine}>
+              <div className={`${styles.packet} ${styles.packetDanger}`} ref={p1Ref}></div>
             </div>
-            <div className={styles.nodeName}>Ethernet</div>
-            <div className={styles.nodeRole}>Source Network</div>
-            <div className={styles.clickHint}>Click to explore</div>
-          </button>
 
-          <div className={styles.straightLine}>
-            <div className={`${styles.packet} ${styles.packetDanger}`} ref={p1Ref}></div>
+            {/* 2. ESP */}
+            <button className={`${styles.nodeBox} ${styles.espBox} ${activeElement === 'esp' ? styles.activeNode : ''}`} onClick={() => handleClick('esp')}>
+              <div className={styles.nodeIcon}>
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
+                  <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z" />
+                  <polyline points="22,6 12,13 2,6" />
+                </svg>
+              </div>
+              <div className={styles.nodeName}>DFX ESP</div>
+              <div className={styles.nodeRole}>Email / File Gateway</div>
+              <div className={styles.clickHint}>Click to explore</div>
+            </button>
+
+            <div className={styles.straightLine}>
+              <div className={`${styles.packet} ${styles.packetYellow}`} ref={p2Ref}></div>
+            </div>
+
+
+
+            {/* 4. Sandbox */}
+            <button className={`${styles.sandboxChamber} ${activeElement === 'sandbox' ? styles.activeNode : ''}`} onClick={() => handleClick('sandbox')}>
+              <div className={styles.scannerLine}></div>
+              <div className={styles.nodeIcon}>
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
+                  <path d="M3 12h3M18 12h3M12 3v3M12 18v3" />
+                  <path d="m5.6 5.6 2.1 2.1M16.3 16.3l2.1 2.1M5.6 18.4l2.1-2.1M16.3 7.7l2.1-2.1" />
+                  <circle cx="12" cy="12" r="4" />
+                </svg>
+              </div>
+              <div className={styles.nodeName}>Sandbox Chamber</div>
+              <div className={styles.nodeRole}>Isolated Execution</div>
+              <div className={styles.clickHint}>Click to explore</div>
+            </button>
+
+            <div className={styles.straightLine}>
+              <div className={`${styles.packet} ${styles.packetSafe}`} ref={p3Ref}></div>
+            </div>
+
+            {/* 5. Target */}
+            <button className={`${styles.nodeBox} ${activeElement === 'target' ? styles.activeNode : ''}`} onClick={() => handleClick('target')}>
+              <div className={styles.nodeIcon}>
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
+                  <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" />
+                  <circle cx="12" cy="7" r="4" />
+                </svg>
+              </div>
+              <div className={styles.nodeName}>Exchange Server</div>
+              <div className={styles.nodeRole}>Protected Network</div>
+              <div className={styles.clickHint}>Click to explore</div>
+            </button>
+
           </div>
-
-          {/* 2. ESP */}
-          <button className={`${styles.nodeBox} ${styles.espBox} ${activeElement === 'esp' ? styles.activeNode : ''}`} onClick={() => handleClick('esp')}>
-            <div className={styles.nodeIcon}>
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
-                <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z" />
-                <polyline points="22,6 12,13 2,6" />
-              </svg>
-            </div>
-            <div className={styles.nodeName}>DFX ESP</div>
-            <div className={styles.nodeRole}>Email / File Gateway</div>
-            <div className={styles.clickHint}>Click to explore</div>
-          </button>
-
-          <div className={styles.straightLine}>
-            <div className={`${styles.packet} ${styles.packetYellow}`} ref={p2Ref}></div>
-          </div>
-
-
-
-          {/* 4. Sandbox */}
-          <button className={`${styles.sandboxChamber} ${activeElement === 'sandbox' ? styles.activeNode : ''}`} onClick={() => handleClick('sandbox')}>
-            <div className={styles.scannerLine}></div>
-            <div className={styles.nodeIcon}>
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
-                <path d="M3 12h3M18 12h3M12 3v3M12 18v3" />
-                <path d="m5.6 5.6 2.1 2.1M16.3 16.3l2.1 2.1M5.6 18.4l2.1-2.1M16.3 7.7l2.1-2.1" />
-                <circle cx="12" cy="12" r="4" />
-              </svg>
-            </div>
-            <div className={styles.nodeName}>Sandbox Chamber</div>
-            <div className={styles.nodeRole}>Isolated Execution</div>
-            <div className={styles.clickHint}>Click to explore</div>
-          </button>
-
-          <div className={styles.straightLine}>
-            <div className={`${styles.packet} ${styles.packetSafe}`} ref={p3Ref}></div>
-          </div>
-
-          {/* 5. Target */}
-          <button className={`${styles.nodeBox} ${activeElement === 'target' ? styles.activeNode : ''}`} onClick={() => handleClick('target')}>
-            <div className={styles.nodeIcon}>
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
-                <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" />
-                <circle cx="12" cy="7" r="4" />
-              </svg>
-            </div>
-            <div className={styles.nodeName}>Exchange Server</div>
-            <div className={styles.nodeRole}>Protected Network</div>
-            <div className={styles.clickHint}>Click to explore</div>
-          </button>
-
         </div>
 
         {/* ── Info Panel ── */}

@@ -1,3 +1,4 @@
+import type { Metadata } from 'next';
 import Nav from '@/components/Nav/Nav';
 import Contact from '@/components/Contact/Contact';
 import GartnerTestimonial from '@/components/GartnerTestimonial/GartnerTestimonial';
@@ -8,15 +9,91 @@ import VideoBackground from '@/components/VideoBackground/VideoBackground';
 import GatewayFamily from '@/components/GatewayFamily/GatewayFamily';
 import styles from './page.module.css';
 
-export const metadata = {
-  title: 'DFX Unidirectional Gateway | DataFlowX',
-  description: 'Hardware-enforced one-way data transfer securing critical infrastructure against cyber threats with Zero Trust principles.',
+export const metadata: Metadata = {
+  title: 'Unidirectional Gateway & Data Diode — OT/SCADA Security',
+  description:
+    'DFX DataDiodeX: EAL4+ certified hardware-enforced unidirectional gateway for OT/SCADA security. Physically isolates critical networks — recognized by Gartner for 3 consecutive years.',
+  keywords: [
+    'unidirectional gateway',
+    'data diode',
+    'OT security',
+    'SCADA security',
+    'ICS cybersecurity',
+    'EAL4+ certified',
+    'critical infrastructure protection',
+    'hardware enforced security',
+    'data diyodu',
+    'tek yönlü ağ geçidi',
+  ],
+  alternates: {
+    canonical: 'https://dataflowx.com/unidirectional-gateway',
+  },
+  openGraph: {
+    title: 'DFX Unidirectional Gateway (DataDiodeX) — EAL4+ Certified',
+    description:
+      'Hardware-enforced one-way data transfer. Gartner-recognized. EAL4+ certified. Securing energy, defense, and critical infrastructure.',
+    url: 'https://dataflowx.com/unidirectional-gateway',
+    images: [{ url: '/og-image.jpg', width: 1200, height: 630 }],
+  },
+};
+
+// Product structured data
+const productSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'Product',
+  name: 'DFX Unidirectional Gateway (DataDiodeX)',
+  description:
+    'EAL4+ certified hardware-enforced unidirectional gateway for OT/SCADA security. Physically prevents reverse data flow, securing critical infrastructure against cyber threats.',
+  brand: { '@type': 'Brand', name: 'DataFlowX' },
+  manufacturer: { '@type': 'Organization', name: 'DataFlowX', url: 'https://dataflowx.com' },
+  category: 'Cybersecurity Hardware',
+  url: 'https://dataflowx.com/unidirectional-gateway',
+  additionalProperty: [
+    { '@type': 'PropertyValue', name: 'Certification', value: 'Common Criteria EAL4+' },
+    { '@type': 'PropertyValue', name: 'Technology', value: 'Hardware-enforced optical diode' },
+    { '@type': 'PropertyValue', name: 'Compliance', value: 'IEC 62443, NERC CIP, NIS2, IEC 62443' },
+    { '@type': 'PropertyValue', name: 'Recognition', value: 'Gartner Hype Cycle for CPS Security' },
+  ],
+};
+
+const faqSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: [
+    {
+      '@type': 'Question',
+      name: 'What is a unidirectional gateway?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'A unidirectional gateway (also called a data diode) is a hardware device that physically enforces one-way data flow between networks. It makes reverse data transfer physically impossible, providing absolute protection for critical OT/SCADA networks.',
+      },
+    },
+    {
+      '@type': 'Question',
+      name: 'What certifications does DFX DataDiodeX hold?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'DFX DataDiodeX holds the EAL4+ Common Criteria certification and is recognized by Gartner in the Hype Cycle for CPS Security in the Unidirectional Gateways category for three consecutive years.',
+      },
+    },
+    {
+      '@type': 'Question',
+      name: 'Which industries use unidirectional gateways?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'Unidirectional gateways are used in energy (power plants, oil & gas, SCADA), defense, nuclear facilities, water treatment, finance, and any critical infrastructure requiring absolute network isolation.',
+      },
+    },
+  ],
 };
 
 export default function UnidirectionalGatewayPage() {
   return (
-    <main>
-      <VideoBackground />
+    <>
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(productSchema) }} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }} />
+      <main>
+        <VideoBackground />
       <Nav />
 
       {/* Opening hero statement */}
@@ -93,5 +170,6 @@ export default function UnidirectionalGatewayPage() {
 
       <Contact />
     </main>
+    </>
   );
 }

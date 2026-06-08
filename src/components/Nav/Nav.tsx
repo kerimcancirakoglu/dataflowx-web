@@ -31,7 +31,6 @@ const NAV_LINKS: NavLink[] = [
         items: [
           { label: 'DFX Unidirectional Gateway', href: '/unidirectional-gateway' },
           { label: 'DFX Secure Remote Access', href: '/secure-remote-access' },
-          { label: 'DFX Advanced Threat Mitigation', href: '/advanced-threat-mitigation' },
         ]
       },
       {
@@ -60,10 +59,10 @@ const NAV_LINKS: NavLink[] = [
   },
   {
     label: 'Resources',
-    href: '#resources',
+    href: '/resources',
     submenu: [
-      { label: 'Datasheets', href: '#datasheets' },
-      { label: 'Blog', href: '#blog' },
+      { label: 'Resource Center (Datasheets & Whitepapers)', href: '/resources' },
+      { label: 'Blog', href: '/resources/blog' },
       { label: 'News', href: '#news' },
       { label: 'Customer Success Stories', href: '#customer-success-stories' },
     ],

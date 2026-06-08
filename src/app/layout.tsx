@@ -2,23 +2,56 @@ import type { Metadata } from 'next';
 import './globals.css';
 import Footer from '@/components/Footer/Footer';
 
+const BASE_URL = 'https://dataflowx.com';
+
 export const metadata: Metadata = {
-  metadataBase: new URL('https://dataflowx.com'), // Replace with actual domain when ready
-  title: 'DataFlowX — Zero Trust Data Transfer Solutions',
-  description: 'Hardware-enforced data isolation for critical infrastructure. Military-grade air-gap technology for defense, finance, and government sectors.',
-  keywords: 'data diode, air gap, zero trust, cybersecurity, critical infrastructure, data transfer, military security',
-  authors: [{ name: 'DataFlowX' }],
+  metadataBase: new URL(BASE_URL),
+  title: {
+    default: 'DataFlowX — Unidirectional Gateway & Data Diode Solutions',
+    template: '%s | DataFlowX',
+  },
+  description:
+    'Hardware-enforced unidirectional gateway and data diode solutions for critical infrastructure. EAL4+ certified. Trusted by energy, defense, and government sectors across Turkey, Gulf, and Europe.',
+  keywords: [
+    'data diode',
+    'unidirectional gateway',
+    'OT security',
+    'SCADA security',
+    'critical infrastructure protection',
+    'zero trust',
+    'ICS cybersecurity',
+    'NIS2 compliance',
+    'IEC 62443',
+    'air gap security',
+    'data diyodu',
+    'unidirectional gateway Türkiye',
+    'OT güvenlik',
+    'SCADA güvenliği',
+  ],
+  authors: [{ name: 'DataFlowX', url: BASE_URL }],
+  creator: 'DataFlowX',
+  publisher: 'DataFlowX',
+  alternates: {
+    canonical: BASE_URL,
+    languages: {
+      'en': `${BASE_URL}/en`,
+      'tr': `${BASE_URL}/tr`,
+      'ar': `${BASE_URL}/ar`,
+      'x-default': BASE_URL,
+    },
+  },
   openGraph: {
-    title: 'DataFlowX — Zero Trust Data Transfer',
-    description: 'Hardware-enforced data isolation for critical infrastructure.',
-    url: 'https://dataflowx.com',
+    title: 'DataFlowX — Unidirectional Gateway & Data Diode Solutions',
+    description:
+      'Hardware-enforced data isolation for critical infrastructure. EAL4+ certified. Trusted by energy, defense, and government sectors.',
+    url: BASE_URL,
     siteName: 'DataFlowX',
     images: [
       {
-        url: '/og-image.jpg', // Placeholder for actual OG image
+        url: '/og-image.jpg',
         width: 1200,
         height: 630,
-        alt: 'DataFlowX Zero Trust Architecture',
+        alt: 'DataFlowX Zero Trust Unidirectional Gateway Architecture',
       },
     ],
     locale: 'en_US',
@@ -26,8 +59,9 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'DataFlowX — Zero Trust Data Transfer',
-    description: 'Hardware-enforced data isolation for critical infrastructure.',
+    title: 'DataFlowX — Unidirectional Gateway & Data Diode Solutions',
+    description:
+      'Hardware-enforced data isolation for critical infrastructure. EAL4+ certified.',
     images: ['/og-image.jpg'],
   },
   robots: {
@@ -41,6 +75,55 @@ export const metadata: Metadata = {
       'max-snippet': -1,
     },
   },
+  verification: {
+    // google: 'YOUR_GOOGLE_SEARCH_CONSOLE_TOKEN', // Add when available
+  },
+};
+
+// Organization structured data (JSON-LD)
+const organizationSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'Organization',
+  name: 'DataFlowX',
+  url: BASE_URL,
+  logo: `${BASE_URL}/logo.png`,
+  description:
+    'DataFlowX develops hardware-enforced unidirectional gateway and data diode solutions for critical infrastructure cybersecurity.',
+  foundingLocation: {
+    '@type': 'Place',
+    addressCountry: 'TR',
+  },
+  areaServed: ['TR', 'AE', 'SA', 'QA', 'RS', 'RO', 'BG', 'KZ', 'AZ', 'EG', 'DZ'],
+  sameAs: [
+    'https://www.linkedin.com/company/dataflowx',
+  ],
+  hasOfferCatalog: {
+    '@type': 'OfferCatalog',
+    name: 'DataFlowX Cybersecurity Product Portfolio',
+    itemListElement: [
+      { '@type': 'Offer', itemOffered: { '@type': 'Product', name: 'DFX Unidirectional Gateway (DataDiodeX)' } },
+      { '@type': 'Offer', itemOffered: { '@type': 'Product', name: 'DFX Secure Remote Access (DataBrokerX)' } },
+      { '@type': 'Offer', itemOffered: { '@type': 'Product', name: 'DFX Media Transfer Station' } },
+      { '@type': 'Offer', itemOffered: { '@type': 'Product', name: 'DFX Email Security Platform' } },
+      { '@type': 'Offer', itemOffered: { '@type': 'Product', name: 'DFX Sandbox (DataSecureX)' } },
+    ],
+  },
+};
+
+// WebSite structured data for sitelinks searchbox
+const websiteSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'WebSite',
+  name: 'DataFlowX',
+  url: BASE_URL,
+  potentialAction: {
+    '@type': 'SearchAction',
+    target: {
+      '@type': 'EntryPoint',
+      urlTemplate: `${BASE_URL}/search?q={search_term_string}`,
+    },
+    'query-input': 'required name=search_term_string',
+  },
 };
 
 export default function RootLayout({
@@ -53,6 +136,20 @@ export default function RootLayout({
       <head>
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
+        {/* hreflang alternate links */}
+        <link rel="alternate" hrefLang="en" href={`${BASE_URL}/en`} />
+        <link rel="alternate" hrefLang="tr" href={`${BASE_URL}/tr`} />
+        <link rel="alternate" hrefLang="ar" href={`${BASE_URL}/ar`} />
+        <link rel="alternate" hrefLang="x-default" href={BASE_URL} />
+        {/* Organization & WebSite structured data */}
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationSchema) }}
+        />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(websiteSchema) }}
+        />
       </head>
       <body>
         {children}

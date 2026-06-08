@@ -57,17 +57,17 @@ const SOURCES = [
     id: 'usb',
     label: 'Hardware / USB',
     sublabel: 'FIRMWARE / MEDIA',
-    color: '#a855f7',
+    color: '#00a3ff',
     detailTitle: 'HARDWARE & MEDIA SCAN',
     detailText: 'Physical media introduced to secure endpoints are scanned and virtually mounted in the sandbox. This prevents zero-day autorun exploits and firmware-level malware from touching the actual OS layer.',
     icon: (
       <svg viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <rect x="22" y="4" width="20" height="36" rx="4" fill="#0d001a" stroke="#a855f7" strokeWidth="2"/>
-        <rect x="30" y="40" width="4" height="20" fill="#a855f7" opacity="0.6"/>
-        <rect x="14" y="52" width="36" height="6" rx="3" fill="#0d001a" stroke="#a855f7" strokeWidth="1.5"/>
-        <rect x="28" y="14" width="8" height="4" rx="1" fill="#a855f7" opacity="0.6"/>
-        <rect x="28" y="22" width="8" height="4" rx="1" fill="#a855f7" opacity="0.4"/>
-        <circle cx="32" cy="10" r="3" fill="#a855f7"/>
+        <rect x="22" y="4" width="20" height="36" rx="4" fill="#001122" stroke="#00a3ff" strokeWidth="2"/>
+        <rect x="30" y="40" width="4" height="20" fill="#00a3ff" opacity="0.6"/>
+        <rect x="14" y="52" width="36" height="6" rx="3" fill="#001122" stroke="#00a3ff" strokeWidth="1.5"/>
+        <rect x="28" y="14" width="8" height="4" rx="1" fill="#00a3ff" opacity="0.6"/>
+        <rect x="28" y="22" width="8" height="4" rx="1" fill="#00a3ff" opacity="0.4"/>
+        <circle cx="32" cy="10" r="3" fill="#00a3ff"/>
         {/* Skull warning */}
         <circle cx="49" cy="15" r="9" fill="#ff4757"/>
         <path d="M49 10.5a4 4 0 0 1 4 4c0 1.5-.8 2.8-2 3.5v1.5h-4v-1.5c-1.2-.7-2-2-2-3.5a4 4 0 0 1 4-4z" fill="white" opacity="0.9"/>
@@ -150,18 +150,19 @@ export default function SandboxAnimation() {
         </p>
       </div>
 
-      <div className={styles.wrapper} ref={containerRef}>
-        {/* SVG Lines + Packets */}
-        <svg className={styles.svgOverlay} viewBox="0 0 100 100" preserveAspectRatio="none">
-          <defs>
-            {SOURCES.map((src, i) => (
-              <linearGradient key={src.id} id={`grad-${src.id}`} x1={nodes[i].x > 50 ? '100%' : '0%'} y1={nodes[i].y > 50 ? '100%' : '0%'} x2={nodes[i].x > 50 ? '0%' : '100%'} y2={nodes[i].y > 50 ? '0%' : '100%'}>
-                <stop offset="0%" stopColor={src.color} stopOpacity="0"/>
-                <stop offset="50%" stopColor={src.color} stopOpacity="0.8"/>
-                <stop offset="100%" stopColor={src.color} stopOpacity="0.2"/>
-              </linearGradient>
-            ))}
-          </defs>
+      <div className={styles.swipeContainer}>
+        <div className={styles.wrapper} ref={containerRef}>
+          {/* SVG Lines + Packets */}
+          <svg className={styles.svgOverlay} viewBox="0 0 100 100" preserveAspectRatio="none">
+            <defs>
+              {SOURCES.map((src, i) => (
+                <linearGradient key={src.id} id={`grad-${src.id}`} x1={nodes[i].x > 50 ? '100%' : '0%'} y1={nodes[i].y > 50 ? '100%' : '0%'} x2={nodes[i].x > 50 ? '0%' : '100%'} y2={nodes[i].y > 50 ? '0%' : '100%'}>
+                  <stop offset="0%" stopColor={src.color} stopOpacity="0"/>
+                  <stop offset="50%" stopColor={src.color} stopOpacity="0.8"/>
+                  <stop offset="100%" stopColor={src.color} stopOpacity="0.2"/>
+                </linearGradient>
+              ))}
+            </defs>
 
           {SOURCES.map((src, i) => (
             <g key={src.id}>
@@ -263,6 +264,7 @@ export default function SandboxAnimation() {
           <span className={styles.badgeDot} style={{ background: '#2ed573' }}/>
           SAFE — PASSED
         </div>
+      </div>
       </div>
 
       {/* Bottom Metrics Bar */}

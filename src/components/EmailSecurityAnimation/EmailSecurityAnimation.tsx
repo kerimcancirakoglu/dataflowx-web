@@ -27,7 +27,7 @@ const elementDetails: Record<string, {
     ]
   },
   sandbox: {
-    title: 'DFX Advanced Threat Mitigation',
+    title: 'DFX Sandbox',
     role: 'Deep Isolation Sandbox',
     steps: [
       { label: 'Detonation', text: 'Suspicious files are safely executed in an isolated environment to observe true behavior.' },
@@ -163,7 +163,8 @@ export default function EmailSecurityAnimation() {
         </div>
 
         {/* ── Flow Diagram ── */}
-        <div className={styles.flowContainer}>
+        <div className={styles.swipeContainer}>
+          <div className={styles.flowContainer}>
 
           {/* ── SVG Connector Paths (absolute overlay) ── */}
           <svg className={styles.pathSvg} viewBox="0 0 1050 360" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
@@ -336,6 +337,7 @@ export default function EmailSecurityAnimation() {
             <div className={styles.nodeLabel}>Exchange Server</div>
           </button>
         </div>
+      </div>
 
         {/* ── Info Panel ── */}
         {detail && (

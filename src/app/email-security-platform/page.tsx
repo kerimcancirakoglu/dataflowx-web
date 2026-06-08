@@ -1,3 +1,4 @@
+import type { Metadata } from 'next';
 import Nav from '@/components/Nav/Nav';
 import Contact from '@/components/Contact/Contact';
 import VideoBackground from '@/components/VideoBackground/VideoBackground';
@@ -6,9 +7,32 @@ import EmailSecurityLayers from '@/components/EmailSecurityLayers/EmailSecurityL
 import EmailFeaturesTabs from '@/components/EmailFeaturesTabs/EmailFeaturesTabs';
 import styles from './page.module.css';
 
-export const metadata = {
-  title: 'DFX E-Mail Security Platform | DataFlowX',
-  description: 'Advanced email gateway with AI-driven threat detection and deep content disarm & reconstruction (CDR).',
+export const metadata: Metadata = {
+  title: 'Email Security Platform — AI-Powered Threat Detection & CDR',
+  description:
+    'DFX Email Security Platform: AI behavioral detection, deep CDR, and retrospective scanning. Zero Trust email gateway protecting critical infrastructure from phishing, BEC, and zero-day malware.',
+  keywords: [
+    'email security platform',
+    'AI threat detection',
+    'content disarm reconstruction',
+    'CDR email',
+    'anti-phishing',
+    'BEC protection',
+    'zero-day malware email',
+    'email gateway security',
+    'e-posta güvenlik platformu',
+    'siber tehdit tespiti',
+  ],
+  alternates: {
+    canonical: 'https://dataflowx.com/email-security-platform',
+  },
+  openGraph: {
+    title: 'DFX Email Security Platform — AI + CDR Protection',
+    description:
+      'Self-learning AI + Deep CDR + Retrospective scanning. Zero Trust email protection against advanced persistent threats.',
+    url: 'https://dataflowx.com/email-security-platform',
+    images: [{ url: '/og-image.jpg', width: 1200, height: 630 }],
+  },
 };
 
 export default function EmailSecurityPage() {
