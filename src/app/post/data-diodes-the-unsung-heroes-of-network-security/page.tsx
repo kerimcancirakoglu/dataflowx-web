@@ -1,19 +1,19 @@
 import type { Metadata } from 'next';
 import Nav from '@/components/Nav/Nav';
-import Contact from '@/components/Contact/Contact';
+import ContactMini from '@/components/ContactMini/ContactMini';
 import styles from './page.module.css';
 
 export const metadata: Metadata = {
-  title: 'What is a Data Diode? The Unsung Heroes of Network Security',
+  title: 'Veri Diodu Nedir? Ağ Güvenliğinin Gizli Kahramanları',
   description:
-    'Learn what a data diode is, how it works, and why it is critical for protecting OT networks, SCADA systems, and critical infrastructure from cyber threats.',
+    'Veri diodunun ne olduğunu, nasıl çalıştığını ve OT ağlarını, SCADA sistemlerini ve kritik altyapıları siber tehditlerden korumak için neden kritik olduğunu öğrenin.',
   keywords: [
-    'what is a data diode',
-    'how does a data diode work',
-    'data diode explanation',
-    'unidirectional gateway tutorial',
-    'OT security basics',
-    'SCADA security diode',
+    'veri diodu nedir',
+    'veri diodu nasıl çalışır',
+    'veri diodu açıklaması',
+    'tek yönlü ağ geçidi eğitimi',
+    'OT güvenlik temelleri',
+    'SCADA güvenlik diodu',
   ],
   alternates: {
     // CRITICAL SEO FIX:
@@ -23,8 +23,8 @@ export const metadata: Metadata = {
     canonical: 'https://dataflowx.com/unidirectional-gateway',
   },
   openGraph: {
-    title: 'What is a Data Diode? How it Works & Why it Matters',
-    description: 'An introductory guide to unidirectional network security for critical infrastructure.',
+    title: 'Veri Diodu Nedir? Nasıl Çalışır ve Neden Önemlidir',
+    description: 'Kritik altyapılar için tek yönlü ağ güvenliğine giriş rehberi.',
     url: 'https://dataflowx.com/post/data-diodes-the-unsung-heroes-of-network-security',
     images: [{ url: '/og-image.jpg', width: 1200, height: 630 }],
   },
@@ -33,11 +33,11 @@ export const metadata: Metadata = {
 const articleSchema = {
   '@context': 'https://schema.org',
   '@type': 'BlogPosting',
-  headline: 'What is a Data Diode? The Unsung Heroes of Network Security',
-  description: 'Learn what a data diode is, how it works, and why it is critical for protecting OT networks.',
+  headline: 'Veri Diodu Nedir? Ağ Güvenliğinin Gizli Kahramanları',
+  description: 'Veri diodunun ne olduğunu, nasıl çalıştığını ve OT ağlarını korumak için neden kritik olduğunu öğrenin.',
   author: {
     '@type': 'Organization',
-    name: 'DataFlowX Security Research',
+    name: 'DataFlowX Güvenlik Araştırmaları',
   },
   publisher: {
     '@type': 'Organization',
@@ -60,12 +60,12 @@ export default function DataDiodeBlogPost() {
         {/* Article Header */}
         <header className={styles.header}>
           <div className={styles.headerInner}>
-            <p className={styles.overline}>CYBERSECURITY ESSENTIALS</p>
-            <h1 className={styles.title}>What is a Data Diode?<br />The Unsung Heroes of Network Security</h1>
+            <p className={styles.overline}>SİBER GÜVENLİK TEMELLERİ</p>
+            <h1 className={styles.title}>Veri Diodu Nedir?<br />Ağ Güvenliğinin Gizli Kahramanları</h1>
             <div className={styles.meta}>
-              <span>By DataFlowX Security Research</span>
+              <span>Yazan: DataFlowX Güvenlik Araştırmaları</span>
               <span>·</span>
-              <span>5 min read</span>
+              <span>5 dk okuma</span>
             </div>
           </div>
         </header>
@@ -73,62 +73,63 @@ export default function DataDiodeBlogPost() {
         {/* Article Content */}
         <article className={styles.article}>
           <div className={styles.content}>
-            <h2>The Need for Absolute Network Isolation</h2>
+            <h2>Mutlak Ağ İzolasyonu İhtiyacı</h2>
             <p>
-              In modern industrial environments, the convergence of IT (Information Technology) and OT (Operational Technology) 
-              has created unprecedented efficiencies. However, it has also introduced severe security risks. When internet-connected 
-              IT networks are linked to critical OT networks—such as power grids, water treatment facilities, or manufacturing plants—the 
-              OT network becomes vulnerable to cyberattacks, ransomware, and unauthorized remote access.
+              Modern endüstriyel ortamlarda BT (Bilgi Teknolojileri) ve OT (Operasyonel Teknolojiler) yakınsaması eşi benzeri görülmemiş 
+              verimlilikler yarattı. Ancak, aynı zamanda ciddi güvenlik risklerini de beraberinde getirdi. İnternet bağlantılı 
+              BT ağları, elektrik şebekeleri, su arıtma tesisleri veya üretim tesisleri gibi kritik OT ağlarına bağlandığında, 
+              OT ağı siber saldırılara, fidye yazılımlarına ve yetkisiz uzaktan erişime karşı savunmasız hale gelir.
             </p>
             <p>
-              Traditional software-based firewalls, while useful for IT security, fall short in protecting OT environments. Firewalls are 
-              fundamentally designed to allow two-way communication and rely on complex software rules that can be misconfigured or exploited 
-              via zero-day vulnerabilities. This is where the <strong>data diode</strong> comes in.
-            </p>
-
-            <h2>What Exactly is a Data Diode?</h2>
-            <p>
-              A data diode, also known as a unidirectional gateway, is a hardware device designed to enforce one-way data flow between two networks. 
-              Unlike a firewall, which uses software to inspect and filter traffic in both directions, a data diode uses <strong>physical hardware components</strong> 
-              (typically optical fibers) to guarantee that data can only travel in a single direction.
+              Geleneksel yazılım tabanlı güvenlik duvarları (firewall), BT güvenliği için yararlı olsa da, OT ortamlarını korumada yetersiz kalır. 
+              Güvenlik duvarları temel olarak iki yönlü iletişime izin verecek şekilde tasarlanmıştır ve yanlış yapılandırılabilecek veya sıfırıncı gün 
+              (zero-day) zafiyetleri yoluyla istismar edilebilecek karmaşık yazılım kurallarına dayanır. İşte bu noktada <strong>veri diodu</strong> devreye girer.
             </p>
 
-            <h2>How Does a Data Diode Work?</h2>
+            <h2>Veri Diodu Tam Olarak Nedir?</h2>
             <p>
-              The core mechanism of a data diode relies on optical isolation. The device typically consists of two distinct nodes: a sending node and a receiving node.
+              Tek yönlü ağ geçidi (unidirectional gateway) olarak da bilinen veri diodu, iki ağ arasında tek yönlü veri akışını zorlamak için 
+              tasarlanmış bir donanım cihazıdır. Trafiği her iki yönde denetlemek ve filtrelemek için yazılım kullanan bir güvenlik duvarının 
+              aksine, bir veri diodu verilerin yalnızca tek bir yönde seyahat etmesini garanti etmek için <strong>fiziksel donanım bileşenleri</strong> 
+              (genellikle fiber optik) kullanır.
+            </p>
+
+            <h2>Veri Diodu Nasıl Çalışır?</h2>
+            <p>
+              Bir veri diodunun temel mekanizması optik izolasyona dayanır. Cihaz tipik olarak iki ayrı düğümden oluşur: bir gönderici düğüm ve bir alıcı düğüm.
             </p>
             <ul>
-              <li><strong>The Sending Node:</strong> This side is connected to the secure network (e.g., an OT network). It contains an optical transmitter (an LED or laser) that converts electrical data signals into light pulses.</li>
-              <li><strong>The Receiving Node:</strong> This side is connected to the destination network (e.g., a corporate IT network). It contains a photocell or optical receiver that converts the light pulses back into electrical data.</li>
+              <li><strong>Gönderici Düğüm:</strong> Bu taraf güvenli ağa (örn. bir OT ağı) bağlıdır. Elektrik veri sinyallerini ışık darbelerine dönüştüren bir optik verici (LED veya lazer) içerir.</li>
+              <li><strong>Alıcı Düğüm:</strong> Bu taraf hedef ağa (örn. kurumsal bir BT ağı) bağlıdır. Işık darbelerini tekrar elektrik verisine dönüştüren bir fotosel veya optik alıcı içerir.</li>
             </ul>
             <p>
-              Crucially, the sending node has <em>no receiver</em>, and the receiving node has <em>no transmitter</em>. Because light cannot travel backward from a receiver to a transmitter, reverse data flow is <strong>physically impossible</strong>. No amount of software manipulation, hacking, or misconfiguration can force data to travel the wrong way across a physical optical gap.
+              En önemlisi, gönderici düğümün <em>hiçbir alıcısı</em> yoktur ve alıcı düğümün <em>hiçbir vericisi</em> yoktur. Işık bir alıcıdan bir vericiye geriye doğru gidemeyeceğinden, ters veri akışı <strong>fiziksel olarak imkansızdır</strong>. Hiçbir yazılım manipülasyonu, bilgisayar korsanlığı (hacking) veya yanlış yapılandırma, verileri fiziksel bir optik boşluk (optical gap) boyunca yanlış yönde seyahat etmeye zorlayamaz.
             </p>
 
-            <h2>Why Are They Critical for OT Security?</h2>
+            <h2>OT Güvenliği İçin Neden Kritikler?</h2>
             <p>
-              Data diodes are the gold standard for protecting highly sensitive or critical networks. They are heavily utilized in sectors such as:
+              Veri diotları, son derece hassas veya kritik ağları korumada altın standarttır. Aşağıdaki gibi sektörlerde yoğun olarak kullanılırlar:
             </p>
             <ul>
-              <li><strong>Energy & Utilities:</strong> Protecting SCADA systems from external interference while allowing operational data to be sent to corporate headquarters for analysis.</li>
-              <li><strong>Defense & Government:</strong> Segmenting classified networks from unclassified networks (Cross-Domain Solutions).</li>
-              <li><strong>Finance:</strong> Isolating core banking infrastructure from corporate IT networks.</li>
+              <li><strong>Enerji & Altyapı:</strong> SCADA sistemlerini dış müdahalelerden korurken, operasyonel verilerin analiz için kurumsal merkeze gönderilmesine olanak tanır.</li>
+              <li><strong>Savunma & Kamu:</strong> Sınıflandırılmış ağları (gizli), sınıflandırılmamış ağlardan izole eder (Alanlar Arası Çözümler - Cross-Domain Solutions).</li>
+              <li><strong>Finans:</strong> Çekirdek bankacılık altyapısını kurumsal BT ağlarından izole eder.</li>
             </ul>
 
             <div className={styles.productCta}>
-              <h3>Ready to secure your critical infrastructure?</h3>
+              <h3>Kritik altyapınızın güvenliğini sağlamaya hazır mısınız?</h3>
               <p>
-                If you are looking for an enterprise-grade unidirectional gateway, DataFlowX offers the <strong>DataDiodeX</strong>. 
-                It is EAL4+ Common Criteria certified, recognized by Gartner, and provides hardware-enforced absolute isolation.
+                Kurumsal düzeyde bir tek yönlü ağ geçidi arıyorsanız, DataFlowX <strong>DFX Unidirectional Gateway</strong> ürününü sunar. 
+                EAL4+ Common Criteria sertifikasına sahiptir, Gartner tarafından tanınmaktadır ve donanım destekli mutlak izolasyon sağlar.
               </p>
               <a href="/unidirectional-gateway" className={styles.ctaBtn}>
-                DataDiodeX Ürün Sayfasını İnceleyin →
+                DFX Unidirectional Gateway Ürün Sayfasını İnceleyin →
               </a>
             </div>
           </div>
         </article>
 
-        <Contact />
+        <ContactMini />
       </main>
     </>
   );

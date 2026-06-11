@@ -4,9 +4,9 @@ import { useRef, useEffect } from 'react';
 import styles from './Product.module.css';
 
 const FEATURES = [
-  'Built on the principle of "Never Trust, Always Verify."',
-  'High-level network isolation and uncompromising data protection.',
-  'Fully aligned with international critical infrastructure standards.',
+  'Uncompromising Zero Trust architecture for Industry 4.0 and IoT integrations.',
+  'Secure IT/OT data flow without halting critical operations.',
+  '100% compliance with international critical infrastructure standards.',
 ];
 
 export default function Product() {
@@ -40,11 +40,10 @@ export default function Product() {
         {/* Left: text */}
         <div className={styles.left}>
           <h2 className={`display-lg ${styles.title}`} data-product-animate>
-            <span style={{ whiteSpace: 'nowrap' }}>Hardware-Enforced</span> Cyber-Physical Protection
+            Accelerate <span style={{ whiteSpace: 'nowrap', color: '#F5A706' }}>Digital Transformation</span><br /> with Hardware-Enforced Armor
           </h2>
-          <p className={`body-text ${styles.desc}`} data-product-animate>
-            Founded in 2014, DataFlowX is a pioneer in securing critical infrastructures across energy, defense, and manufacturing sectors. Our next-generation platforms go beyond traditional software firewalls by delivering EAL4+ certified, hardware-enforced isolation. By physically separating your operational technology (OT) from external IT networks, we safeguard your cyber-physical systems against sophisticated threats—ensuring resilient, uninterrupted operations with an architecture that is mathematically proven to be unbreachable and tamper-proof.
-          </p>
+
+
 
           <div className={styles.features} data-product-animate>
             {FEATURES.map((feature, idx) => (
@@ -58,9 +57,46 @@ export default function Product() {
             ))}
           </div>
 
-          <a href="#contact" className={`btn-pill ${styles.cta}`} data-product-animate>
-            Learn More About Us ➔
+          <a href="#solutions" className={`btn-pill ${styles.cta}`} data-product-animate>
+            EXPLORE TRANSFORMATION SOLUTIONS ➔
           </a>
+        </div>
+
+        {/* Right: visual/cards */}
+        <div className={styles.right}>
+          <div className={styles.cardsWrapper}>
+            <div className={styles.infoCard} data-product-animate>
+              <div className={styles.cardHeader}>
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#F5A706" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                  <path d="M18 10h-1.26A8 8 0 1 0 9 20h9a5 5 0 0 0 0-10z"></path>
+                </svg>
+                <h3>IT/OT Convergence</h3>
+              </div>
+              <p>Bridge enterprise networks with industrial systems seamlessly without exposing critical assets to the internet.</p>
+            </div>
+
+            <div className={styles.infoCard} data-product-animate>
+              <div className={styles.cardHeader}>
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#F5A706" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                  <rect x="2" y="3" width="20" height="14" rx="2" ry="2"></rect>
+                  <line x1="8" y1="21" x2="16" y2="21"></line>
+                  <line x1="12" y1="17" x2="12" y2="21"></line>
+                </svg>
+                <h3>Smart Factory Enablement</h3>
+              </div>
+              <p>Safely extract big data from PLCs and SCADA for real-time analytics and predictive maintenance.</p>
+            </div>
+
+            <div className={styles.infoCard} data-product-animate>
+              <div className={styles.cardHeader}>
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#F5A706" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                  <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+                </svg>
+                <h3>Rapid Compliance</h3>
+              </div>
+              <p>Exceed NERC CIP, IEC 62443, and NIST standards out-of-the-box with hardware-enforced guarantees.</p>
+            </div>
+          </div>
         </div>
       </div>
     </section>

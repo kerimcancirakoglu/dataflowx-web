@@ -25,7 +25,7 @@ const elementDetails: Record<string, { title: string; role: string; steps: { lab
   },
   sandbox: {
     title: 'Isolated Virtual Execution',
-    role: 'The Sandbox Chamber',
+    role: 'The Sandbox',
     steps: [
       { label: 'Deep Behavioral Analysis', text: 'Suspicious files are detonated in a fully isolated, heavily monitored virtual environment with custom VM profiles.' },
       { label: 'Threat Hunting', text: 'Identifies hidden threats early by mimicking human behavior to trigger evasive malware and tracking all file/process interactions.' },
@@ -71,9 +71,9 @@ export default function SandboxFamily() {
               repeat: -1,
               delay,
               keyframes: {
-                '0%':   { opacity: 0, [prop]: '0%' },
-                '15%':  { opacity: 1 },
-                '85%':  { opacity: 1 },
+                '0%': { opacity: 0, [prop]: '0%' },
+                '15%': { opacity: 1 },
+                '85%': { opacity: 1 },
                 '100%': { opacity: 0, [prop]: '100%' }
               }
             }
@@ -105,7 +105,7 @@ export default function SandboxFamily() {
             Detect, Disarm, <span className={styles.highlight}>Defend</span>
           </h2>
           <p className={styles.subtitle}>
-            Click any element to understand how DFX Sandbox purifies suspicious files 
+            Click any element to understand how DFX Sandbox purifies suspicious files
             in isolation and stops zero-day threats before they cause damage.
           </p>
         </div>
@@ -160,7 +160,7 @@ export default function SandboxFamily() {
                   <circle cx="12" cy="12" r="4" />
                 </svg>
               </div>
-              <div className={styles.nodeName}>Sandbox Chamber</div>
+              <div className={styles.nodeName}>Sandbox</div>
               <div className={styles.nodeRole}>Isolated Execution</div>
               <div className={styles.clickHint}>Click to explore</div>
             </button>

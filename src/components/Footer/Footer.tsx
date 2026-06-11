@@ -27,12 +27,28 @@ export default function Footer() {
           </div>
 
           <div className={styles.linksColumn}>
-            <h3 className={styles.columnTitle}>Solutions</h3>
+            <h3 className={styles.columnTitle}>Network Security</h3>
             <ul className={styles.linkList}>
-              <li><Link href="/#network-security">Network Security</Link></li>
-              <li><Link href="/#file-security">File Security</Link></li>
-              <li><Link href="/#email-security">Email Security</Link></li>
-              <li><Link href="/#secure-remote-access">Secure Remote Access</Link></li>
+              <li><Link href="/unidirectional-gateway">DFX Unidirectional Gateway</Link></li>
+              <li><Link href="/secure-remote-access">DFX Secure Remote Access</Link></li>
+            </ul>
+            <h3 className={styles.columnTitle} style={{ marginTop: '1.5rem' }}>File Security</h3>
+            <ul className={styles.linkList}>
+              <li><Link href="/sandbox">DFX Sandbox</Link></li>
+              <li><Link href="/media-transfer-station">DFX Media Transfer Station</Link></li>
+            </ul>
+          </div>
+
+          <div className={styles.linksColumn}>
+            <h3 className={styles.columnTitle}>E-Mail Security</h3>
+            <ul className={styles.linkList}>
+              <li><Link href="/email-security-platform">DFX E-Mail Security Platform</Link></li>
+              <li><Link href="/intelroom">DFX IntelRoom</Link></li>
+              <li><Link href="/true-cdr">TrueCDR™</Link></li>
+            </ul>
+            <h3 className={styles.columnTitle} style={{ marginTop: '1.5rem' }}>OT Security</h3>
+            <ul className={styles.linkList}>
+              <li><Link href="/portx">DFX PortX</Link></li>
             </ul>
           </div>
 
@@ -41,6 +57,7 @@ export default function Footer() {
             <ul className={styles.linkList}>
               <li><Link href="/about-us">About Us</Link></li>
               <li><Link href="/#partners">Partners</Link></li>
+              <li><Link href="/resources">Use Cases</Link></li>
               <li><Link href="/#news">News</Link></li>
               <li><Link href="/contact">Contact</Link></li>
             </ul>

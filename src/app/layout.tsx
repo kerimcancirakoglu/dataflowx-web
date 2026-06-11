@@ -2,6 +2,7 @@ import type { Metadata } from 'next';
 import './globals.css';
 import Footer from '@/components/Footer/Footer';
 
+
 const BASE_URL = 'https://dataflowx.com';
 
 export const metadata: Metadata = {
@@ -101,11 +102,11 @@ const organizationSchema = {
     '@type': 'OfferCatalog',
     name: 'DataFlowX Cybersecurity Product Portfolio',
     itemListElement: [
-      { '@type': 'Offer', itemOffered: { '@type': 'Product', name: 'DFX Unidirectional Gateway (DataDiodeX)' } },
-      { '@type': 'Offer', itemOffered: { '@type': 'Product', name: 'DFX Secure Remote Access (DataBrokerX)' } },
+      { '@type': 'Offer', itemOffered: { '@type': 'Product', name: 'DFX Unidirectional Gateway' } },
+      { '@type': 'Offer', itemOffered: { '@type': 'Product', name: 'DFX Secure Remote Access' } },
       { '@type': 'Offer', itemOffered: { '@type': 'Product', name: 'DFX Media Transfer Station' } },
       { '@type': 'Offer', itemOffered: { '@type': 'Product', name: 'DFX Email Security Platform' } },
-      { '@type': 'Offer', itemOffered: { '@type': 'Product', name: 'DFX Sandbox (DataSecureX)' } },
+      { '@type': 'Offer', itemOffered: { '@type': 'Product', name: 'DFX Sandbox' } },
     ],
   },
 };
@@ -132,7 +133,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en">
+    <html lang="en" suppressHydrationWarning>
       <head>
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
@@ -149,6 +150,20 @@ export default function RootLayout({
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(websiteSchema) }}
+        />
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `
+              (function() {
+                try {
+                  var localTheme = localStorage.getItem('theme');
+                  if (localTheme === 'light') {
+                    document.documentElement.setAttribute('data-theme', 'light');
+                  }
+                } catch (e) {}
+              })();
+            `,
+          }}
         />
       </head>
       <body>

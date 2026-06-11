@@ -95,6 +95,13 @@
   top: 100px;
 }
 
+@media (max-width: 968px) {
+  .sidebar {
+    position: relative;
+    top: 0;
+  }
+}
+
 .sidebarHeader {
   display: flex;
   justify-content: space-between;

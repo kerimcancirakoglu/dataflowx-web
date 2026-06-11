@@ -1,6 +1,6 @@
 import type { Metadata } from 'next';
 import Nav from '@/components/Nav/Nav';
-import Contact from '@/components/Contact/Contact';
+import ContactMini from '@/components/ContactMini/ContactMini';
 import VideoBackground from '@/components/VideoBackground/VideoBackground';
 import EmailSecurityAnimation from '@/components/EmailSecurityAnimation/EmailSecurityAnimation';
 import EmailSecurityLayers from '@/components/EmailSecurityLayers/EmailSecurityLayers';
@@ -112,7 +112,7 @@ export default function EmailSecurityPage() {
 
       <div className="section-spacer" aria-hidden="true" />
 
-      <Contact />
+      <ContactMini />
     </main>
   );
 }

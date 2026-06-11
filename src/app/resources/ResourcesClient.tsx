@@ -2,10 +2,12 @@
 
 import { useState, useMemo } from 'react';
 import styles from './page.module.css';
+import { USE_CASES } from '@/data/useCases';
+import PdfLeadModal from '@/components/PdfLeadModal/PdfLeadModal';
 
-type ResourceType = 'Datasheet' | 'Whitepaper' | 'Case Study' | 'Guide' | 'Report';
-type ProductType = 'DataDiodeX' | 'DataBrokerX' | 'Media Transfer Station' | 'Email Security Platform';
-type UseCaseType = 'Energy & SCADA' | 'Defense & Military' | 'Financial Services' | 'Critical Infrastructure' | 'Logistics';
+type ResourceType = 'Data Sheet' | 'Whitepaper' | 'Case Study' | 'Guide' | 'Report' | 'Use Case';
+type ProductType = 'DFX Unidirectional Gateway' | 'DFX Sandbox' | 'DFX E-Mail Security Platform' | 'DFX PortX' | 'DFX Secure Remote Access' | 'DFX Media Transfer Station' | 'DFX IntelRoom' | 'TrueCDR™';
+type UseCaseType = 'Energy & SCADA' | 'Defense & Military' | 'Financial Services' | 'Critical Infrastructure' | 'Logistics' | 'Manufacturing';
 
 interface Resource {
   id: string;
@@ -13,6 +15,7 @@ interface Resource {
   description: string;
   type: ResourceType;
   product?: ProductType;
+  products?: ProductType[];
   useCase?: UseCaseType;
   date: string;
   link: string;
@@ -22,46 +25,46 @@ interface Resource {
 const resourcesData: Resource[] = [
   {
     id: 'ds-datadiodex',
-    title: 'DataDiodeX Technical Datasheet',
-    description: 'Detailed technical specifications for the DataFlowX EAL4+ certified unidirectional gateway.',
-    type: 'Datasheet',
-    product: 'DataDiodeX',
+    title: 'DFX Unidirectional Gateway Data Sheet',
+    description: 'Detailed technical specifications for DataFlowX EAL4+ certified unidirectional gateway.',
+    type: 'Data Sheet',
+    product: 'DFX Unidirectional Gateway',
     useCase: 'Critical Infrastructure',
     date: '2023-11-15',
-    link: '#download-datadiodex',
-    image: '/og-image.jpg',
+    link: '/resources/ds-datadiodex',
+    image: '/Kapak/kapaklar/datadiode1.jpg',
   },
   {
-    id: 'ds-databrokerx',
-    title: 'DataBrokerX Specifications',
+    id: 'ds-sra',
+    title: 'DFX Secure Remote Access Features',
     description: 'Architecture and features of our secure remote access and cross-domain solution.',
-    type: 'Datasheet',
-    product: 'DataBrokerX',
+    type: 'Data Sheet',
+    product: 'DFX Secure Remote Access',
     useCase: 'Defense & Military',
     date: '2023-12-01',
-    link: '#download-databrokerx',
-    image: '/og-image.jpg',
+    link: '/resources/ds-sra',
+    image: '/Kapak/kapaklar/databroker1.jpg',
   },
   {
     id: 'wp-ot-security',
     title: 'Zero Trust in OT Environments',
-    description: 'A comprehensive whitepaper on applying Zero Trust principles to industrial control systems using hardware isolation.',
+    description: 'Comprehensive whitepaper on applying Zero Trust principles to industrial control systems using hardware isolation.',
     type: 'Whitepaper',
     useCase: 'Critical Infrastructure',
     date: '2024-01-20',
-    link: '#read-ot-security',
-    image: '/og-image.jpg',
+    link: '/resources/wp-ot-security',
+    image: '/Kapak/kapaklar/data3.jpg',
   },
   {
     id: 'cs-energy',
     title: 'Securing National Grid Infrastructure',
-    description: 'How a major European energy provider achieved IEC 62443 compliance using DataFlowX.',
+    description: 'Case study on how a major European energy provider achieved IEC 62443 compliance using DataFlowX.',
     type: 'Case Study',
-    product: 'DataDiodeX',
+    product: 'DFX Unidirectional Gateway',
     useCase: 'Energy & SCADA',
     date: '2024-02-10',
-    link: '#read-energy-case',
-    image: '/og-image.jpg',
+    link: '/resources/cs-energy',
+    image: '/Kapak/kapaklar/datasecure1.jpg',
   },
   {
     id: 'wp-nis2',
@@ -70,46 +73,69 @@ const resourcesData: Resource[] = [
     type: 'Guide',
     useCase: 'Critical Infrastructure',
     date: '2024-03-05',
-    link: '#read-nis2-guide',
-    image: '/og-image.jpg',
+    link: '/resources/wp-nis2',
+    image: '/Kapak/kapaklar/datastation1.jpg',
   },
   {
     id: 'ds-mts',
-    title: 'Media Transfer Station (MTS) Datasheet',
-    description: 'Technical details on our secure USB kiosk with multi-engine AV and CDR sanitization.',
-    type: 'Datasheet',
-    product: 'Media Transfer Station',
+    title: 'DFX Media Transfer Station Data Sheet',
+    description: 'Technical details about our secure USB kiosk featuring multi-engine AV and Deep CDR sanitization.',
+    type: 'Data Sheet',
+    product: 'DFX Media Transfer Station',
     useCase: 'Defense & Military',
     date: '2024-04-12',
-    link: '#download-mts',
-    image: '/og-image.jpg',
+    link: '/resources/ds-mts',
+    image: '/Kapak/kapaklar/datamessage1.jpg',
   },
   {
     id: 'rep-threat-2024',
     title: '2024 ICS Threat Landscape Report',
-    description: 'An analysis of emerging threats to industrial control systems and critical infrastructure.',
+    description: 'Analysis of emerging threats targeting industrial control systems and critical infrastructure.',
     type: 'Report',
     useCase: 'Energy & SCADA',
     date: '2024-05-01',
-    link: '#read-report',
-    image: '/og-image.jpg',
+    link: '/resources/rep-threat-2024',
+    image: '/Kapak/kapaklar/data3.jpg',
   },
   {
     id: 'ds-email',
-    title: 'DFX Email Security Platform',
-    description: 'Deep CDR and AI behavioral detection for zero-trust email gateways.',
-    type: 'Datasheet',
-    product: 'Email Security Platform',
+    title: 'DFX E-Mail Security Platform Data Sheet',
+    description: 'Deep CDR and AI behavior detection for zero-trust email gateways.',
+    type: 'Data Sheet',
+    product: 'DFX E-Mail Security Platform',
     useCase: 'Financial Services',
     date: '2024-05-15',
-    link: '#download-email',
-    image: '/og-image.jpg',
+    link: '/resources/ds-email',
+    image: '/Kapak/kapaklar/datamessage1.jpg',
   }
 ];
 
-const allTypes: ResourceType[] = ['Guide', 'Report', 'Datasheet', 'Case Study', 'Whitepaper'];
-const allProducts: ProductType[] = ['DataDiodeX', 'DataBrokerX', 'Media Transfer Station', 'Email Security Platform'];
-const allUseCases: UseCaseType[] = ['Energy & SCADA', 'Defense & Military', 'Financial Services', 'Critical Infrastructure', 'Logistics'];
+const allResourcesData: Resource[] = [
+  ...resourcesData,
+  ...USE_CASES.map((uc) => {
+    let assignedUseCase: UseCaseType | undefined = undefined;
+    if (uc.slug === 'email-security-zero-tolerance') assignedUseCase = 'Financial Services';
+    if (uc.slug === 'unidirectional-gateway-critical-infrastructure') assignedUseCase = 'Energy & SCADA';
+    if (uc.slug === 'secure-remote-access-defense') assignedUseCase = 'Defense & Military';
+    if (uc.slug === 'media-transfer-station-manufacturing') assignedUseCase = 'Manufacturing';
+
+    return {
+      id: uc.slug,
+      title: uc.title,
+      description: uc.challenge,
+      type: 'Use Case' as ResourceType,
+      products: uc.products as ProductType[],
+      useCase: assignedUseCase,
+      date: uc.date,
+      link: `/resources/use-cases/${uc.slug}`,
+      image: uc.image,
+    };
+  })
+];
+
+const allTypes: ResourceType[] = ['Guide', 'Report', 'Data Sheet', 'Case Study', 'Whitepaper', 'Use Case'];
+const allProducts: ProductType[] = ['DFX Unidirectional Gateway', 'DFX Sandbox', 'DFX E-Mail Security Platform', 'DFX PortX', 'DFX Secure Remote Access', 'DFX Media Transfer Station', 'DFX IntelRoom', 'TrueCDR™'];
+const allUseCases: UseCaseType[] = ['Energy & SCADA', 'Defense & Military', 'Financial Services', 'Critical Infrastructure', 'Logistics', 'Manufacturing'];
 
 export default function ResourcesClient() {
   const [searchQuery, setSearchQuery] = useState('');
@@ -117,10 +143,36 @@ export default function ResourcesClient() {
   const [selectedTypes, setSelectedTypes] = useState<Set<ResourceType>>(new Set());
   const [selectedProducts, setSelectedProducts] = useState<Set<ProductType>>(new Set());
   const [selectedUseCases, setSelectedUseCases] = useState<Set<UseCaseType>>(new Set());
+  
+  // PDF Lead Gen Modal State
+  const [downloadTarget, setDownloadTarget] = useState<string | null>(null);
+
+  const handleResourceClick = (e: React.MouseEvent<HTMLAnchorElement>, resource: Resource) => {
+    // Treat these types as PDFs for the demo
+    const pdfTypes: ResourceType[] = ['Data Sheet', 'Whitepaper', 'Guide', 'Report'];
+    
+    if (pdfTypes.includes(resource.type)) {
+      e.preventDefault();
+      setDownloadTarget(resource.link);
+    }
+  };
+
+  const handleModalClose = () => {
+    // Demo flow: Redirect to blog (news) when closed
+    window.location.href = '/news';
+  };
+
+  const handleModalSubmit = () => {
+    if (downloadTarget) {
+      // Demo flow: Redirect to blog (news) when submitted
+      window.location.href = '/news';
+    }
+    setDownloadTarget(null);
+  };
 
   // Filter resources based on all active criteria
   const filteredResources = useMemo(() => {
-    return resourcesData.filter((res) => {
+    return allResourcesData.filter((res) => {
       // 1. Main Search Filter
       if (searchQuery) {
         const query = searchQuery.toLowerCase();
@@ -134,9 +186,19 @@ export default function ResourcesClient() {
         return false;
       }
 
-      // 3. Product Filter
-      if (selectedProducts.size > 0 && (!res.product || !selectedProducts.has(res.product))) {
-        return false;
+      // 3. Product Filter (AND logic: resource must contain ALL selected products)
+      if (selectedProducts.size > 0) {
+        let satisfiesAll = true;
+        for (const selected of selectedProducts) {
+          const hasSelected = (res.product === selected) || (res.products && res.products.includes(selected));
+          if (!hasSelected) {
+            satisfiesAll = false;
+            break;
+          }
+        }
+        if (!satisfiesAll) {
+          return false;
+        }
       }
 
       // 4. Use Case Filter
@@ -228,7 +290,7 @@ export default function ResourcesClient() {
 
           <div className={styles.filterGroup}>
             {allTypes.map(type => {
-              const count = resourcesData.filter(r => r.type === type).length;
+              const count = allResourcesData.filter(r => r.type === type).length;
               if (count === 0) return null;
               return (
                 <label key={type} className={styles.checkboxLabel}>
@@ -262,7 +324,7 @@ export default function ResourcesClient() {
             </div>
             <div className={styles.checkboxListScroll}>
               {visibleProducts.map(product => {
-                const count = resourcesData.filter(r => r.product === product).length;
+                const count = allResourcesData.filter(r => r.product === product || (r.products && r.products.includes(product))).length;
                 return (
                   <label key={product} className={styles.checkboxLabel}>
                     <input 
@@ -276,7 +338,7 @@ export default function ResourcesClient() {
                 );
               })}
               {visibleProducts.length === 0 && (
-                <p className={styles.noMatchText}>No products match.</p>
+                <p className={styles.noMatchText}>No matching product found.</p>
               )}
             </div>
           </div>
@@ -286,7 +348,7 @@ export default function ResourcesClient() {
             <h3 className={styles.groupTitle}>Use Case</h3>
             <div className={styles.checkboxListScroll}>
               {allUseCases.map(useCase => {
-                const count = resourcesData.filter(r => r.useCase === useCase).length;
+                const count = allResourcesData.filter(r => r.useCase === useCase).length;
                 if (count === 0) return null; // Sadece içerik olanları göster
                 return (
                   <label key={useCase} className={styles.checkboxLabel}>
@@ -319,8 +381,12 @@ export default function ResourcesClient() {
                   <p className={styles.cardDesc} style={{fontSize: '0.9rem', color: 'rgba(255,255,255,0.6)', marginBottom: '1.5rem', lineHeight: 1.5}}>
                     {resource.description.substring(0, 100)}{resource.description.length > 100 ? '...' : ''}
                   </p>
-                  <a href={resource.link} className={styles.readMoreLink}>
-                    {resource.type === 'Datasheet' ? 'Download PDF' : 'Read More'} 
+                  <a 
+                    href={resource.link} 
+                    className={styles.readMoreLink}
+                    onClick={(e) => handleResourceClick(e, resource)}
+                  >
+                    {['Data Sheet', 'Whitepaper', 'Guide', 'Report'].includes(resource.type) ? 'Download PDF' : 'Read More'} 
                     <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={{marginLeft: '6px'}}>
                       <line x1="5" y1="12" x2="19" y2="12"></line>
                       <polyline points="12 5 19 12 12 19"></polyline>
@@ -335,13 +401,20 @@ export default function ResourcesClient() {
             <div className={styles.emptyState}>
               <div className={styles.emptyIcon}>🔍</div>
               <h3>No resources found</h3>
-              <p>Try adjusting your filters or search query.</p>
+              <p>Try changing your filters or search query.</p>
               <button className={styles.primaryBtn} onClick={clearFilters}>Clear Filters</button>
             </div>
           )}
         </div>
         
       </div>
+
+      {/* PDF Lead Generation Modal */}
+      <PdfLeadModal 
+        isOpen={downloadTarget !== null}
+        onClose={handleModalClose}
+        onSubmit={handleModalSubmit}
+      />
     </div>
   );
 }

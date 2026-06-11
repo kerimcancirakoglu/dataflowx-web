@@ -1,27 +1,27 @@
 import type { Metadata } from 'next';
 import Nav from '@/components/Nav/Nav';
-import Contact from '@/components/Contact/Contact';
+import ContactMini from '@/components/ContactMini/ContactMini';
 import VideoBackground from '@/components/VideoBackground/VideoBackground';
 import ResourcesClient from './ResourcesClient';
 
 export const metadata: Metadata = {
-  title: 'Resources & Datasheets | DataFlowX',
+  title: 'Resources & Data Sheets | DataFlowX',
   description:
-    'Download technical datasheets, whitepapers, and case studies about DataFlowX unidirectional gateways and OT network security solutions.',
+    'Download technical data sheets, whitepapers, and case studies about DataFlowX unidirectional gateways and OT network security solutions.',
   keywords: [
-    'data diode datasheet',
+    'data diode data sheet',
     'unidirectional gateway whitepaper',
     'OT security resources',
     'DataFlowX documentation',
     'cybersecurity case studies',
-    'hardware isolation technical specs',
+    'hardware isolation specs',
   ],
   alternates: {
     canonical: 'https://dataflowx.com/resources',
   },
   openGraph: {
-    title: 'DataFlowX Resources & Datasheets',
-    description: 'Technical documentation and resources for DataFlowX OT security solutions.',
+    title: 'DataFlowX Resources & Data Sheets',
+    description: 'Technical documents and resources for DataFlowX OT security solutions.',
     url: 'https://dataflowx.com/resources',
     images: [{ url: '/og-image.jpg', width: 1200, height: 630 }],
   },
@@ -44,7 +44,7 @@ export default function ResourcesPage() {
         <VideoBackground />
         <Nav />
         <ResourcesClient />
-        <Contact />
+        <ContactMini />
       </main>
     </>
   );

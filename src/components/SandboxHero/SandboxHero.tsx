@@ -15,7 +15,7 @@ export default function SandboxHero() {
           <br /><br />
           It executes suspicious files in an isolated environment, ensuring security. Analyzing files in a virtual sandbox is crucial for safely detonating and observing malware behavior without risking the actual system.
           <br /><br />
-          With seamless integration via ICAP, Microsoft Exchange, and network shares, DataSecureX provides content-aware filtering and advanced threat mitigation.
+          With seamless integration via ICAP, Microsoft Exchange, and network shares, DFX Sandbox provides content-aware filtering and advanced threat mitigation.
         </p>
 
         <a href="#contact" className={styles.getInfoButton}>

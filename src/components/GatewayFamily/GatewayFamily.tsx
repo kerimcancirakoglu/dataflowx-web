@@ -16,11 +16,11 @@ const elementDetails: Record<string, {
     steps: [
       { label: 'What it is', text: 'The origin of your critical data — an OT floor, SCADA control system, historian, or enterprise IT network that must share information securely without exposing itself.' },
       { label: 'The Risk', text: 'Any bidirectional connection between Source and destination networks creates an attack surface. A single compromised device on the destination side can pivot back to the source.' },
-      { label: 'How DFX Protects It', text: 'The Source Network connects only to the TX Optical Diode. It never has a route to the destination — all communication is physically one-way. The Source remains completely isolated at the hardware level.' },
+      { label: 'How DFX Protects It', text: 'The Source Network connects only to the TX DFX UG. It never has a route to the destination — all communication is physically one-way. The Source remains completely isolated at the hardware level.' },
     ]
   },
   tx: {
-    title: 'DFX Optical Diode — TX',
+    title: 'DFX UG — TX',
     role: 'Transmit (TX) Unit',
     steps: [
       { label: 'What it is', text: 'The TX unit is the sending side of the optical data diode. It converts data signals into light pulses and fires them through a fiber-optic cable in a single direction.' },
@@ -38,7 +38,7 @@ const elementDetails: Record<string, {
     ]
   },
   rx: {
-    title: 'DFX Optical Diode — RX',
+    title: 'DFX UG — RX',
     role: 'Receive (RX) Unit',
     steps: [
       { label: 'What it is', text: 'The RX unit receives the light pulses from the TX unit and converts them back into network data. It sits entirely on the destination/protected network side.' },
@@ -205,7 +205,7 @@ export default function GatewayFamily() {
                   <path d="M5 12h14M14 7l5 5-5 5" />
                 </svg>
               </div>
-              <div className={styles.diodeName}>DFX Optical Diode</div>
+              <div className={styles.diodeName}>DFX UG</div>
               <div className={styles.diodeRole}>TRANSMIT (TX)</div>
             </button>
             <div className={styles.featureInfo}>
@@ -256,7 +256,7 @@ export default function GatewayFamily() {
                   <path d="M5 12h14M14 7l5 5-5 5" />
                 </svg>
               </div>
-              <div className={styles.diodeName}>DFX Optical Diode</div>
+              <div className={styles.diodeName}>DFX UG</div>
               <div className={styles.diodeRole}>RECEIVE (RX)</div>
             </button>
             <div className={styles.featureInfo}>

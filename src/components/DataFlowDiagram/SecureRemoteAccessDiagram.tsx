@@ -11,13 +11,13 @@ export default function SecureRemoteAccessDiagram() {
 
   useEffect(() => {
     let ctx = gsap.context(() => {
-      // Top Row (Request) - Moves Right to Left
+      // Top Row (Request) - Moves Left to Right
       if (requestPacketRef.current) {
         gsap.fromTo(
           requestPacketRef.current,
-          { right: '-5%', opacity: 0 },
+          { left: '-5%', right: 'auto', opacity: 0 },
           {
-            right: '105%',
+            left: '105%',
             opacity: 1,
             duration: 3,
             ease: 'power1.inOut',
@@ -32,13 +32,13 @@ export default function SecureRemoteAccessDiagram() {
         );
       }
 
-      // Bottom Row (Response) - Moves Left to Right
+      // Bottom Row (Response) - Moves Right to Left
       if (responsePacketRef.current) {
         gsap.fromTo(
           responsePacketRef.current,
-          { left: '-5%', opacity: 0 },
+          { right: '-5%', left: 'auto', opacity: 0 },
           {
-            left: '105%',
+            right: '105%',
             opacity: 1,
             duration: 3,
             delay: 1.5, // staggered
@@ -90,31 +90,31 @@ export default function SecureRemoteAccessDiagram() {
             <span className={styles.airGapLabel}>Air Gap</span>
           </div>
 
-          {/* Top Row: Request (Right to Left) */}
+          {/* Top Row: Request (Left to Right) */}
           <div className={styles.diodeRow}>
             <div className={styles.connectionLine} />
             <div className={`${styles.packet} ${styles.packetYellow}`} ref={requestPacketRef} />
             <div className={`${styles.flowLabel} ${styles.flowLabelYellow}`}>Request</div>
 
-            {/* Right to left flow means RX is on the left, TX on the right */}
-            <div className={`${styles.diodeBox} ${styles.rxBox}`}>
-              <div className={`${styles.diodeLabel} ${styles.rxLabel}`}>RX</div>
-              <div className={styles.diodeText}>Diode</div>
-            </div>
-
+            {/* Left to right flow means TX is on the left, RX on the right */}
             <div className={`${styles.diodeBox} ${styles.txBox}`}>
               <div className={`${styles.diodeLabel} ${styles.txLabel}`}>TX</div>
               <div className={styles.diodeText}>Diode</div>
             </div>
+
+            <div className={`${styles.diodeBox} ${styles.rxBox}`}>
+              <div className={`${styles.diodeLabel} ${styles.rxLabel}`}>RX</div>
+              <div className={styles.diodeText}>Diode</div>
+            </div>
           </div>
 
-          {/* Bottom Row: Response (Left to Right) */}
+          {/* Bottom Row: Response (Right to Left) */}
           <div className={styles.diodeRow}>
             <div className={styles.connectionLine} />
             <div className={`${styles.packet} ${styles.packetBlue}`} ref={responsePacketRef} />
             <div className={`${styles.flowLabelBottom} ${styles.flowLabelBlue}`}>Response</div>
 
-            {/* Left to right flow means TX is on the left, RX on the right */}
+            {/* Ensure it always reads TX -> RX */}
             <div className={`${styles.diodeBox} ${styles.txBox}`}>
               <div className={`${styles.diodeLabel} ${styles.txLabel}`}>TX</div>
               <div className={styles.diodeText}>Diode</div>

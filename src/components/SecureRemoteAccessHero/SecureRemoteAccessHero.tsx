@@ -11,7 +11,7 @@ export default function SecureRemoteAccessHero() {
         </h2>
 
         <p className={styles.quote}>
-          Secure Remote Access is a cross-domain solution that works in integration with DataDiodeX. It enables request-response based transmission between isolated networks while providing full control over data traffic.
+          DFX Secure Remote Access is a comprehensive Zero Trust cross-domain solution. It provides request-response based transmission between isolated networks with full visibility and control over data traffic, operating either independently or in seamless integration with DFX Unidirectional Gateway.
           <br /><br />
           It extends Zero Trust principles to remote operations by verifying every request, user, and payload before allowing it to cross the physical optical boundary. This ensures that only authorized access is granted to critical infrastructure.
           <br /><br />

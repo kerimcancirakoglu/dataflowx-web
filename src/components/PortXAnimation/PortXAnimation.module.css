@@ -1,0 +1,407 @@
+.container {
+  display: grid;
+  grid-template-columns: 1fr 350px;
+  gap: 2rem;
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+@media (max-width: 900px) {
+  .container {
+    grid-template-columns: 1fr;
+  }
+}
+
+.hideCardsContainer {
+  grid-template-columns: 1fr !important;
+  max-width: 600px;
+  transform: scale(0.8);
+  transform-origin: center center;
+}
+
+.wrapper {
+  width: 100%;
+  padding: 2rem;
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  border-radius: 20px;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+  font-family: var(--font-mono);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.stage {
+  display: flex;
+  align-items: stretch;
+  justify-content: space-between;
+  position: relative;
+  min-height: 350px;
+  padding: 1rem;
+  width: 100%;
+}
+
+.zone {
+  width: 180px;
+  border-radius: 12px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+  z-index: 2;
+  transition: all 0.3s ease;
+  padding: 1rem;
+}
+
+.untrustedZone {
+  background: rgba(239, 68, 68, 0.05);
+  border: 1px solid rgba(239, 68, 68, 0.2);
+  justify-content: space-evenly;
+}
+
+.trustedZone {
+  background: rgba(16, 185, 129, 0.05);
+  border: 1px solid rgba(16, 185, 129, 0.2);
+  justify-content: center;
+}
+
+.zoneTitle {
+  font-size: 0.9rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: rgba(255, 255, 255, 0.7);
+  position: absolute;
+  top: 1rem;
+}
+
+.inputs {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  margin-top: 2rem;
+  width: 100%;
+}
+
+.inputPort, .outputPort {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 8px;
+  padding: 0.5rem;
+  text-align: left;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.outputPort {
+  margin-top: 2.5rem;
+  width: 100%;
+  height: 60px;
+  justify-content: center;
+}
+
+.portIcon {
+  width: 20px;
+  height: 20px;
+  color: rgba(255, 255, 255, 0.6);
+  flex-shrink: 0;
+}
+
+.portLabel {
+  font-size: 0.75rem;
+  color: rgba(255, 255, 255, 0.9);
+  font-weight: bold;
+  display: flex;
+  flex-direction: column;
+}
+
+.portSubLabel {
+  font-size: 0.6rem;
+  font-weight: normal;
+  color: rgba(255, 255, 255, 0.5);
+}
+
+.bridgeArea {
+  flex-grow: 1;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.bridgeDevice {
+  width: 150px;
+  height: 220px;
+  background: #111;
+  border: 2px solid #F5A706;
+  border-radius: 12px;
+  z-index: 3;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  padding: 1.5rem 0;
+  position: relative;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+}
+
+.deviceLabel {
+  color: #F5A706;
+  font-size: 1.1rem;
+  font-weight: 700;
+  text-align: center;
+  margin-bottom: 1.5rem;
+}
+
+.nfcTarget {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.concentric {
+  width: 46px;
+  height: 46px;
+  border-radius: 50%;
+  border: 2px solid rgba(255,255,255,0.3);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+}
+
+.concentricInner {
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  border: 6px solid rgba(255,255,255,0.3);
+  background: transparent;
+  transition: all 0.3s ease;
+}
+
+.nfcLabelText {
+  color: #6B7280;
+  font-size: 0.85rem;
+  font-weight: 500;
+  letter-spacing: 0.15em;
+  margin-top: 0.2rem;
+}
+
+.smallDot {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: #374151;
+  margin-top: 1rem;
+  transition: all 0.3s ease;
+}
+
+.statusScreen {
+  background: transparent;
+  border: 1px solid #374151;
+  border-radius: 4px;
+  width: 85%;
+  height: 22px;
+  margin-top: auto;
+  margin-bottom: 0.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.65rem;
+  font-weight: 700;
+  letter-spacing: 1px;
+  color: #374151;
+  transition: all 0.3s ease;
+  font-family: var(--font-mono);
+}
+
+.stateFailed .statusScreen {
+  color: #ef4444;
+  border-color: #ef4444;
+}
+
+.stateFailed .concentric, .stateFailed .concentricInner {
+  border-color: #ef4444;
+}
+.stateFailed .smallDot {
+  background: #ef4444;
+}
+
+.stateSuccess .statusScreen {
+  color: #10b981;
+  border-color: #10b981;
+}
+
+.stateSuccess .concentric, .stateSuccess .concentricInner {
+  border-color: #10b981;
+}
+.stateSuccess .smallDot {
+  background: #10b981;
+}
+
+.shield {
+  position: absolute;
+  left: -15px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 4px;
+  height: 80px;
+  background: #ef4444;
+  border-radius: 4px;
+  box-shadow: 0 0 20px #ef4444;
+  opacity: 0;
+  z-index: 5;
+}
+
+.stateFailed .shield {
+  animation: flashShield 4s infinite;
+}
+
+@keyframes flashShield {
+  0%, 28% { opacity: 0; height: 0px; }
+  30% { opacity: 1; height: 80px; }
+  45% { opacity: 0; height: 80px; }
+  100% { opacity: 0; }
+}
+
+.paths {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  z-index: 1;
+}
+
+.path {
+  position: absolute;
+  height: 2px;
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.pathIn1 {
+  left: 0;
+  width: 50%;
+  top: calc(50% - 60px);
+}
+.pathIn2 {
+  left: 0;
+  width: 50%;
+  top: 50%;
+}
+.pathIn3 {
+  left: 0;
+  width: 50%;
+  top: calc(50% + 60px);
+}
+.pathOut {
+  right: 0;
+  width: 50%;
+  top: 50%;
+}
+
+.packetFailed, .packetSuccess, .packetSuccessRemote {
+  position: absolute;
+  width: 32px;
+  height: 32px;
+  z-index: 4;
+  transform: translateY(-50%);
+}
+
+.packetFailed {
+  color: #ef4444;
+  top: calc(50% - 60px);
+  animation: failAuth 4s ease forwards;
+  left: 0;
+}
+
+.packetSuccess {
+  color: #10b981;
+  top: 50%;
+  animation: passAuth 4.5s ease forwards;
+  left: 0;
+}
+
+.packetSuccessRemote {
+  color: #10b981;
+  top: calc(50% + 60px);
+  animation: passAuth 4.5s ease forwards;
+  left: 0;
+}
+
+@keyframes failAuth {
+  0% { left: -30px; opacity: 0; transform: translateY(-50%) scale(1); }
+  10% { opacity: 1; }
+  30% { left: calc(50% - 75px - 16px); opacity: 1; transform: translateY(-50%) scale(1); color: #fff; } 
+  32% { left: calc(50% - 75px - 8px); opacity: 1; transform: translateY(-50%) scale(1.1); color: #ef4444; } 
+  40% { left: calc(50% - 75px - 40px); opacity: 0.8; transform: translateY(-50%) scale(1.2) rotate(-20deg); } 
+  50% { left: calc(50% - 75px - 30px); opacity: 0; transform: translateY(-50%) scale(0) rotate(20deg); }
+  100% { left: calc(50% - 75px - 30px); opacity: 0; transform: translateY(-50%) scale(0); }
+}
+
+@keyframes passAuth {
+  0% { left: -30px; opacity: 0; transform: translateY(-50%); }
+  10% { opacity: 1; }
+  30% { left: calc(50% - 16px); opacity: 1; color: #fff; transform: translateY(-50%); } 
+  40% { left: calc(50% - 16px); opacity: 1; color: #10b981; transform: translateY(-50%); } 
+  50% { left: calc(50% - 16px); opacity: 1; color: #10b981; transform: translateY(-50%); top: 50%; } 
+  80% { left: calc(100% + 30px); opacity: 1; color: #10b981; top: 50%; transform: translateY(-50%); }
+  90% { opacity: 0; top: 50%; transform: translateY(-50%); }
+  100% { left: calc(100% + 30px); opacity: 0; top: 50%; transform: translateY(-50%); }
+}
+
+/* Scenario Cards on Right */
+.cardsColumn {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  justify-content: center;
+}
+
+.scenarioCard {
+  background: #1A1A20;
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  border-radius: 12px;
+  padding: 1.5rem;
+  transition: all 0.5s ease;
+  opacity: 0.4;
+  position: relative;
+  overflow: hidden;
+}
+
+.scenarioCardActive {
+  opacity: 1;
+  border-color: rgba(245, 167, 6, 0.3);
+  box-shadow: 0 4px 20px rgba(245, 167, 6, 0.05);
+  background: linear-gradient(180deg, rgba(245, 167, 6, 0.05) 0%, rgba(26, 26, 32, 1) 100%);
+}
+
+.cardNumber {
+  color: #F5A706;
+  font-size: 0.75rem;
+  font-weight: 700;
+  border: 1px solid rgba(245, 167, 6, 0.3);
+  border-radius: 20px;
+  padding: 0.2rem 0.6rem;
+  display: inline-block;
+  margin-bottom: 1rem;
+  font-family: var(--font-mono);
+}
+
+.cardTitle {
+  color: #FFF;
+  font-size: 1.1rem;
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+}
+
+.cardDesc {
+  color: rgba(255, 255, 255, 0.6);
+  font-size: 0.85rem;
+  line-height: 1.5;
+}

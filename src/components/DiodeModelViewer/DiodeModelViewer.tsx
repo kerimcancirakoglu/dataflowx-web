@@ -43,7 +43,7 @@ export default function DiodeModelViewer() {
 
       {/* Left Panel: Content matching the requested layout */}
       <div className={styles.infoPanel}>
-        <h2 className={styles.mainTitle}>Optical Diode 1U</h2>
+        <h2 className={styles.mainTitle}>DFX UG</h2>
 
         <div className={styles.subtitle}>
           Learn how <a href="#" className={styles.subtitleLink}>Data Diodes protect your network</a>.
@@ -89,9 +89,10 @@ export default function DiodeModelViewer() {
             <ContactShadows position={[0, -1, 0]} opacity={0.4} scale={10} blur={2} far={4} />
           </Suspense>
 
-          <OrbitControls
+          <OrbitControls 
+            makeDefault
             enablePan={false}
-            enableZoom={true}
+            enableZoom={false}
             minDistance={2}
             maxDistance={10}
             autoRotate

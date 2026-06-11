@@ -1,5 +1,5 @@
 import Nav from '@/components/Nav/Nav';
-import Contact from '@/components/Contact/Contact';
+import ContactMini from '@/components/ContactMini/ContactMini';
 import SandboxFamily from '@/components/SandboxFamily/SandboxFamily';
 import SandboxAnimation from '@/components/SandboxAnimation/SandboxAnimation';
 import SandboxFeaturesGrid from '@/components/SandboxFeaturesGrid/SandboxFeaturesGrid';
@@ -87,7 +87,7 @@ export default function SandboxPage() {
 
       <div className="section-spacer" aria-hidden="true" />
       
-      <Contact />
+      <ContactMini />
     </main>
   );
 }

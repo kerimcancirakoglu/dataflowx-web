@@ -5,7 +5,6 @@
   padding: 80px 0 40px;
   position: relative;
   z-index: 10;
-  margin-top: 60px;
   backdrop-filter: blur(20px);
 }
 
@@ -20,7 +19,7 @@
 /* TOP SECTION */
 .topSection {
   display: grid;
-  grid-template-columns: 2fr 1fr 1fr 1fr;
+  grid-template-columns: 2.5fr 1.5fr 1.5fr 1fr 1fr;
   gap: 60px;
   padding-bottom: 60px;
   border-bottom: 1px solid rgba(255, 255, 255, 0.1);
@@ -38,9 +37,21 @@
 }
 
 .logoImage {
-  width: 100%;
-  height: auto;
+  height: 32px;
+  width: auto;
+  transition: opacity 0.3s ease;
+}
+
+.logoLight {
+  display: none;
+}
+
+:global([data-theme="light"]) .logoLight {
   display: block;
+}
+
+:global([data-theme="light"]) .logoDark {
+  display: none;
 }
 
 .brandDescription {
@@ -168,10 +179,10 @@
 /* RESPONSIVE */
 @media (max-width: 1024px) {
   .topSection {
-    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
   }
   .brandColumn {
-    grid-column: span 3;
+    grid-column: span 4;
     margin-bottom: 20px;
   }
 }

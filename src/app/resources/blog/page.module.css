@@ -349,6 +349,13 @@
   height: max-content;
 }
 
+@media (max-width: 968px) {
+  .categorySidebar {
+    position: relative;
+    top: 0;
+  }
+}
+
 .sidebarTitle {
   font-size: 1.25rem;
   font-weight: 700;

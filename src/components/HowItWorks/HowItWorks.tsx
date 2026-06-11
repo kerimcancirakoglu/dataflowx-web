@@ -32,13 +32,12 @@ const CARDS = [
         <path d="M12 2v2M12 20v2M2 12h2M20 12h2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
       </svg>
     ),
-    image: '/Kapak/New-Project-2025-08-02T043719.908.jpg',
+    image: '/cyber-security-concept-digital-art.jpg',
     overlay: 'linear-gradient(to bottom, rgba(40, 20, 10, 0.3) 0%, rgba(15, 5, 0, 0.95) 100%)',
     description: 'AI-powered ecosystem designed to trap, analyze, and neutralize sophisticated malware.',
     links: [
-      { text: 'DFX NDR', url: '#' },
-      { text: 'DFX Sandbox', url: '#' },
-      { text: 'DFX Media Transfer Station', url: '#' }
+      { text: 'DFX Sandbox', url: '/sandbox' },
+      { text: 'DFX Media Transfer Station', url: '/media-transfer-station' }
     ]
   },
   {
@@ -53,9 +52,9 @@ const CARDS = [
     overlay: 'linear-gradient(to bottom, rgba(10, 20, 30, 0.4) 0%, rgba(0, 5, 15, 0.95) 100%)',
     description: 'Advanced email gateway with AI-driven threat detection and deep content disarm & reconstruction (CDR).',
     links: [
-      { text: 'DFX Email Security Platform', url: '/email-security' },
-      { text: 'DFX IntelRoom', url: '#' },
-      { text: 'DFX CDR', url: '#' }
+      { text: 'DFX Email Security Platform', url: '/email-security-platform' },
+      { text: 'DFX IntelRoom', url: '/intelroom' },
+      { text: 'TrueCDR™', url: '/true-cdr' }
     ]
   },
   {
@@ -66,11 +65,11 @@ const CARDS = [
         <path d="M12 2L15 8L22 9L17 14L18 21L12 18L6 21L7 14L2 9L9 8L12 2Z" stroke="currentColor" strokeWidth="1.5" strokeLinejoin="round" />
       </svg>
     ),
-    image: '/Kapak/New-Project-2025-08-02T043719.908.jpg',
+    image: '/secured-file-folder-futuristic-data-network.jpg',
     overlay: 'linear-gradient(to bottom, rgba(30, 30, 10, 0.3) 0%, rgba(10, 10, 0, 0.95) 100%)',
     description: 'Secure, controlled data exchange between networks of differing security levels without compromising isolation.',
     links: [
-      { text: 'DFX PortX', url: '#' }
+      { text: 'DFX PortX', url: '/portx' }
     ]
   }
 ];
@@ -109,10 +108,12 @@ export default function HowItWorks() {
     <section ref={sectionRef} className={styles.section} id="how-it-works">
       <div className={styles.inner}>
         <h2 className={`display-lg ${styles.title}`} data-animate>
-          No Lateral Movement.<br />
-          <span style={{ color: '#F5A706', fontSize: '1.15em', fontWeight: 800 }}>No Return Path.</span><br />
-          <span style={{ whiteSpace: 'nowrap' }}>No Way In.</span>
+          Every Threat Vector.<br />
+          <span style={{ color: '#F5A706', fontSize: '1.15em', fontWeight: 800 }}>One Ecosystem.</span>
         </h2>
+        <p className="body-text" data-animate style={{ marginTop: '24px', marginBottom: '48px', fontSize: '1.25rem', opacity: 0.8, maxWidth: '600px' }}>
+          Cyber threats don't pick one entry point and neither do we.
+        </p>
 
         <div className={styles.grid}>
           {CARDS.map((card) => (

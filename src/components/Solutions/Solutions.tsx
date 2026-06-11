@@ -7,11 +7,15 @@ import SecureRemoteAccessDiagram from '../DataFlowDiagram/SecureRemoteAccessDiag
 import EmailSecurityDiagram from '../DataFlowDiagram/EmailSecurityDiagram';
 import SandboxDiagram from '../DataFlowDiagram/SandboxDiagram';
 import KioskDiagram from '../DataFlowDiagram/KioskDiagram';
+import IntelRoomDiagram from '../DataFlowDiagram/IntelRoomDiagram';
+import TrueCDRDiagram from '../DataFlowDiagram/TrueCDRDiagram';
+import PortXAnimation from '../PortXAnimation/PortXAnimation';
 
 const SOLUTIONS = [
   {
     id: 'unidirectional',
-    titlePrefix: 'Unidirectional',
+    category: 'Network Security',
+    titlePrefix: 'DFX Unidirectional',
     titleHighlight: 'Gateway',
     description: 'DFX UDG is a diode-based gateway operating on Zero Trust principles. It physically isolates critical networks, allowing only authorized one-way data transmission.',
     protects: 'Secures sensitive infrastructures by completely neutralizing threats and making reverse data flow physically impossible.',
@@ -27,7 +31,8 @@ const SOLUTIONS = [
   },
   {
     id: 'Secure Remote',
-    titlePrefix: 'Secure Remote',
+    category: 'Network Security',
+    titlePrefix: 'DFX Secure Remote',
     titleHighlight: 'Access',
     description: 'Built directly upon and seamlessly integrated with DFX UDG hardware, DFX CDS enables request-response based data transmission between isolated networks.',
     protects: 'Provides complete and uncompromising control over inter-network data traffic, blocking unauthorized lateral movement.',
@@ -42,26 +47,13 @@ const SOLUTIONS = [
     image: '/svgler/trafoyeni.svg'
   },
   {
-    id: 'email-security',
-    titlePrefix: 'E-Mail Security',
-    titleHighlight: 'Platform',
-    description: 'DFX ESP holistically addresses enterprise security needs, combining high precision, flexibility, and control. Built for modern messaging threats.',
-    protects: 'Establishes active defense against SPAM, Phishing, BEC (Business Email Compromise), Malware, and Exploit attacks.',
-    link: '/email-security',
-    features: [
-      { text: 'YARA Engine', icon: <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><circle cx="12" cy="12" r="10"></circle><line x1="2" y1="12" x2="22" y2="12"></line><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path></svg> },
-      { text: 'LDAP Integration', icon: <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg> },
-      { text: 'Content Disarming (CDR)', icon: <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"></path></svg> },
-      { text: 'Antivirus Control', icon: <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="8" x2="12" y2="12"></line><line x1="12" y1="16" x2="12.01" y2="16"></line></svg> },
-      { text: 'Phishing Protection', icon: <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg> }
-    ],
-    image: '/svgler/walletcrypto.svg'
-  },
-  {
     id: 'sandbox',
-    titlePrefix: 'Sandbox',
+    category: 'File Security',
+    titlePrefix: 'DFX',
+    titleHighlight: 'Sandbox',
     description: 'DFX Sandbox proactively detects suspicious behavior by continuously monitoring network traffic. It isolates and analyzes suspicious files within a virtual sandbox environment.',
     protects: 'Safely observes malware behavior and neutralizes cyber threats without risking the actual production environment.',
+    link: '/sandbox',
     features: [
       { text: 'AI-Powered Detection', icon: <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"></rect><line x1="8" y1="21" x2="16" y2="21"></line><line x1="12" y1="17" x2="12" y2="21"></line></svg> },
       { text: 'Human Behavior Mimicking', icon: <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg> },
@@ -73,10 +65,12 @@ const SOLUTIONS = [
   },
   {
     id: 'media-transfer',
-    titlePrefix: 'Media Transfer',
+    category: 'File Security',
+    titlePrefix: 'DFX Media Transfer',
     titleHighlight: 'Station',
     description: 'A physical kiosk guaranteeing the secure use of portable media in sensitive network environments. It deeply inspects and sanitizes portable media before network connection.',
     protects: 'Physically enforces a "Zero-USB" policy by detecting and neutralizing malicious payloads before they penetrate the network.',
+    link: '/media-transfer-station',
     features: [
       { text: 'Data Loss Prevention (DLP)', icon: <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg> },
       { text: 'Zero-Day Prevention', icon: <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"></rect><line x1="8" y1="21" x2="16" y2="21"></line><line x1="12" y1="17" x2="12" y2="21"></line></svg> },
@@ -86,11 +80,58 @@ const SOLUTIONS = [
     image: '/svgler/server.svg'
   },
   {
+    id: 'email-security',
+    category: 'Email Security',
+    titlePrefix: 'DFX Email Security',
+    titleHighlight: 'Platform',
+    description: 'DFX ESP holistically addresses enterprise security needs, combining high precision, flexibility, and control. Built for modern messaging threats.',
+    protects: 'Establishes active defense against SPAM, Phishing, BEC (Business Email Compromise), Malware, and Exploit attacks.',
+    link: '/email-security-platform',
+    features: [
+      { text: 'YARA Engine', icon: <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><circle cx="12" cy="12" r="10"></circle><line x1="2" y1="12" x2="22" y2="12"></line><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path></svg> },
+      { text: 'LDAP Integration', icon: <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg> },
+      { text: 'Content Disarming (CDR)', icon: <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"></path></svg> },
+      { text: 'Antivirus Control', icon: <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="8" x2="12" y2="12"></line><line x1="12" y1="16" x2="12.01" y2="16"></line></svg> },
+      { text: 'Phishing Protection', icon: <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg> }
+    ],
+    image: '/svgler/walletcrypto.svg'
+  },
+  {
+    id: 'intelroom',
+    category: 'Email Security',
+    titlePrefix: 'DFX',
+    titleHighlight: 'IntelRoom',
+    description: 'Advanced threat intelligence sharing and analysis room for sophisticated email and network threats.',
+    protects: 'Gathers, analyzes and shares actionable threat intelligence across the entire ecosystem.',
+    link: '/intelroom',
+    features: [
+      { text: 'Real-time Intelligence', icon: <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg> },
+      { text: 'Global Threat Feeds', icon: <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><circle cx="12" cy="12" r="10"></circle><line x1="2" y1="12" x2="22" y2="12"></line><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path></svg> }
+    ],
+    image: '/svgler/server.svg'
+  },
+  {
+    id: 'trucdr',
+    category: 'Email Security',
+    titlePrefix: 'True',
+    titleHighlight: 'CDR',
+    description: 'Content Disarm and Reconstruction engine that intercepts files, removes malicious active content, and rebuilds clean files in real-time.',
+    protects: 'Stops zero-day exploits hidden in common file formats by mathematically ensuring only safe components enter.',
+    link: '/true-cdr',
+    features: [
+      { text: 'Deep File Inspection', icon: <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg> },
+      { text: 'Zero-Trust File Rebuild', icon: <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"></path></svg> }
+    ],
+    image: '/svgler/robot.svg'
+  },
+  {
     id: 'portable-access',
-    titlePrefix: 'Portable Access Security',
-    titleHighlight: 'System',
+    category: 'OT Security',
+    titlePrefix: 'DFX Pass',
+    titleHighlight: '(PortX)',
     description: 'Ensures secure access and data exchange for remote or temporary operators without compromising the core air-gapped network. Built on a strict "nothing trusted, everything verified" architecture.',
     protects: 'Provides continuous authentication and isolation for remote sessions, completely eliminating lateral movement from external or untrusted devices.',
+    link: '/portx',
     features: [
       { text: 'Zero Trust Network Access', icon: <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg> },
       { text: 'Encrypted Tunneling', icon: <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><circle cx="12" cy="12" r="10"></circle><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path><path d="M2 12h20"></path></svg> },
@@ -119,6 +160,9 @@ export default function Solutions() {
     if (activeSolution.id === 'email-security') return <EmailSecurityDiagram />;
     if (activeSolution.id === 'sandbox') return <SandboxDiagram />;
     if (activeSolution.id === 'media-transfer') return <KioskDiagram />;
+    if (activeSolution.id === 'intelroom') return <IntelRoomDiagram />;
+    if (activeSolution.id === 'trucdr') return <TrueCDRDiagram />;
+    if (activeSolution.id === 'portable-access') return <PortXAnimation hideCards={true} />;
     return <img src={activeSolution.image} alt={activeSolution.titlePrefix} className={styles.isometricImage} />;
   };
 
@@ -127,10 +171,10 @@ export default function Solutions() {
       <div className={styles.inner}>
         <div className={styles.title}>
           <h2 className="display-lg">
-            Cyber-Physical <span style={{ color: '#F5A706' }}>Solutions</span>
+            Every Threat Vector. <br/><span style={{ color: '#F5A706' }}>One Ecosystem.</span>
           </h2>
           <p className="body-md" style={{ color: 'rgba(255,255,255,0.6)', marginTop: '16px' }}>
-            DataFlowX delivers next-generation cybersecurity solutions that protect digital infrastructures across complex IT, OT, and hybrid environments.
+            Cyber threats don't pick one entry point and neither do we.
           </p>
         </div>
 
@@ -155,6 +199,7 @@ export default function Solutions() {
           {/* Sağ Kısım - İçerik */}
           <div className={styles.cardRight}>
             <h3 className={styles.cardTitle}>
+              <span style={{ fontSize: '0.6em', opacity: 0.5, display: 'block', marginBottom: '8px', textTransform: 'uppercase', letterSpacing: '0.1em' }}>{activeSolution.category}</span>
               {activeSolution.titlePrefix} <span className={styles.highlight}>{activeSolution.titleHighlight}</span>
             </h3>
 

@@ -1,6 +1,6 @@
 import type { Metadata } from 'next';
 import Nav from '@/components/Nav/Nav';
-import Contact from '@/components/Contact/Contact';
+import ContactMini from '@/components/ContactMini/ContactMini';
 import GartnerTestimonial from '@/components/GartnerTestimonial/GartnerTestimonial';
 import DiodeModelViewerWrapper from '@/components/DiodeModelViewer/DiodeModelViewerWrapper';
 import ProductSpecs from '@/components/ProductSpecs/ProductSpecs';
@@ -12,7 +12,7 @@ import styles from './page.module.css';
 export const metadata: Metadata = {
   title: 'Unidirectional Gateway & Data Diode — OT/SCADA Security',
   description:
-    'DFX DataDiodeX: EAL4+ certified hardware-enforced unidirectional gateway for OT/SCADA security. Physically isolates critical networks — recognized by Gartner for 3 consecutive years.',
+    'DFX Unidirectional Gateway: EAL4+ certified hardware-enforced unidirectional gateway for OT/SCADA security. Physically isolates critical networks — recognized by Gartner for 3 consecutive years.',
   keywords: [
     'unidirectional gateway',
     'data diode',
@@ -29,7 +29,7 @@ export const metadata: Metadata = {
     canonical: 'https://dataflowx.com/unidirectional-gateway',
   },
   openGraph: {
-    title: 'DFX Unidirectional Gateway (DataDiodeX) — EAL4+ Certified',
+    title: 'DFX Unidirectional Gateway — EAL4+ Certified',
     description:
       'Hardware-enforced one-way data transfer. Gartner-recognized. EAL4+ certified. Securing energy, defense, and critical infrastructure.',
     url: 'https://dataflowx.com/unidirectional-gateway',
@@ -41,7 +41,7 @@ export const metadata: Metadata = {
 const productSchema = {
   '@context': 'https://schema.org',
   '@type': 'Product',
-  name: 'DFX Unidirectional Gateway (DataDiodeX)',
+  name: 'DFX Unidirectional Gateway',
   description:
     'EAL4+ certified hardware-enforced unidirectional gateway for OT/SCADA security. Physically prevents reverse data flow, securing critical infrastructure against cyber threats.',
   brand: { '@type': 'Brand', name: 'DataFlowX' },
@@ -70,10 +70,10 @@ const faqSchema = {
     },
     {
       '@type': 'Question',
-      name: 'What certifications does DFX DataDiodeX hold?',
+      name: 'What certifications does DFX Unidirectional Gateway hold?',
       acceptedAnswer: {
         '@type': 'Answer',
-        text: 'DFX DataDiodeX holds the EAL4+ Common Criteria certification and is recognized by Gartner in the Hype Cycle for CPS Security in the Unidirectional Gateways category for three consecutive years.',
+        text: 'DFX Unidirectional Gateway holds the EAL4+ Common Criteria certification and is recognized by Gartner in the Hype Cycle for CPS Security in the Unidirectional Gateways category for three consecutive years.',
       },
     },
     {
@@ -168,7 +168,7 @@ export default function UnidirectionalGatewayPage() {
 
       <div className="section-spacer" aria-hidden="true" />
 
-      <Contact />
+      <ContactMini />
     </main>
     </>
   );

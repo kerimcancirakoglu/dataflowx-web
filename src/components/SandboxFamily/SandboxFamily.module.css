@@ -35,7 +35,8 @@
 }
 
 .highlight {
-  color: #F5A706; /* Sandbox Orange */
+  color: #F5A706;
+  /* Sandbox Orange */
 }
 
 .subtitle {
@@ -84,7 +85,8 @@
   box-shadow: 0 8px 30px rgba(0, 0, 0, 0.3);
 }
 
-.espBox:hover, .espBox.activeNode {
+.espBox:hover,
+.espBox.activeNode {
   border-color: #F5A706;
   box-shadow: 0 8px 30px rgba(245, 167, 6, 0.15);
 }
@@ -94,11 +96,15 @@
   margin-bottom: 0.75rem;
   color: rgba(255, 255, 255, 0.6);
 }
+
 .nodeIcon svg {
   width: 32px;
   height: 32px;
 }
-.espBox .nodeIcon { color: #F5A706; }
+
+.espBox .nodeIcon {
+  color: #F5A706;
+}
 
 .nodeName {
   font-family: var(--font-display);
@@ -114,7 +120,10 @@
   color: var(--color-text-muted);
   text-transform: uppercase;
 }
-.espBox .nodeRole { color: #F5A706; }
+
+.espBox .nodeRole {
+  color: #F5A706;
+}
 
 .clickHint {
   position: absolute;
@@ -128,12 +137,13 @@
   transition: opacity 0.2s ease;
   white-space: nowrap;
 }
+
 .nodeBox:hover .clickHint,
 .sandboxChamber:hover .clickHint {
   opacity: 1;
 }
 
-/* ── Sandbox Chamber ── */
+/* ── Sandbox  ── */
 .sandboxChamber {
   width: 200px;
   height: 180px;
@@ -185,8 +195,13 @@
 }
 
 @keyframes scan {
-  0% { transform: translateY(0); }
-  100% { transform: translateY(180px); }
+  0% {
+    transform: translateY(0);
+  }
+
+  100% {
+    transform: translateY(180px);
+  }
 }
 
 /* ── Connection Lines ── */
@@ -236,8 +251,15 @@
 }
 
 @keyframes slideUp {
-  from { opacity: 0; transform: translateY(16px); }
-  to   { opacity: 1; transform: translateY(0); }
+  from {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 .infoPanelHeader {
@@ -296,7 +318,9 @@
 .stepCard::before {
   content: '';
   position: absolute;
-  top: 0; left: 0; right: 0;
+  top: 0;
+  left: 0;
+  right: 0;
   height: 2px;
   background: linear-gradient(90deg, transparent, rgba(245, 167, 6, 0.6), transparent);
   opacity: 0.5;
@@ -328,8 +352,10 @@
 }
 
 @media (max-width: 1024px) {
-  .stepsGrid { grid-template-columns: 1fr; }
-  
+  .stepsGrid {
+    grid-template-columns: 1fr;
+  }
+
   .swipeContainer {
     overflow-x: auto;
     overflow-y: hidden;
@@ -337,17 +363,27 @@
     margin: 0 -1.5rem;
     padding: 0 1.5rem 2rem 1.5rem;
   }
-  .swipeContainer::-webkit-scrollbar { height: 4px; }
+
+  .swipeContainer::-webkit-scrollbar {
+    height: 4px;
+  }
+
   .swipeContainer::-webkit-scrollbar-thumb {
     background: rgba(245, 167, 6, 0.5);
     border-radius: 4px;
   }
 
-  .flowContainer { 
-    flex-direction: row; 
-    gap: 1rem; 
-    padding-bottom: 1rem; 
-    min-width: 900px; /* Force wide layout for swiping */
+  .flowContainer {
+    flex-direction: row;
+    gap: 1rem;
+    padding-bottom: 1rem;
+    min-width: 900px;
+    /* Force wide layout for swiping */
   }
-  .straightLine { width: 40px; height: 2px; flex: 1; }
+
+  .straightLine {
+    width: 40px;
+    height: 2px;
+    flex: 1;
+  }
 }

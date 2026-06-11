@@ -1,6 +1,7 @@
 'use client';
 
 import Link from 'next/link';
+import { usePathname } from 'next/navigation';
 import styles from './Nav.module.css';
 import React, { useEffect, useRef, useState } from 'react';
 
@@ -37,7 +38,6 @@ const NAV_LINKS: NavLink[] = [
         groupLabel: 'File Security',
         items: [
           { label: 'DFX Sandbox', href: '/sandbox' },
-          { label: 'DFX NDR', href: '/ndr' },
           { label: 'DFX Media Transfer Station', href: '/media-transfer-station' },
         ]
       },
@@ -46,7 +46,7 @@ const NAV_LINKS: NavLink[] = [
         items: [
           { label: 'DFX E-Mail Security Platform', href: '/email-security-platform' },
           { label: 'DFX IntelRoom', href: '/intelroom' },
-          { label: 'DFX CDR', href: '/cdr' },
+          { label: 'TrueCDR™', href: '/true-cdr' },
         ]
       },
       {
@@ -61,21 +61,35 @@ const NAV_LINKS: NavLink[] = [
     label: 'Resources',
     href: '/resources',
     submenu: [
-      { label: 'Resource Center (Datasheets & Whitepapers)', href: '/resources' },
+      { label: 'Resource Center', href: '/resources' },
       { label: 'Blog', href: '/resources/blog' },
-      { label: 'News', href: '#news' },
-      { label: 'Customer Success Stories', href: '#customer-success-stories' },
+      { label: 'News', href: '/news' },
     ],
   },
   { label: 'Partners', href: '/#partners' },
   { label: 'About Us', href: '/about-us' },
 ];
 
-export default function Nav() {
+
+interface NavProps {
+  logoSrc?: string;
+  hideMenu?: boolean;
+}
+
+export default function Nav({ logoSrc = "/DataFlowX_Logo_W.png", hideMenu = false }: NavProps = {}) {
   const navRef = useRef<HTMLElement>(null);
   const [scrolled, setScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [activeDropdown, setActiveDropdown] = useState<string | null>(null);
+  const [theme, setTheme] = useState<'dark' | 'light'>('dark');
+
+  const pathname = usePathname();
+
+
+  useEffect(() => {
+    document.documentElement.setAttribute('data-theme', 'dark');
+    setTheme('dark');
+  }, [pathname]);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -102,7 +116,11 @@ export default function Nav() {
         aria-label="DataFlowX – Ana sayfa"
         onClick={() => setMobileMenuOpen(false)}
       >
-        <img src="/DataFlowX_Logo_W.png" alt="DataFlowX Logo" className={styles.logoImage} />
+        <img 
+          src={logoSrc === '/Intelroombeyaz.png' ? '/Intelroombeyaz.png' : (theme === 'light' ? '/DataFlowX_Logo.png' : logoSrc)} 
+          alt="DataFlowX Logo" 
+          className={`${styles.logoImage} ${logoSrc === '/Intelroombeyaz.png' ? (theme === 'light' ? styles.intelRoomLogoLight : styles.intelRoomLogo) : ''}`} 
+        />
       </Link>
 
       {/* Center Floating Pill Navigation (Desktop) */}
@@ -175,10 +193,12 @@ export default function Nav() {
         </ul>
       </div>
 
-      {/* CTA Button (Desktop) */}
-      <a href="#contact" className={styles.ctaButton}>
-        Contact
-      </a>
+      {/* Right Actions */}
+      <div className={styles.rightActions}>
+        <Link href="/contact" className={styles.ctaButton}>
+          Contact
+        </Link>
+      </div>
 
       {/* Hamburger Toggle (Mobile) */}
       <button

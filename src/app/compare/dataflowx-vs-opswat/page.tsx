@@ -1,13 +1,13 @@
 import type { Metadata } from 'next';
 import Nav from '@/components/Nav/Nav';
-import Contact from '@/components/Contact/Contact';
+import ContactMini from '@/components/ContactMini/ContactMini';
 import VideoBackground from '@/components/VideoBackground/VideoBackground';
 import styles from './page.module.css';
 
 export const metadata: Metadata = {
   title: 'DataFlowX vs OPSWAT — Data Diode & Unidirectional Gateway Comparison',
   description:
-    'Comparing DataFlowX DataDiodeX vs OPSWAT MetaDefender: EAL4+ certification, regional support, TCO, and deployment. OPSWAT alternative with local support in Turkey, Gulf, and Balkans.',
+    'Comparing DataFlowX DFX Unidirectional Gateway vs OPSWAT MetaDefender: EAL4+ certification, regional support, TCO, and deployment. OPSWAT alternative with local support in Turkey, Gulf, and Balkans.',
   keywords: [
     'OPSWAT alternative',
     'OPSWAT MetaDefender alternative',
@@ -42,7 +42,7 @@ const faqSchema = {
       name: 'What is the difference between DataFlowX and OPSWAT MetaDefender?',
       acceptedAnswer: {
         '@type': 'Answer',
-        text: 'DataFlowX DataDiodeX is a hardware-enforced unidirectional gateway with EAL4+ Common Criteria certification, making reverse data flow physically impossible. OPSWAT MetaDefender is primarily a content inspection and CDR software platform. DataFlowX provides absolute network isolation at the hardware level, while OPSWAT focuses on file-based threat prevention.',
+        text: 'DataFlowX DFX Unidirectional Gateway is a hardware-enforced unidirectional gateway with EAL4+ Common Criteria certification, making reverse data flow physically impossible. OPSWAT MetaDefender is primarily a content inspection and CDR software platform. DataFlowX provides absolute network isolation at the hardware level, while OPSWAT focuses on file-based threat prevention.',
       },
     },
     {
@@ -58,7 +58,7 @@ const faqSchema = {
       name: 'Is DataFlowX EAL4+ certified?',
       acceptedAnswer: {
         '@type': 'Answer',
-        text: 'Yes. DataFlowX DataDiodeX holds the EAL4+ Common Criteria certification, the highest level of independently verified security assurance for cybersecurity hardware. It is also recognized by Gartner in the Hype Cycle for CPS Security.',
+        text: 'Yes. DataFlowX DFX Unidirectional Gateway holds the EAL4+ Common Criteria certification, the highest level of independently verified security assurance for cybersecurity hardware. It is also recognized by Gartner in the Hype Cycle for CPS Security.',
       },
     },
     {
@@ -133,7 +133,7 @@ const comparisonData = [
   },
   {
     feature: 'Content Inspection (CDR)',
-    dfx: 'Via DataSecureX integration',
+    dfx: 'Via DFX Sandbox integration',
     opswat: 'Core capability (MetaDefender)',
     dfxWins: false,
   },
@@ -314,7 +314,7 @@ export default function DataFlowXVsOpswatPage() {
 
         <div className="section-spacer" aria-hidden="true" />
 
-        <Contact />
+        <ContactMini />
       </main>
     </>
   );

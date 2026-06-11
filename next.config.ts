@@ -1,5 +1,6 @@
 import type { NextConfig } from "next";
 
+
 const nextConfig: NextConfig = {
   async redirects() {
     return [
@@ -77,17 +78,17 @@ const nextConfig: NextConfig = {
       },
       {
         source: '/post/cybersecurity-compliance-in-the-energy-sector-iso-iec-27019-requirements',
-        destination: '/tr/cozumler/enerji-scada-guvenligi', // En uygun TR hedefi, çünkü ISO 27019 geçiyor. İngilizce okuyorsa /en/solutions/gulf de olabilir ama Türkiye enerji daha odaklı.
+        destination: '/tr/cozumler/enerji-scada-guvenligi', 
         permanent: true,
       },
       {
         source: '/solutions/scada-security',
-        destination: '/tr/cozumler/enerji-scada-guvenligi', // SCADA güvenliği TR landing page'ine
+        destination: '/tr/cozumler/enerji-scada-guvenligi', 
         permanent: true,
       },
       {
         source: '/crypto-asset-storage',
-        destination: '/solutions/file-security', // Dosya/Asset güvenliği için en yakın kategori
+        destination: '/solutions/file-security', 
         permanent: true,
       },
       {
@@ -97,7 +98,7 @@ const nextConfig: NextConfig = {
       },
       {
         source: '/post/cybersecurity-challenges-in-logistics-and-supply-chain',
-        destination: '/resources/blog', // Spesifik sayfa yoksa blog ana dizinine yönlendirilir.
+        destination: '/resources/blog', 
         permanent: true,
       },
       {
@@ -110,8 +111,6 @@ const nextConfig: NextConfig = {
         destination: '/unidirectional-gateway',
         permanent: true,
       },
-      // Note: /post/data-diodes-the-unsung-heroes-of-network-security is intentionally 
-      // kept as an active page with a cross-canonical tag to /unidirectional-gateway.
       {
         source: '/post/sharing-threat-intelligence-between-networks-misp-and-data-diodes',
         destination: '/resources/blog', 

@@ -1,6 +1,6 @@
 import type { Metadata } from 'next';
 import Nav from '@/components/Nav/Nav';
-import Contact from '@/components/Contact/Contact';
+import ContactMini from '@/components/ContactMini/ContactMini';
 import DiodeModelViewerWrapper from '@/components/DiodeModelViewer/DiodeModelViewerWrapper';
 import ProductSpecs from '@/components/ProductSpecs/ProductSpecs';
 import FeaturesGrid from '@/components/FeaturesGrid/FeaturesGrid';
@@ -12,7 +12,7 @@ import styles from './page.module.css';
 export const metadata: Metadata = {
   title: 'Secure Remote Access — Zero Trust Cross-Domain Solution',
   description:
-    'DFX DataBrokerX: request-response based secure remote access across isolated OT/IT networks. Zero Trust architecture with Active Directory integration and ICAP sandbox support.',
+    'DFX Secure Remote Access: request-response based secure remote access across isolated OT/IT networks. Zero Trust architecture with Active Directory integration and ICAP sandbox support.',
   keywords: [
     'secure remote access',
     'cross-domain solution',
@@ -28,7 +28,7 @@ export const metadata: Metadata = {
     canonical: 'https://dataflowx.com/secure-remote-access',
   },
   openGraph: {
-    title: 'DFX Secure Remote Access (DataBrokerX) — Zero Trust OT Access',
+    title: 'DFX Secure Remote Access — Zero Trust OT Access',
     description:
       'Request-response based secure access across isolated networks. Active Directory integration. ICAP sandbox support.',
     url: 'https://dataflowx.com/secure-remote-access',
@@ -62,8 +62,7 @@ export default function SecureRemoteAccessPage() {
           <p className={styles.ugDetailsOverTitle}>PRODUCT OVERVIEW</p>
           <h2 className={styles.ugDetailsTitle}>Secure Cross-Domain Access</h2>
           <p className={styles.ugDetailsDesc}>
-            Secure Remote Access is a cross-domain solution that works in integration with DataDiodeX. It enables 
-            request-response based transmission between isolated networks while providing full control over data traffic.
+            DFX Secure Remote Access is a comprehensive Zero Trust cross-domain solution. It provides request-response based transmission between isolated networks with full visibility and control over data traffic, operating either independently or in seamless integration with DFX Unidirectional Gateway.
           </p>
         </div>
         <div className={styles.ugDetailsGrid}>
@@ -84,7 +83,7 @@ export default function SecureRemoteAccessPage() {
           <div className={styles.ugDetailCard}>
             <div className={styles.ugDetailLabel}>SANDBOX INTEGRATION</div>
             <p className={styles.ugDetailText}>
-              Integrates with ICAP to route suspicious files to sandbox solutions (like DataSecureX) for 
+              Integrates with ICAP to route suspicious files to sandbox solutions (like DFX Sandbox) for 
               detonation and analysis before they ever reach the protected network.
             </p>
           </div>
@@ -114,7 +113,7 @@ export default function SecureRemoteAccessPage() {
 
       <div className="section-spacer" aria-hidden="true" />
 
-      <Contact />
+      <ContactMini />
     </main>
   );
 }

@@ -3,10 +3,11 @@
 }
 
 .inner {
-  max-width: 1200px;
+  max-width: 1400px;
   margin: 0 auto;
   display: grid;
-  grid-template-columns: 1fr;
+  grid-template-columns: 1fr 1fr;
+  gap: 80px;
   align-items: center;
 }
 
@@ -39,6 +40,38 @@
   align-items: flex-start;
 }
 
+.highlight {
+  color: #F5A706;
+  font-weight: 500;
+}
+
+.badges {
+  display: flex;
+  gap: 16px;
+  margin-top: -12px;
+  margin-bottom: 8px;
+  flex-wrap: wrap;
+}
+
+.badge {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 16px;
+  background: rgba(245, 167, 6, 0.1);
+  border: 1px solid rgba(245, 167, 6, 0.2);
+  border-radius: 100px;
+  color: #F5A706;
+  font-size: 0.85rem;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+.badge svg {
+  flex-shrink: 0;
+}
+
 .featureRow {
   display: flex;
   align-items: center;
@@ -67,62 +100,60 @@
   align-self: flex-start;
 }
 
-/* Right visual */
+/* Right visual / Cards */
 .right {
   display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-.productVisual {
-  position: relative;
+  justify-content: flex-end;
+  align-items: stretch;
   width: 100%;
-  max-width: 480px;
-  aspect-ratio: 1;
-  display: flex;
-  align-items: center;
-  justify-content: center;
 }
 
-.productGlow {
-  position: absolute;
-  inset: 0;
-  border-radius: 50%;
-  background: radial-gradient(ellipse at center,
-    rgba(0, 180, 255, 0.08) 0%,
-    rgba(245, 167, 6, 0.05) 50%,
-    transparent 70%
-  );
-  animation: breathe 4s ease-in-out infinite;
-}
-
-.productPlaceholder {
+.cardsWrapper {
   display: flex;
   flex-direction: column;
+  gap: 24px;
+  width: 100%;
+  max-width: 550px;
+}
+
+.infoCard {
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  border-radius: 16px;
+  padding: 24px;
+  backdrop-filter: blur(12px);
+  transition: transform 0.3s ease, border-color 0.3s ease, background 0.3s ease;
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.2);
+}
+
+.infoCard:hover {
+  transform: translateX(-4px);
+  border-color: rgba(245, 167, 6, 0.3);
+  background: rgba(255, 255, 255, 0.04);
+}
+
+.cardHeader {
+  display: flex;
   align-items: center;
-  justify-content: center;
-  position: relative;
-  z-index: 1;
-  width: 100%;
-  height: 100%;
-  border: none;
-  background: transparent;
-  backdrop-filter: none;
+  gap: 12px;
+  margin-bottom: 12px;
 }
 
-.productLogoImage {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  border-radius: 24px;
-  display: block;
-  transform: scale(1.15);
-  transition: transform 0.4s ease;
+.cardHeader h3 {
+  font-family: var(--font-display);
+  font-size: 1.15rem;
+  color: var(--color-text);
+  margin: 0;
+  font-weight: 500;
+  letter-spacing: 0.02em;
 }
 
-@keyframes breathe {
-  0%, 100% { opacity: 0.6; transform: scale(1); }
-  50% { opacity: 1; transform: scale(1.05); }
+.infoCard p {
+  font-family: var(--font-mono);
+  font-size: 0.85rem;
+  color: rgba(255, 255, 255, 0.6);
+  line-height: 1.6;
+  margin: 0;
 }
 
 @media (max-width: 900px) {
@@ -132,7 +163,7 @@
   }
 
   .right {
-    order: -1;
+    order: 1;
   }
 
   .productVisual {

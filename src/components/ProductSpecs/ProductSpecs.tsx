@@ -9,7 +9,7 @@ const PRODUCT_DATA = {
     {
       category: 'General Information',
       items: [
-        { label: 'Model', value: 'DataDiodeX 1G Small / 10G Small' },
+        { label: 'Model', value: 'DFX Unidirectional Gateway 1G Small / 10G Small' },
         { label: 'Product Code', value: 'DFX-DDX-P-SM101-C-TR / DFX-DDX-P-SM110-C-TR' },
         { label: 'Diode Speed', value: '1G / 10G' },
       ]
@@ -28,7 +28,7 @@ const PRODUCT_DATA = {
     {
       category: 'General Information',
       items: [
-        { label: 'Model', value: 'DataDiodeX 1G Mini' },
+        { label: 'Model', value: 'DFX Unidirectional Gateway 1G Mini' },
         { label: 'Product Code', value: 'DFX-DDX-P-MN101-C-TR' },
         { label: 'Diode Speed', value: '1G' },
       ]
@@ -47,7 +47,7 @@ const PRODUCT_DATA = {
     {
       category: 'General Information',
       items: [
-        { label: 'Model', value: 'DataDiodeX 1G Compact' },
+        { label: 'Model', value: 'DFX Unidirectional Gateway 1G Compact' },
         { label: 'Product Code', value: 'DFX-DDX-P-CC101-C-TR' },
         { label: 'Diode Speed', value: '1G' },
       ]
@@ -66,7 +66,7 @@ const PRODUCT_DATA = {
     {
       category: 'General Information',
       items: [
-        { label: 'Model', value: 'DataDiodeX 1G Enterprise / 10G Enterprise' },
+        { label: 'Model', value: 'DFX Unidirectional Gateway 1G Enterprise / 10G Enterprise' },
         { label: 'Product Code', value: 'DFX-DDX-P-EN101-C-TR / DFX-DDX-P-EN110-C-TR' },
         { label: 'Diode Speed', value: '1G / 10G' },
       ]

@@ -1,0 +1,80 @@
+.sidebarTitle {
+  font-size: 0.9rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: #718096;
+  margin-bottom: 1rem;
+}
+
+/* Table of Contents */
+.toc {
+  margin-bottom: 3rem;
+}
+
+.tocList {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.tocItem a {
+  color: #a0aec0;
+  font-size: 0.95rem;
+  text-decoration: none;
+  transition: color 0.2s ease;
+  display: block;
+  padding-left: 1rem;
+  border-left: 2px solid transparent;
+}
+
+.tocItemSub a {
+  padding-left: 2rem;
+  font-size: 0.85rem;
+}
+
+.tocItem a:hover {
+  color: #ffffff;
+}
+
+.tocItemActive a {
+  color: #F5A706;
+  border-left-color: #F5A706;
+  font-weight: 600;
+}
+
+/* Social Share */
+.socialShare {
+  margin-bottom: 2rem;
+}
+
+.socialIcons {
+  display: flex;
+  gap: 1rem;
+}
+
+.socialIcon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.05);
+  color: #a0aec0;
+  transition: all 0.3s ease;
+}
+
+.socialIcon svg {
+  width: 18px;
+  height: 18px;
+}
+
+.socialIcon:hover {
+  background: #F5A706;
+  color: #000000;
+  transform: translateY(-2px);
+}

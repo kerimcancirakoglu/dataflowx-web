@@ -25,11 +25,11 @@ const elementDetails: Record<string, {
     steps: [
       { label: 'What it is', text: 'The Client Module (CM) acts as a secure proxy, terminating connections from the source network and inspecting all requests before they proceed.' },
       { label: 'Granular Filtering', text: 'Performs protocol-specific, content-aware filtering. It integrates with Active Directory to enforce strict Zero Trust Network Access policies.' },
-      { label: 'Sandbox Integration', text: 'Via ICAP integration, the CM can route payloads to sandbox solutions (like DataSecureX) for deep analysis and malware mitigation before transmission.' },
+      { label: 'Sandbox Integration', text: 'Via ICAP integration, the CM can route payloads to sandbox solutions (like DFX Sandbox) for deep analysis and malware mitigation before transmission.' },
     ]
   },
   tx: {
-    title: 'DFX Optical Diode — TX',
+    title: 'DFX UG — TX',
     role: 'Transmit (TX) Unit',
     steps: [
       { label: 'What it is', text: 'The TX unit takes the validated request from the CM module and converts it into light pulses to traverse the optical fiber.' },
@@ -47,7 +47,7 @@ const elementDetails: Record<string, {
     ]
   },
   rx: {
-    title: 'DFX Optical Diode — RX',
+    title: 'DFX UG — RX',
     role: 'Receive (RX) Unit',
     steps: [
       { label: 'What it is', text: 'The RX unit receives the light pulses from the TX unit across the air gap and converts them back into data for the SM module.' },
@@ -162,7 +162,7 @@ export default function BrokerFamily() {
           </h2>
           <p className={styles.subtitle}>
             Click any element to understand how Secure Remote Access enables request-response based 
-            transmission between isolated networks via integrated CM/SM modules and Optical Diodes.
+            transmission between isolated networks via integrated CM/SM modules and DFX UG.
           </p>
         </div>
 
@@ -219,18 +219,18 @@ export default function BrokerFamily() {
 
           {/* 4. Diode Stack Left */}
           <div className={styles.diodeStack}>
-            {/* Top: RX */}
-            <button className={`${styles.diodeBox} ${styles.rxBox} ${activeElement === 'rx' ? styles.activeNode : ''}`} onClick={() => handleClick('rx')}>
+            {/* Top: TX */}
+            <button className={`${styles.diodeBox} ${styles.txBox} ${activeElement === 'tx' ? styles.activeNode : ''}`} onClick={() => handleClick('tx')}>
               <div className={styles.diodeRole}>
-                <span className={styles.rxText}>RX</span> <div className={`${styles.diodeDot} ${styles.rxDot}`}></div>
+                <span className={styles.txText}>TX</span> <div className={`${styles.diodeDot} ${styles.txDot}`}></div>
               </div>
               <div className={styles.diodeName}>Diode</div>
               <div className={styles.clickHint}>Click to explore</div>
             </button>
-            {/* Bottom: TX */}
-            <button className={`${styles.diodeBox} ${styles.txBox} ${activeElement === 'tx' ? styles.activeNode : ''}`} onClick={() => handleClick('tx')}>
+            {/* Bottom: RX */}
+            <button className={`${styles.diodeBox} ${styles.rxBox} ${activeElement === 'rx' ? styles.activeNode : ''}`} onClick={() => handleClick('rx')}>
               <div className={styles.diodeRole}>
-                <span className={styles.txText}>TX</span> <div className={`${styles.diodeDot} ${styles.txDot}`}></div>
+                <span className={styles.rxText}>RX</span> <div className={`${styles.diodeDot} ${styles.rxDot}`}></div>
               </div>
               <div className={styles.diodeName}>Diode</div>
               <div className={styles.clickHint}>Click to explore</div>
@@ -256,18 +256,18 @@ export default function BrokerFamily() {
 
           {/* 6. Diode Stack Right */}
           <div className={styles.diodeStack}>
-            {/* Top: TX */}
-            <button className={`${styles.diodeBox} ${styles.txBox} ${activeElement === 'tx' ? styles.activeNode : ''}`} onClick={() => handleClick('tx')}>
+            {/* Top: RX */}
+            <button className={`${styles.diodeBox} ${styles.rxBox} ${activeElement === 'rx' ? styles.activeNode : ''}`} onClick={() => handleClick('rx')}>
               <div className={styles.diodeRole}>
-                <span className={styles.txText}>TX</span> <div className={`${styles.diodeDot} ${styles.txDot}`}></div>
+                <span className={styles.rxText}>RX</span> <div className={`${styles.diodeDot} ${styles.rxDot}`}></div>
               </div>
               <div className={styles.diodeName}>Diode</div>
               <div className={styles.clickHint}>Click to explore</div>
             </button>
-            {/* Bottom: RX */}
-            <button className={`${styles.diodeBox} ${styles.rxBox} ${activeElement === 'rx' ? styles.activeNode : ''}`} onClick={() => handleClick('rx')}>
+            {/* Bottom: TX */}
+            <button className={`${styles.diodeBox} ${styles.txBox} ${activeElement === 'tx' ? styles.activeNode : ''}`} onClick={() => handleClick('tx')}>
               <div className={styles.diodeRole}>
-                <span className={styles.rxText}>RX</span> <div className={`${styles.diodeDot} ${styles.rxDot}`}></div>
+                <span className={styles.txText}>TX</span> <div className={`${styles.diodeDot} ${styles.txDot}`}></div>
               </div>
               <div className={styles.diodeName}>Diode</div>
               <div className={styles.clickHint}>Click to explore</div>

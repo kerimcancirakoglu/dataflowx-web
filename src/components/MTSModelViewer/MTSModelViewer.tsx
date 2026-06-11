@@ -84,11 +84,12 @@ export default function MTSModelViewer() {
             <ContactShadows position={[0, -1, 0]} opacity={0.4} scale={10} blur={2} far={4} />
           </Suspense>
 
-          <OrbitControls
+          <OrbitControls 
+            makeDefault
             enablePan={false}
-            enableZoom={true}
+            enableZoom={false}
             minDistance={2}
-            maxDistance={10}
+            maxDistance={20}
             autoRotate
             autoRotateSpeed={0.5}
           />

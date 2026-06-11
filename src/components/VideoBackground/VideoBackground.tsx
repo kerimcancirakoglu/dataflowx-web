@@ -6,12 +6,30 @@ function lerp(a: number, b: number, t: number): number {
   return a + (b - a) * t;
 }
 
-export default function VideoBackground() {
+interface VideoBackgroundProps {
+  videoSrc?: string;
+  opacity?: number;
+  playMode?: 'scrub' | 'play';
+}
+
+export default function VideoBackground({ 
+  videoSrc = "/dynamic-particle-flow.mp4", 
+  opacity = 0.45,
+  playMode = 'scrub'
+}: VideoBackgroundProps = {}) {
   const videoRef = useRef<HTMLVideoElement>(null);
 
   useEffect(() => {
     const video = videoRef.current;
     if (!video) return;
+
+    if (playMode === 'play') {
+      if (video) {
+        video.loop = true;
+        video.play().catch(e => console.warn("AutoPlay failed:", e));
+      }
+      return;
+    }
 
     let targetTime = 0;
     let smoothTime = 0;
@@ -115,7 +133,7 @@ export default function VideoBackground() {
         left: 0,
         width: '100vw',
         height: '100vh',
-        zIndex: -1,
+        zIndex: -10,
         pointerEvents: 'none',
         overflow: 'hidden',
         background: '#000',
@@ -123,7 +141,7 @@ export default function VideoBackground() {
     >
       <video
         ref={videoRef}
-        src="/dynamic-particle-flow.mp4"
+        src={videoSrc}
         preload="auto"
         autoPlay
         muted
@@ -132,7 +150,7 @@ export default function VideoBackground() {
           width: '100%',
           height: '100%',
           objectFit: 'cover',
-          opacity: 0.45,
+          opacity: opacity,
           display: 'block',
           transform: 'translateZ(0)',
           willChange: 'transform',

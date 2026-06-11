@@ -60,7 +60,7 @@ const features = [
   },
   {
     title: 'Certifications',
-    desc: 'MetaDefender Optical Diode is certified in Common Criteria EAL4+ and C1D2*. \n*MetaDefender Optical Diode DIN rail model only. C1D2 certification as of November 2024.',
+    desc: 'DFX UG is certified in Common Criteria EAL4+ and C1D2*. \n*DFX UG DIN rail model only. C1D2 certification as of November 2024.',
     icon: (
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
         <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />

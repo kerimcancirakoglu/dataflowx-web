@@ -1,0 +1,282 @@
+.mapContainer {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  min-height: 400px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.mapWrapper {
+  position: relative;
+  width: 100%;
+  max-width: 500px;
+  aspect-ratio: 1 / 1;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: var(--color-bg);
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
+}
+
+.mapBackground {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  overflow: hidden;
+  box-shadow: 
+    inset -40px -40px 80px rgba(0,0,0,0.9),
+    inset 20px 20px 40px rgba(220, 38, 38, 0.05),
+    0 0 40px rgba(220, 38, 38, 0.1);
+  background: radial-gradient(circle at 30% 30%, rgba(220, 38, 38, 0.08), var(--color-bg));
+  background-image: url('/world-map.svg');
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+  opacity: 0.08;
+  filter: invert(1) brightness(0.8) sepia(1) hue-rotate(180deg) saturate(2);
+}
+
+:global([data-theme="light"]) .mapBackground {
+  filter: none;
+  opacity: 0.08;
+}
+
+/* Animated Connections */
+.connectionsLayer {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 5;
+}
+
+.attackLine {
+  stroke: rgba(230, 57, 70, 0.4);
+  stroke-width: 1.5;
+  stroke-dasharray: 4 8;
+  animation: march 20s linear infinite;
+}
+
+@keyframes march {
+  from { stroke-dashoffset: 1000; }
+  to { stroke-dashoffset: 0; }
+}
+
+/* Nodes */
+.mapNode {
+  position: absolute;
+  transform: translate(-50%, -50%);
+  z-index: 10;
+  cursor: pointer;
+  border-radius: 50%; /* Just in case */
+}
+
+.nodeCore {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background-color: currentColor;
+  box-shadow: 0 0 10px currentColor;
+}
+
+.nodePulse {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  border-radius: 50%;
+  border: 1px solid currentColor;
+  opacity: 0;
+  animation: pulseMap 2s infinite cubic-bezier(0.215, 0.61, 0.355, 1);
+}
+
+/* Sizes */
+.large .nodePulse { width: 40px; height: 40px; }
+.medium .nodePulse { width: 24px; height: 24px; }
+.small .nodePulse { width: 14px; height: 14px; }
+
+/* Colors */
+.critical {
+  color: #E63946; /* Red */
+}
+.medium {
+  color: #F5A706; /* Yellow/Amber */
+}
+.low {
+  color: #DC2626; /* Blue */
+}
+
+/* Tooltips */
+.tooltip {
+  position: absolute;
+  top: -60px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: var(--color-ui);
+  border: 1px solid currentColor;
+  padding: 8px 12px;
+  border-radius: 4px;
+  min-width: 150px;
+  pointer-events: none;
+  z-index: 30;
+  animation: slideUp 0.2s ease-out;
+}
+
+.tooltipHeader {
+  color: var(--color-text);
+  font-size: 0.65rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin-bottom: 4px;
+  border: 1px solid var(--color-border);
+  padding-bottom: 4px;
+}
+
+.tooltipBody {
+  color: var(--color-text-muted);
+  font-size: 0.75rem;
+}
+
+@keyframes slideUp {
+  from { opacity: 0; transform: translate(-50%, 10px); }
+  to { opacity: 1; transform: translate(-50%, 0); }
+}
+
+/* Details Panel Overlay */
+.detailsPanel {
+  position: absolute;
+  top: 10%;
+  right: -50px;
+  width: 260px;
+  background: var(--color-ui);
+  border: 1px solid var(--color-border);
+  border-left: 2px solid #E63946;
+  border-radius: 6px;
+  padding: 0;
+  z-index: 40;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+  animation: slideInRight 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  font-family: var(--font-mono);
+}
+
+.panelHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 14px;
+  border: 1px solid var(--color-border);
+  font-size: 0.7rem;
+  font-weight: 700;
+  color: var(--color-text);
+  letter-spacing: 0.1em;
+  background: var(--color-ui);
+}
+
+.closeBtn {
+  background: none;
+  border: none;
+  color: var(--color-text-muted);
+  cursor: pointer;
+  font-size: 1rem;
+  transition: color 0.2s;
+}
+.closeBtn:hover { color: var(--color-text); }
+
+.panelBody {
+  padding: 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.panelRow {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.panelLabel {
+  font-size: 0.65rem;
+  color: var(--color-text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.panelValue {
+  font-size: 0.8rem;
+  color: var(--color-text-muted);
+}
+
+.statusActive {
+  color: #F5A706;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+.statusActive::before {
+  content: '';
+  display: inline-block;
+  width: 6px;
+  height: 6px;
+  background: #F5A706;
+  border-radius: 50%;
+  box-shadow: 0 0 5px #F5A706;
+  animation: pulseMap 1s infinite;
+}
+
+.panelFooter {
+  padding: 10px 14px;
+  border: 1px solid var(--color-border);
+  background: var(--color-ui);
+}
+
+.actionBtn {
+  width: 100%;
+  padding: 8px;
+  background: rgba(230, 57, 70, 0.1);
+  border: 1px solid rgba(230, 57, 70, 0.3);
+  color: #E63946;
+  border-radius: 4px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+.actionBtn:hover {
+  background: rgba(230, 57, 70, 0.2);
+  border-color: #E63946;
+}
+
+@keyframes slideInRight {
+  from { opacity: 0; transform: translateX(20px); }
+  to { opacity: 1; transform: translateX(0); }
+}
+
+
+
+
+
+@keyframes pulseMap {
+  0% {
+    width: 0px;
+    height: 0px;
+    opacity: 1;
+  }
+  100% {
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+  }
+}

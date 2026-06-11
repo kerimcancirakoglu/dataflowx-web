@@ -1,6 +1,5 @@
 import Nav from '@/components/Nav/Nav';
 import Hero from '@/components/Hero/Hero';
-import Product from '@/components/Product/Product';
 import HowItWorks from '@/components/HowItWorks/HowItWorks';
 import UseCases from '@/components/UseCases/UseCases';
 import Solutions from '@/components/Solutions/Solutions';
@@ -10,6 +9,7 @@ import Contact from '@/components/Contact/Contact';
 import VideoBackground from '@/components/VideoBackground/VideoBackground';
 
 export default function Home() {
+
   return (
     <main>
       <VideoBackground />
@@ -19,9 +19,6 @@ export default function Home() {
       {/* Section spacer — 25vh isolation */}
       <div className="section-spacer" aria-hidden="true" />
 
-      <Product />
-
-      <div className="section-spacer" aria-hidden="true" />
 
       <HowItWorks />
 

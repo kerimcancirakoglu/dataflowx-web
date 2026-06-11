@@ -1,0 +1,41 @@
+'use client';
+
+import { useLocale } from 'next-intl';
+import { usePathname, useRouter } from '@/navigation';
+import { useTransition } from 'react';
+
+export default function LanguageSwitcher() {
+  const [isPending, startTransition] = useTransition();
+  const locale = useLocale();
+  const router = useRouter();
+  const pathname = usePathname();
+
+  function onSelectChange(event: React.ChangeEvent<HTMLSelectElement>) {
+    const nextLocale = event.target.value;
+    startTransition(() => {
+      router.replace(pathname, { locale: nextLocale });
+    });
+  }
+
+  return (
+    <select
+      defaultValue={locale}
+      disabled={isPending}
+      onChange={onSelectChange}
+      style={{
+        background: 'transparent',
+        color: 'inherit',
+        border: '1px solid rgba(255,255,255,0.2)',
+        borderRadius: '4px',
+        padding: '4px 8px',
+        marginRight: '16px',
+        cursor: 'pointer',
+        fontSize: '0.9rem'
+      }}
+    >
+      <option value="en" style={{color: '#000'}}>EN</option>
+      <option value="tr" style={{color: '#000'}}>TR</option>
+      <option value="ar" style={{color: '#000'}}>AR</option>
+    </select>
+  );
+}

@@ -15,7 +15,7 @@ const MOCK_POSTS: Post[] = [
     id: 1,
     title: 'Beyond Network Visibility: Implementing Prevention-First Security for SCADA Environments',
     date: '23 hours ago',
-    image: '/images/blog/blog-1.avif',
+    image: '/Kapak/kapaklar/datamessage1.jpg',
     featured: true,
     link: '#'
   },
@@ -23,7 +23,7 @@ const MOCK_POSTS: Post[] = [
     id: 2,
     title: 'OT Security Alert: How the "Broken Windows Theory" Predicts Your Next Breach',
     date: 'May 18',
-    image: '/images/blog/blog-2.avif',
+    image: '/Kapak/kapaklar/databroker1.jpg',
     featured: false,
     link: '#'
   },
@@ -31,7 +31,7 @@ const MOCK_POSTS: Post[] = [
     id: 3,
     title: 'How AI Models Like Claude are Targeting SCADA Infrastructure: Monterrey Water Utility Breach',
     date: 'May 11',
-    image: '/images/blog/blog-3.avif',
+    image: '/Kapak/kapaklar/datasecure1.jpg',
     featured: false,
     link: '#'
   },
@@ -39,7 +39,7 @@ const MOCK_POSTS: Post[] = [
     id: 4,
     title: 'Zero Trust Architecture in Critical Infrastructure: A Comprehensive Guide for 2026',
     date: 'May 04',
-    image: '/images/blog/blog-1.avif',
+    image: '/Kapak/kapaklar/datadiode1.jpg',
     featured: false,
     link: '#'
   }

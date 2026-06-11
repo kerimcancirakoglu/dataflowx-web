@@ -15,6 +15,17 @@
   --spacer-section: 25vh;
   --transition-base: 0.4s cubic-bezier(0.16, 1, 0.3, 1);
 }
+/* RECORDED FUTURE THEME (Crisp White / Blue / Red) */
+[data-theme="light"] {
+  --color-bg: #FFFFFF;
+  --color-tx: #2563EB;
+  --color-rx: #DC2626;
+  --color-merge: #F8FAFC;
+  --color-ui: rgba(37, 99, 235, 0.05);
+  --color-border: rgba(15, 23, 42, 0.12);
+  --color-text: #1E293B;
+  --color-text-muted: #64748B;
+}
 
 *, *::before, *::after {
   box-sizing: border-box;
