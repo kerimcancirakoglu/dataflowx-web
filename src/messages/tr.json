@@ -1,0 +1,20 @@
+{
+  "nav": {
+    "solutions": "Çözümler",
+    "resources": "Kaynaklar",
+    "partners": "İş Ortakları",
+    "about": "Hakkımızda",
+    "contact": "İletişim"
+  },
+  "ContactForm": {
+    "title": "Dokümanı İndir",
+    "description": "Bu dokümanı indirmek için lütfen kurumsal bilgilerinizi giriniz.",
+    "namePlaceholder": "Adınız Soyadınız",
+    "emailPlaceholder": "Kurumsal E-posta",
+    "emailError": "Lütfen geçerli bir kurumsal e-posta adresi giriniz.",
+    "genericError": "Bir hata oluştu. Lütfen tekrar deneyiniz.",
+    "submitBtn": "Dokümanı İndir",
+    "successMessage": "Bilgileriniz doğrulandı, indirme başlatılıyor...",
+    "submitting": "İşleniyor..."
+  }
+}

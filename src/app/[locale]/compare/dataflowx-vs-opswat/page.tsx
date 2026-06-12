@@ -1,4 +1,5 @@
 import type { Metadata } from 'next';
+
 import Nav from '@/components/Nav/Nav';
 import ContactMini from '@/components/ContactMini/ContactMini';
 import VideoBackground from '@/components/VideoBackground/VideoBackground';
@@ -147,34 +148,39 @@ const comparisonData = [
 
 export default function DataFlowXVsOpswatPage() {
   return (
-    <>
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }} />
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }} />
-      <main className={styles.main}>
-        <VideoBackground />
-        <Nav />
+    <main className={styles.main}>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }}
+      />
+      <VideoBackground />
+      <Nav />
 
-        {/* Hero */}
-        <section className={styles.hero}>
-          <div className={styles.heroInner}>
-            <p className={styles.overline}>VENDOR COMPARISON</p>
-            <h1 className={styles.heroTitle}>
-              DataFlowX vs OPSWAT MetaDefender:<br />
-              <span className={styles.heroAccent}>Which is Right for Your Infrastructure?</span>
-            </h1>
-            <p className={styles.heroSubtitle}>
-              An objective comparison of two different approaches to OT/ICS security.
-              DataFlowX provides <strong>hardware-enforced absolute isolation</strong>;
-              OPSWAT offers software-based content inspection. Understanding the difference
-              is critical for critical infrastructure protection.
-            </p>
-            <div className={styles.heroMeta}>
-              <span className={styles.metaTag}>🔍 Objective Analysis</span>
-              <span className={styles.metaTag}>📊 TCO Comparison</span>
-              <span className={styles.metaTag}>🌍 Regional Support</span>
-            </div>
+      {/* Hero */}
+      <section className={styles.hero}>
+        <div className={styles.heroInner}>
+          <p className={styles.overline}>VENDOR COMPARISON</p>
+          <h1 className={styles.heroTitle}>
+            DataFlowX vs OPSWAT MetaDefender:<br />
+            <span className={styles.heroAccent}>Which is Right for Your Infrastructure?</span>
+          </h1>
+          <p className={styles.heroSubtitle}>
+            An objective comparison of two different approaches to OT/ICS security.
+            DataFlowX provides <strong>hardware-enforced absolute isolation</strong>;
+            OPSWAT offers software-based content inspection. Understanding the difference
+            is critical for critical infrastructure protection.
+          </p>
+          <div className={styles.heroMeta}>
+            <span className={styles.metaTag}>🔍 Objective Analysis</span>
+            <span className={styles.metaTag}>📊 TCO Comparison</span>
+            <span className={styles.metaTag}>🌍 Regional Support</span>
           </div>
-        </section>
+        </div>
+      </section>
 
         <div className="section-spacer" aria-hidden="true" />
 
@@ -315,7 +321,6 @@ export default function DataFlowXVsOpswatPage() {
         <div className="section-spacer" aria-hidden="true" />
 
         <ContactMini />
-      </main>
-    </>
+    </main>
   );
 }

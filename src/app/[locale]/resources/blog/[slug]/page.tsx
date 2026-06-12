@@ -1,11 +1,13 @@
 // src/app/resources/blog/[slug]/page.tsx
 import type { Metadata } from 'next';
+
 import { notFound } from 'next/navigation';
 import Nav from '@/components/Nav/Nav';
 import Contact from '@/components/Contact/Contact';
 import TableOfContents from '@/components/BlogLayout/TableOfContents';
 import SocialShare from '@/components/BlogLayout/SocialShare';
-import { getAntigravityPostBySlug, getAntigravityPosts } from '@/lib/antigravity';
+import client from '@/lib/apollo-client';
+import { GET_POST_BY_SLUG, GET_ALL_POST_SLUGS } from '@/lib/graphql-queries';
 import styles from './post.module.css';
 import contentStyles from '@/components/BlogLayout/BlogContentStyles.module.css';
 
@@ -68,7 +70,11 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const slug = resolvedParams.slug;
   let post: any = null;
   try {
-    post = await getAntigravityPostBySlug(slug);
+    const { data } = await client.query<any>({
+      query: GET_POST_BY_SLUG,
+      variables: { id: slug, idType: 'SLUG' },
+    });
+    post = data?.post;
   } catch {
     // handled below
   }
@@ -116,9 +122,9 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 // ── Static path generation at build time ───────────
 export async function generateStaticParams() {
   try {
-    const posts = await getAntigravityPosts();
-    if (posts && posts.length > 0) {
-      return posts.map((p: any) => ({ slug: p.slug }));
+    const { data } = await client.query<any>({ query: GET_ALL_POST_SLUGS });
+    if (data?.posts?.nodes?.length > 0) {
+      return data.posts.nodes.map((p: any) => ({ slug: p.slug }));
     }
   } catch {
     // ignore
@@ -128,13 +134,17 @@ export async function generateStaticParams() {
 }
 
 // ── Page ───────────────────────────────────────────
-export const dynamic = 'force-dynamic';
+export const revalidate = 3600;
 export default async function BlogPostPage({ params }: Props) {
   const resolvedParams = await params;
   const slug = resolvedParams.slug;
   let post: any = null;
   try {
-    post = await getAntigravityPostBySlug(slug);
+    const { data } = await client.query<any>({
+      query: GET_POST_BY_SLUG,
+      variables: { id: slug, idType: 'SLUG' },
+    });
+    post = data?.post;
   } catch (err) {
     console.warn('[BlogPostPage] WP API error, falling back to mock data if available.', err);
   }
@@ -154,7 +164,7 @@ export default async function BlogPostPage({ params }: Props) {
   
   const imageUrl = post.featuredImage?.node?.sourceUrl ?? post.featuredImage ?? null;
   const authorName = post.author?.name ?? post.author?.node?.name ?? 'DataFlowX Team';
-  const readingTime = post.readingTime ?? '5 min read';
+  const readingTime = post.seo?.readingTime ? `${post.seo.readingTime} min read` : (post.readingTime ?? '5 min read');
 
   const articleSchema = {
     '@context': 'https://schema.org',
@@ -182,13 +192,17 @@ export default async function BlogPostPage({ params }: Props) {
   };
 
   return (
-    <>
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(articleSchema) }} />
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }} />
-      
-      <main className={styles.main}>
-        <div className={styles.bgGlow} aria-hidden="true" />
-        <Nav />
+    <main className={styles.main}>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(articleSchema) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }}
+      />
+      <div className={styles.bgGlow} aria-hidden="true" />
+      <Nav />
 
         {/* Hero Header */}
         <header className={styles.hero}>
@@ -244,7 +258,6 @@ export default async function BlogPostPage({ params }: Props) {
         </div>
 
         <Contact />
-      </main>
-    </>
+    </main>
   );
 }

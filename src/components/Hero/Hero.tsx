@@ -115,7 +115,7 @@ export default function Hero() {
       {/* Hero content */}
       <div className={styles.contentWrapper}>
         <div ref={contentRef} className={styles.content}>
-          <h1 className={`display-xl ${styles.headline}`}>
+          <h1 className={`display-xl ${styles.headline}`} dir="ltr">
             {slide.titlePrefix}<br />
             <span className={styles.highlightText}>{slide.titleHighlight}</span>
           </h1>

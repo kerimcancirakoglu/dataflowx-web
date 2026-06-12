@@ -1,4 +1,5 @@
 import type { Metadata } from 'next';
+
 import Nav from '@/components/Nav/Nav';
 import ContactMini from '@/components/ContactMini/ContactMini';
 import GartnerTestimonial from '@/components/GartnerTestimonial/GartnerTestimonial';
@@ -89,11 +90,16 @@ const faqSchema = {
 
 export default function UnidirectionalGatewayPage() {
   return (
-    <>
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(productSchema) }} />
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }} />
-      <main>
-        <VideoBackground />
+    <main>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(productSchema) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
+      />
+      <VideoBackground />
       <Nav />
 
       {/* Opening hero statement */}
@@ -170,6 +176,5 @@ export default function UnidirectionalGatewayPage() {
 
       <ContactMini />
     </main>
-    </>
   );
 }

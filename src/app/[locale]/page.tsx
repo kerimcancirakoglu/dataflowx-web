@@ -7,8 +7,25 @@ import Testimonials from '@/components/Testimonials/Testimonials';
 import LatestNews from '@/components/LatestNews/LatestNews';
 import Contact from '@/components/Contact/Contact';
 import VideoBackground from '@/components/VideoBackground/VideoBackground';
+import { gql } from '@apollo/client';
+import client from '@/lib/apollo-client';
 
-export default function Home() {
+export default async function Home() {
+  try {
+    const { data } = await client.query<any>({
+      query: gql`
+        query GetGeneralSettings {
+          generalSettings {
+            title
+            description
+          }
+        }
+      `,
+    });
+    console.log('WPGraphQL Connection Success. Site Title:', data?.generalSettings?.title);
+  } catch (error) {
+    console.error('WPGraphQL Connection Error:', error);
+  }
 
   return (
     <main>

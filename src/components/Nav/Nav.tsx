@@ -108,7 +108,7 @@ export default function Nav({ logoSrc = "/DataFlowX_Logo_W.png", hideMenu = fals
   };
 
   return (
-    <nav ref={navRef} className={`${styles.nav} ${scrolled ? styles.scrolled : ''}`} role="navigation" aria-label="Main navigation">
+    <nav ref={navRef} className={`${styles.nav} ${scrolled ? styles.scrolled : ''}`} role="navigation" aria-label="Main navigation" dir="ltr">
       {/* Logo */}
       <Link
         href="/"

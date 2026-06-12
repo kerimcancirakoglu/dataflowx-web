@@ -1,10 +1,10 @@
 // src/app/resources/blog/page.tsx
 import type { Metadata } from 'next';
+
 import Nav from '@/components/Nav/Nav';
 import ContactMini from '@/components/ContactMini/ContactMini';
 import VideoBackground from '@/components/VideoBackground/VideoBackground';
 import BlogClient from './BlogClient';
-import { getAntigravityPosts } from '@/lib/antigravity';
 
 export const metadata: Metadata = {
   title: 'Blog & Insights | DataFlowX Cybersecurity',
@@ -61,11 +61,29 @@ const blogListingSchema = {
   },
 };
 
-export default async function BlogPage() {
+import client from '@/lib/apollo-client';
+import { GET_ALL_POSTS } from '@/lib/graphql-queries';
+
+export const revalidate = 3600; // ISR: Revalidate every hour
+
+export default async function BlogPage({
+  params,
+}: {
+  params: Promise<{ locale: string }>;
+}) {
+  const { locale } = await params;
+  
+  // Convert our path locale to WPGraphQL LanguageCodeEnum if needed
+  const wpLangCode = locale.toUpperCase(); 
+
   // Fetch real posts from WordPress — graceful fallback to empty array on error
   let wpPosts: any[] = [];
   try {
-    wpPosts = await getAntigravityPosts();
+    const { data } = await client.query<any>({
+      query: GET_ALL_POSTS,
+      variables: { language: wpLangCode },
+    });
+    wpPosts = data?.posts?.nodes || [];
   } catch (err) {
     // WP down or WPGraphQL not configured yet — page still renders with empty state
     console.warn('[BlogPage] WordPress API unreachable. Rendering with empty posts.', err);
@@ -147,7 +165,7 @@ export default async function BlogPage() {
   }
 
   return (
-    <>
+    <main>
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }}
@@ -156,12 +174,10 @@ export default async function BlogPage() {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(blogListingSchema) }}
       />
-      <main>
-        <VideoBackground />
-        <Nav />
-        <BlogClient posts={wpPosts} />
-        <ContactMini />
-      </main>
-    </>
+      <VideoBackground />
+      <Nav />
+      <BlogClient posts={wpPosts} />
+      <ContactMini />
+    </main>
   );
 }

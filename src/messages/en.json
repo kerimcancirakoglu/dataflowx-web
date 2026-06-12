@@ -1,0 +1,20 @@
+{
+  "nav": {
+    "solutions": "Solutions",
+    "resources": "Resources",
+    "partners": "Partners",
+    "about": "About Us",
+    "contact": "Contact"
+  },
+  "ContactForm": {
+    "title": "Download Document",
+    "description": "Please enter your corporate details to download this document.",
+    "namePlaceholder": "Full Name",
+    "emailPlaceholder": "Corporate Email",
+    "emailError": "Please enter a valid corporate email address.",
+    "genericError": "Something went wrong. Please try again.",
+    "submitBtn": "Download Document",
+    "successMessage": "Information verified, download is starting...",
+    "submitting": "Processing..."
+  }
+}

@@ -1,7 +1,18 @@
 import type { NextConfig } from "next";
+import createNextIntlPlugin from 'next-intl/plugin';
 
+const withNextIntl = createNextIntlPlugin('./src/i18n/request.ts');
 
 const nextConfig: NextConfig = {
+  images: {
+    remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: 'dataflowx1.wpenginepowered.com',
+        pathname: '/**',
+      },
+    ],
+  },
   async redirects() {
     return [
       // ── MIGRATION / SEO REDIRECTS ──────────────────────────────────────────
@@ -125,4 +136,4 @@ const nextConfig: NextConfig = {
   },
 };
 
-export default nextConfig;
+export default withNextIntl(nextConfig);

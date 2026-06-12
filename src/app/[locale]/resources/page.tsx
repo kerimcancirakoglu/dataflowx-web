@@ -1,4 +1,5 @@
 import type { Metadata } from 'next';
+
 import Nav from '@/components/Nav/Nav';
 import ContactMini from '@/components/ContactMini/ContactMini';
 import VideoBackground from '@/components/VideoBackground/VideoBackground';
@@ -38,14 +39,15 @@ const breadcrumbSchema = {
 
 export default function ResourcesPage() {
   return (
-    <>
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }} />
-      <main>
-        <VideoBackground />
-        <Nav />
-        <ResourcesClient />
-        <ContactMini />
-      </main>
-    </>
+    <main>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }}
+      />
+      <VideoBackground />
+      <Nav />
+      <ResourcesClient />
+      <ContactMini />
+    </main>
   );
 }

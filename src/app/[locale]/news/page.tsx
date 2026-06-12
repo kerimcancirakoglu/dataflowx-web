@@ -26,25 +26,27 @@ export const metadata: Metadata = {
   },
 };
 
-const breadcrumbSchema = {
-  '@context': 'https://schema.org',
-  '@type': 'BreadcrumbList',
-  itemListElement: [
-    { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://dataflowx.com' },
-    { '@type': 'ListItem', position: 2, name: 'News', item: 'https://dataflowx.com/news' },
-  ],
-};
-
 export default function NewsPage() {
+  const breadcrumbSchema = {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: [
+      { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://dataflowx.com' },
+      { '@type': 'ListItem', position: 2, name: 'News', item: 'https://dataflowx.com/news' },
+    ],
+  };
+
   return (
-    <>
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }} />
-      <main>
-        <VideoBackground />
-        <Nav />
-        <NewsClient />
-        <Contact />
-      </main>
-    </>
+    <main>
+      {/* JSON-LD structured data — inside main, React 19 Server Component hoists it */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }}
+      />
+      <VideoBackground />
+      <Nav />
+      <NewsClient />
+      <Contact />
+    </main>
   );
 }

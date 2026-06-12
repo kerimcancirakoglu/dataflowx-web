@@ -114,14 +114,14 @@ export default function SecureRemoteAccessDiagram() {
             <div className={`${styles.packet} ${styles.packetBlue}`} ref={responsePacketRef} />
             <div className={`${styles.flowLabelBottom} ${styles.flowLabelBlue}`}>Response</div>
 
-            {/* Ensure it always reads TX -> RX */}
-            <div className={`${styles.diodeBox} ${styles.txBox}`}>
-              <div className={`${styles.diodeLabel} ${styles.txLabel}`}>TX</div>
+            {/* Swapped RX and TX because data flows Right to Left (Response) */}
+            <div className={`${styles.diodeBox} ${styles.rxBox}`}>
+              <div className={`${styles.diodeLabel} ${styles.rxLabel}`}>RX</div>
               <div className={styles.diodeText}>Diode</div>
             </div>
 
-            <div className={`${styles.diodeBox} ${styles.rxBox}`}>
-              <div className={`${styles.diodeLabel} ${styles.rxLabel}`}>RX</div>
+            <div className={`${styles.diodeBox} ${styles.txBox}`}>
+              <div className={`${styles.diodeLabel} ${styles.txLabel}`}>TX</div>
               <div className={styles.diodeText}>Diode</div>
             </div>
           </div>

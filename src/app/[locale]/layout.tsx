@@ -1,8 +1,9 @@
 import type { Metadata } from 'next';
-import './globals.css';
+import { NextIntlClientProvider } from 'next-intl';
+import { getMessages } from 'next-intl/server';
+import '../globals.css';
 import Footer from '@/components/Footer/Footer';
-
-
+import { ApolloWrapper } from '@/providers/ApolloWrapper';
 const BASE_URL = 'https://dataflowx.com';
 
 export const metadata: Metadata = {
@@ -127,13 +128,19 @@ const websiteSchema = {
   },
 };
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
+  params,
 }: {
   children: React.ReactNode;
+  params: Promise<{ locale: string }>;
 }) {
+  const { locale } = await params;
+  const direction = locale === 'ar' ? 'rtl' : 'ltr';
+  const messages = await getMessages();
+
   return (
-    <html lang="en" suppressHydrationWarning>
+    <html lang={locale} dir={direction} suppressHydrationWarning>
       <head>
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
@@ -142,7 +149,7 @@ export default function RootLayout({
         <link rel="alternate" hrefLang="tr" href={`${BASE_URL}/tr`} />
         <link rel="alternate" hrefLang="ar" href={`${BASE_URL}/ar`} />
         <link rel="alternate" hrefLang="x-default" href={BASE_URL} />
-        {/* Organization & WebSite structured data */}
+        {/* Organization & WebSite structured data - JSON-LD */}
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationSchema) }}
@@ -151,24 +158,20 @@ export default function RootLayout({
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(websiteSchema) }}
         />
+        {/* Theme init — runs before paint to prevent flash */}
         <script
           dangerouslySetInnerHTML={{
-            __html: `
-              (function() {
-                try {
-                  var localTheme = localStorage.getItem('theme');
-                  if (localTheme === 'light') {
-                    document.documentElement.setAttribute('data-theme', 'light');
-                  }
-                } catch (e) {}
-              })();
-            `,
+            __html: `(function(){try{var t=localStorage.getItem('theme');if(t==='light')document.documentElement.setAttribute('data-theme','light');}catch(e){}})();`,
           }}
         />
       </head>
       <body>
-        {children}
-        <Footer />
+        <NextIntlClientProvider messages={messages}>
+          <ApolloWrapper>
+            {children}
+            <Footer />
+          </ApolloWrapper>
+        </NextIntlClientProvider>
       </body>
     </html>
   );
