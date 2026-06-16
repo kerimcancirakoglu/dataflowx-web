@@ -14,6 +14,12 @@ interface Post {
   link: string;
 }
 
+interface WPPostsResponse {
+  posts: {
+    nodes: any[];
+  };
+}
+
 const MOCK_POSTS: Post[] = [
   {
     id: 1,
@@ -51,7 +57,7 @@ const MOCK_POSTS: Post[] = [
 
 async function getLatestPosts(locale: string): Promise<Post[]> {
   try {
-    const { data } = await client.query({
+    const { data } = await client.query<WPPostsResponse>({
       query: GET_ALL_POSTS,
       variables: { language: localeToWPLanguage(locale) },
       fetchPolicy: 'no-cache'
