@@ -12,7 +12,7 @@ import styles from './page.module.css';
 import { getTranslations } from 'next-intl/server';
 
 export const metadata: Metadata = {
-  title: '{t("overviewTitle")} & Data Diode — OT/SCADA Security',
+  title: 'DataFlowX Unidirectional Gateway & Data Diode — OT/SCADA Security',
   description:
     'DFX Unidirectional Gateway: EAL4+ certified hardware-enforced unidirectional gateway for OT/SCADA security. Physically isolates critical networks — recognized by Gartner for 3 consecutive years.',
   keywords: [
