@@ -13,9 +13,9 @@ import IntelHeroGlobe from '@/components/IntelRoom/IntelHeroGlobe';
 import IntelOracleEngine from '@/components/IntelRoom/IntelOracleEngine';
 
 export const metadata: Metadata = {
-  title: 'DFX IntelRoom — Live {t('heroTitle2')}Organism',
+  title: 'DFX IntelRoom — Live Threat Intelligence Organism',
   description:
-    'DFX IntelRoom: Analyzes billions of signals, establishes context, and generates actionable decisions. Advanced {t('heroTitle2')}platform for SOC, CISO, and MSSP.',
+    'DFX IntelRoom: Analyzes billions of signals, establishes context, and generates actionable decisions. Advanced Threat Intelligence platform for SOC, CISO, and MSSP.',
   keywords: [
     'threat intelligence',
     'intelroom',
@@ -68,7 +68,6 @@ export default async function IntelRoomPage() {
       )
     },
   ];
-  const t = await getTranslations('IntelRoom.page');
   return (
     <div className={styles.pageWrapper}>
       <VideoBackground videoSrc="/intelroom-bg.mp4" opacity={0.2} playMode="scrub" />

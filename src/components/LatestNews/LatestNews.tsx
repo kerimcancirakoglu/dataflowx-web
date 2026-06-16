@@ -3,7 +3,7 @@ import styles from './LatestNews.module.css';
 import { getTranslations, getLocale } from 'next-intl/server';
 import client from '@/lib/apollo-client';
 import { GET_ALL_POSTS } from '@/lib/graphql-queries';
-import { getGraphQLLocaleFilter } from '@/lib/locale-map';
+import { localeToWPLanguage } from '@/lib/locale-map';
 
 interface Post {
   id: number;
@@ -53,7 +53,7 @@ async function getLatestPosts(locale: string): Promise<Post[]> {
   try {
     const { data } = await client.query({
       query: GET_ALL_POSTS,
-      variables: { language: getGraphQLLocaleFilter(locale) },
+      variables: { language: localeToWPLanguage(locale) },
       fetchPolicy: 'no-cache'
     });
 
