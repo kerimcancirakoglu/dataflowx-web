@@ -8,6 +8,7 @@ import VideoBackground from '@/components/VideoBackground/VideoBackground';
 import BrokerFamily from '@/components/BrokerFamily/BrokerFamily';
 import SecureRemoteAccessHero from '@/components/SecureRemoteAccessHero/SecureRemoteAccessHero';
 import styles from './page.module.css';
+import { getTranslations } from 'next-intl/server';
 
 export const metadata: Metadata = {
   title: 'Secure Remote Access — Zero Trust Cross-Domain Solution',
@@ -36,7 +37,8 @@ export const metadata: Metadata = {
   },
 };
 
-export default function SecureRemoteAccessPage() {
+export default async function SecureRemoteAccessPage() {
+  const t = await getTranslations('SRA.page');
   return (
     <main>
       <VideoBackground />
@@ -59,32 +61,29 @@ export default function SecureRemoteAccessPage() {
       {/* Text Details */}
       <section className={styles.ugDetails} style={{ padding: '0 2rem', maxWidth: '1400px', margin: '0 auto' }}>
         <div className={styles.ugDetailsHeader}>
-          <p className={styles.ugDetailsOverTitle}>PRODUCT OVERVIEW</p>
-          <h2 className={styles.ugDetailsTitle}>Secure Cross-Domain Access</h2>
+          <p className={styles.ugDetailsOverTitle}>{t('overviewOverTitle')}</p>
+          <h2 className={styles.ugDetailsTitle}>{t('overviewTitle')}</h2>
           <p className={styles.ugDetailsDesc}>
-            DFX Secure Remote Access is a comprehensive Zero Trust cross-domain solution. It provides request-response based transmission between isolated networks with full visibility and control over data traffic, operating either independently or in seamless integration with DFX Unidirectional Gateway.
+            {t('overviewDesc')}
           </p>
         </div>
         <div className={styles.ugDetailsGrid}>
           <div className={styles.ugDetailCard}>
-            <div className={styles.ugDetailLabel}>ZERO TRUST NETWORK ACCESS</div>
+            <div className={styles.ugDetailLabel}>{t('ztnaLabel')}</div>
             <p className={styles.ugDetailText}>
-              Extends Zero Trust principles to remote operations by verifying every request, user, and payload 
-              before allowing it to cross the physical optical boundary.
+              {t('ztnaText')}
             </p>
           </div>
           <div className={styles.ugDetailCard}>
-            <div className={styles.ugDetailLabel}>CONTENT-AWARE FILTERING</div>
+            <div className={styles.ugDetailLabel}>{t('contentLabel')}</div>
             <p className={styles.ugDetailText}>
-              Performs protocol-specific granular filtering and can seamlessly integrate with Active Directory 
-              to enforce access policies at the individual user or group level.
+              {t('contentText')}
             </p>
           </div>
           <div className={styles.ugDetailCard}>
-            <div className={styles.ugDetailLabel}>SANDBOX INTEGRATION</div>
+            <div className={styles.ugDetailLabel}>{t('sandboxLabel')}</div>
             <p className={styles.ugDetailText}>
-              Integrates with ICAP to route suspicious files to sandbox solutions (like DFX Sandbox) for 
-              detonation and analysis before they ever reach the protected network.
+              {t('sandboxText')}
             </p>
           </div>
         </div>

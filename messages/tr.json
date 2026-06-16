@@ -483,5 +483,150 @@
       "messageLabel": "Mesajınız",
       "submitBtn": "Mesaj Gönder"
     }
+  },
+  "UDG": {
+    "page": {
+      "overviewOverTitle": "ÜRÜN BAKIŞI",
+      "overviewTitle": "Unidirectional Gateway",
+      "overviewDesc": "DFX UDG, Zero Trust prensiplerine göre çalışan diyot tabanlı bir ağ geçididir. Kritik ağları fiziksel olarak izole eder, sadece yetkilendirilmiş tek yönlü veri iletimine izin verir.",
+      "protectsLabel": "KRİTİK ALTYAPINIZI NASIL KORUR",
+      "protectsText": "Tehditleri tamamen nötralize ederek ve ters veri akışını fiziksel olarak imkansız kılarak hassas altyapıları güvence altına alır.",
+      "gartnerLabel": "GARTNER TANINMASI",
+      "gartnerText": "Üç yıl üst üste Unidirectional Gateways kategorisinde, Gartner Hype Cycle for CPS Security raporunda Örnek Sağlayıcı olarak tanınmaktan gurur duyuyoruz.",
+      "eal4Label": "EAL4+ SERTİFİKASI",
+      "eal4Text": "Ayrıca DFX UDG, EAL4+ Ortak Kriter sertifikasına sahiptir ve kritik altyapıyı korumada en üst düzey donanım tabanlı, tek yönlü veri aktarım teknolojisini sağlar."
+    },
+    "features": {
+      "f1": {
+        "title": "Dağıtımı Kolay",
+        "desc": "Önceden yapılandırılmış platform hızlı ve sorunsuz bir şekilde dağıtılır."
+      },
+      "f2": {
+        "title": "Kullanıcılara Şeffaf",
+        "desc": "Hızlı ve yüksek sadakatli veri replikasyonu, kurumsal kullanıcıların çalışma prosedürlerini değiştirmeye gerek kalmaması demektir."
+      },
+      "f3": {
+        "title": "Yüksek Ölçeklenebilir",
+        "desc": "Sahada 1Gbps'ye yükseltilebilen 100Mbps temel platform sunuyoruz. Ayrıca, kurumsal sunucularda 10Gbps seçeneğimiz de mevcuttur. 10Mbps DIN raylı model sahada 50Mbps'ye yükseltilebilir."
+      },
+      "f4": {
+        "title": "Endüstriyel Protokoller İçin Tam Destek",
+        "desc": "TCP, UDP, HTTPS, FTP, SFTP, FTPS, SMB, Windows File Share, CIFS, SMTP, Video, Aveva Pi (yalnızca 1U model), Modbus, OPC DA/AE/UA, MQTT, DNP3, IEC-104, ICCP ve Screen View içerir."
+      },
+      "f5": {
+        "title": "Mevzuat Uyumluluğunu Sağlar",
+        "desc": "Endüstriyel Siber Güvenlik standartlarıyla uyumluluğu destekler: NERC CIP, NIST CSF, ICS 800-82, 800-53, IEC 62443, NRC 5.71, CFATS ISO 27001, 27032, 27103, ANSSI, IIC SF ve daha fazlası."
+      },
+      "f6": {
+        "title": "Sertifikalar",
+        "desc": "DFX UG, Common Criteria EAL4+ ve C1D2* sertifikalıdır. \n*Sadece DFX UG DIN raylı model. Kasım 2024 itibarıyla C1D2 sertifikası."
+      }
+    },
+    "testimonial": {
+      "text": "\"Siber-fiziksel sistemler (CPS) koruma platformları pazarı, varlıklar ve risklere dair daha fazla görünürlük ihtiyacı nedeniyle büyüyor. Güvenlik ve risk yönetimi liderleri, bu çözümleri birleşik bir savunma mekanizması olarak değerlendirmelidir.\"",
+      "author": "Gartner®",
+      "desc": "Hype Cycle™ for Cyber-Physical Systems (CPS) Security, 2024",
+      "source": "Daha Fazla Bilgi"
+    },
+    "specs": {
+      "title": "Donanım Özellikleri",
+      "downloadText": "Ayrıntılı teknik özellikler için tam veri sayfasını indirin.",
+      "downloadBtn": "Veri Sayfasını İndir"
+    },
+    "gartner": {
+      "badgeText": "Gartner Tanınması<br/>Örnek",
+      "headlinePrefix": "Üç yıl.",
+      "headlineHighlight": "Tutarlı bir tanınma.",
+      "p1": "Üç yıl üst üste Unidirectional Gateways kategorisinde, Gartner Hype Cycle for CPS Security raporunda Örnek Sağlayıcı olarak tanınmaktan gurur duyuyoruz.",
+      "p2": "Bu raporda her yıl yer almak, kritik altyapıları korumada donanım tabanlı, tek yönlü veri aktarımı teknolojilerinin artan önemini yansıtıyor. Operasyonel ortamların güvenliğini güçlendirmeye devam ettikçe, tek yönlü ağ geçitleri dayanıklı mimarilerin vazgeçilmez bir parçası haline geliyor.",
+      "p3": "Güvenleri ve destekleri için müşterilerimize, ortaklarımıza ve tüm DataFlowX ekibine minnettarız. Tehdit manzarası gelişmeye devam ediyor. Bizim de kararlılığımız gelişiyor.",
+      "btn": "BİLGİ ALIN"
+    }
+  },
+  "EmailSecurity": {
+    "page": {
+      "heroTitle": "E-Posta Güvenlik Platformu",
+      "heroSubtitle": "Gelişmiş kötü amaçlı yazılımları tuzağa düşürmek, analiz etmek ve etkisiz hale getirmek için tasarlanmış yapay zeka destekli ekosistem. Gelen ve giden iletişimlerinizi gelişmiş tehditlere karşı güvence altına alın.",
+      "btn": "Bilgi Alın ➔",
+      "overviewOverTitle": "ÜRÜN BAKIŞI",
+      "overviewTitle": "Çok Katmanlı Koruma",
+      "overviewDesc": "DFX E-Posta Güvenlik Platformu, gelen ve giden e-postaları filtrelemek, silahsızlandırmak ve temizlemek için Zero Trust (Sıfır Güven) prensiplerine göre çalışır. Oltalama, BEC ve sıfırıncı gün kötü amaçlı yazılımları gelen kutusuna ulaşmadan önce tespit etmek için gelişmiş yapay zeka destekli motorları entegre eder.",
+      "aiLabel": "YAPAY ZEKA DAVRANIŞSAL TESPİT",
+      "aiText": "Yalnızca tehdit istihbaratı akışlarına dayanmadan bilinen ve bilinmeyen tehditleri durdurmak için işinizi anlayan Kendi Kendine Öğrenen Yapay Zeka ile yerel e-posta güvenliğini artırır.",
+      "cdrLabel": "DERİN İÇERİK SİLAHSIZLANDIRMA (CDR)",
+      "cdrText": "İşlevselliği bozmadan dosyalardaki tüm yürütülebilir içeriği kaldırır. Tüm dosyaların kötü niyetli olduğunu varsayarak Zero Trust prensibine sadık kalır.",
+      "retroLabel": "GERİYE DÖNÜK TARAMA",
+      "retroText": "Anında müdahale ve tek tıkla iyileştirme. Platform, teslim edilen e-postaları yeni keşfedilen tehdit istihbaratlarına karşı sürekli olarak yeniden değerlendirir."
+    }
+  },
+  "Sandbox": {
+    "page": {
+      "overviewOverTitle": "ÜRÜN BAKIŞI",
+      "overviewTitle": "Gelişmiş Tehdit Azaltma",
+      "overviewDesc": "DFX Sandbox, bir ağdaki veri trafiğini izleyerek şüpheli davranışları tespit eden ve siber tehditleri izole bir ortamda yürüterek azaltan yapay zeka destekli yeni nesil bir çözümdür.",
+      "isoLabel": "İZOLE PATLATMA",
+      "isoText": "Sanal bir korumalı alanda dosyaları analiz etmek, kötü amaçlı yazılım davranışlarını gerçek sistemi riske atmadan güvenli bir şekilde patlatmak ve gözlemlemek için çok önemlidir.",
+      "intLabel": "ENTEGRE EKOSİSTEM",
+      "intText": "Otomatik dosya yönlendirmesi için ICAP, Microsoft Exchange ve ağ paylaşımları üzerinden sorunsuz entegrasyonla çalışır ve güçlü sıfır güven doğrulaması sağlar.",
+      "contentLabel": "İÇERİK FARKINDALIKLI FİLTRELEME",
+      "contentText": "Teslimattan önce karmaşık belgelerden gizli yükleri kesin olarak tanımlayan, çıkaran ve temizleyen gelişmiş içerik farkındalıklı filtreleme özelliğine sahiptir.",
+      "keyCapabilitiesLabel": "TEMEL YETENEKLER",
+      "keyCapabilitiesTitle": "Başkalarının Kaçırdıklarını Durdurmak"
+    }
+  },
+  "MTS": {
+    "page": {
+      "overviewOverTitle": "ÜRÜN BAKIŞI",
+      "overviewTitle": "Veri Hareketi Kontrol Altında",
+      "overviewDesc": "DFX Media Transfer Station, hassas ağ ortamlarında çıkarılabilir medyanın kullanımını güvence altına almak için tasarlanmış güvenli bir medya transfer kioskudur. Ağınıza bağlanmadan önce çıkarılabilir medyayı incelemek ve temizlemek, kötü amaçlı içeriği tespit edip etkisiz hale getirerek güvenli kullanım sağlamak için güvenli bir yöntem sunar.",
+      "protectsLabel": "KRİTİK ALTYAPINIZI NASIL KORUR",
+      "protectsText": "Kritik iş istasyonlarına ulaşmadan önce USB sürücülerde ve diğer çıkarılabilir medyalarda gizlenen tehditleri engelleyerek hassas fiziksel alanları güvence altına alır.",
+      "industryLabel": "SEKTÖRDE TANINIRLIK",
+      "industryText": "Fiziksel saldırı vektörlerini etkili bir şekilde etkisiz hale getirmek için dünya çapındaki kritik altyapı operatörleri ve savunma kuruluşları tarafından güvenilmektedir.",
+      "advLabel": "GELİŞMİŞ TEMİZLEME",
+      "advText": "Yalnızca temiz ve güvenli dosyaların aktarılmasını sağlamak için çoklu AV motorlarını ve en yeni İçerik Silahsızlandırma ve Yeniden Oluşturma (CDR) teknolojisini kullanır.",
+      "keyCapabilitiesLabel": "TEMEL YETENEKLER",
+      "keyCapabilitiesTitle": "Kapsamlı Çıkarılabilir Medya Güvenliği"
+    }
+  },
+  "SRA": {
+    "page": {
+      "overviewOverTitle": "ÜRÜN BAKIŞI",
+      "overviewTitle": "Güvenli Alanlar Arası Erişim",
+      "overviewDesc": "DFX Secure Remote Access, kapsamlı bir Zero Trust alanlar arası (cross-domain) çözümüdür. Veri trafiği üzerinde tam görünürlük ve kontrol sağlayarak izole ağlar arasında istek-yanıt tabanlı iletim sağlar, bağımsız olarak veya DFX Unidirectional Gateway ile sorunsuz entegrasyon içinde çalışır.",
+      "ztnaLabel": "SIFIR GÜVEN AĞ ERİŞİMİ",
+      "ztnaText": "Her isteği, kullanıcıyı ve yükü fiziksel optik sınırı geçmesine izin vermeden önce doğrulayarak Zero Trust ilkelerini uzak operasyonlara genişletir.",
+      "contentLabel": "İÇERİK FARKINDALIKLI FİLTRELEME",
+      "contentText": "Protokole özgü ayrıntılı filtreleme gerçekleştirir ve erişim politikalarını bireysel kullanıcı veya grup düzeyinde uygulamak için Active Directory ile sorunsuz bir şekilde entegre olabilir.",
+      "sandboxLabel": "KORUMALI ALAN (SANDBOX) ENTEGRASYONU",
+      "sandboxText": "Şüpheli dosyaları korunan ağa ulaşmadan önce patlatma ve analiz için korumalı alan çözümlerine (DFX Sandbox gibi) yönlendirmek üzere ICAP ile entegre olur."
+    }
+  },
+  "IntelRoom": {
+    "page": {
+      "heroTitle1": "Dünyanın İlk Canlı",
+      "heroTitle2": "Siber İstihbarat ",
+      "heroTitle3": "Organizması",
+      "heroSubtitle": "Milyarlarca sinyali analiz eder, bağlam kurar ve eyleme dönüştürülebilir kararlar üretir. Sadece bir analiz aracı olmaktan çok daha fazlası; tehdit istihbaratını tamamen otonom ve akıllı bir sürece dönüştürür.",
+      "btn": "BİLGİ ALIN",
+      "compLabel": "BİLEŞENLER VE KATMANLAR",
+      "compTitle": "Sadece Bir Araç Değil, Bir Organizma",
+      "compDesc": "IntelRoom statik bir araç değildir; birbirine bağlı 8 temel modülden oluşan canlı bir ekosistemdir.",
+      "relLabel": "İLİŞKİSEL BELLEK",
+      "relTitle": "İlişkileri Görün, Tehditleri Anlayın",
+      "relDesc": "Tehdit aktörleri, IOC'ler ve kampanyalar arasındaki gizli ağı gerçek zamanlı olarak inceleyin.",
+      "expLabel": "AÇIKLANABİLİR YAPAY ZEKA",
+      "expTitle": "Her Kararın Arkasında Bir Gerekçe",
+      "expDesc": "Kara kutu değil, şeffaflık aracı. Oracle, her skoru bir kanıt zinciriyle açıklar.",
+      "whoLabel": "KİMLER İÇİN?",
+      "whoTitle": "Her Rol İçin Özelleştirilmiş Odak",
+      "whoDesc": "Farklı güvenlik rollerinin farklı ihtiyaçları vardır. IntelRoom, doğru veriyi doğru kişiye doğru formatta sunar.",
+      "p1Title": "CISO / Güvenlik Liderleri",
+      "p1Desc": "Büyük Resmi Görün. İş riskini ve yatırım getirisini yönetmek için ham teknik verilerden uzaklaşın. Kurumunuzun siber duruşunu yönetim kuruluna hazır raporlarla net bir şekilde iletin.",
+      "p2Title": "SOC Analistleri",
+      "p2Desc": "Zaman Kazanın. Doğrulanmış IOC'ler, zenginleştirilmiş bağlam ve kullanıma hazır Arsenal kurallarıyla olay müdahale sürelerini dakikalardan saniyelere indirin.",
+      "p3Title": "MSSP Operatörleri",
+      "p3Desc": "Ölçeklenebilir Güvenlik. Çok kiracılı mimariyle onlarca müşterinin tehdit manzarasını tek bir ekrandan yönetin, MSSP operasyonlarınızın kârlılığını artırın."
+    }
   }
 }

@@ -2,6 +2,7 @@
 
 import React, { useState } from 'react';
 import styles from './ProductSpecs.module.css';
+import { getTranslations } from 'next-intl/server';
 
 
 const PRODUCT_DATA = {
@@ -102,7 +103,8 @@ const PRODUCT_DATA = {
   ]
 };
 
-export default function ProductSpecs() {
+export default async function ProductSpecs() {
+  const t = await getTranslations("UDG.specs");
   const tabs = Object.keys(PRODUCT_DATA) as Array<keyof typeof PRODUCT_DATA>;
   const [activeTab, setActiveTab] = useState<keyof typeof PRODUCT_DATA>('SMALL');
 

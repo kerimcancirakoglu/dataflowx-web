@@ -1,9 +1,10 @@
 import React from 'react';
 import styles from './FeaturesGrid.module.css';
+import { getTranslations } from 'next-intl/server';
 
 const features = [
   {
-    title: 'Easy to Deploy',
+    id: 'f1', title: 'Easy to Deploy',
     desc: 'Preconfigured platform deploys quickly and seamlessly.',
     icon: (
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
@@ -12,7 +13,7 @@ const features = [
     )
   },
   {
-    title: 'Transparent to Users',
+    id: 'f2', title: 'Transparent to Users',
     desc: 'Fast and high-fidelity data replication means there is no need to alter work procedures of corporate users.',
     icon: (
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
@@ -22,7 +23,7 @@ const features = [
     )
   },
   {
-    title: 'Highly Scalable',
+    id: 'f3', title: 'Highly Scalable',
     desc: 'We offer a 100Mbps base platform that can be field upgraded to 1Gbps. Additionally, we offer an option for 10Gbps delivered on enterprise servers. The 10Mbps DIN rail model is field upgradeable to 50Mbps.',
     icon: (
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
@@ -34,7 +35,7 @@ const features = [
     )
   },
   {
-    title: 'Full Support for Industrial Protocols',
+    id: 'f4', title: 'Full Support for Industrial Protocols',
     desc: 'Includes TCP, UDP, HTTPS, FTP, SFTP, FTPS, SMB, Windows File Share, CIFS, SMTP, Video, Aveva Pi (1U model only), Modbus, OPC DA/AE/UA, MQTT, DNP3, IEC-104, ICCP, and Screen View.',
     icon: (
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
@@ -46,7 +47,7 @@ const features = [
     )
   },
   {
-    title: 'Enables Regulatory Compliance',
+    id: 'f5', title: 'Enables Regulatory Compliance',
     desc: 'Supports compliance with Industrial Cybersecurity standards: NERC CIP, NIST CSF, ICS 800-82, 800-53, IEC 62443, NRC 5.71, CFATS ISO 27001, 27032, 27103, ANSSI, IIC SF and more.',
     icon: (
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
@@ -59,7 +60,7 @@ const features = [
     )
   },
   {
-    title: 'Certifications',
+    id: 'f6', title: 'Certifications',
     desc: 'DFX UG is certified in Common Criteria EAL4+ and C1D2*. \n*DFX UG DIN rail model only. C1D2 certification as of November 2024.',
     icon: (
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
@@ -70,7 +71,8 @@ const features = [
   }
 ];
 
-export default function FeaturesGrid() {
+export default async function FeaturesGrid() {
+  const t = await getTranslations("UDG.features");
   return (
     <div className={styles.container}>
       <div className={styles.grid}>
@@ -79,8 +81,8 @@ export default function FeaturesGrid() {
             <div className={styles.iconWrapper}>
               {feature.icon}
             </div>
-            <h3 className={styles.cardTitle}>{feature.title}</h3>
-            <p className={styles.cardDesc}>{feature.desc}</p>
+            <h3 className={styles.cardTitle}>{t(`${feature.id}.title` as any)}</h3>
+            <p className={styles.cardDesc}>{t(`${feature.id}.desc` as any)}</p>
           </div>
         ))}
       </div>

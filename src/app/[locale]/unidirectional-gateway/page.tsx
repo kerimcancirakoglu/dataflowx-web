@@ -9,9 +9,10 @@ import FeaturesGrid from '@/components/FeaturesGrid/FeaturesGrid';
 import VideoBackground from '@/components/VideoBackground/VideoBackground';
 import GatewayFamily from '@/components/GatewayFamily/GatewayFamily';
 import styles from './page.module.css';
+import { getTranslations } from 'next-intl/server';
 
 export const metadata: Metadata = {
-  title: 'Unidirectional Gateway & Data Diode — OT/SCADA Security',
+  title: '{t("overviewTitle")} & Data Diode — OT/SCADA Security',
   description:
     'DFX Unidirectional Gateway: EAL4+ certified hardware-enforced unidirectional gateway for OT/SCADA security. Physically isolates critical networks — recognized by Gartner for 3 consecutive years.',
   keywords: [
@@ -88,7 +89,8 @@ const faqSchema = {
   ],
 };
 
-export default function UnidirectionalGatewayPage() {
+export default async function UnidirectionalGatewayPage() {
+  const t = await getTranslations("UDG.page");
   return (
     <main>
       <script
@@ -119,33 +121,29 @@ export default function UnidirectionalGatewayPage() {
       {/* UG Text Details — the content from the old diagram's right column, now as full-width text */}
       <section className={styles.ugDetails} style={{ padding: '0 2rem', maxWidth: '1400px', margin: '0 auto' }}>
         <div className={styles.ugDetailsHeader}>
-          <p className={styles.ugDetailsOverTitle}>PRODUCT OVERVIEW</p>
+          <p className={styles.ugDetailsOverTitle}>{t("overviewOverTitle")}</p>
           <h2 className={styles.ugDetailsTitle}>Unidirectional Gateway</h2>
           <p className={styles.ugDetailsDesc}>
-            DFX UDG is a diode-based gateway operating on Zero Trust principles. It physically isolates
-            critical networks, allowing only authorized one-way data transmission.
+            {t("overviewDesc")}
           </p>
         </div>
         <div className={styles.ugDetailsGrid}>
           <div className={styles.ugDetailCard}>
-            <div className={styles.ugDetailLabel}>HOW IT PROTECTS YOUR CRITICAL INFRASTRUCTURE</div>
+            <div className={styles.ugDetailLabel}>{t("protectsLabel")}</div>
             <p className={styles.ugDetailText}>
-              Secures sensitive infrastructures by completely neutralizing threats and making reverse data
-              flow physically impossible.
+              {t("protectsText")}
             </p>
           </div>
           <div className={styles.ugDetailCard}>
-            <div className={styles.ugDetailLabel}>GARTNER RECOGNITION</div>
+            <div className={styles.ugDetailLabel}>{t("gartnerLabel")}</div>
             <p className={styles.ugDetailText}>
-              We are proud to be recognized as a Sample Vendor in the Gartner Hype Cycle for CPS Security,
-              in the Unidirectional Gateways category, for the third consecutive year.
+              {t("gartnerText")}
             </p>
           </div>
           <div className={styles.ugDetailCard}>
-            <div className={styles.ugDetailLabel}>EAL4+ CERTIFICATION</div>
+            <div className={styles.ugDetailLabel}>{t("eal4Label")}</div>
             <p className={styles.ugDetailText}>
-              Furthermore, DFX UDG holds the EAL4+ Common Criteria certification, ensuring the highest
-              level of hardware-enforced, one-way data transfer technology in protecting critical infrastructure.
+              {t("eal4Text")}
             </p>
           </div>
         </div>

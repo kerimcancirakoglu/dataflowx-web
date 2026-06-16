@@ -6,6 +6,7 @@ import EmailSecurityAnimation from '@/components/EmailSecurityAnimation/EmailSec
 import EmailSecurityLayers from '@/components/EmailSecurityLayers/EmailSecurityLayers';
 import EmailFeaturesTabs from '@/components/EmailFeaturesTabs/EmailFeaturesTabs';
 import styles from './page.module.css';
+import { getTranslations } from 'next-intl/server';
 
 export const metadata: Metadata = {
   title: 'Email Security Platform — AI-Powered Threat Detection & CDR',
@@ -35,7 +36,8 @@ export const metadata: Metadata = {
   },
 };
 
-export default function EmailSecurityPage() {
+export default async function EmailSecurityPage() {
+  const t = await getTranslations('EmailSecurity.page');
   return (
     <main>
       <VideoBackground />
@@ -44,14 +46,13 @@ export default function EmailSecurityPage() {
       {/* Opening hero statement (Image 4 reference) */}
       <div className={styles.heroSection}>
         <h1 className={styles.heroTitle}>
-          <span style={{ color: '#F5A706' }}>DFX</span> E-Mail Security Platform
+          <span style={{ color: '#F5A706' }}>DFX</span> {t('heroTitle')}
         </h1>
         <p className={styles.heroSubtitle}>
-          AI-powered ecosystem designed to trap, analyze, and neutralize sophisticated malware.
-          Secure your inbound and outbound communications against advanced threats.
+          {t('heroSubtitle')}
         </p>
         <div className={styles.buttonGroup}>
-          <a href="#contact" className={styles.primaryButton}>Get Information ➔</a>
+          <a href="#contact" className={styles.primaryButton}>{t('btn')}</a>
         </div>
       </div>
 
@@ -74,30 +75,29 @@ export default function EmailSecurityPage() {
       {/* Text Details (Product Overview) */}
       <section className={styles.ugDetails} style={{ padding: '0 2rem', maxWidth: '1400px', margin: '0 auto' }}>
         <div className={styles.ugDetailsHeader}>
-          <p className={styles.ugDetailsOverTitle}>PRODUCT OVERVIEW</p>
-          <h2 className={styles.ugDetailsTitle}>Multi-Layered Protection</h2>
+          <p className={styles.ugDetailsOverTitle}>{t('overviewOverTitle')}</p>
+          <h2 className={styles.ugDetailsTitle}>{t('overviewTitle')}</h2>
           <p className={styles.ugDetailsDesc}>
-            DFX E-Mail Security Platform operates on Zero Trust principles to filter, disarm, and sanitize incoming and outgoing emails.
-            It integrates advanced AI-driven engines to detect phishing, BEC, and zero-day malware before they reach the inbox.
+            {t('overviewDesc')}
           </p>
         </div>
         <div className={styles.ugDetailsGrid}>
           <div className={styles.ugDetailCard}>
-            <div className={styles.ugDetailLabel}>AI BEHAVIORAL DETECTION</div>
+            <div className={styles.ugDetailLabel}>{t('aiLabel')}</div>
             <p className={styles.ugDetailText}>
-              Enhances native email security with Self-Learning AI that understands your business to stop known and unknown threats without relying solely on threat intelligence feeds.
+              {t('aiText')}
             </p>
           </div>
           <div className={styles.ugDetailCard}>
-            <div className={styles.ugDetailLabel}>DEEP CONTENT DISARM (CDR)</div>
+            <div className={styles.ugDetailLabel}>{t('cdrLabel')}</div>
             <p className={styles.ugDetailText}>
-              Removes all executable content from files while keeping functionality intact. Stays true to Zero Trust by assuming all files are malicious.
+              {t('cdrText')}
             </p>
           </div>
           <div className={styles.ugDetailCard}>
-            <div className={styles.ugDetailLabel}>RETROSPECTIVE SCANNING</div>
+            <div className={styles.ugDetailLabel}>{t('retroLabel')}</div>
             <p className={styles.ugDetailText}>
-              Instant action and one-click remediation. The platform continuously re-evaluates delivered emails against newly discovered threat intelligence.
+              {t('retroText')}
             </p>
           </div>
         </div>

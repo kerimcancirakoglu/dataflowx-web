@@ -8,6 +8,7 @@ import MTSModelViewer from '@/components/MTSModelViewer/MTSModelViewer';
 import MTSModels from '@/components/MTSModels/MTSModels';
 import MTSFeaturesGrid from '@/components/MTSFeaturesGrid/MTSFeaturesGrid';
 import styles from './page.module.css';
+import { getTranslations } from 'next-intl/server';
 
 export const metadata: Metadata = {
   title: 'Media Transfer Station — Secure USB & Removable Media Sanitization',
@@ -37,7 +38,8 @@ export const metadata: Metadata = {
   },
 };
 
-export default function MediaTransferStationPage() {
+export default async function MediaTransferStationPage() {
+  const t = await getTranslations('MTS.page');
   return (
     <main className={styles.main}>
       <VideoBackground />
@@ -60,30 +62,30 @@ export default function MediaTransferStationPage() {
       {/* Product Overview text block */}
       <section className={styles.ugDetails} style={{ padding: '0 2rem', maxWidth: '1400px', margin: '0 auto' }}>
         <div className={styles.ugDetailsHeader}>
-          <p className={styles.ugDetailsOverTitle}>PRODUCT OVERVIEW</p>
-          <h2 className={styles.ugDetailsTitle}>Data Movement Under Control</h2>
+          <p className={styles.ugDetailsOverTitle}>{t('overviewOverTitle')}</p>
+          <h2 className={styles.ugDetailsTitle}>{t('overviewTitle')}</h2>
           <p className={styles.ugDetailsDesc}>
-            DFX Media Transfer Station is a secure media transfer kiosk, designed to secure the use of removable media within sensitive network environments. It provides a secure method for examining and sanitizing removable media before it connects to your network, detecting and neutralizing malicious content to ensure safe usage.
+            {t('overviewDesc')}
           </p>
         </div>
 
         <div className={styles.ugDetailsGrid}>
           <div className={styles.ugDetailCard}>
-            <div className={styles.ugDetailLabel}>HOW IT PROTECTS YOUR CRITICAL INFRASTRUCTURE</div>
+            <div className={styles.ugDetailLabel}>{t('protectsLabel')}</div>
             <p className={styles.ugDetailText}>
-              Secures sensitive physical spaces by intercepting threats hidden in USB drives and other removable media before they ever reach critical workstations.
+              {t('protectsText')}
             </p>
           </div>
           <div className={styles.ugDetailCard}>
-            <div className={styles.ugDetailLabel}>INDUSTRY RECOGNITION</div>
+            <div className={styles.ugDetailLabel}>{t('industryLabel')}</div>
             <p className={styles.ugDetailText}>
-              Trusted by critical infrastructure operators and defense organizations worldwide to neutralize physical attack vectors effectively.
+              {t('industryText')}
             </p>
           </div>
           <div className={styles.ugDetailCard}>
-            <div className={styles.ugDetailLabel}>ADVANCED PURIFICATION</div>
+            <div className={styles.ugDetailLabel}>{t('advLabel')}</div>
             <p className={styles.ugDetailText}>
-              Utilizes multiple AV engines and cutting-edge Content Disarm and Reconstruction (CDR) to ensure only clean, safe files are transferred.
+              {t('advText')}
             </p>
           </div>
         </div>
@@ -109,10 +111,10 @@ export default function MediaTransferStationPage() {
       <section style={{ padding: '0 2rem', maxWidth: '1400px', margin: '0 auto' }}>
         <div style={{ textAlign: 'center', marginBottom: '3rem' }}>
           <p style={{ fontFamily: 'var(--font-mono)', fontSize: '0.85rem', color: 'var(--color-text-muted)', letterSpacing: '0.1em', marginBottom: '0.5rem', textTransform: 'uppercase' }}>
-            KEY CAPABILITIES
+            {t('keyCapabilitiesLabel')}
           </p>
           <h2 style={{ fontFamily: 'var(--font-display)', fontSize: '2.5rem', color: '#ffffff' }}>
-            Comprehensive Removable Media Security
+            {t('keyCapabilitiesTitle')}
           </h2>
         </div>
         <MTSFeaturesGrid />

@@ -6,13 +6,15 @@ import SandboxFeaturesGrid from '@/components/SandboxFeaturesGrid/SandboxFeature
 import SandboxHero from '@/components/SandboxHero/SandboxHero';
 import VideoBackground from '@/components/VideoBackground/VideoBackground';
 import styles from './page.module.css';
+import { getTranslations } from 'next-intl/server';
 
 export const metadata = {
   title: 'DFX Sandbox | DataFlowX',
   description: 'Proactive, Intelligence-led Threat Intervention and Sandbox Solution.',
 };
 
-export default function SandboxPage() {
+export default async function SandboxPage() {
+  const t = await getTranslations('Sandbox.page');
   return (
     <main className={styles.main}>
       <VideoBackground />
@@ -42,29 +44,29 @@ export default function SandboxPage() {
       {/* Text Details */}
       <section className={styles.ugDetails} style={{ padding: '0 2rem', maxWidth: '1400px', margin: '0 auto' }}>
         <div className={styles.ugDetailsHeader}>
-          <p className={styles.ugDetailsOverTitle}>PRODUCT OVERVIEW</p>
-          <h2 className={styles.ugDetailsTitle}>Advanced Threat Mitigation</h2>
+          <p className={styles.ugDetailsOverTitle}>{t('overviewOverTitle')}</p>
+          <h2 className={styles.ugDetailsTitle}>{t('overviewTitle')}</h2>
           <p className={styles.ugDetailsDesc}>
-            DFX Sandbox is an AI-powered next-gen solution that monitors data traffic in a network to detect suspicious behavior and mitigate cyber threats by executing them in an isolated environment.
+            {t('overviewDesc')}
           </p>
         </div>
         <div className={styles.ugDetailsGrid}>
           <div className={styles.ugDetailCard}>
-            <div className={styles.ugDetailLabel}>ISOLATED DETONATION</div>
+            <div className={styles.ugDetailLabel}>{t('isoLabel')}</div>
             <p className={styles.ugDetailText}>
-              Analyzing files in a virtual sandbox is crucial for safely detonating and observing malware behavior without risking the actual system.
+              {t('isoText')}
             </p>
           </div>
           <div className={styles.ugDetailCard}>
-            <div className={styles.ugDetailLabel}>INTEGRATED ECOSYSTEM</div>
+            <div className={styles.ugDetailLabel}>{t('intLabel')}</div>
             <p className={styles.ugDetailText}>
-              Works in seamless integration via ICAP, Microsoft Exchange, and network shares for automated file routing, ensuring robust zero-trust validation.
+              {t('intText')}
             </p>
           </div>
           <div className={styles.ugDetailCard}>
-            <div className={styles.ugDetailLabel}>CONTENT-AWARE FILTERING</div>
+            <div className={styles.ugDetailLabel}>{t('contentLabel')}</div>
             <p className={styles.ugDetailText}>
-              Features advanced content-aware filtering that precisely identifies, extracts, and purifies hidden payloads from complex documents before delivery.
+              {t('contentText')}
             </p>
           </div>
         </div>
@@ -76,10 +78,10 @@ export default function SandboxPage() {
       <section style={{ padding: '4rem 2rem 0', maxWidth: '1400px', margin: '0 auto' }}>
         <div style={{ textAlign: 'center', margin: '3rem 0 4rem' }}>
           <p style={{ fontFamily: 'var(--font-mono)', fontSize: '0.85rem', color: 'var(--color-text-muted)', letterSpacing: '0.1em', marginBottom: '0.5rem', textTransform: 'uppercase' }}>
-            KEY CAPABILITIES
+            {t('keyCapabilitiesLabel')}
           </p>
           <h2 style={{ fontFamily: 'var(--font-display)', fontSize: '2.5rem', color: '#ffffff' }}>
-            Stopping What Others Miss
+            {t('keyCapabilitiesTitle')}
           </h2>
         </div>
         <SandboxFeaturesGrid />

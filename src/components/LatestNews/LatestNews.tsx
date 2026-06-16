@@ -1,6 +1,9 @@
 import React from 'react';
 import styles from './LatestNews.module.css';
 import { getTranslations, getLocale } from 'next-intl/server';
+import client from '@/lib/apollo-client';
+import { GET_ALL_POSTS } from '@/lib/graphql-queries';
+import { getGraphQLLocaleFilter } from '@/lib/locale-map';
 
 interface Post {
   id: number;
@@ -47,35 +50,32 @@ const MOCK_POSTS: Post[] = [
 ];
 
 async function getLatestPosts(locale: string): Promise<Post[]> {
-  const wpUrl = process.env.WORDPRESS_API_URL;
-  if (!wpUrl) {
-    return MOCK_POSTS;
-  }
-
   try {
-    const res = await fetch(`${wpUrl}/wp-json/wp/v2/posts?_embed&per_page=4&lang=${locale}`, { next: { revalidate: 3600 } });
-    if (!res.ok) throw new Error('Failed to fetch posts');
-    const posts = await res.json();
+    const { data } = await client.query({
+      query: GET_ALL_POSTS,
+      variables: { language: getGraphQLLocaleFilter(locale) },
+      fetchPolicy: 'no-cache'
+    });
 
-    return posts.map((post: any, index: number) => {
-      const imageUrl = post._embedded?.['wp:featuredmedia']?.[0]?.source_url || '/images/blog/blog-1.avif';
+    if (!data?.posts?.nodes) {
+      return MOCK_POSTS;
+    }
+
+    return data.posts.nodes.slice(0, 4).map((post: any, index: number) => {
       const dateObj = new Date(post.date);
-      const formattedDate = dateObj.toLocaleDateString('en-US', { month: 'short', day: 'numeric' });
-
-      // Decode HTML entities in title
-      const title = post.title.rendered.replace(/&#(\d+);/g, (match: string, dec: string) => String.fromCharCode(dec as any)).replace(/&[#A-Za-z0-9]+;/g, '');
-
+      const formattedDate = dateObj.toLocaleDateString(locale === 'ar' ? 'ar-SA' : locale === 'tr' ? 'tr-TR' : 'en-US', { month: 'short', day: 'numeric' });
+      
       return {
-        id: post.id,
-        title: title,
+        id: post.id || index,
+        title: post.title,
         date: formattedDate,
-        image: imageUrl,
+        image: post.featuredImage?.node?.sourceUrl || '/images/blog/blog-1.avif',
         featured: index === 0,
-        link: post.link
+        link: `/${locale}/resources/blog/${post.slug}`
       };
     });
   } catch (error) {
-    console.error('Error fetching WordPress posts:', error);
+    console.error('Error fetching WordPress posts via GraphQL:', error);
     return MOCK_POSTS;
   }
 }
