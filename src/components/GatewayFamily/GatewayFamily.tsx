@@ -3,68 +3,60 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { gsap } from 'gsap';
 import styles from './GatewayFamily.module.css';
+import { useTranslations } from 'next-intl';
 
-/* ── Detail cards for each clickable element ── */
-const elementDetails: Record<string, {
-  title: string;
-  role: string;
-  steps: { label: string; text: string }[];
-}> = {
-  source: {
-    title: 'Source Network',
-    role: 'Trusted / OT / ICS Environment',
-    steps: [
-      { label: 'What it is', text: 'The origin of your critical data — an OT floor, SCADA control system, historian, or enterprise IT network that must share information securely without exposing itself.' },
-      { label: 'The Risk', text: 'Any bidirectional connection between Source and destination networks creates an attack surface. A single compromised device on the destination side can pivot back to the source.' },
-      { label: 'How DFX Protects It', text: 'The Source Network connects only to the TX DFX UG. It never has a route to the destination — all communication is physically one-way. The Source remains completely isolated at the hardware level.' },
-    ]
-  },
-  tx: {
-    title: 'DFX UG — TX',
-    role: 'Transmit (TX) Unit',
-    steps: [
-      { label: 'What it is', text: 'The TX unit is the sending side of the optical data diode. It converts data signals into light pulses and fires them through a fiber-optic cable in a single direction.' },
-      { label: 'Hardware Enforcement', text: 'There is no receive circuitry in the TX unit. It is physically incapable of accepting incoming light signals. This is not a firewall rule — it is a law of optics enforced by hardware.' },
-      { label: 'What it Guarantees', text: 'Any data that enters the TX unit will be transmitted forward — and nothing can ever travel backwards through it. Software exploits, zero-days, and misconfigurations cannot override this physical property.' },
-    ]
-  },
-  airgap: {
-    title: 'Air Gap Zone',
-    role: 'Physical Isolation Boundary',
-    steps: [
-      { label: 'What it is', text: 'The Air Gap is the physical separation between the TX and RX units. The only connection across this boundary is a single-mode optical fiber that carries light — not electricity, not network packets.' },
-      { label: 'Why it Matters', text: 'Traditional "air-gap" solutions are often software-emulated and can be bypassed. The DFX air gap is real and physical: there is no network cable, no electrical conductor, and no shared memory crossing this boundary.' },
-      { label: 'Crossing the Gap', text: 'Light travels TX → RX only. No protocol crossing, no metadata leakage. The fiber does not support return-path communication — it is single-mode, single-direction by design.' },
-    ]
-  },
-  rx: {
-    title: 'DFX UG — RX',
-    role: 'Receive (RX) Unit',
-    steps: [
-      { label: 'What it is', text: 'The RX unit receives the light pulses from the TX unit and converts them back into network data. It sits entirely on the destination/protected network side.' },
-      { label: 'Zero Reverse Channel', text: 'The RX unit contains no transmit circuitry. It cannot emit light or send any signal back through the fiber. An attacker on the receiving network has zero physical capability to reach the source.' },
-      { label: 'What it Guarantees', text: 'Even if the Protected Network is fully compromised, the attacker faces a mathematical impossibility: they cannot send data backwards through a receive-only optical component. The source remains untouchable.' },
-    ]
-  },
-  dest: {
-    title: 'Protected Network',
-    role: 'Destination / Isolated Environment',
-    steps: [
-      { label: 'What it is', text: 'The Protected Network receives authorized, one-way data feeds from the source. This may be a DMZ, a cloud analytics platform, an IT network, or a completely air-gapped environment.' },
-      { label: 'Isolation Guarantee', text: 'This network has no route back to the source. No connection — TCP, UDP, or otherwise — can be initiated from here to the originating network. Network segmentation is enforced at the physics layer.' },
-      { label: 'Result', text: 'Operators on the Protected Network receive real-time telemetry, logs, video, and data streams from the source — without introducing any exposure to the trusted environment. True one-way bridge.' },
-    ]
-  }
-};
-
-type ElementId = keyof typeof elementDetails;
+type ElementId = 'source' | 'tx' | 'airgap' | 'rx' | 'dest';
 
 export default function GatewayFamily() {
+  const t = useTranslations('GatewayFamily');
   const containerRef = useRef<HTMLDivElement>(null);
   const packet1Ref = useRef<HTMLDivElement>(null);
   const packet2Ref = useRef<HTMLDivElement>(null);
   const packet3Ref = useRef<HTMLDivElement>(null);
   const [activeElement, setActiveElement] = useState<ElementId | null>(null);
+
+  const elementDetails = {
+    source: {
+      title: t('source.title'), role: t('source.role'),
+      steps: [
+        { label: t('source.s1l'), text: t('source.s1t') },
+        { label: t('source.s2l'), text: t('source.s2t') },
+        { label: t('source.s3l'), text: t('source.s3t') },
+      ]
+    },
+    tx: {
+      title: t('tx.title'), role: t('tx.role'),
+      steps: [
+        { label: t('tx.s1l'), text: t('tx.s1t') },
+        { label: t('tx.s2l'), text: t('tx.s2t') },
+        { label: t('tx.s3l'), text: t('tx.s3t') },
+      ]
+    },
+    airgap: {
+      title: t('airgap.title'), role: t('airgap.role'),
+      steps: [
+        { label: t('airgap.s1l'), text: t('airgap.s1t') },
+        { label: t('airgap.s2l'), text: t('airgap.s2t') },
+        { label: t('airgap.s3l'), text: t('airgap.s3t') },
+      ]
+    },
+    rx: {
+      title: t('rx.title'), role: t('rx.role'),
+      steps: [
+        { label: t('rx.s1l'), text: t('rx.s1t') },
+        { label: t('rx.s2l'), text: t('rx.s2t') },
+        { label: t('rx.s3l'), text: t('rx.s3t') },
+      ]
+    },
+    dest: {
+      title: t('dest.title'), role: t('dest.role'),
+      steps: [
+        { label: t('dest.s1l'), text: t('dest.s1t') },
+        { label: t('dest.s2l'), text: t('dest.s2t') },
+        { label: t('dest.s3l'), text: t('dest.s3t') },
+      ]
+    },
+  };
 
   useEffect(() => {
     const ctx = gsap.context(() => {
@@ -142,14 +134,11 @@ export default function GatewayFamily() {
       <div className={styles.inner}>
 
         <div className={styles.header}>
-          <p className={styles.overTitle}>SECURITY ARCHITECTURE</p>
+          <p className={styles.overTitle}>{t('overTitle')}</p>
           <h2 className={styles.title}>
-            Hardware-Enforced <span className={styles.highlight}>Data Flow</span>
+            {t('title')} <span className={styles.highlight}>{t('titleHighlight')}</span>
           </h2>
-          <p className={styles.subtitle}>
-            Click any element to understand exactly how DFX UDG enforces one-way data transfer
-            and protects your critical networks at every step.
-          </p>
+          <p className={styles.subtitle}>{t('subtitle')}</p>
         </div>
 
         {/* ── Diagram Row ── */}
@@ -178,8 +167,8 @@ export default function GatewayFamily() {
                 <circle cx="12" cy="7" r="4" />
               </svg>
             </div>
-            <div className={styles.networkLabel}>Source Network</div>
-            <div className={styles.clickHint}>Click to explore</div>
+            <div className={styles.networkLabel}>{t('source.label')}</div>
+            <div className={styles.clickHint}>{t('source.hint')}</div>
           </button>
 
           {/* Line 1 */}
@@ -209,8 +198,8 @@ export default function GatewayFamily() {
               <div className={styles.diodeRole}>TRANSMIT (TX)</div>
             </button>
             <div className={styles.featureInfo}>
-              <h4>Hardware-Level Isolation</h4>
-              <p>Physical diode ensures data travels only in one direction.</p>
+              <h4>{t('hwIsolation')}</h4>
+              <p>{t('hwIsolationDesc')}</p>
             </div>
           </div>
 
@@ -239,8 +228,8 @@ export default function GatewayFamily() {
             </button>
 
             <div className={styles.featureInfo} style={{ marginTop: '1rem' }}>
-              <h4>Air-Gap Bridging</h4>
-              <p>Transfer data without opening any network ports.</p>
+              <h4>{t('airGapBridging')}</h4>
+              <p>{t('airGapBridgingDesc')}</p>
             </div>
           </div>
 
@@ -260,8 +249,8 @@ export default function GatewayFamily() {
               <div className={styles.diodeRole}>RECEIVE (RX)</div>
             </button>
             <div className={styles.featureInfo}>
-              <h4>Zero Reverse Channel</h4>
-              <p>Mathematically impossible for attackers to reach back.</p>
+              <h4>{t('zeroReverse')}</h4>
+              <p>{t('zeroReverseDesc')}</p>
             </div>
           </div>
 
@@ -299,8 +288,8 @@ export default function GatewayFamily() {
                 <polyline points="9 22 9 12 15 12 15 22" />
               </svg>
             </div>
-            <div className={styles.networkLabel}>Protected Network</div>
-            <div className={styles.clickHint}>Click to explore</div>
+            <div className={styles.networkLabel}>{t('dest.label')}</div>
+            <div className={styles.clickHint}>{t('dest.hint')}</div>
           </button>
         </div>
 

@@ -628,5 +628,132 @@
       "p3Title": "MSSP Operatörleri",
       "p3Desc": "Ölçeklenebilir Güvenlik. Çok kiracılı mimariyle onlarca müşterinin tehdit manzarasını tek bir ekrandan yönetin, MSSP operasyonlarınızın kârlılığını artırın."
     }
+  },
+  "GatewayFamily": {
+    "overTitle": "GÜVENLİK MİMARİSİ",
+    "title": "Donanım Destekli",
+    "titleHighlight": "Veri Akışı",
+    "subtitle": "DFX UDG'nin tek yönlü veri aktarımını nasıl zorladığını ve kritik ağlarınızı her adımda nasıl koruduğunu anlamak için herhangi bir öğeye tıklayın.",
+    "source": {
+      "label": "Kaynak Ağ",
+      "hint": "Keşfetmek için tıkla",
+      "title": "Kaynak Ağ",
+      "role": "Güvenilir / OT / ICS Ortamı",
+      "s1l": "Nedir",
+      "s1t": "Kritik verinizin kaynağı — güvenli bilgi paylaşımı yapması gereken bir OT katı, SCADA kontrol sistemi, tarihçi veya kurumsal BT ağı.",
+      "s2l": "Risk",
+      "s2t": "Kaynak ve hedef ağlar arasındaki çift yönlü herhangi bir bağlantı bir saldırı yüzeyi oluşturur. Hedef tarafında ele geçirilen tek bir cihaz kaynağa pivot yapabilir.",
+      "s3l": "DFX Nasıl Korur",
+      "s3t": "Kaynak Ağ yalnızca TX DFX UG'ye bağlanır. Hedefe hiçbir zaman rota oluşturmaz — tüm iletişim fiziksel olarak tek yönlüdür. Kaynak donanım düzeyinde tamamen yalıtılmış kalır."
+    },
+    "tx": {
+      "title": "DFX UG — TX",
+      "role": "İletim (TX) Birimi",
+      "s1l": "Nedir",
+      "s1t": "TX birimi, optik veri diyotunun gönderme tarafıdır. Veri sinyallerini ışık darbelerine dönüştürür ve fiber optik kablo üzerinden tek yönde iletir.",
+      "s2l": "Donanım Zorlama",
+      "s2t": "TX biriminde alıcı devre yoktur. Gelen ışık sinyallerini fiziksel olarak kabul edemez. Bu bir güvenlik duvarı kuralı değil — donanım tarafından uygulanan bir optik yasasıdır.",
+      "s3l": "Garanti Ettiği",
+      "s3t": "TX birimine giren herhangi bir veri ileride iletilecektir — ve hiçbir şey onun üzerinden geriye doğru hareket edemez. Yazılım açıkları, sıfır günler ve yanlış yapılandırmalar bu fiziksel özelliği geçersiz kılamaz."
+    },
+    "airgap": {
+      "title": "Hava Boşluğu Bölgesi",
+      "role": "Fiziksel İzolasyon Sınırı",
+      "s1l": "Nedir",
+      "s1t": "Hava Boşluğu, TX ve RX birimleri arasındaki fiziksel ayrımdır. Bu sınırı geçen tek bağlantı, elektrik değil ışık taşıyan tek modlu optik fiberdır.",
+      "s2l": "Neden Önemli",
+      "s2t": "Geleneksel 'hava boşluğu' çözümleri genellikle yazılım tabanlıdır ve atlatılabilir. DFX hava boşluğu gerçek ve fizikseldir: bu sınırı geçen ağ kablosu, elektrik iletkeni veya paylaşılan bellek yoktur.",
+      "s3l": "Boşluğu Geçmek",
+      "s3t": "Işık yalnızca TX → RX yönünde ilerler. Protokol geçişi yok, meta veri sızıntısı yok. Fiber, dönüş yolu iletişimini desteklemez — tasarımı gereği tek mod, tek yöndür."
+    },
+    "rx": {
+      "title": "DFX UG — RX",
+      "role": "Alıcı (RX) Birimi",
+      "s1l": "Nedir",
+      "s1t": "RX birimi, TX biriminden gelen ışık darbelerini alır ve ağ verisine geri dönüştürür. Tamamen hedef/korunan ağ tarafında bulunur.",
+      "s2l": "Sıfır Ters Kanal",
+      "s2t": "RX biriminde iletim devresi yoktur. Işık yayamaz veya fiber üzerinden herhangi bir sinyal gönderemez. Alıcı ağdaki bir saldırganın kaynağa ulaşma fiziksel kapasitesi sıfırdır.",
+      "s3l": "Garanti Ettiği",
+      "s3t": "Korunan Ağ tam olarak ele geçirilse bile saldırgan matematiksel bir imkânsızlıkla karşılaşır: yalnızca alıcı olan bir optik bileşen üzerinden geriye veri gönderemez. Kaynak dokunulmaz kalır."
+    },
+    "dest": {
+      "label": "Korunan Ağ",
+      "hint": "Keşfetmek için tıkla",
+      "title": "Korunan Ağ",
+      "role": "Hedef / İzole Ortam",
+      "s1l": "Nedir",
+      "s1t": "Korunan Ağ, kaynaktan yetkili tek yönlü veri beslemelerini alır. Bu bir DMZ, bulut analitik platformu, BT ağı veya tamamen hava boşluklu bir ortam olabilir.",
+      "s2l": "İzolasyon Garantisi",
+      "s2t": "Bu ağın kaynağa dönüş yolu yoktur. Buradan kaynak ağa TCP, UDP veya başka herhangi bir bağlantı başlatılamaz. Ağ segmentasyonu fizik katmanında uygulanır.",
+      "s3l": "Sonuç",
+      "s3t": "Korunan Ağdaki operatörler, güvenilir ortama herhangi bir maruz kalma riski olmaksızın kaynaktan gerçek zamanlı telemetri, günlükler, video ve veri akışları alır."
+    },
+    "hwIsolation": "Donanım Düzeyinde İzolasyon",
+    "hwIsolationDesc": "Fiziksel diyot, verinin yalnızca tek yönde ilerlemesini sağlar.",
+    "airGapBridging": "Hava Boşluğu Köprüleme",
+    "airGapBridgingDesc": "Ağ portlarını açmadan veri aktarımı yapın.",
+    "zeroReverse": "Sıfır Ters Kanal",
+    "zeroReverseDesc": "Saldırganların geri ulaşması matematiksel olarak imkânsız."
+  },
+  "EmailFeaturesTabs": {
+    "overTitle": "PLATFORM ÖZELLİKLERİ",
+    "title": "Kapsamlı",
+    "titleHighlight": "Özellikler",
+    "phishing": {
+      "label": "Kimlik Avı & BEC",
+      "title": "Kimlik Avı & BEC Koruması",
+      "desc": "Daha akıllı saldırıları daha güçlü savunmayla durdurun. DFX ESP, İş E-posta Uzlaşısını ve kimlik bilgisi hırsızlığını önlemek için çok katmanlı algılama, duygu analizi, AD/LDAP entegrasyonu ve eşik profilleri kullanır. Sürekli güncellenen YARA kuralları anlık koruma sağlar."
+    },
+    "malware": {
+      "label": "Kötü Amaçlı Yazılım Azaltma",
+      "title": "Gelişmiş Yapay Zeka Kötü Amaçlı Yazılım Azaltma",
+      "desc": "Yürütme başlamadan önce tespit edilemezi tespit edin. Sıfır gün saldırılarını ve bilinmeyen varyantları durdurmak için sezgisel tarama, dinamik Siber Tehdit İstihbaratı (CTI) ve tamamen izole sanal sandbox patlama (Gelişmiş Tehdit Azaltma) kullanıyoruz."
+    },
+    "url": {
+      "label": "URL Koruması",
+      "title": "Güvenli Tarama & Bağlantı Takibi",
+      "desc": "Her URL isteği güvenli bir bağlantı döndürür. Tıklamada anında alan adı, IP ve URL itibar kontrolü yapıyoruz. Kötü amaçlı web siteleri IntelRoom Güvenli Tarama aracılığıyla otomatik engellenir."
+    },
+    "attachment": {
+      "label": "Ek Savunması",
+      "title": "İçerik Etkisizleştirme & Yeniden Yapılandırma (CDR)",
+      "desc": "Tüm dosyaların kötü amaçlı olduğunu varsayarak Sıfır Güven ilkesine sadık kalın. Platform, kullanılabilirliği korurken eklerden tüm yürütülebilir içeriği kaldırır. Entegre OCR, görüntülerdeki metnin filtreleri atlatmak için kullanılmasını engeller."
+    },
+    "dlp": {
+      "label": "Veri Sızıntısı Önleme",
+      "title": "Entegre Şifreleme & DLP",
+      "desc": "Hassas veri sızıntısını gerçekleşmeden önce önleyin. Yerel DLP uygulaması hassas içeriğin kurumsal çevreyi yetkisiz olarak asla terk etmemesini sağlar. Otomatik profiller mevzuat uyumunu zahmetsizce zorlar."
+    },
+    "response": {
+      "label": "Hızlı Müdahale",
+      "title": "Geriye Dönük Tarama & Analitik",
+      "desc": "Çünkü dünün e-postaları bugünün tehditleri olabilir. İletilen posta kutularının sürekli geriye dönük taranması, yeni tehdit imzaları keşfedildiğinde tek tıkla düzeltme ve SOC dostu iş akışları sağlar."
+    }
+  },
+  "MTSFeaturesGrid": {
+    "f1": {
+      "title": "Veri Kaybı Önleme (DLP)",
+      "desc": "Tüm bağlı medya aygıtlarında okuma/yazma politikalarını sıkı biçimde uygulayarak hassas verilerin güvenli ağınızı terk etmesini engeller."
+    },
+    "f2": {
+      "title": "Sıfır Gün Kötü Amaçlı Yazılım Önleme",
+      "desc": "Keşfedilmemiş ve gizli kötü amaçlı yazılımları tespit etmek için sezgisel tarama, yapay zeka destekli davranışsal analiz ve birden fazla AV motorunu birleştirir."
+    },
+    "f3": {
+      "title": "Dosya Arındırma (CDR)",
+      "desc": "İçerik Etkisizleştirme ve Yeniden Yapılandırma, karmaşık belgelerden (PDF, Word) gizli yükleri çıkarır ve aktarımdan önce bunları güvenli şekilde yeniden oluşturur."
+    },
+    "f4": {
+      "title": "Özel Güvenlik Politikaları",
+      "desc": "Active Directory/LDAP kullanıcılarına, gruplara veya belirli cihaz seri numaralarına göre ayrıntılı izinler tanımlayın."
+    },
+    "f5": {
+      "title": "Uyumluluk & Denetim",
+      "desc": "Sektör düzenlemelerine tam uyumu sağlamak için aktarılan tüm dosyaların, tarama sonuçlarının ve kullanıcı etkinliklerinin değiştirilemez günlüklerini oluşturur."
+    },
+    "f6": {
+      "title": "Sıfır USB Politikası",
+      "desc": "Hiçbir harici, güvenilmeyen medyanın doğrudan temel operasyonel iş istasyonlarınıza bağlanmaması kuralını fiziksel olarak uygular."
+    }
   }
 }
