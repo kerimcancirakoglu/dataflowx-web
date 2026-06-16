@@ -32,23 +32,23 @@
     "all_rights_reserved": "جميع الحقوق محفوظة."
   },
   "Solutions": {
-    "titlePrefix": "Every Threat Vector.",
-    "titleHighlight": "One Ecosystem.",
-    "subtitle": "Cyber threats don't pick one entry point and neither do we.",
-    "protectsTitle": "How It Protects Your Critical Infrastructure",
-    "goToProduct": "Go to Product Page ➔",
+    "titlePrefix": "كل ناقل تهديد.",
+    "titleHighlight": "نظام بيئي واحد.",
+    "subtitle": "التهديدات السيبرانية لا تختار نقطة دخول واحدة، ونحن كذلك.",
+    "protectsTitle": "كيف تحمي بنيتك التحتية الحيوية",
+    "goToProduct": "اذهب إلى صفحة المنتج ➔",
     "categories": {
-      "networkSecurity": "Network Security",
-      "fileSecurity": "File Security",
-      "emailSecurity": "Email Security",
-      "otSecurity": "OT Security"
+      "networkSecurity": "أمن الشبكات",
+      "fileSecurity": "أمن الملفات",
+      "emailSecurity": "أمن البريد الإلكتروني",
+      "otSecurity": "أمن التكنولوجيا التشغيلية"
     },
     "items": {
       "unidirectional": {
         "titlePrefix": "DFX Unidirectional",
         "titleHighlight": "Gateway",
-        "description": "DFX UDG is a diode-based gateway operating on Zero Trust principles. It physically isolates critical networks, allowing only authorized one-way data transmission.",
-        "protects": "Secures sensitive infrastructures by completely neutralizing threats and making reverse data flow physically impossible.",
+        "description": "بوابة تعتمد على الصمام الثنائي وتعمل وفقًا لمبادئ انعدام الثقة (Zero Trust). تقوم بعزل الشبكات الحيوية ماديًا، وتسمح فقط بنقل البيانات المصرح به في اتجاه واحد.",
+        "protects": "يؤمن البنى التحتية الحساسة من خلال تحييد التهديدات تمامًا وجعل تدفق البيانات العكسي مستحيلًا ماديًا.",
         "features": {
           "f1": "Security Management Singularity",
           "f2": "OT Visibility",
@@ -60,8 +60,8 @@
       "secureRemote": {
         "titlePrefix": "DFX Secure Remote",
         "titleHighlight": "Access",
-        "description": "Built directly upon and seamlessly integrated with DFX UDG hardware, DFX CDS enables request-response based data transmission between isolated networks.",
-        "protects": "Provides complete and uncompromising control over inter-network data traffic, blocking unauthorized lateral movement.",
+        "description": "مدمج مباشرة وسلس مع أجهزة DFX UDG، مما يتيح نقل البيانات بناءً على الطلب والاستجابة بين الشبكات المعزولة.",
+        "protects": "يوفر تحكمًا كاملًا لا هوادة فيه في حركة البيانات بين الشبكات، ويمنع الحركة الجانبية غير المصرح بها.",
         "features": {
           "f1": "Zero Trust Access",
           "f2": "Granular Filtering",
@@ -73,8 +73,8 @@
       "sandbox": {
         "titlePrefix": "DFX",
         "titleHighlight": "Sandbox",
-        "description": "DFX Sandbox proactively detects suspicious behavior by continuously monitoring network traffic. It isolates and analyzes suspicious files within a virtual sandbox environment.",
-        "protects": "Safely observes malware behavior and neutralizes cyber threats without risking the actual production environment.",
+        "description": "يكتشف السلوكيات المشبوهة بشكل استباقي عن طريق المراقبة المستمرة لحركة مرور الشبكة. يقوم بعزل وتحليل الملفات المشبوهة داخل بيئة افتراضية.",
+        "protects": "يلاحظ بأمان سلوك البرامج الضارة ويحييد التهديدات السيبرانية دون المخاطرة ببيئة الإنتاج الفعلية.",
         "features": {
           "f1": "AI-Powered Detection",
           "f2": "Human Behavior Mimicking",
@@ -86,8 +86,8 @@
       "mediaTransfer": {
         "titlePrefix": "DFX Media Transfer",
         "titleHighlight": "Station",
-        "description": "A physical kiosk guaranteeing the secure use of portable media in sensitive network environments. It deeply inspects and sanitizes portable media before network connection.",
-        "protects": "Physically enforces a 'Zero-USB' policy by detecting and neutralizing malicious payloads before they penetrate the network.",
+        "description": "كشك مادي يضمن الاستخدام الآمن للوسائط المحمولة في بيئات الشبكات الحساسة. يقوم بفحص وتعقيم الوسائط المحمولة بعمق قبل الاتصال بالشبكة.",
+        "protects": "يفرض ماديًا سياسة 'Zero-USB' من خلال اكتشاف وتحييد الحمولات الضارة قبل اختراقها للشبكة.",
         "features": {
           "f1": "Data Loss Prevention (DLP)",
           "f2": "Zero-Day Prevention",
@@ -98,8 +98,8 @@
       "emailSecurity": {
         "titlePrefix": "DFX Email Security",
         "titleHighlight": "Platform",
-        "description": "DFX ESP holistically addresses enterprise security needs, combining high precision, flexibility, and control. Built for modern messaging threats.",
-        "protects": "Establishes active defense against SPAM, Phishing, BEC (Business Email Compromise), Malware, and Exploit attacks.",
+        "description": "يعالج بشكل كلي احتياجات أمان المؤسسة، ويجمع بين الدقة العالية والمرونة والتحكم. مصمم للتهديدات الحديثة.",
+        "protects": "يؤسس دفاعًا نشطًا ضد البريد العشوائي والتصيد الاحتيالي واختراق البريد الإلكتروني للأعمال (BEC) والبرامج الضارة والاستغلال.",
         "features": {
           "f1": "YARA Engine",
           "f2": "LDAP Integration",
@@ -111,8 +111,8 @@
       "intelroom": {
         "titlePrefix": "DFX",
         "titleHighlight": "IntelRoom",
-        "description": "Advanced threat intelligence sharing and analysis room for sophisticated email and network threats.",
-        "protects": "Gathers, analyzes and shares actionable threat intelligence across the entire ecosystem.",
+        "description": "غرفة متقدمة لتبادل وتحليل التهديدات للتهديدات المتطورة في البريد الإلكتروني والشبكات.",
+        "protects": "يجمع ويحلل ويشارك معلومات التهديدات القابلة للتنفيذ عبر النظام البيئي بأكمله.",
         "features": {
           "f1": "Real-time Intelligence",
           "f2": "Global Threat Feeds"
@@ -121,8 +121,8 @@
       "trucdr": {
         "titlePrefix": "True",
         "titleHighlight": "CDR",
-        "description": "Content Disarm and Reconstruction engine that intercepts files, removes malicious active content, and rebuilds clean files in real-time.",
-        "protects": "Stops zero-day exploits hidden in common file formats by mathematically ensuring only safe components enter.",
+        "description": "محرك نزع السلاح وإعادة البناء الذي يعترض الملفات، ويزيل المحتوى النشط الضار، ويعيد بناء ملفات نظيفة في الوقت الفعلي.",
+        "protects": "يوقف هجمات اليوم الصفر (zero-day) المخبأة في تنسيقات الملفات الشائعة من خلال التأكد رياضيًا من دخول المكونات الآمنة فقط.",
         "features": {
           "f1": "Deep File Inspection",
           "f2": "Zero-Trust File Rebuild"
@@ -131,8 +131,8 @@
       "portableAccess": {
         "titlePrefix": "DFX Pass",
         "titleHighlight": "(PortX)",
-        "description": "Ensures secure access and data exchange for remote or temporary operators without compromising the core air-gapped network. Built on a strict 'nothing trusted, everything verified' architecture.",
-        "protects": "Provides continuous authentication and isolation for remote sessions, completely eliminating lateral movement from external or untrusted devices.",
+        "description": "يضمن الوصول الآمن وتبادل البيانات للمشغلين عن بُعد أو المؤقتين دون المساس بالشبكة الأساسية المعزولة هوائيًا. مبني على معمارية 'لا تثق بشيء، تحقق من كل شيء'.",
+        "protects": "يوفر مصادقة وعزل مستمرين للجلسات عن بُعد، مما يلغي تمامًا الحركة الجانبية من الأجهزة الخارجية أو غير الموثوقة.",
         "features": {
           "f1": "Zero Trust Network Access",
           "f2": "Encrypted Tunneling",

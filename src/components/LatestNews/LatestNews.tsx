@@ -1,6 +1,6 @@
 import React from 'react';
 import styles from './LatestNews.module.css';
-import { getTranslations } from 'next-intl/server';
+import { getTranslations, getLocale } from 'next-intl/server';
 
 interface Post {
   id: number;
@@ -46,14 +46,14 @@ const MOCK_POSTS: Post[] = [
   }
 ];
 
-async function getLatestPosts(): Promise<Post[]> {
+async function getLatestPosts(locale: string): Promise<Post[]> {
   const wpUrl = process.env.WORDPRESS_API_URL;
   if (!wpUrl) {
     return MOCK_POSTS;
   }
 
   try {
-    const res = await fetch(`${wpUrl}/wp-json/wp/v2/posts?_embed&per_page=4`, { next: { revalidate: 3600 } });
+    const res = await fetch(`${wpUrl}/wp-json/wp/v2/posts?_embed&per_page=4&lang=${locale}`, { next: { revalidate: 3600 } });
     if (!res.ok) throw new Error('Failed to fetch posts');
     const posts = await res.json();
 
@@ -81,7 +81,8 @@ async function getLatestPosts(): Promise<Post[]> {
 }
 
 export default async function LatestNews() {
-  const posts = await getLatestPosts();
+  const locale = await getLocale();
+  const posts = await getLatestPosts(locale);
   const featuredItem = posts.find(item => item.featured) || posts[0];
   const listItems = posts.filter(item => item.id !== featuredItem.id).slice(0, 3);
   const t = await getTranslations('Home.LatestNews');

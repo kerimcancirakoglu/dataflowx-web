@@ -33,8 +33,8 @@
   },
   "Solutions": {
     "titlePrefix": "Her Tehdit Vektörü.",
-    "titleHighlight": "Tek Ekosistem.",
-    "subtitle": "Siber tehditler tek bir giriş noktası seçmez, biz de öyle.",
+    "titleHighlight": "Tek Bir Ekosistem.",
+    "subtitle": "Siber tehditler tek bir giriş noktasını seçmezler, biz de öyle.",
     "protectsTitle": "Kritik Altyapınızı Nasıl Korur",
     "goToProduct": "Ürün Sayfasına Git ➔",
     "categories": {
@@ -45,10 +45,10 @@
     },
     "items": {
       "unidirectional": {
-        "titlePrefix": "DFX Tek Yönlü",
-        "titleHighlight": "Ağ Geçidi",
-        "description": "DFX UDG, Sıfır Güven ilkeleriyle çalışan diyot tabanlı bir ağ geçididir. Kritik ağları fiziksel olarak izole eder ve yalnızca yetkilendirilmiş tek yönlü veri iletimine izin verir.",
-        "protects": "Tehditleri tamamen etkisiz hale getirerek ve tersine veri akışını fiziksel olarak imkansız kılarak hassas altyapıları güvence altına alır.",
+        "titlePrefix": "DFX Unidirectional",
+        "titleHighlight": "Gateway",
+        "description": "DFX UDG, Zero Trust prensipleriyle çalışan diyot tabanlı bir ağ geçididir. Kritik ağları fiziksel olarak izole eder ve yalnızca yetkilendirilmiş tek yönlü veri iletimine izin verir.",
+        "protects": "Tehditleri tamamen etkisiz hale getirerek ve ters veri akışını fiziksel olarak imkansız kılarak hassas altyapıları güvence altına alır.",
         "features": {
           "f1": "Güvenlik Yönetimi Tekilliği",
           "f2": "OT Görünürlüğü",
@@ -58,9 +58,9 @@
         }
       },
       "secureRemote": {
-        "titlePrefix": "DFX Güvenli Uzaktan",
-        "titleHighlight": "Erişim",
-        "description": "DFX UDG donanımı üzerine doğrudan inşa edilen ve sorunsuz entegre olan DFX CDS, izole ağlar arasında istek-yanıt tabanlı veri iletimi sağlar.",
+        "titlePrefix": "DFX Secure Remote",
+        "titleHighlight": "Access",
+        "description": "DFX UDG donanımı ile doğrudan ve sorunsuz bir şekilde entegre edilen DFX CDS, izole edilmiş ağlar arasında istek-yanıt tabanlı veri iletimine olanak tanır.",
         "protects": "Ağlar arası veri trafiği üzerinde tam ve tavizsiz kontrol sağlayarak yetkisiz yanal hareketleri engeller.",
         "features": {
           "f1": "Sıfır Güven Erişimi",
@@ -73,8 +73,8 @@
       "sandbox": {
         "titlePrefix": "DFX",
         "titleHighlight": "Sandbox",
-        "description": "DFX Sandbox, ağ trafiğini sürekli izleyerek şüpheli davranışları proaktif olarak tespit eder. Şüpheli dosyaları sanal bir sandbox ortamında izole eder ve analiz eder.",
-        "protects": "Gerçek üretim ortamını riske atmadan kötü amaçlı yazılım davranışlarını güvenle gözlemler ve siber tehditleri etkisiz hale getirir.",
+        "description": "DFX Sandbox, ağ trafiğini sürekli izleyerek şüpheli davranışları proaktif olarak tespit eder. Şüpheli dosyaları sanal bir korumalı alan ortamında izole eder ve analiz eder.",
+        "protects": "Gerçek üretim ortamını riske atmadan kötü amaçlı yazılım davranışlarını güvenli bir şekilde gözlemler ve siber tehditleri etkisiz hale getirir.",
         "features": {
           "f1": "Yapay Zeka Destekli Tespit",
           "f2": "İnsan Davranışı Taklidi",
@@ -84,10 +84,10 @@
         }
       },
       "mediaTransfer": {
-        "titlePrefix": "DFX Medya Transfer",
-        "titleHighlight": "İstasyonu",
-        "description": "Hassas ağ ortamlarında taşınabilir medyanın güvenli kullanımını garanti eden fiziksel bir kiosk. Taşınabilir medyayı ağa bağlamadan önce derinlemesine inceler ve temizler.",
-        "protects": "Kötü amaçlı yükleri ağa girmeden önce tespit edip etkisiz hale getirerek 'Sıfır USB' politikasını fiziksel olarak uygular.",
+        "titlePrefix": "DFX Media Transfer",
+        "titleHighlight": "Station",
+        "description": "Hassas ağ ortamlarında taşınabilir medyanın güvenli kullanımını garanti eden fiziksel bir kiosk. Ağ bağlantısından önce taşınabilir medyayı derinlemesine inceler ve temizler.",
+        "protects": "Kötü amaçlı yazılımları ağa nüfuz etmeden önce tespit edip etkisiz hale getirerek 'Sıfır USB' politikasını fiziksel olarak uygular.",
         "features": {
           "f1": "Veri Kaybı Önleme (DLP)",
           "f2": "Sıfır Gün Koruması",
@@ -96,10 +96,10 @@
         }
       },
       "emailSecurity": {
-        "titlePrefix": "DFX E-Posta Güvenlik",
-        "titleHighlight": "Platformu",
-        "description": "DFX ESP, yüksek hassasiyet, esneklik ve kontrolü birleştirerek kurumsal güvenlik ihtiyaçlarını bütünsel olarak ele alır. Modern mesajlaşma tehditleri için tasarlanmıştır.",
-        "protects": "SPAM, Phishing, BEC (İş E-postası İstismarı), Kötü Amaçlı Yazılım ve Exploit saldırılarına karşı aktif savunma kurar.",
+        "titlePrefix": "DFX Email Security",
+        "titleHighlight": "Platform",
+        "description": "DFX ESP, yüksek hassasiyet, esneklik ve kontrolü bir araya getirerek kurumsal güvenlik ihtiyaçlarını bütünsel olarak ele alır. Modern mesajlaşma tehditleri için tasarlanmıştır.",
+        "protects": "SPAM, Phishing, BEC (İş E-postası Ele Geçirme), Kötü Amaçlı Yazılım ve Exploit saldırılarına karşı aktif savunma kurar.",
         "features": {
           "f1": "YARA Motoru",
           "f2": "LDAP Entegrasyonu",
@@ -111,8 +111,8 @@
       "intelroom": {
         "titlePrefix": "DFX",
         "titleHighlight": "IntelRoom",
-        "description": "Gelişmiş e-posta ve ağ tehditleri için tehdit istihbaratı paylaşım ve analiz odası.",
-        "protects": "Tüm ekosistem genelinde eyleme dönüştürülebilir tehdit istihbaratını toplar, analiz eder ve paylaşır.",
+        "description": "Gelişmiş e-posta ve ağ tehditleri için istihbarat paylaşımı ve analiz odası.",
+        "protects": "Tüm ekosistem genelinde eyleme geçirilebilir tehdit istihbaratını toplar, analiz eder ve paylaşır.",
         "features": {
           "f1": "Gerçek Zamanlı İstihbarat",
           "f2": "Küresel Tehdit Akışları"
@@ -121,8 +121,8 @@
       "trucdr": {
         "titlePrefix": "True",
         "titleHighlight": "CDR",
-        "description": "Dosyaları yakalayan, kötü amaçlı aktif içeriği kaldıran ve temiz dosyaları gerçek zamanlı olarak yeniden oluşturan İçerik Arındırma ve Yeniden Oluşturma (CDR) motoru.",
-        "protects": "Yalnızca güvenli bileşenlerin içeri girmesini matematiksel olarak sağlayarak yaygın dosya formatlarında gizlenen sıfır gün açıklarını durdurur.",
+        "description": "Dosyaları araya giren, kötü amaçlı aktif içeriği kaldıran ve temiz dosyaları gerçek zamanlı olarak yeniden oluşturan İçerik Silahsızlandırma ve Yeniden Oluşturma motoru.",
+        "protects": "Matematiksel olarak yalnızca güvenli bileşenlerin girmesini sağlayarak yaygın dosya formatlarında gizlenen sıfır gün (zero-day) açıklarını durdurur.",
         "features": {
           "f1": "Derin Dosya İncelemesi",
           "f2": "Sıfır Güven Dosya Yeniden Oluşturma"
@@ -131,8 +131,8 @@
       "portableAccess": {
         "titlePrefix": "DFX Pass",
         "titleHighlight": "(PortX)",
-        "description": "Çekirdek izole ağı tehlikeye atmadan uzak veya geçici operatörler için güvenli erişim ve veri alışverişi sağlar. Sıkı bir 'hiçbir şeye güvenme, her şeyi doğrula' mimarisi üzerine inşa edilmiştir.",
-        "protects": "Uzak oturumlar için sürekli kimlik doğrulama ve izolasyon sağlayarak harici veya güvenilmeyen cihazlardan kaynaklanan yanal hareketi tamamen ortadan kaldırır.",
+        "description": "Temel hava boşluklu ağı tehlikeye atmadan uzak veya geçici operatörler için güvenli erişim ve veri alışverişi sağlar. Sıkı bir 'hiçbir şeye güvenme, her şeyi doğrula' mimarisi üzerine inşa edilmiştir.",
+        "protects": "Uzak oturumlar için sürekli kimlik doğrulama ve izolasyon sağlayarak harici veya güvenilmeyen cihazlardan yanal hareketi tamamen ortadan kaldırır.",
         "features": {
           "f1": "Sıfır Güven Ağ Erişimi",
           "f2": "Şifreli Tünelleme",
