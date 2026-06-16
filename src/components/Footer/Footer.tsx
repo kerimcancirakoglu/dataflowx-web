@@ -1,9 +1,12 @@
 import React from 'react';
 import Link from 'next/link';
+import { getTranslations } from 'next-intl/server';
 import styles from './Footer.module.css';
 
-export default function Footer() {
+export default async function Footer() {
   const currentYear = new Date().getFullYear();
+  const t = await getTranslations('Footer');
+  const tNav = await getTranslations('Nav');
 
   return (
     <footer className={styles.footer} role="contentinfo">
@@ -15,7 +18,7 @@ export default function Footer() {
               <img src="/DataFlowX_Logo_W.png" alt="DataFlowX Logo" className={styles.logoImage} />
             </Link>
             <p className={styles.brandDescription}>
-              Hardware-enforced data isolation and Zero Trust architecture for critical infrastructure. Security that doesn't compromise on operational flow.
+              {t('description')}
             </p>
             <div className={styles.socialLinks}>
               <a href="https://www.linkedin.com/company/dataflowx/posts/?feedView=all" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn" className={styles.socialIcon}>
@@ -27,48 +30,48 @@ export default function Footer() {
           </div>
 
           <div className={styles.linksColumn}>
-            <h3 className={styles.columnTitle}>Network Security</h3>
+            <h3 className={styles.columnTitle}>{tNav('network_security')}</h3>
             <ul className={styles.linkList}>
-              <li><Link href="/unidirectional-gateway">DFX Unidirectional Gateway</Link></li>
-              <li><Link href="/secure-remote-access">DFX Secure Remote Access</Link></li>
+              <li><Link href="/unidirectional-gateway">{tNav('unidirectional_gateway')}</Link></li>
+              <li><Link href="/secure-remote-access">{tNav('secure_remote_access')}</Link></li>
             </ul>
-            <h3 className={styles.columnTitle} style={{ marginTop: '1.5rem' }}>File Security</h3>
+            <h3 className={styles.columnTitle} style={{ marginTop: '1.5rem' }}>{tNav('file_security')}</h3>
             <ul className={styles.linkList}>
-              <li><Link href="/sandbox">DFX Sandbox</Link></li>
-              <li><Link href="/media-transfer-station">DFX Media Transfer Station</Link></li>
-            </ul>
-          </div>
-
-          <div className={styles.linksColumn}>
-            <h3 className={styles.columnTitle}>E-Mail Security</h3>
-            <ul className={styles.linkList}>
-              <li><Link href="/email-security-platform">DFX E-Mail Security Platform</Link></li>
-              <li><Link href="/intelroom">DFX IntelRoom</Link></li>
-              <li><Link href="/true-cdr">TrueCDR™</Link></li>
-            </ul>
-            <h3 className={styles.columnTitle} style={{ marginTop: '1.5rem' }}>OT Security</h3>
-            <ul className={styles.linkList}>
-              <li><Link href="/portx">DFX PortX</Link></li>
+              <li><Link href="/sandbox">{tNav('sandbox')}</Link></li>
+              <li><Link href="/media-transfer-station">{tNav('media_transfer_station')}</Link></li>
             </ul>
           </div>
 
           <div className={styles.linksColumn}>
-            <h3 className={styles.columnTitle}>Company</h3>
+            <h3 className={styles.columnTitle}>{tNav('email_security')}</h3>
             <ul className={styles.linkList}>
-              <li><Link href="/about-us">About Us</Link></li>
-              <li><Link href="/#partners">Partners</Link></li>
-              <li><Link href="/resources">Use Cases</Link></li>
-              <li><Link href="/#news">News</Link></li>
-              <li><Link href="/contact">Contact</Link></li>
+              <li><Link href="/email-security-platform">{tNav('email_security_platform')}</Link></li>
+              <li><Link href="/intelroom">{tNav('intelroom')}</Link></li>
+              <li><Link href="/true-cdr">{tNav('true_cdr')}</Link></li>
+            </ul>
+            <h3 className={styles.columnTitle} style={{ marginTop: '1.5rem' }}>{tNav('ot_security')}</h3>
+            <ul className={styles.linkList}>
+              <li><Link href="/portx">{tNav('portx')}</Link></li>
             </ul>
           </div>
 
           <div className={styles.linksColumn}>
-            <h3 className={styles.columnTitle}>Legal</h3>
+            <h3 className={styles.columnTitle}>{t('company')}</h3>
             <ul className={styles.linkList}>
-              <li><Link href="/privacy">Privacy Policy</Link></li>
-              <li><Link href="/gdpr">GDPR</Link></li>
-              <li><Link href="/cookie-policy">Cookie Policy</Link></li>
+              <li><Link href="/about-us">{tNav('about_us')}</Link></li>
+              <li><Link href="/#partners">{tNav('partners')}</Link></li>
+              <li><Link href="/resources">{t('use_cases')}</Link></li>
+              <li><Link href="/#news">{tNav('news')}</Link></li>
+              <li><Link href="/contact">{tNav('contact')}</Link></li>
+            </ul>
+          </div>
+
+          <div className={styles.linksColumn}>
+            <h3 className={styles.columnTitle}>{t('legal')}</h3>
+            <ul className={styles.linkList}>
+              <li><Link href="/privacy">{t('privacy_policy')}</Link></li>
+              <li><Link href="/gdpr">{t('gdpr')}</Link></li>
+              <li><Link href="/cookie-policy">{t('cookie_policy')}</Link></li>
             </ul>
           </div>
 
@@ -76,7 +79,7 @@ export default function Footer() {
 
         <div className={styles.bottomSection}>
           <div className={styles.copyright}>
-            &copy; {currentYear} DataFlowX. All rights reserved.
+            &copy; {currentYear} DataFlowX. {t('all_rights_reserved')}
           </div>
         </div>
       </div>

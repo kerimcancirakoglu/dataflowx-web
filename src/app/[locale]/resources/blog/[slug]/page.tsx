@@ -1,4 +1,4 @@
-// src/app/resources/blog/[slug]/page.tsx
+// src/app/[locale]/resources/blog/[slug]/page.tsx
 import type { Metadata } from 'next';
 
 import { notFound } from 'next/navigation';
@@ -10,9 +10,10 @@ import client from '@/lib/apollo-client';
 import { GET_POST_BY_SLUG, GET_ALL_POST_SLUGS } from '@/lib/graphql-queries';
 import styles from './post.module.css';
 import contentStyles from '@/components/BlogLayout/BlogContentStyles.module.css';
+import { localeToWPLanguage } from '@/lib/locale-map';
 
 interface Props {
-  params: Promise<{ slug: string }>;
+  params: Promise<{ slug: string; locale: string }>;
 }
 
 // Mock fallback logic
@@ -24,7 +25,7 @@ const MOCK_POSTS: Record<string, any> = {
     excerpt: 'Integrates directly with Microsoft 365 to disarm email attachments...',
     author: { name: 'DFX Security Team' },
     readingTime: '4 min read',
-    featuredImage: { node: { sourceUrl: '/Kapak/kapaklar/datamessage1.jpg', altText: 'M365 Security' } }
+    featuredImage: { node: { sourceUrl: `${process.env.NEXT_PUBLIC_WP_URL}/wp-content/uploads/Kapak/kapaklar/datamessage1.jpg`, altText: 'M365 Security' } }
   },
   'network-segmentation-vs-isolation': {
     title: 'Network Segmentation vs. Isolation in OT Environments',
@@ -33,7 +34,7 @@ const MOCK_POSTS: Record<string, any> = {
     excerpt: 'A deep dive into why traditional firewalls fail in OT security...',
     author: { name: 'DFX Threat Intel' },
     readingTime: '5 min read',
-    featuredImage: { node: { sourceUrl: '/Kapak/kapaklar/datadiode1.jpg', altText: 'OT Security' } }
+    featuredImage: { node: { sourceUrl: `${process.env.NEXT_PUBLIC_WP_URL}/wp-content/uploads/Kapak/kapaklar/datadiode1.jpg`, altText: 'OT Security' } }
   },
   'defending-critical-infrastructure': {
     title: 'Defending Critical Infrastructure from Nation-State Actors',
@@ -42,7 +43,7 @@ const MOCK_POSTS: Record<string, any> = {
     excerpt: 'How air-gapped systems and zero-trust principles prevent lateral movement...',
     author: { name: 'DFX Security Team' },
     readingTime: '6 min read',
-    featuredImage: { node: { sourceUrl: '/Kapak/kapaklar/datasecure1.jpg', altText: 'Critical Infrastructure' } }
+    featuredImage: { node: { sourceUrl: `${process.env.NEXT_PUBLIC_WP_URL}/wp-content/uploads/Kapak/kapaklar/datasecure1.jpg`, altText: 'Critical Infrastructure' } }
   },
   'evolution-of-malware': {
     title: 'The Evolution of Malware: Why Antivirus is No Longer Enough',
@@ -51,7 +52,7 @@ const MOCK_POSTS: Record<string, any> = {
     excerpt: 'With polymorphic viruses and fileless malware on the rise...',
     author: { name: 'DFX Security Team' },
     readingTime: '3 min read',
-    featuredImage: { node: { sourceUrl: '/Kapak/kapaklar/data3.jpg', altText: 'Malware Analysis' } }
+    featuredImage: { node: { sourceUrl: `${process.env.NEXT_PUBLIC_WP_URL}/wp-content/uploads/Kapak/kapaklar/data3.jpg`, altText: 'Malware Analysis' } }
   },
   'securing-remote-access': {
     title: 'Securing Remote Access for Third-Party Vendors',
@@ -60,21 +61,23 @@ const MOCK_POSTS: Record<string, any> = {
     excerpt: 'Best practices for implementing secure, audited, and isolated remote access...',
     author: { name: 'DFX Security Team' },
     readingTime: '7 min read',
-    featuredImage: { node: { sourceUrl: '/Kapak/kapaklar/databroker1.jpg', altText: 'Zero Trust Remote Access' } }
+    featuredImage: { node: { sourceUrl: `${process.env.NEXT_PUBLIC_WP_URL}/wp-content/uploads/Kapak/kapaklar/databroker1.jpg`, altText: 'Zero Trust Remote Access' } }
   }
 };
 
 // ── Dynamic SEO metadata per post ──────────────────
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const resolvedParams = await params;
-  const slug = resolvedParams.slug;
+  const { slug, locale } = resolvedParams;
+  const wpLangCode = localeToWPLanguage(locale);
+  
   let post: any = null;
   try {
     const { data } = await client.query<any>({
       query: GET_POST_BY_SLUG,
-      variables: { id: slug, idType: 'SLUG' },
+      variables: { id: slug, language: wpLangCode },
     });
-    post = data?.post;
+    post = data?.post?.translation;
   } catch {
     // handled below
   }
@@ -96,16 +99,29 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
   const imageUrl = post.featuredImage?.node?.sourceUrl ?? post.featuredImage ?? '/og-image.jpg';
 
+  const languages: Record<string, string> = {};
+  if (post.translations) {
+    post.translations.forEach((t: any) => {
+      const langCode = t.language?.code?.toLowerCase();
+      if (langCode) {
+        languages[langCode] = `https://dataflowx.com/${langCode}/resources/blog/${t.slug}`;
+      }
+    });
+  }
+  // Include self reference
+  languages[locale] = `https://dataflowx.com/${locale}/resources/blog/${slug}`;
+
   return {
     title: `${post.title} | DataFlowX Blog`,
     description: cleanExcerpt,
     alternates: {
-      canonical: `https://dataflowx.com/resources/blog/${slug}`,
+      canonical: `https://dataflowx.com/${locale}/resources/blog/${slug}`,
+      languages,
     },
     openGraph: {
       title: post.title,
       description: cleanExcerpt,
-      url: `https://dataflowx.com/resources/blog/${slug}`,
+      url: `https://dataflowx.com/${locale}/resources/blog/${slug}`,
       type: 'article',
       publishedTime: post.date,
       images: [{ url: imageUrl, width: 1200, height: 630, alt: post.title }],
@@ -121,30 +137,52 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
 // ── Static path generation at build time ───────────
 export async function generateStaticParams() {
-  try {
-    const { data } = await client.query<any>({ query: GET_ALL_POST_SLUGS });
-    if (data?.posts?.nodes?.length > 0) {
-      return data.posts.nodes.map((p: any) => ({ slug: p.slug }));
+  const locales = ['tr', 'en', 'ar'];
+  const allParams: { locale: string; slug: string }[] = [];
+
+  for (const locale of locales) {
+    const language = localeToWPLanguage(locale);
+    try {
+      const { data } = await client.query<any>({ 
+        query: GET_ALL_POST_SLUGS,
+        variables: { language }
+      });
+      if (data?.posts?.nodes?.length > 0) {
+        data.posts.nodes.forEach((p: any) => {
+          allParams.push({ locale, slug: p.slug });
+        });
+      }
+    } catch {
+      // ignore
     }
-  } catch {
-    // ignore
   }
-  // Return mock slugs if API fails
-  return Object.keys(MOCK_POSTS).map(slug => ({ slug }));
+
+  // Fallback to mock slugs if API fails completely
+  if (allParams.length === 0) {
+    for (const locale of locales) {
+      Object.keys(MOCK_POSTS).forEach((slug) => {
+        allParams.push({ locale, slug });
+      });
+    }
+  }
+
+  return allParams;
 }
 
 // ── Page ───────────────────────────────────────────
 export const revalidate = 3600;
 export default async function BlogPostPage({ params }: Props) {
   const resolvedParams = await params;
-  const slug = resolvedParams.slug;
+  const { slug, locale } = resolvedParams;
+  const wpLangCode = localeToWPLanguage(locale);
+
   let post: any = null;
   try {
     const { data } = await client.query<any>({
       query: GET_POST_BY_SLUG,
-      variables: { id: slug, idType: 'SLUG' },
+      variables: { id: slug, language: wpLangCode },
     });
-    post = data?.post;
+    post = data?.post?.translation;
   } catch (err) {
     console.warn('[BlogPostPage] WP API error, falling back to mock data if available.', err);
   }
@@ -154,9 +192,12 @@ export default async function BlogPostPage({ params }: Props) {
   }
 
   console.log('[DEBUG] param.slug:', slug, 'post:', post?.title);
-  if (!post) notFound();
+  if (!post) {
+    // If no translation found, or post doesn't exist
+    notFound();
+  }
 
-  const formattedDate = new Date(post.date).toLocaleDateString('en-US', {
+  const formattedDate = new Date(post.date).toLocaleDateString(locale === 'ar' ? 'ar-SA' : locale === 'tr' ? 'tr-TR' : 'en-US', {
     year: 'numeric',
     month: 'long',
     day: 'numeric',
@@ -177,17 +218,17 @@ export default async function BlogPostPage({ params }: Props) {
       name: 'DataFlowX',
       url: 'https://dataflowx.com',
     },
-    mainEntityOfPage: `https://dataflowx.com/resources/blog/${slug}`,
+    mainEntityOfPage: `https://dataflowx.com/${locale}/resources/blog/${slug}`,
   };
 
   const breadcrumbSchema = {
     '@context': 'https://schema.org',
     '@type': 'BreadcrumbList',
     itemListElement: [
-      { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://dataflowx.com' },
-      { '@type': 'ListItem', position: 2, name: 'Resources', item: 'https://dataflowx.com/resources' },
-      { '@type': 'ListItem', position: 3, name: 'Blog', item: 'https://dataflowx.com/resources/blog' },
-      { '@type': 'ListItem', position: 4, name: post.title, item: `https://dataflowx.com/resources/blog/${slug}` },
+      { '@type': 'ListItem', position: 1, name: 'Home', item: `https://dataflowx.com/${locale}` },
+      { '@type': 'ListItem', position: 2, name: 'Resources', item: `https://dataflowx.com/${locale}/resources` },
+      { '@type': 'ListItem', position: 3, name: 'Blog', item: `https://dataflowx.com/${locale}/resources/blog` },
+      { '@type': 'ListItem', position: 4, name: post.title, item: `https://dataflowx.com/${locale}/resources/blog/${slug}` },
     ],
   };
 
@@ -207,7 +248,7 @@ export default async function BlogPostPage({ params }: Props) {
         {/* Hero Header */}
         <header className={styles.hero}>
           <div className={styles.breadcrumbs}>
-            <a href="/">Home</a> <span>/</span> <a href="/resources">Resources</a> <span>/</span> <a href="/resources/blog">Blog</a>
+            <a href={`/${locale}`}>Home</a> <span>/</span> <a href={`/${locale}/resources`}>Resources</a> <span>/</span> <a href={`/${locale}/resources/blog`}>Blog</a>
           </div>
           <h1 className={styles.title}>{post.title}</h1>
           <div className={styles.meta}>

@@ -100,7 +100,7 @@ export default function IntelStoryScroll() {
                     <div className={styles.nodeTitle}>{layer.name}</div>
                     {isActive && (
                       <div className={styles.nodeMiniDesc}>
-                        {layer.role} — Aktif Veri Akışı İşleniyor...
+                        {layer.role} — Processing Active Data Stream...
                       </div>
                     )}
                   </div>

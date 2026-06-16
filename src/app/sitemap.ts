@@ -1,108 +1,85 @@
 import { MetadataRoute } from 'next';
+import client from '@/lib/apollo-client';
+import { GET_ALL_POST_SLUGS } from '@/lib/graphql-queries';
 
-const BASE_URL = 'https://dataflowx.com';
+export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
+  const locales = ['en', 'tr', 'ar'];
+  const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://dataflowx.com';
 
-type ChangeFrequency = 'always' | 'hourly' | 'daily' | 'weekly' | 'monthly' | 'yearly' | 'never';
+  // 1. Fetch WP Posts (with Pagination)
+  let posts: any[] = [];
+  try {
+    let hasNextPage = true;
+    let afterCursor = null;
 
-function makeRoutes(
-  paths: string[],
-  options: { changeFrequency: ChangeFrequency; priority: number; lastModified?: Date }
-) {
-  return paths.map((route) => ({
-    url: `${BASE_URL}${route}`,
-    lastModified: options.lastModified ?? new Date(),
-    changeFrequency: options.changeFrequency,
-    priority: options.priority,
-  }));
-}
+    while (hasNextPage) {
+      const response: any = await client.query({
+        query: GET_ALL_POST_SLUGS,
+        variables: { language: 'en', after: afterCursor }, // Primary language
+        fetchPolicy: 'no-cache',
+      });
+      
+      const newPosts = response.data?.posts?.nodes || [];
+      posts = [...posts, ...newPosts];
+      
+      hasNextPage = response.data?.posts?.pageInfo?.hasNextPage || false;
+      afterCursor = response.data?.posts?.pageInfo?.endCursor || null;
+    }
+  } catch (err) {
+    console.warn('[sitemap] WordPress API unreachable. Skipping posts in sitemap.');
+  }
 
-export default function sitemap(): MetadataRoute.Sitemap {
-  // ── Core pages (highest priority) ─────────────────────────────────────────
-  const coreRoutes = makeRoutes(
-    ['', '/about-us', '/contact'],
-    { changeFrequency: 'monthly', priority: 1.0 }
-  );
-
-  // ── Product pages ──────────────────────────────────────────────────────────
-  const productRoutes = makeRoutes(
-    [
-      '/unidirectional-gateway',
-      '/secure-remote-access',
-      '/media-transfer-station',
-      '/email-security-platform',
-      '/sandbox',
-    ],
-    { changeFrequency: 'monthly', priority: 0.9 }
-  );
-
-  // ── Türkiye çözüm sayfaları ────────────────────────────────────────────────
-  const turkeyRoutes = makeRoutes(
-    [
-      '/tr',
-      '/tr/cozumler/enerji-scada-guvenligi',
-      '/tr/cozumler/savunma-sanayi',
-      '/tr/cozumler/kamu-kritik-altyapi',
-      '/tr/cozumler/finans-sektoru',
-      '/tr/cozumler/osb-endustriyel-aglar',
-      '/tr/regulasyon/bddk-siber-guvenlik',
-      '/tr/regulasyon/epdk-kritik-altyapi',
-      '/tr/regulasyon/btk-veri-guvenligi',
-      '/tr/regulasyon/tse-iso27001-ot',
-    ],
-    { changeFrequency: 'monthly', priority: 0.85 }
-  );
-
-  // ── Regional / English landing pages ──────────────────────────────────────
-  const regionalRoutes = makeRoutes(
-    [
-      '/en',
-      '/en/solutions/gulf',
-      '/en/solutions/balkans',
-      '/en/solutions/central-asia',
-      '/en/solutions/north-africa',
-    ],
-    { changeFrequency: 'monthly', priority: 0.8 }
-  );
-
-  // ── Competitor comparison pages ────────────────────────────────────────────
-  const compareRoutes = makeRoutes(
-    [
-      '/compare/dataflowx-vs-opswat',
-      '/compare/dataflowx-vs-waterfall',
-      '/compare/dataflowx-vs-owl',
-      '/compare/dataflowx-vs-paloalto',
-      '/compare/dataflowx-vs-claroty',
-    ],
-    { changeFrequency: 'monthly', priority: 0.75 }
-  );
-
-  // ── Resource & solution pages ──────────────────────────────────────────────
-  const resourceRoutes = makeRoutes(
-    [
-      '/solutions/network-security',
-      '/solutions/file-security',
-      '/solutions/email-security',
-      '/solutions/cross-domain-solutions',
-      '/partners',
-      '/resources/datasheets',
-      '/resources/blog',
-      '/resources/news',
-      '/resources/customer-success-stories',
-    ],
-    { changeFrequency: 'weekly', priority: 0.7 }
-  );
-
-  // ── Blog posts (dynamic — extend here when CMS is integrated) ─────────────
-  // const blogPosts = await fetchBlogPostsFromWPEngine();
-  // const blogRoutes = blogPosts.map((post) => ({ url: `${BASE_URL}/resources/blog/${post.slug}`, ... }));
-
-  return [
-    ...coreRoutes,
-    ...productRoutes,
-    ...turkeyRoutes,
-    ...regionalRoutes,
-    ...compareRoutes,
-    ...resourceRoutes,
+  // 2. Generate Static Pages
+  const staticRoutes = [
+    '',
+    '/unidirectional-gateway',
+    '/secure-remote-access',
+    '/sandbox',
+    '/media-transfer-station',
+    '/email-security-platform',
+    '/intelroom',
+    '/true-cdr',
+    '/portx',
+    '/resources',
+    '/resources/blog',
+    '/news',
+    '/partners',
+    '/about-us',
+    '/contact',
   ];
-}
 
+  const staticPages = staticRoutes.flatMap((route) => {
+    return locales.map((locale) => {
+      const url = `${baseUrl}/${locale}${route}`;
+      return {
+        url,
+        lastModified: new Date(),
+        changeFrequency: 'weekly' as const,
+        priority: route === '' ? 1.0 : 0.8,
+        alternates: {
+          languages: Object.fromEntries(locales.map((l) => [l, `${baseUrl}/${l}${route}`])),
+        },
+      };
+    });
+  });
+
+  // 3. Generate Post Pages
+  const postUrls = locales.flatMap((locale) => {
+    return posts.map((post) => {
+      const slug = post.slug;
+      return {
+        url: `${baseUrl}/${locale}/resources/blog/${slug}`,
+        lastModified: new Date(),
+        changeFrequency: 'monthly' as const,
+        priority: 0.7,
+        alternates: {
+          languages: Object.fromEntries(
+            locales.map((l) => [l, `${baseUrl}/${l}/resources/blog/${slug}`])
+          ),
+        },
+      };
+    });
+  });
+
+  return [...staticPages, ...postUrls];
+}

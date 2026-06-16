@@ -31,7 +31,7 @@ const PERSONAS = [
     num: '01',
     title: 'CISO / Security Leaders',
     desc: 'See the Big Picture. Break away from raw technical data to manage business risk and ROI. Clearly communicate your organization\'s cyber posture with board-ready Briefs reports.',
-    image: '/Kapak/pexels-rsantos1232-3888149-scaled.jpg',
+    image: `${process.env.NEXT_PUBLIC_WP_URL}/wp-content/uploads/Kapak/pexels-rsantos1232-3888149-scaled.jpg`,
     icon: (
       <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
         <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" stroke="currentColor" strokeWidth="1.5" strokeLinejoin="round" />
@@ -42,7 +42,7 @@ const PERSONAS = [
     num: '02',
     title: 'SOC Analysts',
     desc: 'Save Time. Reduce incident response times from minutes to seconds with verified IOCs, context enriched by The Mesh graph, and ready-to-use Arsenal rules.',
-    image: '/Kapak/New-Project-2025-08-02T043719.908.jpg',
+    image: `${process.env.NEXT_PUBLIC_WP_URL}/wp-content/uploads/Kapak/New-Project-2025-08-02T043719.908.jpg`,
     icon: (
       <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
         <circle cx="11" cy="11" r="8" stroke="currentColor" strokeWidth="1.5" />
@@ -54,7 +54,7 @@ const PERSONAS = [
     num: '03',
     title: 'MSSP Operators',
     desc: 'Scalable Security. Manage the threat landscape of dozens of clients from a single screen with multi-tenant architecture (Bureau), increasing the profitability of your MSSP operations.',
-    image: '/Kapak/networksecurity.png',
+    image: `${process.env.NEXT_PUBLIC_WP_URL}/wp-content/uploads/Kapak/networksecurity.png`,
     icon: (
       <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
         <path d="M4 6h16v10H4V6z" stroke="currentColor" strokeWidth="1.5" />

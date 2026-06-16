@@ -268,9 +268,10 @@
 
 @media (max-width: 768px) {
   .hero {
-    padding: 0 5vw;
+    padding: 120px 5vw 80px 5vw;
     align-items: center;
     text-align: center;
+    justify-content: flex-start;
   }
 
   .contentWrapper {

@@ -8,21 +8,33 @@ export default function TableOfContents() {
   const [activeId, setActiveId] = useState<string>('');
 
   useEffect(() => {
-    // In a real app with dynamic HTML, we'd querySelectorAll('h2, h3') inside the article
-    // For this mock, we'll hardcode based on our mock data, but structure it dynamically.
-    const mockHeadings = [
-      { id: 'need-for-deep', text: 'The Need for Deep File Inspection', level: 2 },
-      { id: 'what-is-cdr', text: 'What is CDR?', level: 3 },
-      { id: 'top-8-vendors', text: 'Top 8 CDR Vendors in 2026', level: 2 },
-      { id: 'conclusion', text: 'Conclusion', level: 2 },
-    ];
-    setHeadings(mockHeadings);
-    setActiveId('need-for-deep');
+    // Dynamically find all h2 and h3 inside the article content
+    const article = document.getElementById('article-content');
+    if (!article) return;
+
+    const headingElements = Array.from(article.querySelectorAll('h2, h3'));
+    const dynamicHeadings = headingElements.map((el, index) => {
+      // Ensure each heading has an ID so anchor links work
+      if (!el.id) {
+        el.id = `heading-${index}`;
+      }
+      return {
+        id: el.id,
+        text: el.textContent || '',
+        level: el.tagName === 'H2' ? 2 : 3,
+      };
+    });
+
+    setHeadings(dynamicHeadings);
+    
+    if (dynamicHeadings.length > 0) {
+      setActiveId(dynamicHeadings[0].id);
+    }
   }, []);
 
   return (
     <div className={styles.toc}>
-      <h4 className={styles.sidebarTitle}>İçindekiler</h4>
+      <h4 className={styles.sidebarTitle}>Table of Contents</h4>
       <ul className={styles.tocList}>
         {headings.map((heading) => (
           <li 

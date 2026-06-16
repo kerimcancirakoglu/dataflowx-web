@@ -3,6 +3,7 @@ import Nav from '@/components/Nav/Nav';
 import Contact from '@/components/Contact/Contact';
 import VideoBackground from '@/components/VideoBackground/VideoBackground';
 import NewsClient from './NewsClient';
+import { getPosts, WPRestPost } from '@/lib/wp-api';
 
 export const metadata: Metadata = {
   title: 'Newsroom | DataFlowX',
@@ -26,7 +27,15 @@ export const metadata: Metadata = {
   },
 };
 
-export default function NewsPage() {
+export const revalidate = 3600; // ISR: Revalidate every hour
+
+export default async function NewsPage({
+  params,
+}: {
+  params: Promise<{ locale: string }>;
+}) {
+  const { locale } = await params;
+
   const breadcrumbSchema = {
     '@context': 'https://schema.org',
     '@type': 'BreadcrumbList',
@@ -36,16 +45,22 @@ export default function NewsPage() {
     ],
   };
 
+  let wpPosts: WPRestPost[] = [];
+  try {
+    wpPosts = await getPosts('news-dfx', locale);
+  } catch (err) {
+    console.warn('[NewsPage] WordPress API unreachable. Rendering with empty posts.', err);
+  }
+
   return (
     <main>
-      {/* JSON-LD structured data — inside main, React 19 Server Component hoists it */}
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }}
       />
       <VideoBackground />
       <Nav />
-      <NewsClient />
+      <NewsClient posts={wpPosts} />
       <Contact />
     </main>
   );

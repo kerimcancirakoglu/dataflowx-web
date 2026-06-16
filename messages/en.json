@@ -1,0 +1,487 @@
+{
+  "Nav": {
+    "solutions": "Solutions",
+    "network_security": "Network Security",
+    "unidirectional_gateway": "DFX Unidirectional Gateway",
+    "secure_remote_access": "DFX Secure Remote Access",
+    "file_security": "File Security",
+    "sandbox": "DFX Sandbox",
+    "media_transfer_station": "DFX Media Transfer Station",
+    "email_security": "E-Mail Security",
+    "email_security_platform": "DFX E-Mail Security Platform",
+    "intelroom": "DFX IntelRoom",
+    "true_cdr": "TrueCDR™",
+    "ot_security": "OT Security",
+    "portx": "DFX PortX",
+    "resources": "Resources",
+    "resource_center": "Resource Center",
+    "blog": "Blog",
+    "news": "News",
+    "partners": "Partners",
+    "about_us": "About Us",
+    "contact": "Contact"
+  },
+  "Footer": {
+    "description": "Hardware-enforced data isolation and Zero Trust architecture for critical infrastructure. Security that doesn't compromise on operational flow.",
+    "company": "Company",
+    "legal": "Legal",
+    "use_cases": "Use Cases",
+    "privacy_policy": "Privacy Policy",
+    "gdpr": "GDPR",
+    "cookie_policy": "Cookie Policy",
+    "all_rights_reserved": "All rights reserved."
+  },
+  "Solutions": {
+    "titlePrefix": "Every Threat Vector.",
+    "titleHighlight": "One Ecosystem.",
+    "subtitle": "Cyber threats don't pick one entry point and neither do we.",
+    "protectsTitle": "How It Protects Your Critical Infrastructure",
+    "goToProduct": "Go to Product Page ➔",
+    "categories": {
+      "networkSecurity": "Network Security",
+      "fileSecurity": "File Security",
+      "emailSecurity": "Email Security",
+      "otSecurity": "OT Security"
+    },
+    "items": {
+      "unidirectional": {
+        "titlePrefix": "DFX Unidirectional",
+        "titleHighlight": "Gateway",
+        "description": "DFX UDG is a diode-based gateway operating on Zero Trust principles. It physically isolates critical networks, allowing only authorized one-way data transmission.",
+        "protects": "Secures sensitive infrastructures by completely neutralizing threats and making reverse data flow physically impossible.",
+        "features": {
+          "f1": "Security Management Singularity",
+          "f2": "OT Visibility",
+          "f3": "Compliance Reporting",
+          "f4": "Monitoring & Auditing",
+          "f5": "Secure Data Sharing"
+        }
+      },
+      "secureRemote": {
+        "titlePrefix": "DFX Secure Remote",
+        "titleHighlight": "Access",
+        "description": "Built directly upon and seamlessly integrated with DFX UDG hardware, DFX CDS enables request-response based data transmission between isolated networks.",
+        "protects": "Provides complete and uncompromising control over inter-network data traffic, blocking unauthorized lateral movement.",
+        "features": {
+          "f1": "Zero Trust Access",
+          "f2": "Granular Filtering",
+          "f3": "ICAP Sandbox Integration",
+          "f4": "Content-Aware",
+          "f5": "Active Directory"
+        }
+      },
+      "sandbox": {
+        "titlePrefix": "DFX",
+        "titleHighlight": "Sandbox",
+        "description": "DFX Sandbox proactively detects suspicious behavior by continuously monitoring network traffic. It isolates and analyzes suspicious files within a virtual sandbox environment.",
+        "protects": "Safely observes malware behavior and neutralizes cyber threats without risking the actual production environment.",
+        "features": {
+          "f1": "AI-Powered Detection",
+          "f2": "Human Behavior Mimicking",
+          "f3": "Virtual Machine Auto Scaling",
+          "f4": "MS Exchange Integration",
+          "f5": "Network Share Transfers"
+        }
+      },
+      "mediaTransfer": {
+        "titlePrefix": "DFX Media Transfer",
+        "titleHighlight": "Station",
+        "description": "A physical kiosk guaranteeing the secure use of portable media in sensitive network environments. It deeply inspects and sanitizes portable media before network connection.",
+        "protects": "Physically enforces a 'Zero-USB' policy by detecting and neutralizing malicious payloads before they penetrate the network.",
+        "features": {
+          "f1": "Data Loss Prevention (DLP)",
+          "f2": "Zero-Day Prevention",
+          "f3": "File Purification (CDR)",
+          "f4": "Zero USB Policy"
+        }
+      },
+      "emailSecurity": {
+        "titlePrefix": "DFX Email Security",
+        "titleHighlight": "Platform",
+        "description": "DFX ESP holistically addresses enterprise security needs, combining high precision, flexibility, and control. Built for modern messaging threats.",
+        "protects": "Establishes active defense against SPAM, Phishing, BEC (Business Email Compromise), Malware, and Exploit attacks.",
+        "features": {
+          "f1": "YARA Engine",
+          "f2": "LDAP Integration",
+          "f3": "Content Disarming (CDR)",
+          "f4": "Antivirus Control",
+          "f5": "Phishing Protection"
+        }
+      },
+      "intelroom": {
+        "titlePrefix": "DFX",
+        "titleHighlight": "IntelRoom",
+        "description": "Advanced threat intelligence sharing and analysis room for sophisticated email and network threats.",
+        "protects": "Gathers, analyzes and shares actionable threat intelligence across the entire ecosystem.",
+        "features": {
+          "f1": "Real-time Intelligence",
+          "f2": "Global Threat Feeds"
+        }
+      },
+      "trucdr": {
+        "titlePrefix": "True",
+        "titleHighlight": "CDR",
+        "description": "Content Disarm and Reconstruction engine that intercepts files, removes malicious active content, and rebuilds clean files in real-time.",
+        "protects": "Stops zero-day exploits hidden in common file formats by mathematically ensuring only safe components enter.",
+        "features": {
+          "f1": "Deep File Inspection",
+          "f2": "Zero-Trust File Rebuild"
+        }
+      },
+      "portableAccess": {
+        "titlePrefix": "DFX Pass",
+        "titleHighlight": "(PortX)",
+        "description": "Ensures secure access and data exchange for remote or temporary operators without compromising the core air-gapped network. Built on a strict 'nothing trusted, everything verified' architecture.",
+        "protects": "Provides continuous authentication and isolation for remote sessions, completely eliminating lateral movement from external or untrusted devices.",
+        "features": {
+          "f1": "Zero Trust Network Access",
+          "f2": "Encrypted Tunneling",
+          "f3": "Strict Authentication"
+        }
+      }
+    }
+  },
+  "TrueCDR": {
+    "hero": {
+      "overTitle": "Content Disarm & Reconstruction",
+      "tagline": "Disarm Weaponized Content. Deliver Safe Files.",
+      "subtitle": "TrueCDR™ neutralizes file-borne threats before they reach your users, inboxes, shared drives, removable media workflows, and sensitive networks. It removes malicious, active, malformed, and unnecessary risk — then reconstructs safe, usable content for seamless business operations.",
+      "reqDemo": "Request a Demo",
+      "reviewOpts": "Review Integration Options"
+    },
+    "problem": {
+      "label": "THE CHALLENGE",
+      "title": "The File Is Still the Attack Vector",
+      "c1": {
+        "title": "Detection Alone Leaves Gaps",
+        "text": "Antivirus, sandboxing, and threat intelligence depend heavily on known indicators, observed behavior, and detonation timing. Attackers rapidly deploy evasive documents, delayed execution, and malformed structures to bypass traditional layers."
+      },
+      "c2": {
+        "title": "Blocking Everything Breaks Business",
+        "text": "Users need documents, invoices, contracts, and partner content. Blanket blocking creates operational friction, workarounds, and immense pressure on security teams to loosen perimeter controls."
+      },
+      "c3": {
+        "title": "Manual Review Doesn't Scale",
+        "text": "Security teams cannot manually inspect every attachment, upload, or shared file. High-volume environments need repeatable enforcement and audit-ready evidence without endless analyst tickets."
+      },
+      "quote": "The question is not simply: <em>'Is this file malicious?'</em><br />The better question is: <em>Can this file be made safe enough to use?</em>"
+    },
+    "features": {
+      "label": "CAPABILITIES",
+      "title": "Enterprise-Grade CDR",
+      "desc": "Built for real-world enterprise file traffic. Every capability is engineered around a single principle: reconstruct safety, preserve usability.",
+      "f1": {
+        "label": "MULTI-FORMAT PROCESSING",
+        "text": "Handles real enterprise traffic: documents, attachments, uploads, shared files, and deeply nested archives across all common file types."
+      },
+      "f2": {
+        "label": "ACTIVE CONTENT NEUTRALIZATION",
+        "text": "Removes or neutralizes risky active content — macros, scripts, embedded objects, automatic actions, and unsafe links."
+      },
+      "f3": {
+        "label": "STRUCTURAL VALIDATION",
+        "text": "Inspects internal file structures, container relationships, embedded content, malformed components, and hidden internals."
+      },
+      "f4": {
+        "label": "RECONSTRUCTION ENGINE",
+        "text": "Produces a clean, safer, fully functional version of the content — preserving usability while removing unsafe file capabilities."
+      },
+      "f5": {
+        "label": "MICROSOFT 365 INTEGRATION",
+        "text": "Direct, API-driven monitoring and attachment disarming across Exchange Email, SharePoint, and OneDrive workflows."
+      },
+      "f6": {
+        "label": "POLICY-BASED CONTROL",
+        "text": "Configure custom rules for risk outcomes: allow, sanitize, block, quarantine, retain original, or route — based on your security posture."
+      }
+    },
+    "benefits": {
+      "label": "KEY BENEFITS",
+      "title": "Disarm the Risk. Preserve the Work.",
+      "b1": {
+        "title": "No Prior Knowledge Required",
+        "desc": "Security that does not depend on the attacker being known first — effective against zero-days."
+      },
+      "b2": {
+        "title": "Business Continuity",
+        "desc": "Reconstructs safe, usable content rather than forcing files into dead-end quarantines."
+      },
+      "b3": {
+        "title": "Deterministic Protection",
+        "desc": "A non-evadable companion to traditional antivirus, sandboxing, and EDR layers."
+      },
+      "b4": {
+        "title": "Flexible Deployment",
+        "desc": "On-premises, cloud, and hybrid deployments for enterprise IT, regulated networks, and industrial environments."
+      },
+      "b5": {
+        "title": "Full Auditability",
+        "desc": "Clear, file-level processing records and traceable transformation evidence for compliance."
+      },
+      "b6": {
+        "title": "Reduced Analyst Load",
+        "desc": "Automates consistent file handling, eliminating manual attachment triage tickets."
+      }
+    },
+    "vs": {
+      "label": "COMPETITIVE POSITIONING",
+      "title": "Beyond Detection, Blocking & Extraction",
+      "v1": {
+        "vs": "vs Antivirus",
+        "text": "Antivirus looks for known signatures. DFX CDR removes dangerous capabilities even when a zero-day is completely unknown."
+      },
+      "v2": {
+        "vs": "vs Sandboxing",
+        "text": "Sandboxing observes behavior in a delayed virtual environment — modern malware evades it. DFX CDR reconstructs the file immediately."
+      },
+      "v3": {
+        "vs": "vs Block-Only",
+        "text": "Blocking protects but halts business. DFX CDR gives a middle path: remove risky parts, deliver safe reconstructed content."
+      },
+      "v4": {
+        "vs": "vs Extraction Tools",
+        "text": "Extraction tools flag or pull metadata. DFX CDR fully transforms risky input into completely safe, usable output."
+      }
+    }
+  },
+  "PortX": {
+    "hero": {
+      "overTitle": "DFX Portable Access Security System",
+      "tagline": "Eliminate the USB Risk. Keep the Workflow.",
+      "subtitle": "In industrial environments, the USB drive is one of the most dangerous and most unavoidable tools on the production floor. DFX Portable Access Security System replaces it entirely: a hardened, policy-driven data bridge that enables secure, encrypted, and fully auditable file transfers across your most sensitive networks without a single uncontrolled USB connection.",
+      "reqDemo": "Request a Demo",
+      "howItWorks": "See How It Works"
+    },
+    "overview": {
+      "overTitle": "PRODUCT OVERVIEW",
+      "title": "DFX Portable Access Security System",
+      "desc": "A hardware-based Zero Trust secure data bridge purpose-built for industrial and operational environments where uncontrolled USB usage represents an unacceptable risk.",
+      "c1": {
+        "label": "ELIMINATES USB RISK",
+        "text": "Replaces traditional USB transfers with a centrally governed, AES-256 encrypted, and NFC-enabled data bridge, removing the physical attack vector."
+      },
+      "c2": {
+        "label": "HARDWARE SECURITY",
+        "text": "Built on a FIPS-compliant TPM module and a hardened operating system designed to resist even the most advanced adversarial techniques."
+      },
+      "c3": {
+        "label": "SEAMLESS INTEGRATION",
+        "text": "Operates seamlessly with DFX Unidirectional Gateway, ensuring data moves only in the authorized direction, combining portability with unidirectional security."
+      }
+    },
+    "animation": {
+      "label": "Workflow",
+      "title": "How It Works",
+      "desc": "Unlike traditional removable media controls that restrict behavior through software policies, it eliminates the physical attack vector entirely."
+    },
+    "benefits": {
+      "label": "Key Benefits",
+      "title": "Why Choose It"
+    },
+    "problem": {
+      "label": "The Problem",
+      "title": "Why USB is an Unacceptable Risk",
+      "desc": "In critical industrial environments, the USB drive remains one of the most persistent and underestimated attack vectors. It bypasses perimeter defenses entirely.",
+      "c1": {
+        "title": "Physical Malware Transmission",
+        "text": "A single infected USB drive can introduce ransomware, destructive malware, or espionage tools directly into air-gapped OT networks, leading to production shutdowns, equipment damage, and severe threats to operational safety."
+      },
+      "c2": {
+        "title": "Unauthorized Data Leakage",
+        "text": "Removable media bypasses network perimeters and data loss prevention (DLP) systems, making it dangerously easy for sensitive intellectual property, operational data, or credentials to be extracted from secure environments without detection."
+      },
+      "c3": {
+        "title": "Inefficiency of Traditional AV",
+        "text": "Traditional Antivirus depends heavily on known signatures and takes time to detect new threats. It often fails to block zero-day malware or targeted attacks hidden on USB drives before they execute and compromise the system."
+      }
+    },
+    "useCases": {
+      "label": "Use Cases",
+      "title": "Where It is Deployed",
+      "c1": {
+        "title": "Secure Firmware Updates",
+        "text": "When vendors need to patch critical ICS/SCADA equipment, it ensures that only verified, malware-free firmware enters the OT environment, with a permanent cryptographic record of the transaction."
+      },
+      "c2": {
+        "title": "Log & Telemetry Extraction",
+        "text": "Operators can securely extract operational data, system logs, or compliance reports from highly isolated zones for analysis in the IT network, without creating a two-way connection."
+      },
+      "c3": {
+        "title": "Air-Gapped Workstations",
+        "text": "In defense and intelligence applications, it provides the only approved method for moving mission-critical intelligence across physically separated classification domains."
+      }
+    },
+    "featuresGrid": {
+      "f1": {
+        "title": "Zero USB Policy",
+        "desc": "Eliminates physical USB usage on the production floor entirely, closing one of industrial security's most persistent attack vectors while giving operational teams a fast alternative."
+      },
+      "f2": {
+        "title": "Military-Grade Encryption",
+        "desc": "Every file is secured with AES-256 encryption and RSA-2048 digital signature verification, ensuring data cannot be intercepted, tampered with, or replayed in transit."
+      },
+      "f3": {
+        "title": "Full Traceability",
+        "desc": "Real-time visibility into who transferred which file, when, and to which machine. Audit-ready logs support compliance with NIS2, IEC 62443, and internal security policies."
+      },
+      "f4": {
+        "title": "Hardware-Level Protection",
+        "desc": "Built on a FIPS-compliant TPM module and a hardened operating system, it is engineered to resist advanced persistent threats, tampering, and physical attack."
+      },
+      "f5": {
+        "title": "Seamless Integration with DFX Unidirectional Gateway",
+        "desc": "Transfers files via a built-in data diode path, ensuring data moves only in the authorized direction combining the operational convenience of a portable device with the hardware-enforced security of a unidirectional gateway."
+      }
+    }
+  },
+  "AboutUs": {
+    "part1": {
+      "mainTitle1": "We Secure the",
+      "mainTitleHighlight": "Flow",
+      "mainTitle2": "of Critical World",
+      "description": "DataFlowX is a cybersecurity company focused on securing critical infrastructures and enabling safe, controlled data flow between IT and OT environments.",
+      "f1": {
+        "title": "Zero Trust By Design",
+        "desc": "By Architecture Not Just Policy"
+      },
+      "f2": {
+        "title": "Proactive Over Reactive",
+        "desc": "Detect, Isolate, Neutralize"
+      },
+      "f3": {
+        "title": "Security As An Enabler",
+        "desc": "Making Security A Force Multiplier"
+      }
+    },
+    "part2": {
+      "title": "Who We Are?",
+      "p1": "We develop next-generation solutions built on Zero Trust architecture and AI-driven threat intelligence that designed for organizations where security is not optional.",
+      "p2": "We serve sectors where operational continuity and data integrity are mission-critical: energy, finance, manufacturing, and defense. Our products are engineered to meet the highest security standards, including CC EAL4+ certification, and are trusted by institutions that cannot afford to compromise.",
+      "p3": "We believe that security should not slow organizations down contrary it should make them stronger. That belief drives everything we build.",
+      "s1": {
+        "num": "25+",
+        "label": "Customers"
+      },
+      "s2": {
+        "num": "3+",
+        "label": "Countries"
+      },
+      "s3": {
+        "num": "5+",
+        "label": "Partners"
+      },
+      "s4": {
+        "num": "4+",
+        "label": "Certificate"
+      }
+    },
+    "part3": {
+      "title": "Join Our Team",
+      "desc": "Are you passionate about building mathematically unbreachable systems? Do you want to work on cutting-edge zero-trust solutions that protect the world's most critical infrastructures?\n\nAt DataFlowX, we are always looking for brilliant minds to join our mission. Be a part of the team that secures the flow of the critical world.",
+      "btn": "View Open Positions"
+    }
+  },
+  "Home": {
+    "Hero": {
+      "slide1": {
+        "titlePrefix": "The Infrastructure Runs.",
+        "titleHighlight": "The Threats Don't.",
+        "description": "DataFlowX delivers an integrated cybersecurity ecosystem purpose-built for organizations where downtime, data loss, and breaches are simply not options.\n\nFrom network boundaries to endpoints, from email to removable media. Every attack surface, covered.",
+        "buttonText": "Get Information"
+      },
+      "slide2": {
+        "titlePrefix": "Built for the Sectors",
+        "titleHighlight": "That Cannot Afford to Fail.",
+        "description": "Energy grids. Defense networks. Financial systems. Public infrastructure. The organizations that keep the world running face threats that generic security tools were never designed to stop. DataFlowX was.",
+        "buttonText": "Learn More",
+        "f1": "Zero Trust architecture, built in.",
+        "f2": "Hardware and software solutions, working as one ecosystem.",
+        "f3": "Proven in the most demanding environments on earth."
+      }
+    },
+    "HowItWorks": {
+      "titlePrefix": "Every Threat Vector.",
+      "titleHighlight": "One Ecosystem.",
+      "subtitle": "Cyber threats don't pick one entry point and neither do we.",
+      "network": {
+        "title": "Network Security",
+        "description": "Hardware-based unidirectional gateways provide physical isolation for critical SCADA and ICS networks.",
+        "l1": "DFX Unidirectional Gateway",
+        "l2": "DFX Secure Remote Access"
+      },
+      "file": {
+        "title": "File Security",
+        "description": "AI-powered ecosystem designed to trap, analyze, and neutralize sophisticated malware.",
+        "l1": "DFX Sandbox",
+        "l2": "DFX Media Transfer Station"
+      },
+      "email": {
+        "title": "Email Security",
+        "description": "Advanced email gateway with AI-driven threat detection and deep content disarm & reconstruction (CDR).",
+        "l1": "DFX Email Security Platform",
+        "l2": "DFX IntelRoom",
+        "l3": "TrueCDR™"
+      },
+      "ot": {
+        "title": "OT Security",
+        "description": "Secure, controlled data exchange between networks of differing security levels without compromising isolation.",
+        "l1": "DFX PortX"
+      }
+    },
+    "UseCases": {
+      "title": "Tailored Protection for High\nStakes Industries",
+      "subtitle": "Use Cases",
+      "c1": {
+        "headline": "Defense & Classified",
+        "description": "Physically irreversible, leak-proof data movement across classified network boundaries."
+      },
+      "c2": {
+        "headline": "Energy & Infrastructure",
+        "description": "A secure pipeline guaranteeing 100% isolation for OT networks and critical energy flows."
+      },
+      "c3": {
+        "headline": "Crypto & Finance",
+        "description": "Zero-risk data signing and secure asset transfer within an isolated air-gapped core."
+      },
+      "c4": {
+        "headline": "Industry & Manufacturing",
+        "description": "Uninterrupted production data securely bridging the physical air-gap between OT and IT layers."
+      }
+    },
+    "Testimonials": {
+      "title": "Trusted by",
+      "titleHighlight": "Industry Leaders",
+      "subtitle": "Hear how organizations worldwide secure their critical infrastructure and mission-critical data with DataFlowX.",
+      "t1": {
+        "text": "DataFlowX's Unidirectional Gateway completely transformed our OT network security. We can now safely export real-time production data without ever exposing our critical industrial control systems to external threats.",
+        "role": "Head of OT Security",
+        "sector": "Major Energy Provider"
+      },
+      "t2": {
+        "text": "The Sandbox solution catches zero-day threats that our previous vendors missed. Its ability to simulate human behavior and evade detection by advanced malware is truly game-changing for our SOC team.",
+        "role": "Chief Information Security Officer",
+        "sector": "Global Financial Institution"
+      },
+      "t3": {
+        "text": "Implementing DataFlowX's Secure Remote Access allowed us to maintain secure communication channels between different classification levels. The peace of mind it brings to our defense infrastructure is invaluable.",
+        "role": "Security Architect",
+        "sector": "National Defense Agency"
+      }
+    },
+    "LatestNews": {
+      "title": "Read the",
+      "titleHighlight": "latest news",
+      "viewAll": "View All",
+      "readArticle": "Read Article"
+    },
+    "Contact": {
+      "title": "Get Contact",
+      "subtitle": "Consult with our security experts to determine the right solution for your critical infrastructure",
+      "nameLabel": "Name Surname",
+      "orgLabel": "Company",
+      "emailLabel": "E-Mail",
+      "messageLabel": "Your Message",
+      "submitBtn": "Send Message"
+    }
+  }
+}

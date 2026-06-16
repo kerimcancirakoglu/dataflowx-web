@@ -1,7 +1,10 @@
 import React from 'react';
 import styles from './AboutUs.module.css';
+import { getTranslations } from 'next-intl/server';
 
-export default function AboutUs() {
+export default async function AboutUs() {
+  const t = await getTranslations('AboutUs');
+
   return (
     <section className={styles.section} id="about-us">
       <div className={styles.inner}>
@@ -10,13 +13,13 @@ export default function AboutUs() {
         <div className={styles.topPart}>
           <div className={styles.textContent}>
             <h2 className={styles.mainTitle}>
-              We Secure the <br />
-              <span className={styles.highlight}>Flow</span> of Critical<br />
-              World
+              {t('part1.mainTitle1')} <br />
+              <span className={styles.highlight}>{t('part1.mainTitleHighlight')}</span><br />
+              {t('part1.mainTitle2')}
             </h2>
 
             <p className={styles.description}>
-              DataFlowX is a cybersecurity company focused on securing critical infrastructures and enabling safe, controlled data flow between IT and OT environments.
+              {t('part1.description')}
             </p>
 
             <ul className={styles.featureList}>
@@ -27,8 +30,8 @@ export default function AboutUs() {
                   </svg>
                 </div>
                 <div className={styles.featureText}>
-                  <strong>Zero Trust By Design</strong>
-                  <span>By Architecture Not Just Policy</span>
+                  <strong>{t('part1.f1.title')}</strong>
+                  <span>{t('part1.f1.desc')}</span>
                 </div>
               </li>
               <li>
@@ -38,8 +41,8 @@ export default function AboutUs() {
                   </svg>
                 </div>
                 <div className={styles.featureText}>
-                  <strong>Proactive Over Reactive</strong>
-                  <span>Detect, Isolate, Neutralize</span>
+                  <strong>{t('part1.f2.title')}</strong>
+                  <span>{t('part1.f2.desc')}</span>
                 </div>
               </li>
               <li>
@@ -49,8 +52,8 @@ export default function AboutUs() {
                   </svg>
                 </div>
                 <div className={styles.featureText}>
-                  <strong>Security As An Enabler</strong>
-                  <span>Making Security A Force Multiplier</span>
+                  <strong>{t('part1.f3.title')}</strong>
+                  <span>{t('part1.f3.desc')}</span>
                 </div>
               </li>
             </ul>
@@ -127,36 +130,36 @@ export default function AboutUs() {
           </div>
 
           <div className={styles.whoWeAreTitleContainer}>
-            <h2 className={styles.whoWeAreTitle}>Who We Are?</h2>
+            <h2 className={styles.whoWeAreTitle}>{t('part2.title')}</h2>
           </div>
 
           <div className={styles.whoWeAreContent}>
             <p>
-              We develop next-generation solutions built on Zero Trust architecture and AI-driven threat intelligence that designed for organizations where security is not optional.
+              {t('part2.p1')}
             </p>
             <p>
-              We serve sectors where operational continuity and data integrity are mission-critical: energy, finance, manufacturing, and defense. Our products are engineered to meet the highest security standards, including CC EAL4+ certification, and are trusted by institutions that cannot afford to compromise.
+              {t('part2.p2')}
             </p>
             <p>
-              We believe that security should not slow organizations down contrary it should make them stronger. That belief drives everything we build.
+              {t('part2.p3')}
             </p>
 
             <div className={styles.statsGrid}>
               <div className={styles.statCard}>
-                <span className={styles.statNumber}>25+</span>
-                <span className={styles.statLabel}>Customers</span>
+                <span className={styles.statNumber}>{t('part2.s1.num')}</span>
+                <span className={styles.statLabel}>{t('part2.s1.label')}</span>
               </div>
               <div className={styles.statCard}>
-                <span className={styles.statNumber}>3+</span>
-                <span className={styles.statLabel}>Countries</span>
+                <span className={styles.statNumber}>{t('part2.s2.num')}</span>
+                <span className={styles.statLabel}>{t('part2.s2.label')}</span>
               </div>
               <div className={styles.statCard}>
-                <span className={styles.statNumber}>5+</span>
-                <span className={styles.statLabel}>Partners</span>
+                <span className={styles.statNumber}>{t('part2.s3.num')}</span>
+                <span className={styles.statLabel}>{t('part2.s3.label')}</span>
               </div>
               <div className={styles.statCard}>
-                <span className={styles.statNumber}>4+</span>
-                <span className={styles.statLabel}>Certificate</span>
+                <span className={styles.statNumber}>{t('part2.s4.num')}</span>
+                <span className={styles.statLabel}>{t('part2.s4.label')}</span>
               </div>
             </div>
           </div>
@@ -168,21 +171,19 @@ export default function AboutUs() {
         {/* Part 3: Join Our Team */}
         <div className={styles.storyPart}>
           <div className={styles.storyContent}>
-            <h2 className={styles.storyTitle}>Join Our Team</h2>
-            <p className={styles.storyDescription}>
-              Are you passionate about building mathematically unbreachable systems? Do you want to work on cutting-edge zero-trust solutions that protect the world's most critical infrastructures?
-              <br /><br />
-              At DataFlowX, we are always looking for brilliant minds to join our mission. Be a part of the team that secures the flow of the critical world.
+            <h2 className={styles.storyTitle}>{t('part3.title')}</h2>
+            <p className={styles.storyDescription} style={{ whiteSpace: 'pre-line' }}>
+              {t('part3.desc')}
             </p>
             <a href="mailto:hr@dataflowx.com" className={styles.primaryButton} style={{ textDecoration: 'none', display: 'inline-block', textAlign: 'center' }}>
-              View Open Positions
+              {t('part3.btn')}
             </a>
           </div>
 
           <div className={styles.imageContent}>
             <div className={styles.imageWrapper}>
               <img
-                src="/Kapak/kapaklar/data3.jpg"
+                src={`${process.env.NEXT_PUBLIC_WP_URL}/wp-content/uploads/Kapak/kapaklar/data3.jpg`}
                 alt="DataFlowX Team"
                 className={styles.aboutImage}
               />

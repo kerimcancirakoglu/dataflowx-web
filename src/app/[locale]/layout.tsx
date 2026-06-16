@@ -128,6 +128,14 @@ const websiteSchema = {
   },
 };
 
+import { Noto_Sans_Arabic } from 'next/font/google';
+
+const notoSansArabic = Noto_Sans_Arabic({
+  subsets: ['arabic'],
+  weight: ['400', '500', '600', '700'],
+  variable: '--font-arabic',
+});
+
 export default async function RootLayout({
   children,
   params,
@@ -138,9 +146,11 @@ export default async function RootLayout({
   const { locale } = await params;
   const direction = locale === 'ar' ? 'rtl' : 'ltr';
   const messages = await getMessages();
+  
+  const fontClass = locale === 'ar' ? notoSansArabic.variable : '';
 
   return (
-    <html lang={locale} dir={direction} suppressHydrationWarning>
+    <html lang={locale} dir={direction} suppressHydrationWarning className={fontClass}>
       <head>
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />

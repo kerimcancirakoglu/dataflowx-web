@@ -20,7 +20,12 @@ interface Resource {
   date: string;
   link: string;
   image: string;
+  /** Direct URL to the downloadable PDF on WP Engine */
+  fileUrl?: string;
 }
+
+const BROCHURE_DATA_DIODE_X =
+  'https://dataflowx1.wpenginepowered.com/wp-content/uploads/2026/06/converted_yeni_DataDiodeX_TS_Brosur_EN-1.pdf';
 
 const resourcesData: Resource[] = [
   {
@@ -32,7 +37,8 @@ const resourcesData: Resource[] = [
     useCase: 'Critical Infrastructure',
     date: '2023-11-15',
     link: '/resources/ds-datadiodex',
-    image: '/Kapak/kapaklar/datadiode1.jpg',
+    image: `${process.env.NEXT_PUBLIC_WP_URL}/wp-content/uploads/Kapak/kapaklar/datadiode1.jpg`,
+    fileUrl: BROCHURE_DATA_DIODE_X,
   },
   {
     id: 'ds-sra',
@@ -43,7 +49,7 @@ const resourcesData: Resource[] = [
     useCase: 'Defense & Military',
     date: '2023-12-01',
     link: '/resources/ds-sra',
-    image: '/Kapak/kapaklar/databroker1.jpg',
+    image: `${process.env.NEXT_PUBLIC_WP_URL}/wp-content/uploads/Kapak/kapaklar/databroker1.jpg`,
   },
   {
     id: 'wp-ot-security',
@@ -53,7 +59,7 @@ const resourcesData: Resource[] = [
     useCase: 'Critical Infrastructure',
     date: '2024-01-20',
     link: '/resources/wp-ot-security',
-    image: '/Kapak/kapaklar/data3.jpg',
+    image: `${process.env.NEXT_PUBLIC_WP_URL}/wp-content/uploads/Kapak/kapaklar/data3.jpg`,
   },
   {
     id: 'cs-energy',
@@ -64,7 +70,7 @@ const resourcesData: Resource[] = [
     useCase: 'Energy & SCADA',
     date: '2024-02-10',
     link: '/resources/cs-energy',
-    image: '/Kapak/kapaklar/datasecure1.jpg',
+    image: `${process.env.NEXT_PUBLIC_WP_URL}/wp-content/uploads/Kapak/kapaklar/datasecure1.jpg`,
   },
   {
     id: 'wp-nis2',
@@ -74,7 +80,7 @@ const resourcesData: Resource[] = [
     useCase: 'Critical Infrastructure',
     date: '2024-03-05',
     link: '/resources/wp-nis2',
-    image: '/Kapak/kapaklar/datastation1.jpg',
+    image: `${process.env.NEXT_PUBLIC_WP_URL}/wp-content/uploads/Kapak/kapaklar/datastation1.jpg`,
   },
   {
     id: 'ds-mts',
@@ -85,7 +91,7 @@ const resourcesData: Resource[] = [
     useCase: 'Defense & Military',
     date: '2024-04-12',
     link: '/resources/ds-mts',
-    image: '/Kapak/kapaklar/datamessage1.jpg',
+    image: `${process.env.NEXT_PUBLIC_WP_URL}/wp-content/uploads/Kapak/kapaklar/datamessage1.jpg`,
   },
   {
     id: 'rep-threat-2024',
@@ -95,7 +101,7 @@ const resourcesData: Resource[] = [
     useCase: 'Energy & SCADA',
     date: '2024-05-01',
     link: '/resources/rep-threat-2024',
-    image: '/Kapak/kapaklar/data3.jpg',
+    image: `${process.env.NEXT_PUBLIC_WP_URL}/wp-content/uploads/Kapak/kapaklar/data3.jpg`,
   },
   {
     id: 'ds-email',
@@ -106,7 +112,7 @@ const resourcesData: Resource[] = [
     useCase: 'Financial Services',
     date: '2024-05-15',
     link: '/resources/ds-email',
-    image: '/Kapak/kapaklar/datamessage1.jpg',
+    image: `${process.env.NEXT_PUBLIC_WP_URL}/wp-content/uploads/Kapak/kapaklar/datamessage1.jpg`,
   }
 ];
 
@@ -145,28 +151,23 @@ export default function ResourcesClient() {
   const [selectedUseCases, setSelectedUseCases] = useState<Set<UseCaseType>>(new Set());
   
   // PDF Lead Gen Modal State
-  const [downloadTarget, setDownloadTarget] = useState<string | null>(null);
+  const [downloadTarget, setDownloadTarget] = useState<{ title: string; fileUrl?: string } | null>(null);
 
   const handleResourceClick = (e: React.MouseEvent<HTMLAnchorElement>, resource: Resource) => {
-    // Treat these types as PDFs for the demo
     const pdfTypes: ResourceType[] = ['Data Sheet', 'Whitepaper', 'Guide', 'Report'];
-    
+
     if (pdfTypes.includes(resource.type)) {
       e.preventDefault();
-      setDownloadTarget(resource.link);
+      setDownloadTarget({ title: resource.title, fileUrl: resource.fileUrl });
     }
   };
 
   const handleModalClose = () => {
-    // Demo flow: Redirect to blog (news) when closed
-    window.location.href = '/news';
+    setDownloadTarget(null);
   };
 
   const handleModalSubmit = () => {
-    if (downloadTarget) {
-      // Demo flow: Redirect to blog (news) when submitted
-      window.location.href = '/news';
-    }
+    // fileUrl download is handled inside PdfLeadModal via triggerDownload
     setDownloadTarget(null);
   };
 
@@ -410,10 +411,12 @@ export default function ResourcesClient() {
       </div>
 
       {/* PDF Lead Generation Modal */}
-      <PdfLeadModal 
+      <PdfLeadModal
         isOpen={downloadTarget !== null}
         onClose={handleModalClose}
         onSubmit={handleModalSubmit}
+        documentName={downloadTarget?.title}
+        fileUrl={downloadTarget?.fileUrl}
       />
     </div>
   );

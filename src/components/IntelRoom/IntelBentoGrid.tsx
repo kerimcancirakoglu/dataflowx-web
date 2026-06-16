@@ -6,8 +6,8 @@ import styles from './IntelComponents.module.css';
 const BENTO_ITEMS = [
   {
     title: 'The Mesh',
-    label: 'BİLGİ GRAFİĞİ',
-    desc: 'Tehdit aktörleri, kampanyalar ve IOC\'ler arasındaki gizli bağlantıları ortaya çıkaran yaşayan, ilişkisel beyin. Her veri noktası bir düğüm, her ilişki bir kenar.',
+    label: 'KNOWLEDGE GRAPH',
+    desc: 'A living, relational brain that uncovers hidden connections between threat actors, campaigns, and IOCs. Every data point is a node, every relationship an edge.',
     size: 'large',
     tags: [
       { text: 'APT-29', type: 'red' },
@@ -20,22 +20,22 @@ const BENTO_ITEMS = [
   },
   {
     title: 'Sentinels',
-    label: 'SENSÖRLER',
-    desc: 'Otonom veri toplayan izleyici ağı. Yüzlerce kaynaktan IOC, feed ve tehdit sinyali gerçek zamanlı olarak toplanır.',
+    label: 'SENSORS',
+    desc: 'Autonomous data collection tracker network. IOCs, feeds, and threat signals from hundreds of sources are collected in real-time.',
     size: 'medium',
     tags: []
   },
   {
     title: 'Oracle',
-    label: 'PUANLAMA MOTORU',
-    desc: 'Birleşik karar motoru. Her IOC ve tehdidi bağlamsal kanıt zincirleriyle puanlar.',
+    label: 'SCORING ENGINE',
+    desc: 'Unified decision engine. Scores every IOC and threat with contextual evidence chains.',
     size: 'medium',
     tags: []
   },
   {
     title: 'Arsenal',
-    label: 'KURAL MOTORU',
-    desc: 'YARA · Sigma · Snort yaşam döngüsü yönetimi.',
+    label: 'RULE ENGINE',
+    desc: 'YARA · Sigma · Snort lifecycle management.',
     size: 'medium',
     tags: [
       { text: 'YARA', type: 'blue' },
@@ -45,29 +45,29 @@ const BENTO_ITEMS = [
   },
   {
     title: 'Relay',
-    label: 'API KATMANI',
-    desc: 'REST API sinir uçları. Gerçek zamanlı entegrasyon.',
+    label: 'API LAYER',
+    desc: 'REST API endpoints. Real-time integration.',
     size: 'medium',
     tags: []
   },
   {
     title: 'Briefs',
-    label: 'YÖNETSEL KATMAN',
-    desc: 'AI tarafından sentezlenmiş, yönetim kuruluna hazır tehdit brifingleri.',
+    label: 'EXECUTIVE LAYER',
+    desc: 'AI-synthesized, board-ready threat briefings.',
     size: 'small',
     tags: []
   },
   {
     title: 'Operations',
-    label: 'ANALİST KATMANI',
-    desc: 'SOC analistleri için gerçek zamanlı komuta merkezi. Bento Grid arayüzü.',
+    label: 'ANALYST LAYER',
+    desc: 'Real-time command center for SOC analysts. Bento Grid interface.',
     size: 'small',
     tags: []
   },
   {
     title: 'Bureau',
-    label: 'MSSP KATMANI',
-    desc: 'Çok kiracılı yönetim. Beyaz etiket raporlama. Ölçeklenebilir kâr marjı.',
+    label: 'MSSP LAYER',
+    desc: 'Multi-tenant management. White-label reporting. Scalable profit margin.',
     size: 'wide',
     tags: []
   }

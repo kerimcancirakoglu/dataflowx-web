@@ -132,35 +132,35 @@ export default function IntelGlobalMap() {
       {/* HUD UI Overlay */}
       <div className={styles.mapHudOverlay}>
         <div className={styles.hudTopLeft}>
-          <div className={styles.hudTitle}>/// CANLI METRİKLER</div>
+          <div className={styles.hudTitle}>/// LIVE METRICS</div>
           <div className={styles.hudStat}>
-            <span className={styles.hudStatLabel}>SİNYAL HACMİ</span>
-            <span className={styles.hudStatValue}>1.4M<small>/sn</small></span>
+            <span className={styles.hudStatLabel}>SIGNAL VOLUME</span>
+            <span className={styles.hudStatValue}>1.4M<small>/sec</small></span>
           </div>
           <div className={styles.hudStat}>
-            <span className={styles.hudStatLabel}>İŞLENEN KORELASYON</span>
+            <span className={styles.hudStatLabel}>PROCESSED CORRELATIONS</span>
             <span className={styles.hudStatValue}>324,592</span>
           </div>
           <div className={styles.hudStat}>
-            <span className={styles.hudStatLabel}>KRİTİK UYARI</span>
+            <span className={styles.hudStatLabel}>CRITICAL ALERTS</span>
             <span className={styles.hudStatValue} style={{ color: '#EF4444' }}>{activeNode === 3 || activeNode === 6 ? '3' : '2'}</span>
           </div>
         </div>
 
         <div className={styles.hudBottomRight}>
-          <div className={styles.hudTitle}>/// AKTİF OLAY AKIŞI</div>
+          <div className={styles.hudTitle}>/// ACTIVE EVENT STREAM</div>
           <div className={styles.logTerminal}>
             <div className={styles.logLine}>
               <span className={styles.logTime}>10:48:02</span> 
-              <span className={styles.logCode}>[SYS]</span> Oracle Engine bağlamı analiz ediyor...
+              <span className={styles.logCode}>[SYS]</span> Oracle Engine analyzing context...
             </div>
             <div className={styles.logLine}>
               <span className={styles.logTime}>10:48:03</span> 
-              <span className={styles.logCode} style={{color: '#F5A706'}}>[WARN]</span> Şüpheli lateral hareket tespit edildi (Node 5).
+              <span className={styles.logCode} style={{color: '#F5A706'}}>[WARN]</span> Suspicious lateral movement detected (Node 5).
             </div>
             <div className={styles.logLine}>
               <span className={styles.logTime}>10:48:05</span> 
-              <span className={styles.logCode} style={{color: '#EF4444'}}>[CRIT]</span> {activeNode === 3 || activeNode === 6 ? 'Node izolasyonu başlatıldı! Güvenlik skoru: 940' : 'Sistem normal, anomali tespiti devam ediyor.'}
+              <span className={styles.logCode} style={{color: '#EF4444'}}>[CRIT]</span> {activeNode === 3 || activeNode === 6 ? 'Node isolation initiated! Security score: 940' : 'System normal, anomaly detection ongoing.'}
             </div>
           </div>
         </div>

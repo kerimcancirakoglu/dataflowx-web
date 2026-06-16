@@ -1,0 +1,487 @@
+{
+  "Nav": {
+    "solutions": "Çözümler",
+    "network_security": "Ağ Güvenliği",
+    "unidirectional_gateway": "DFX Unidirectional Gateway",
+    "secure_remote_access": "DFX Secure Remote Access",
+    "file_security": "Dosya Güvenliği",
+    "sandbox": "DFX Sandbox",
+    "media_transfer_station": "DFX Media Transfer Station",
+    "email_security": "E-Posta Güvenliği",
+    "email_security_platform": "DFX E-Posta Güvenlik Platformu",
+    "intelroom": "DFX IntelRoom",
+    "true_cdr": "TrueCDR™",
+    "ot_security": "OT Güvenliği",
+    "portx": "DFX PortX",
+    "resources": "Kaynaklar",
+    "resource_center": "Kaynak Merkezi",
+    "blog": "Blog",
+    "news": "Haberler",
+    "partners": "İş Ortakları",
+    "about_us": "Hakkımızda",
+    "contact": "İletişim"
+  },
+  "Footer": {
+    "description": "Kritik altyapılar için donanım tabanlı veri izolasyonu ve Zero Trust mimarisi. Operasyonel akıştan ödün vermeyen siber güvenlik.",
+    "company": "Şirket",
+    "legal": "Yasal",
+    "use_cases": "Kullanım Senaryoları",
+    "privacy_policy": "Gizlilik Politikası",
+    "gdpr": "KVKK / GDPR",
+    "cookie_policy": "Çerez Politikası",
+    "all_rights_reserved": "Tüm hakları saklıdır."
+  },
+  "Solutions": {
+    "titlePrefix": "Her Tehdit Vektörü.",
+    "titleHighlight": "Tek Ekosistem.",
+    "subtitle": "Siber tehditler tek bir giriş noktası seçmez, biz de öyle.",
+    "protectsTitle": "Kritik Altyapınızı Nasıl Korur",
+    "goToProduct": "Ürün Sayfasına Git ➔",
+    "categories": {
+      "networkSecurity": "Ağ Güvenliği",
+      "fileSecurity": "Dosya Güvenliği",
+      "emailSecurity": "E-Posta Güvenliği",
+      "otSecurity": "OT Güvenliği"
+    },
+    "items": {
+      "unidirectional": {
+        "titlePrefix": "DFX Tek Yönlü",
+        "titleHighlight": "Ağ Geçidi",
+        "description": "DFX UDG, Sıfır Güven ilkeleriyle çalışan diyot tabanlı bir ağ geçididir. Kritik ağları fiziksel olarak izole eder ve yalnızca yetkilendirilmiş tek yönlü veri iletimine izin verir.",
+        "protects": "Tehditleri tamamen etkisiz hale getirerek ve tersine veri akışını fiziksel olarak imkansız kılarak hassas altyapıları güvence altına alır.",
+        "features": {
+          "f1": "Güvenlik Yönetimi Tekilliği",
+          "f2": "OT Görünürlüğü",
+          "f3": "Uyumluluk Raporlaması",
+          "f4": "İzleme ve Denetim",
+          "f5": "Güvenli Veri Paylaşımı"
+        }
+      },
+      "secureRemote": {
+        "titlePrefix": "DFX Güvenli Uzaktan",
+        "titleHighlight": "Erişim",
+        "description": "DFX UDG donanımı üzerine doğrudan inşa edilen ve sorunsuz entegre olan DFX CDS, izole ağlar arasında istek-yanıt tabanlı veri iletimi sağlar.",
+        "protects": "Ağlar arası veri trafiği üzerinde tam ve tavizsiz kontrol sağlayarak yetkisiz yanal hareketleri engeller.",
+        "features": {
+          "f1": "Sıfır Güven Erişimi",
+          "f2": "Granüler Filtreleme",
+          "f3": "ICAP Sandbox Entegrasyonu",
+          "f4": "İçerik Duyarlı",
+          "f5": "Active Directory Entegrasyonu"
+        }
+      },
+      "sandbox": {
+        "titlePrefix": "DFX",
+        "titleHighlight": "Sandbox",
+        "description": "DFX Sandbox, ağ trafiğini sürekli izleyerek şüpheli davranışları proaktif olarak tespit eder. Şüpheli dosyaları sanal bir sandbox ortamında izole eder ve analiz eder.",
+        "protects": "Gerçek üretim ortamını riske atmadan kötü amaçlı yazılım davranışlarını güvenle gözlemler ve siber tehditleri etkisiz hale getirir.",
+        "features": {
+          "f1": "Yapay Zeka Destekli Tespit",
+          "f2": "İnsan Davranışı Taklidi",
+          "f3": "Sanal Makine Otomatik Ölçekleme",
+          "f4": "MS Exchange Entegrasyonu",
+          "f5": "Ağ Paylaşım Transferleri"
+        }
+      },
+      "mediaTransfer": {
+        "titlePrefix": "DFX Medya Transfer",
+        "titleHighlight": "İstasyonu",
+        "description": "Hassas ağ ortamlarında taşınabilir medyanın güvenli kullanımını garanti eden fiziksel bir kiosk. Taşınabilir medyayı ağa bağlamadan önce derinlemesine inceler ve temizler.",
+        "protects": "Kötü amaçlı yükleri ağa girmeden önce tespit edip etkisiz hale getirerek 'Sıfır USB' politikasını fiziksel olarak uygular.",
+        "features": {
+          "f1": "Veri Kaybı Önleme (DLP)",
+          "f2": "Sıfır Gün Koruması",
+          "f3": "Dosya Arındırma (CDR)",
+          "f4": "Sıfır USB Politikası"
+        }
+      },
+      "emailSecurity": {
+        "titlePrefix": "DFX E-Posta Güvenlik",
+        "titleHighlight": "Platformu",
+        "description": "DFX ESP, yüksek hassasiyet, esneklik ve kontrolü birleştirerek kurumsal güvenlik ihtiyaçlarını bütünsel olarak ele alır. Modern mesajlaşma tehditleri için tasarlanmıştır.",
+        "protects": "SPAM, Phishing, BEC (İş E-postası İstismarı), Kötü Amaçlı Yazılım ve Exploit saldırılarına karşı aktif savunma kurar.",
+        "features": {
+          "f1": "YARA Motoru",
+          "f2": "LDAP Entegrasyonu",
+          "f3": "İçerik Arındırma (CDR)",
+          "f4": "Antivirüs Kontrolü",
+          "f5": "Kimlik Avı Koruması"
+        }
+      },
+      "intelroom": {
+        "titlePrefix": "DFX",
+        "titleHighlight": "IntelRoom",
+        "description": "Gelişmiş e-posta ve ağ tehditleri için tehdit istihbaratı paylaşım ve analiz odası.",
+        "protects": "Tüm ekosistem genelinde eyleme dönüştürülebilir tehdit istihbaratını toplar, analiz eder ve paylaşır.",
+        "features": {
+          "f1": "Gerçek Zamanlı İstihbarat",
+          "f2": "Küresel Tehdit Akışları"
+        }
+      },
+      "trucdr": {
+        "titlePrefix": "True",
+        "titleHighlight": "CDR",
+        "description": "Dosyaları yakalayan, kötü amaçlı aktif içeriği kaldıran ve temiz dosyaları gerçek zamanlı olarak yeniden oluşturan İçerik Arındırma ve Yeniden Oluşturma (CDR) motoru.",
+        "protects": "Yalnızca güvenli bileşenlerin içeri girmesini matematiksel olarak sağlayarak yaygın dosya formatlarında gizlenen sıfır gün açıklarını durdurur.",
+        "features": {
+          "f1": "Derin Dosya İncelemesi",
+          "f2": "Sıfır Güven Dosya Yeniden Oluşturma"
+        }
+      },
+      "portableAccess": {
+        "titlePrefix": "DFX Pass",
+        "titleHighlight": "(PortX)",
+        "description": "Çekirdek izole ağı tehlikeye atmadan uzak veya geçici operatörler için güvenli erişim ve veri alışverişi sağlar. Sıkı bir 'hiçbir şeye güvenme, her şeyi doğrula' mimarisi üzerine inşa edilmiştir.",
+        "protects": "Uzak oturumlar için sürekli kimlik doğrulama ve izolasyon sağlayarak harici veya güvenilmeyen cihazlardan kaynaklanan yanal hareketi tamamen ortadan kaldırır.",
+        "features": {
+          "f1": "Sıfır Güven Ağ Erişimi",
+          "f2": "Şifreli Tünelleme",
+          "f3": "Sıkı Kimlik Doğrulama"
+        }
+      }
+    }
+  },
+  "TrueCDR": {
+    "hero": {
+      "overTitle": "İçerik Arındırma ve Yeniden Oluşturma",
+      "tagline": "Silahlanmış İçeriği Etkisiz Hale Getirin. Güvenli Dosyalar Teslim Edin.",
+      "subtitle": "TrueCDR™, kullanıcılarınıza, gelen kutularına, paylaşılan sürücülere, taşınabilir medya iş akışlarına ve hassas ağlara ulaşmadan önce dosya kaynaklı tehditleri etkisiz hale getirir. Kötü amaçlı, aktif, bozuk ve gereksiz riskleri ortadan kaldırır — ardından kesintisiz iş operasyonları için güvenli, kullanılabilir içeriği yeniden oluşturur.",
+      "reqDemo": "Demo İste",
+      "reviewOpts": "Entegrasyon Seçeneklerini İncele"
+    },
+    "problem": {
+      "label": "ZORLUK",
+      "title": "Dosya Hala En Büyük Saldırı Vektörü",
+      "c1": {
+        "title": "Sadece Tespit Etmek Yetersiz Kalıyor",
+        "text": "Antivirüs, sandboxing ve tehdit istihbaratı büyük ölçüde bilinen göstergelere, gözlemlenen davranışlara ve patlatma zamanlamasına bağlıdır. Saldırganlar, geleneksel katmanları atlatmak için hızla kaçamak belgeler, gecikmeli yürütme ve bozuk yapılar kullanırlar."
+      },
+      "c2": {
+        "title": "Her Şeyi Engellemek İşi Durdurur",
+        "text": "Kullanıcıların belgelere, faturalara, sözleşmelere ve iş ortağı içeriklerine ihtiyacı vardır. Toptan engelleme, operasyonel sürtünme yaratır ve güvenlik ekipleri üzerinde çevre kontrollerini gevşetmeleri için muazzam bir baskı oluşturur."
+      },
+      "c3": {
+        "title": "Manuel İnceleme Ölçeklenemez",
+        "text": "Güvenlik ekipleri her eki, yüklemeyi veya paylaşılan dosyayı manuel olarak inceleyemez. Yüksek hacimli ortamlar, sonu gelmeyen analist biletleri olmadan tekrarlanabilir uygulama ve denetime hazır kanıtlara ihtiyaç duyar."
+      },
+      "quote": "Soru sadece <em>'Bu dosya kötü amaçlı mı?'</em> değildir.<br />Daha iyi soru şudur: <em>Bu dosya kullanılacak kadar güvenli hale getirilebilir mi?</em>"
+    },
+    "features": {
+      "label": "YETENEKLER",
+      "title": "Kurumsal Seviye CDR",
+      "desc": "Gerçek dünya kurumsal dosya trafiği için tasarlandı. Her yetenek tek bir prensip etrafında şekillendirildi: güvenliği yeniden oluştur, kullanılabilirliği koru.",
+      "f1": {
+        "label": "ÇOKLU FORMAT İŞLEME",
+        "text": "Gerçek kurumsal trafiği işler: tüm yaygın dosya türlerindeki belgeler, ekler, yüklemeler, paylaşılan dosyalar ve derinlemesine iç içe geçmiş arşivler."
+      },
+      "f2": {
+        "label": "AKTİF İÇERİK ETKİSİZLEŞTİRME",
+        "text": "Riskli aktif içeriği - makrolar, komut dosyaları, gömülü nesneler, otomatik eylemler ve güvenli olmayan bağlantıları - kaldırır veya etkisiz hale getirir."
+      },
+      "f3": {
+        "label": "YAPISAL DOĞRULAMA",
+        "text": "Dahili dosya yapılarını, kapsayıcı ilişkilerini, gömülü içeriği, bozuk bileşenleri ve gizli iç yapıları inceler."
+      },
+      "f4": {
+        "label": "YENİDEN OLUŞTURMA MOTORU",
+        "text": "İçeriğin temiz, daha güvenli, tamamen işlevsel bir sürümünü üretir - güvenli olmayan dosya yeteneklerini kaldırırken kullanılabilirliği korur."
+      },
+      "f5": {
+        "label": "MICROSOFT 365 ENTEGRASYONU",
+        "text": "Exchange E-posta, SharePoint ve OneDrive iş akışlarında doğrudan, API tabanlı izleme ve ek arındırma."
+      },
+      "f6": {
+        "label": "POLİTİKA TABANLI KONTROL",
+        "text": "Güvenlik duruşunuza bağlı olarak risk sonuçları için özel kurallar yapılandırın: izin ver, temizle, engelle, karantinaya al, orijinali koru veya yönlendir."
+      }
+    },
+    "benefits": {
+      "label": "TEMEL FAYDALAR",
+      "title": "Riski Arındırın. İşi Koruyun.",
+      "b1": {
+        "title": "Ön Bilgi Gerektirmez",
+        "desc": "Saldırganın önceden bilinmesine bağlı olmayan güvenlik — sıfır gün tehditlerine karşı etkilidir."
+      },
+      "b2": {
+        "title": "İş Sürekliliği",
+        "desc": "Dosyaları çıkmaz karantinalara zorlamak yerine güvenli, kullanılabilir içeriği yeniden oluşturur."
+      },
+      "b3": {
+        "title": "Deterministik Koruma",
+        "desc": "Geleneksel antivirüs, sandbox ve EDR katmanlarına atlatılamaz bir yoldaş."
+      },
+      "b4": {
+        "title": "Esnek Dağıtım",
+        "desc": "Kurumsal BT, düzenlenmiş ağlar ve endüstriyel ortamlar için şirket içi, bulut ve hibrit dağıtımlar."
+      },
+      "b5": {
+        "title": "Tam Denetlenebilirlik",
+        "desc": "Uyumluluk için net, dosya düzeyinde işleme kayıtları ve izlenebilir dönüşüm kanıtları."
+      },
+      "b6": {
+        "title": "Azalan Analist Yükü",
+        "desc": "Tutarlı dosya işlemeyi otomatikleştirerek manuel ek inceleme biletlerini ortadan kaldırır."
+      }
+    },
+    "vs": {
+      "label": "REKABETÇİ KONUMLANDIRMA",
+      "title": "Tespit, Engelleme ve Çıkarmanın Ötesinde",
+      "v1": {
+        "vs": "Antivirüs'e Karşı",
+        "text": "Antivirüs bilinen imzaları arar. DFX CDR, sıfır gün tamamen bilinmese bile tehlikeli yetenekleri kaldırır."
+      },
+      "v2": {
+        "vs": "Sandbox'a Karşı",
+        "text": "Sandbox, gecikmeli bir sanal ortamda davranışı gözlemler — modern kötü amaçlı yazılımlar bundan kaçar. DFX CDR dosyayı anında yeniden oluşturur."
+      },
+      "v3": {
+        "vs": "Sadece Engellemeye Karşı",
+        "text": "Engelleme korur ancak işi durdurur. DFX CDR orta bir yol sunar: riskli kısımları çıkar, güvenli yeniden oluşturulmuş içeriği teslim et."
+      },
+      "v4": {
+        "vs": "Çıkarma Araçlarına Karşı",
+        "text": "Çıkarma araçları işaretler veya meta verileri çeker. DFX CDR, riskli girdiyi tamamen güvenli, kullanılabilir çıktıya tam olarak dönüştürür."
+      }
+    }
+  },
+  "PortX": {
+    "hero": {
+      "overTitle": "DFX Taşınabilir Erişim Güvenlik Sistemi",
+      "tagline": "USB Riskini Ortadan Kaldırın. İş Akışını Koruyun.",
+      "subtitle": "Endüstriyel ortamlarda USB sürücü, üretim sahasındaki en tehlikeli ve en kaçınılmaz araçlardan biridir. DFX Taşınabilir Erişim Güvenlik Sistemi bunu tamamen değiştirir: tek bir kontrolsüz USB bağlantısı olmadan en hassas ağlarınızda güvenli, şifreli ve tamamen denetlenebilir dosya aktarımları sağlayan sertleştirilmiş, politika odaklı bir veri köprüsü.",
+      "reqDemo": "Demo İste",
+      "howItWorks": "Nasıl Çalıştığını Görün"
+    },
+    "overview": {
+      "overTitle": "ÜRÜNE GENEL BAKIŞ",
+      "title": "DFX Taşınabilir Erişim Güvenlik Sistemi",
+      "desc": "Kontrolsüz USB kullanımının kabul edilemez bir risk oluşturduğu endüstriyel ve operasyonel ortamlar için özel olarak tasarlanmış, donanım tabanlı Sıfır Güven (Zero Trust) veri köprüsü.",
+      "c1": {
+        "label": "USB RİSKİNİ ORTADAN KALDIRIR",
+        "text": "Geleneksel USB transferlerini merkezi olarak yönetilen, AES-256 şifreli ve NFC özellikli bir veri köprüsüyle değiştirerek fiziksel saldırı vektörünü ortadan kaldırır."
+      },
+      "c2": {
+        "label": "DONANIM GÜVENLİĞİ",
+        "text": "FIPS uyumlu bir TPM modülü ve en gelişmiş saldırı tekniklerine bile direnecek şekilde tasarlanmış sertleştirilmiş bir işletim sistemi üzerine inşa edilmiştir."
+      },
+      "c3": {
+        "label": "KUSURSUZ ENTEGRASYON",
+        "text": "DFX Unidirectional Gateway ile kusursuz bir şekilde çalışır, verilerin yalnızca yetkili yönde hareket etmesini sağlayarak taşınabilirliği tek yönlü güvenlikle birleştirir."
+      }
+    },
+    "animation": {
+      "label": "İş Akışı",
+      "title": "Nasıl Çalışır",
+      "desc": "Yazılım politikaları aracılığıyla davranışı kısıtlayan geleneksel çıkarılabilir medya kontrollerinin aksine, fiziksel saldırı vektörünü tamamen ortadan kaldırır."
+    },
+    "benefits": {
+      "label": "Temel Faydalar",
+      "title": "Neden Seçmelisiniz"
+    },
+    "problem": {
+      "label": "Sorun",
+      "title": "USB Neden Kabul Edilemez Bir Risktir",
+      "desc": "Kritik endüstriyel ortamlarda, USB sürücü en kalıcı ve hafife alınan saldırı vektörlerinden biri olmaya devam etmektedir. Çevre savunmalarını tamamen atlar.",
+      "c1": {
+        "title": "Fiziksel Kötü Amaçlı Yazılım İletimi",
+        "text": "Virüs bulaşmış tek bir USB sürücü; fidye yazılımı, yıkıcı kötü amaçlı yazılım veya casusluk araçlarını doğrudan hava boşluklu (air-gapped) OT ağlarına sokarak üretim durmalarına, ekipman hasarına ve operasyonel güvenliğe yönelik ciddi tehditlere yol açabilir."
+      },
+      "c2": {
+        "title": "Yetkisiz Veri Sızıntısı",
+        "text": "Çıkarılabilir medya, ağ çevrelerini ve veri kaybını önleme (DLP) sistemlerini atlayarak hassas fikri mülkiyetin, operasyonel verilerin veya kimlik bilgilerinin tespit edilmeden güvenli ortamlardan çıkarılmasını tehlikeli derecede kolaylaştırır."
+      },
+      "c3": {
+        "title": "Geleneksel AV'nin Yetersizliği",
+        "text": "Geleneksel Antivirüs büyük ölçüde bilinen imzalara dayanır ve yeni tehditleri tespit etmesi zaman alır. Çoğu zaman USB sürücülerde gizlenen sıfır gün (zero-day) kötü amaçlı yazılımlarını veya hedefli saldırıları, bunlar çalıştırılıp sistemi tehlikeye atmadan önce engellemekte başarısız olur."
+      }
+    },
+    "useCases": {
+      "label": "Kullanım Senaryoları",
+      "title": "Nerelerde Dağıtılır",
+      "c1": {
+        "title": "Güvenli Firmware Güncellemeleri",
+        "text": "Satıcıların kritik ICS/SCADA ekipmanlarını yamaması gerektiğinde, işlemin kalıcı bir kriptografik kaydıyla birlikte OT ortamına yalnızca doğrulanmış, kötü amaçlı yazılım içermeyen donanım yazılımının girmesini sağlar."
+      },
+      "c2": {
+        "title": "Log ve Telemetri Çıkarımı",
+        "text": "Operatörler, iki yönlü bir bağlantı oluşturmadan IT ağında analiz etmek üzere yüksek düzeyde izole edilmiş bölgelerden operasyonel verileri, sistem günlüklerini veya uyumluluk raporlarını güvenli bir şekilde çıkarabilir."
+      },
+      "c3": {
+        "title": "Hava Boşluklu (Air-Gapped) İş İstasyonları",
+        "text": "Savunma ve istihbarat uygulamalarında, görev açısından kritik istihbaratın fiziksel olarak ayrılmış sınıflandırma alanları arasında taşınması için onaylanmış tek yöntemi sağlar."
+      }
+    },
+    "featuresGrid": {
+      "f1": {
+        "title": "Sıfır USB Politikası",
+        "desc": "Üretim sahasında fiziksel USB kullanımını tamamen ortadan kaldırarak endüstriyel güvenliğin en kalıcı saldırı vektörlerinden birini kapatırken operasyon ekiplerine hızlı bir alternatif sunar."
+      },
+      "f2": {
+        "title": "Askeri Düzeyde Şifreleme",
+        "desc": "Her dosya AES-256 şifrelemesi ve RSA-2048 dijital imza doğrulaması ile güvence altına alınarak verilerin geçiş sırasında engellenememesi, tahrif edilememesi veya tekrarlanamaması sağlanır."
+      },
+      "f3": {
+        "title": "Tam İzlenebilirlik",
+        "desc": "Hangi dosyayı, kimin, ne zaman ve hangi makineye aktardığına dair gerçek zamanlı görünürlük. Denetime hazır günlükler NIS2, IEC 62443 ve dahili güvenlik politikalarına uyumluluğu destekler."
+      },
+      "f4": {
+        "title": "Donanım Seviyesinde Koruma",
+        "desc": "FIPS uyumlu bir TPM modülü ve sertleştirilmiş bir işletim sistemi üzerine inşa edilmiştir, gelişmiş kalıcı tehditlere, kurcalamaya ve fiziksel saldırılara direnecek şekilde tasarlanmıştır."
+      },
+      "f5": {
+        "title": "DFX Unidirectional Gateway ile Kusursuz Entegrasyon",
+        "desc": "Dosyaları yerleşik bir veri diyotu yolu üzerinden aktararak verilerin yalnızca yetkili yönde hareket etmesini sağlar. Taşınabilir bir cihazın operasyonel rahatlığını, tek yönlü bir ağ geçidinin donanım destekli güvenliği ile birleştirir."
+      }
+    }
+  },
+  "AboutUs": {
+    "part1": {
+      "mainTitle1": "Kritik Dünyanın",
+      "mainTitleHighlight": "Akışını",
+      "mainTitle2": "Güvence Altına Alıyoruz",
+      "description": "DataFlowX, kritik altyapıları güvence altına almaya ve BT ile OT ortamları arasında güvenli, kontrollü veri akışı sağlamaya odaklanmış bir siber güvenlik şirketidir.",
+      "f1": {
+        "title": "Tasarım Gereği Sıfır Güven (Zero Trust)",
+        "desc": "Sadece Politikayla Değil, Mimariyle"
+      },
+      "f2": {
+        "title": "Reaktif Değil Proaktif",
+        "desc": "Tespit Et, İzole Et, Etkisiz Hale Getir"
+      },
+      "f3": {
+        "title": "Destekleyici Bir Güç Olarak Güvenlik",
+        "desc": "Güvenliği Bir Güç Çarpanı Haline Getirmek"
+      }
+    },
+    "part2": {
+      "title": "Biz Kimiz?",
+      "p1": "Güvenliğin bir seçenek olmadığı kurumlar için tasarlanmış, Sıfır Güven (Zero Trust) mimarisi ve yapay zeka destekli tehdit istihbaratı üzerine inşa edilmiş yeni nesil çözümler geliştiriyoruz.",
+      "p2": "Operasyonel sürekliliğin ve veri bütünlüğünün kritik olduğu sektörlere hizmet veriyoruz: enerji, finans, üretim ve savunma. Ürünlerimiz, CC EAL4+ sertifikasyonu dahil en yüksek güvenlik standartlarını karşılayacak şekilde tasarlanmış olup, taviz vermeyi göze alamayan kurumlar tarafından güvenle kullanılmaktadır.",
+      "p3": "Güvenliğin kurumları yavaşlatmaması gerektiğine, aksine onları daha da güçlendirmesi gerektiğine inanıyoruz. Bu inanç, inşa ettiğimiz her şeye yön veriyor.",
+      "s1": {
+        "num": "25+",
+        "label": "Müşteri"
+      },
+      "s2": {
+        "num": "3+",
+        "label": "Ülke"
+      },
+      "s3": {
+        "num": "5+",
+        "label": "İş Ortağı"
+      },
+      "s4": {
+        "num": "4+",
+        "label": "Sertifika"
+      }
+    },
+    "part3": {
+      "title": "Ekibimize Katıl",
+      "desc": "Matematiksel olarak aşılamaz sistemler inşa etme konusunda tutkulu musunuz? Dünyanın en kritik altyapılarını koruyan son teknoloji sıfır güven çözümleri üzerinde çalışmak ister misiniz?\n\nDataFlowX olarak, misyonumuza katılacak parlak beyinler arıyoruz. Kritik dünyanın akışını güvence altına alan ekibin bir parçası olun.",
+      "btn": "Açık Pozisyonları Görüntüle"
+    }
+  },
+  "Home": {
+    "Hero": {
+      "slide1": {
+        "titlePrefix": "Altyapı Çalışır.",
+        "titleHighlight": "Tehditler Durur.",
+        "description": "DataFlowX, kesinti, veri kaybı ve ihlallerin asla bir seçenek olmadığı kurumlar için özel olarak tasarlanmış entegre bir siber güvenlik ekosistemi sunar.\n\nAğ sınırlarından uç noktalara, e-postadan çıkarılabilir medyaya kadar. Her saldırı yüzeyi güvende.",
+        "buttonText": "Bilgi Al"
+      },
+      "slide2": {
+        "titlePrefix": "Başarısızlığı Göze Alamayacak",
+        "titleHighlight": "Sektörler İçin Geliştirildi.",
+        "description": "Enerji şebekeleri. Savunma ağları. Finansal sistemler. Kamu altyapısı. Dünyanın işlemesini sağlayan kurumlar, sıradan güvenlik araçlarının asla durduramayacağı tehditlerle karşı karşıya. DataFlowX bunun için tasarlandı.",
+        "buttonText": "Daha Fazla Bilgi",
+        "f1": "Tasarım gereği yerleşik Sıfır Güven (Zero Trust) mimarisi.",
+        "f2": "Tek bir ekosistem olarak çalışan donanım ve yazılım çözümleri.",
+        "f3": "Dünyanın en zorlu ortamlarında kanıtlanmış başarı."
+      }
+    },
+    "HowItWorks": {
+      "titlePrefix": "Her Tehdit Vektörü.",
+      "titleHighlight": "Tek Ekosistem.",
+      "subtitle": "Siber tehditler tek bir giriş noktası seçmez, biz de öyle.",
+      "network": {
+        "title": "Ağ Güvenliği",
+        "description": "Donanım tabanlı tek yönlü ağ geçitleri, kritik SCADA ve ICS ağları için fiziksel izolasyon sağlar.",
+        "l1": "DFX Unidirectional Gateway",
+        "l2": "DFX Secure Remote Access"
+      },
+      "file": {
+        "title": "Dosya Güvenliği",
+        "description": "Gelişmiş kötü amaçlı yazılımları yakalamak, analiz etmek ve etkisiz hale getirmek için tasarlanmış yapay zeka destekli ekosistem.",
+        "l1": "DFX Sandbox",
+        "l2": "DFX Media Transfer Station"
+      },
+      "email": {
+        "title": "E-Posta Güvenliği",
+        "description": "Yapay zeka destekli tehdit tespiti ve derin içerik arındırma (CDR) sunan gelişmiş e-posta ağ geçidi.",
+        "l1": "DFX E-Posta Güvenlik Platformu",
+        "l2": "DFX IntelRoom",
+        "l3": "TrueCDR™"
+      },
+      "ot": {
+        "title": "OT Güvenliği",
+        "description": "Farklı güvenlik seviyelerindeki ağlar arasında izolasyondan ödün vermeden güvenli ve kontrollü veri değişimi.",
+        "l1": "DFX PortX"
+      }
+    },
+    "UseCases": {
+      "title": "Yüksek Riskli Sektörler İçin\nÖzel Koruma",
+      "subtitle": "Kullanım Senaryoları",
+      "c1": {
+        "headline": "Savunma ve Gizlilik",
+        "description": "Gizli ağ sınırları arasında fiziksel olarak geri döndürülemez, sızıntı yapmayan veri hareketi."
+      },
+      "c2": {
+        "headline": "Enerji ve Altyapı",
+        "description": "OT ağları ve kritik enerji akışları için %100 izolasyonu garanti eden güvenli bir veri hattı."
+      },
+      "c3": {
+        "headline": "Kripto ve Finans",
+        "description": "İzole edilmiş, hava boşluklu bir çekirdekte sıfır riskli veri imzalama ve güvenli varlık transferi."
+      },
+      "c4": {
+        "headline": "Endüstri ve Üretim",
+        "description": "OT ve BT katmanları arasındaki fiziksel hava boşluğunu güvenle köprüleyen kesintisiz üretim verisi."
+      }
+    },
+    "Testimonials": {
+      "title": "Endüstri Liderleri",
+      "titleHighlight": "Tarafından Güveniliyor",
+      "subtitle": "Dünya çapındaki kurumların, kritik altyapılarını ve hayati verilerini DataFlowX ile nasıl güvence altına aldıklarını dinleyin.",
+      "t1": {
+        "text": "DataFlowX'in Unidirectional Gateway çözümü OT ağ güvenliğimizi tamamen dönüştürdü. Artık kritik endüstriyel kontrol sistemlerimizi dış tehditlere maruz bırakmadan gerçek zamanlı üretim verilerini güvenle dışarı aktarabiliyoruz.",
+        "role": "OT Güvenlik Müdürü",
+        "sector": "Büyük Enerji Sağlayıcısı"
+      },
+      "t2": {
+        "text": "Sandbox çözümü, önceki tedarikçilerimizin kaçırdığı sıfır gün tehditlerini yakalıyor. İnsan davranışını taklit edebilme ve gelişmiş zararlı yazılımlar tarafından tespitten kaçınabilme yeteneği SOC ekibimiz için gerçekten oyunu değiştiriyor.",
+        "role": "Bilgi Güvenliği Baş Yöneticisi (CISO)",
+        "sector": "Küresel Finans Kurumu"
+      },
+      "t3": {
+        "text": "DataFlowX'in Güvenli Uzaktan Erişim sistemini uygulamak, farklı sınıflandırma seviyeleri arasında güvenli iletişim kanallarını sürdürmemizi sağladı. Savunma altyapımıza getirdiği huzur paha biçilemez.",
+        "role": "Güvenlik Mimarı",
+        "sector": "Ulusal Savunma Ajansı"
+      }
+    },
+    "LatestNews": {
+      "title": "En son",
+      "titleHighlight": "haberleri okuyun",
+      "viewAll": "Tümünü Gör",
+      "readArticle": "Makaleyi Oku"
+    },
+    "Contact": {
+      "title": "İletişime Geçin",
+      "subtitle": "Kritik altyapınız için doğru çözümü belirlemek üzere güvenlik uzmanlarımızla görüşün",
+      "nameLabel": "Ad Soyad",
+      "orgLabel": "Şirket",
+      "emailLabel": "E-Posta",
+      "messageLabel": "Mesajınız",
+      "submitBtn": "Mesaj Gönder"
+    }
+  }
+}

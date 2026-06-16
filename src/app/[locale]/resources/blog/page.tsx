@@ -64,6 +64,8 @@ const blogListingSchema = {
 import client from '@/lib/apollo-client';
 import { GET_ALL_POSTS } from '@/lib/graphql-queries';
 
+import { localeToWPLanguage } from '@/lib/locale-map';
+
 export const revalidate = 3600; // ISR: Revalidate every hour
 
 export default async function BlogPage({
@@ -73,8 +75,8 @@ export default async function BlogPage({
 }) {
   const { locale } = await params;
   
-  // Convert our path locale to WPGraphQL LanguageCodeEnum if needed
-  const wpLangCode = locale.toUpperCase(); 
+  // Convert our path locale to WPGraphQL LanguageCodeFilterEnum
+  const wpLangCode = localeToWPLanguage(locale);
 
   // Fetch real posts from WordPress — graceful fallback to empty array on error
   let wpPosts: any[] = [];
@@ -82,8 +84,13 @@ export default async function BlogPage({
     const { data } = await client.query<any>({
       query: GET_ALL_POSTS,
       variables: { language: wpLangCode },
+      fetchPolicy: 'no-cache', // Ensure we get fresh data
     });
-    wpPosts = data?.posts?.nodes || [];
+    
+    // Sadece "dataflowx-news" kategorisine sahip OLMAYANLARI filtrele (Blog yazıları)
+    wpPosts = (data?.posts?.nodes || []).filter((post: any) => 
+      !post.categories?.nodes?.some((cat: any) => cat.slug === 'dataflowx-news')
+    );
   } catch (err) {
     // WP down or WPGraphQL not configured yet — page still renders with empty state
     console.warn('[BlogPage] WordPress API unreachable. Rendering with empty posts.', err);
@@ -102,7 +109,7 @@ export default async function BlogPage({
         },
         featuredImage: {
           node: {
-            sourceUrl: '/Kapak/kapaklar/datamessage1.jpg',
+            sourceUrl: `${process.env.NEXT_PUBLIC_WP_URL}/wp-content/uploads/Kapak/kapaklar/datamessage1.jpg`,
             altText: 'M365 Security'
           }
         }
@@ -117,7 +124,7 @@ export default async function BlogPage({
         },
         featuredImage: {
           node: {
-            sourceUrl: '/Kapak/kapaklar/datadiode1.jpg',
+            sourceUrl: `${process.env.NEXT_PUBLIC_WP_URL}/wp-content/uploads/Kapak/kapaklar/datadiode1.jpg`,
             altText: 'OT Security'
           }
         }
@@ -132,7 +139,7 @@ export default async function BlogPage({
         },
         featuredImage: {
           node: {
-            sourceUrl: '/Kapak/kapaklar/datasecure1.jpg',
+            sourceUrl: `${process.env.NEXT_PUBLIC_WP_URL}/wp-content/uploads/Kapak/kapaklar/datasecure1.jpg`,
             altText: 'Critical Infrastructure'
           }
         }
@@ -147,7 +154,7 @@ export default async function BlogPage({
         },
         featuredImage: {
           node: {
-            sourceUrl: '/Kapak/kapaklar/data3.jpg',
+            sourceUrl: `${process.env.NEXT_PUBLIC_WP_URL}/wp-content/uploads/Kapak/kapaklar/data3.jpg`,
             altText: 'Malware Analysis'
           }
         }

@@ -3,7 +3,7 @@ import { gql } from '@apollo/client';
 // WPGraphQL query for the blog listing page
 export const GET_ALL_POSTS = gql`
   query GetAllPosts($language: LanguageCodeFilterEnum!) {
-    posts(where: { language: $language }) {
+    posts(first: 100, where: { language: $language }) {
       nodes {
         id
         title
@@ -21,8 +21,11 @@ export const GET_ALL_POSTS = gql`
             altText
           }
         }
-        seo {
-          readingTime
+        categories {
+          nodes {
+            name
+            slug
+          }
         }
       }
     }
@@ -31,13 +34,14 @@ export const GET_ALL_POSTS = gql`
 
 // WPGraphQL query for generating static paths
 export const GET_ALL_POST_SLUGS = gql`
-  query GetAllPostSlugs {
-    posts(first: 100) {
+  query GetAllPostSlugs($language: LanguageCodeFilterEnum!, $after: String) {
+    posts(first: 100, where: { language: $language }, after: $after) {
+      pageInfo {
+        hasNextPage
+        endCursor
+      }
       nodes {
         slug
-        language {
-          code
-        }
       }
     }
   }
@@ -45,29 +49,30 @@ export const GET_ALL_POST_SLUGS = gql`
 
 // WPGraphQL query for the single blog detail page
 export const GET_POST_BY_SLUG = gql`
-  query GetPostBySlug($id: ID!, $idType: PostIdType = SLUG) {
-    post(id: $id, idType: $idType) {
-      id
-      title
-      content
-      date
-      author {
-        node {
-          name
-        }
-      }
-      featuredImage {
-        node {
-          sourceUrl
-          altText
-        }
-      }
-      seo {
+  query GetPostBySlug($id: ID!, $language: LanguageCodeEnum!) {
+    post(id: $id, idType: SLUG) {
+      translation(language: $language) {
+        id
         title
-        metaDesc
-        readingTime
-        opengraphImage {
-          sourceUrl
+        content
+        date
+        slug
+        author {
+          node {
+            name
+          }
+        }
+        featuredImage {
+          node {
+            sourceUrl
+            altText
+          }
+        }
+        translations {
+          slug
+          language {
+            code
+          }
         }
       }
     }

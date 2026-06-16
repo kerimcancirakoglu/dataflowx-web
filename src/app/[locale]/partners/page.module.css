@@ -1,0 +1,110 @@
+.main {
+  min-height: 100vh;
+  background: var(--color-background, #050505);
+  color: var(--color-text-primary, #fff);
+  position: relative;
+  overflow: hidden;
+  padding-top: 100px;
+}
+
+.mapSection {
+  width: 100%;
+  height: 60vh;
+  min-height: 400px;
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 2rem;
+}
+
+@media (max-width: 768px) {
+  .mapSection {
+    /* Keep aspect ratio square-ish on mobile to prevent Three.js fov cropping horizontally */
+    height: 100vw;
+    min-height: 300px;
+    max-height: 50vh;
+  }
+}
+
+.textSection {
+  max-width: 900px;
+  margin: 0 auto;
+  text-align: center;
+  padding: 0 2rem 4rem;
+  position: relative;
+  z-index: 10;
+}
+
+.title {
+  font-size: clamp(2rem, 4vw, 3.5rem);
+  font-weight: 700;
+  margin-bottom: 1.5rem;
+  background: linear-gradient(to right, #fff, #a0a0a0);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  line-height: 1.2;
+}
+
+.description {
+  font-size: 1.125rem;
+  line-height: 1.8;
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.bottomSection {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 2rem 8rem;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 4rem;
+  align-items: stretch;
+  position: relative;
+  z-index: 10;
+}
+
+@media (max-width: 768px) {
+  .bottomSection {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+}
+
+.partnerBox {
+  background: rgba(20, 20, 20, 0.5);
+  border: 1px solid rgba(245, 167, 6, 0.3);
+  padding: 3rem;
+  border-radius: 12px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  position: relative;
+  overflow: hidden;
+}
+
+.partnerBox::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: radial-gradient(circle at top left, rgba(245, 167, 6, 0.1), transparent 70%);
+  pointer-events: none;
+}
+
+.partnerBox h2 {
+  font-size: 2.5rem;
+  color: #F5A706;
+  margin-bottom: 1rem;
+  font-weight: 600;
+}
+
+.partnerBox p {
+  font-size: 1.1rem;
+  color: #ccc;
+  line-height: 1.6;
+}
+
+.formBox {
+  width: 100%;
+}

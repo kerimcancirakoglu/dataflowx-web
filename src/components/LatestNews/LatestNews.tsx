@@ -1,5 +1,6 @@
 import React from 'react';
 import styles from './LatestNews.module.css';
+import { getTranslations } from 'next-intl/server';
 
 interface Post {
   id: number;
@@ -15,7 +16,7 @@ const MOCK_POSTS: Post[] = [
     id: 1,
     title: 'Beyond Network Visibility: Implementing Prevention-First Security for SCADA Environments',
     date: '23 hours ago',
-    image: '/Kapak/kapaklar/datamessage1.jpg',
+    image: `${process.env.NEXT_PUBLIC_WP_URL}/wp-content/uploads/Kapak/kapaklar/datamessage1.jpg`,
     featured: true,
     link: '#'
   },
@@ -23,7 +24,7 @@ const MOCK_POSTS: Post[] = [
     id: 2,
     title: 'OT Security Alert: How the "Broken Windows Theory" Predicts Your Next Breach',
     date: 'May 18',
-    image: '/Kapak/kapaklar/databroker1.jpg',
+    image: `${process.env.NEXT_PUBLIC_WP_URL}/wp-content/uploads/Kapak/kapaklar/databroker1.jpg`,
     featured: false,
     link: '#'
   },
@@ -31,7 +32,7 @@ const MOCK_POSTS: Post[] = [
     id: 3,
     title: 'How AI Models Like Claude are Targeting SCADA Infrastructure: Monterrey Water Utility Breach',
     date: 'May 11',
-    image: '/Kapak/kapaklar/datasecure1.jpg',
+    image: `${process.env.NEXT_PUBLIC_WP_URL}/wp-content/uploads/Kapak/kapaklar/datasecure1.jpg`,
     featured: false,
     link: '#'
   },
@@ -39,7 +40,7 @@ const MOCK_POSTS: Post[] = [
     id: 4,
     title: 'Zero Trust Architecture in Critical Infrastructure: A Comprehensive Guide for 2026',
     date: 'May 04',
-    image: '/Kapak/kapaklar/datadiode1.jpg',
+    image: `${process.env.NEXT_PUBLIC_WP_URL}/wp-content/uploads/Kapak/kapaklar/datadiode1.jpg`,
     featured: false,
     link: '#'
   }
@@ -50,12 +51,12 @@ async function getLatestPosts(): Promise<Post[]> {
   if (!wpUrl) {
     return MOCK_POSTS;
   }
-  
+
   try {
     const res = await fetch(`${wpUrl}/wp-json/wp/v2/posts?_embed&per_page=4`, { next: { revalidate: 3600 } });
     if (!res.ok) throw new Error('Failed to fetch posts');
     const posts = await res.json();
-    
+
     return posts.map((post: any, index: number) => {
       const imageUrl = post._embedded?.['wp:featuredmedia']?.[0]?.source_url || '/images/blog/blog-1.avif';
       const dateObj = new Date(post.date);
@@ -83,6 +84,7 @@ export default async function LatestNews() {
   const posts = await getLatestPosts();
   const featuredItem = posts.find(item => item.featured) || posts[0];
   const listItems = posts.filter(item => item.id !== featuredItem.id).slice(0, 3);
+  const t = await getTranslations('Home.LatestNews');
 
   return (
     <section className={styles.section} id="news">
@@ -90,10 +92,10 @@ export default async function LatestNews() {
         <div className={styles.header}>
           <div className={styles.titleRow}>
             <h2 className="display-lg">
-              Read the <span style={{ color: '#F5A706' }}>latest news</span>
+              {t('title')} <span style={{ color: '#F5A706' }}>{t('titleHighlight')}</span>
             </h2>
             <button className={styles.viewAllBtn}>
-              View All
+              {t('viewAll')}
               <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                 <line x1="5" y1="12" x2="19" y2="12"></line>
                 <polyline points="12 5 19 12 12 19"></polyline>
@@ -114,8 +116,8 @@ export default async function LatestNews() {
                 <div className={styles.date}>{featuredItem.date}</div>
                 <h3 className={styles.featuredTitle}>{featuredItem.title}</h3>
                 <div className={styles.readMore}>
-                  Read Article
-                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                  {t('readArticle')}
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="#f5a706" stroke="currentColor" strokeWidth="2">
                     <line x1="5" y1="12" x2="19" y2="12"></line>
                     <polyline points="12 5 19 12 12 19"></polyline>
                   </svg>

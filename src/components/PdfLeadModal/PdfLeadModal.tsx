@@ -7,12 +7,19 @@ import styles from './PdfLeadModal.module.css';
 interface PdfLeadModalProps {
   isOpen: boolean;
   onClose: () => void;
-  // This gets passed the PDF filename when submitting is successful
   onSubmit: () => void;
   documentName?: string;
+  /** Direct URL to the PDF file that will be downloaded on success */
+  fileUrl?: string;
 }
 
-export default function PdfLeadModal({ isOpen, onClose, onSubmit, documentName = 'Generic Document' }: PdfLeadModalProps) {
+export default function PdfLeadModal({
+  isOpen,
+  onClose,
+  onSubmit,
+  documentName = 'Generic Document',
+  fileUrl,
+}: PdfLeadModalProps) {
   const t = useTranslations('ContactForm');
   const formRef = useRef<HTMLFormElement>(null);
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -22,7 +29,6 @@ export default function PdfLeadModal({ isOpen, onClose, onSubmit, documentName =
   useEffect(() => {
     if (isOpen) {
       document.body.style.overflow = 'hidden';
-      // Reset state on open
       setIsSubmitting(false);
       setErrorMsg(null);
       setIsSuccess(false);
@@ -34,6 +40,12 @@ export default function PdfLeadModal({ isOpen, onClose, onSubmit, documentName =
     };
   }, [isOpen]);
 
+  const triggerDownload = (url: string) => {
+    // Vercel deployment için en sağlıklı ve güvenilir yöntem:
+    // Dosyayı kendi sunucumuzdan değil, WP Engine'in hızlı CDN'i üzerinden indirtmek.
+    window.location.href = url;
+  };
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!formRef.current) return;
@@ -41,9 +53,8 @@ export default function PdfLeadModal({ isOpen, onClose, onSubmit, documentName =
     setIsSubmitting(true);
     setErrorMsg(null);
 
-    const formData = new FormData(formRef.current);
-    
-    // Construct payload
+    const formData = new FormData(formRef.current); 
+
     const payload = {
       fullName: formData.get('fullName'),
       email: formData.get('email'),
@@ -62,21 +73,24 @@ export default function PdfLeadModal({ isOpen, onClose, onSubmit, documentName =
       const result = await response.json();
 
       if (!response.ok) {
-        // We throw to catch block, but use API's error message if provided
         throw new Error(result.error || t('genericError'));
       }
 
-      // Success
+      // Show success tick
       setIsSuccess(true);
-      
-      // Trigger the download callback after a short delay so user sees success message
+
+      // After 2s: trigger download (if fileUrl provided), call callbacks, close modal
       setTimeout(() => {
+        if (fileUrl) {
+          triggerDownload(fileUrl);
+        }
         onSubmit();
         onClose();
       }, 2000);
 
-    } catch (err: any) {
-      setErrorMsg(err.message || t('genericError'));
+    } catch (err: unknown) {
+      const message = err instanceof Error ? err.message : t('genericError');
+      setErrorMsg(message);
     } finally {
       setIsSubmitting(false);
     }
@@ -88,7 +102,7 @@ export default function PdfLeadModal({ isOpen, onClose, onSubmit, documentName =
     <div className={styles.overlay} onClick={onClose}>
       <div className={styles.modal} onClick={(e) => e.stopPropagation()}>
         <button className={styles.closeBtn} onClick={onClose}>&times;</button>
-        
+
         <div className={styles.header}>
           <h2 className={styles.title}>{t('title')}</h2>
           <p className={styles.subtitle}>{t('description')}</p>
@@ -97,45 +111,86 @@ export default function PdfLeadModal({ isOpen, onClose, onSubmit, documentName =
         <div className={styles.formCard}>
           {isSuccess ? (
             <div style={{ textAlign: 'center', padding: '2rem 0', color: '#10B981' }}>
-              <svg width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={{ margin: '0 auto 1rem' }}>
+              <svg
+                width="64"
+                height="64"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                style={{ margin: '0 auto 1rem' }}
+              >
                 <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14" />
                 <polyline points="22 4 12 14.01 9 11.01" />
               </svg>
               <h3 style={{ fontSize: '1.2rem', marginBottom: '0.5rem' }}>{t('successMessage')}</h3>
+              {fileUrl && (
+                <p style={{ fontSize: '0.85rem', color: 'rgba(255,255,255,0.5)', marginTop: '0.5rem' }}>
+                  Your download will start automatically…
+                </p>
+              )}
             </div>
           ) : (
             <form ref={formRef} onSubmit={handleSubmit} className={styles.form} noValidate>
-              
+
               {/* HONEYPOT - Hidden from real users */}
               <div style={{ display: 'none' }} aria-hidden="true">
                 <input type="text" name="website_url" tabIndex={-1} autoComplete="off" />
               </div>
 
               {errorMsg && (
-                <div style={{ color: '#EF4444', marginBottom: '1rem', fontSize: '0.9rem', padding: '0.5rem', background: 'rgba(239, 68, 68, 0.1)', borderRadius: '4px' }}>
+                <div style={{
+                  color: '#EF4444',
+                  marginBottom: '1rem',
+                  fontSize: '0.9rem',
+                  padding: '0.5rem',
+                  background: 'rgba(239, 68, 68, 0.1)',
+                  borderRadius: '4px',
+                }}>
                   {errorMsg}
                 </div>
               )}
 
               <div className={styles.row}>
                 <div className={styles.field} style={{ width: '100%' }}>
-                  <input name="fullName" type="text" className={styles.input} placeholder={t('namePlaceholder')} required />
+                  <input
+                    name="fullName"
+                    type="text"
+                    className={styles.input}
+                    placeholder={t('namePlaceholder')}
+                    required
+                  />
                 </div>
               </div>
 
               <div className={styles.row}>
                 <div className={styles.field}>
-                  <input name="company" type="text" className={styles.input} placeholder="Company*" required />
+                  <input
+                    name="company"
+                    type="text"
+                    className={styles.input}
+                    placeholder="Company*"
+                    required
+                  />
                 </div>
                 <div className={styles.field}>
-                  <input name="email" type="email" className={styles.input} placeholder={t('emailPlaceholder')} required />
+                  <input
+                    name="email"
+                    type="email"
+                    className={styles.input}
+                    placeholder={t('emailPlaceholder')}
+                    required
+                  />
                 </div>
               </div>
 
               <div className={styles.checkboxField}>
                 <input type="checkbox" id="modal-consent" className={styles.checkbox} required />
                 <label htmlFor="modal-consent">
-                  I consent to the processing of my data in accordance with the DataFlowX Privacy Policy. I agree to be contacted regarding relevant security solutions and industry updates.
+                  I consent to the processing of my data in accordance with the DataFlowX Privacy Policy.
+                  I agree to be contacted regarding relevant security solutions and industry updates.
                 </label>
               </div>
 

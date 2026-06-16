@@ -6,7 +6,7 @@ import styles from './BlogLayout.module.css';
 export default function SocialShare() {
   return (
     <div className={styles.socialShare}>
-      <h4 className={styles.sidebarTitle}>Paylaş</h4>
+      <h4 className={styles.sidebarTitle}>Share</h4>
       <div className={styles.socialIcons}>
         {/* LinkedIn */}
         <a href="#" className={styles.socialIcon} aria-label="Share on LinkedIn">

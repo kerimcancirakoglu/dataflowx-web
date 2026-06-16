@@ -5,6 +5,7 @@ import Nav from '@/components/Nav/Nav';
 import Contact from '@/components/Contact/Contact';
 import TableOfContents from '@/components/BlogLayout/TableOfContents';
 import SocialShare from '@/components/BlogLayout/SocialShare';
+import LeadModalTrigger from './LeadModalTrigger';
 import styles from './page.module.css';
 import contentStyles from '@/components/BlogLayout/BlogContentStyles.module.css';
 
@@ -21,7 +22,8 @@ const MOCK_RESOURCES: Record<string, any> = {
     excerpt: 'Detailed technical specifications for DataFlowX EAL4+ certified unidirectional gateway.',
     author: { name: 'DFX Product Team' },
     readingTime: '1 min read',
-    featuredImage: '/Kapak/kapaklar/datadiode1.jpg'
+    featuredImage: `${process.env.NEXT_PUBLIC_WP_URL}/wp-content/uploads/Kapak/kapaklar/datadiode1.jpg`,
+    fileUrl: 'https://dataflowx1.wpenginepowered.com/wp-content/uploads/2026/06/converted_yeni_DataDiodeX_TS_Brosur_EN-1.pdf'
   },
   'ds-sra': {
     title: 'DFX Secure Remote Access Features',
@@ -30,7 +32,7 @@ const MOCK_RESOURCES: Record<string, any> = {
     excerpt: 'Architecture and features of our secure remote access and cross-domain solution.',
     author: { name: 'DFX Product Team' },
     readingTime: '1 min read',
-    featuredImage: '/Kapak/kapaklar/databroker1.jpg'
+    featuredImage: `${process.env.NEXT_PUBLIC_WP_URL}/wp-content/uploads/Kapak/kapaklar/databroker1.jpg`
   },
   'wp-ot-security': {
     title: 'Zero Trust in OT Environments',
@@ -39,7 +41,7 @@ const MOCK_RESOURCES: Record<string, any> = {
     excerpt: 'Comprehensive whitepaper on applying Zero Trust principles to industrial control systems using hardware isolation.',
     author: { name: 'DFX Threat Intel' },
     readingTime: '12 min read',
-    featuredImage: '/Kapak/kapaklar/data3.jpg'
+    featuredImage: `${process.env.NEXT_PUBLIC_WP_URL}/wp-content/uploads/Kapak/kapaklar/data3.jpg`
   },
   'cs-energy': {
     title: 'Securing National Grid Infrastructure',
@@ -48,7 +50,7 @@ const MOCK_RESOURCES: Record<string, any> = {
     excerpt: 'Case study on how a major European energy provider achieved IEC 62443 compliance using DataFlowX.',
     author: { name: 'DFX Case Studies' },
     readingTime: '5 min read',
-    featuredImage: '/Kapak/kapaklar/datasecure1.jpg'
+    featuredImage: `${process.env.NEXT_PUBLIC_WP_URL}/wp-content/uploads/Kapak/kapaklar/datasecure1.jpg`
   },
   'wp-nis2': {
     title: 'NIS2 Compliance Guide for Critical Infrastructure',
@@ -57,7 +59,7 @@ const MOCK_RESOURCES: Record<string, any> = {
     excerpt: 'Understanding the OT security requirements of the NIS2 directive and how unidirectional gateways help.',
     author: { name: 'DFX Compliance Team' },
     readingTime: '8 min read',
-    featuredImage: '/Kapak/kapaklar/datastation1.jpg'
+    featuredImage: `${process.env.NEXT_PUBLIC_WP_URL}/wp-content/uploads/Kapak/kapaklar/datastation1.jpg`
   },
   'ds-mts': {
     title: 'DFX Media Transfer Station Data Sheet',
@@ -66,7 +68,7 @@ const MOCK_RESOURCES: Record<string, any> = {
     excerpt: 'Technical details about our secure USB kiosk featuring multi-engine AV and Deep CDR sanitization.',
     author: { name: 'DFX Product Team' },
     readingTime: '1 min read',
-    featuredImage: '/Kapak/kapaklar/datamessage1.jpg'
+    featuredImage: `${process.env.NEXT_PUBLIC_WP_URL}/wp-content/uploads/Kapak/kapaklar/datamessage1.jpg`
   },
   'rep-threat-2024': {
     title: '2024 ICS Threat Landscape Report',
@@ -75,7 +77,7 @@ const MOCK_RESOURCES: Record<string, any> = {
     excerpt: 'Analysis of emerging threats targeting industrial control systems and critical infrastructure.',
     author: { name: 'DFX Threat Intel' },
     readingTime: '15 min read',
-    featuredImage: '/Kapak/kapaklar/data3.jpg'
+    featuredImage: `${process.env.NEXT_PUBLIC_WP_URL}/wp-content/uploads/Kapak/kapaklar/data3.jpg`
   },
   'ds-email': {
     title: 'DFX E-Mail Security Platform Data Sheet',
@@ -84,7 +86,7 @@ const MOCK_RESOURCES: Record<string, any> = {
     excerpt: 'Deep CDR and AI behavior detection for zero-trust email gateways.',
     author: { name: 'DFX Product Team' },
     readingTime: '1 min read',
-    featuredImage: '/Kapak/kapaklar/datamessage1.jpg'
+    featuredImage: `${process.env.NEXT_PUBLIC_WP_URL}/wp-content/uploads/Kapak/kapaklar/datamessage1.jpg`
   }
 };
 
@@ -193,6 +195,7 @@ export default async function ResourcePostPage({ params }: Props) {
         </div>
 
         <Contact />
+        <LeadModalTrigger fileUrl={post.fileUrl} documentName={post.title} />
       </main>
     </>
   );
