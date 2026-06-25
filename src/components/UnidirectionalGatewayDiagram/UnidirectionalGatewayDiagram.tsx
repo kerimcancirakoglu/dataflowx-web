@@ -65,7 +65,7 @@ export default function UnidirectionalGatewayDiagram() {
               <div className={`${styles.diodeBox} ${styles.txBox}`}>
                 <div className={styles.diodeLabelRow}>
                   <span className={`${styles.diodeLabel} ${styles.txLabel}`}>TX</span>
-                  <span className={styles.diodeText}>DFX UG</span>
+                  <span className={styles.diodeText}>DFX UDG</span>
                 </div>
                 <div className={styles.diodeText}>Transmit</div>
               </div>
@@ -73,7 +73,7 @@ export default function UnidirectionalGatewayDiagram() {
               <div className={`${styles.diodeBox} ${styles.rxBox}`}>
                 <div className={styles.diodeLabelRow}>
                   <span className={`${styles.diodeLabel} ${styles.rxLabel}`}>RX</span>
-                  <span className={styles.diodeText}>DFX UG</span>
+                  <span className={styles.diodeText}>DFX UDG</span>
                 </div>
                 <div className={styles.diodeText}>Receive</div>
               </div>

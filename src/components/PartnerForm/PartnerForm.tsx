@@ -1,6 +1,7 @@
 'use client';
 
 import React, { useState } from 'react';
+import { Turnstile } from '@marsidev/react-turnstile';
 import styles from './PartnerForm.module.css';
 
 export default function PartnerForm() {
@@ -12,6 +13,7 @@ export default function PartnerForm() {
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [success, setSuccess] = useState(false);
+  const [turnstileToken, setTurnstileToken] = useState<string | null>(null);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -24,7 +26,8 @@ export default function PartnerForm() {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
           ...formData,
-          documentName: 'PARTNER_APPLICATION'
+          documentName: 'PARTNER_APPLICATION',
+          turnstileToken
         }),
       });
       
@@ -94,6 +97,13 @@ export default function PartnerForm() {
                 onChange={e => setFormData({...formData, message: e.target.value})}
                 className={styles.textarea}
                 rows={4}
+              />
+            </div>
+            
+            <div style={{ marginBottom: '1rem', display: 'flex', justifyContent: 'center' }}>
+              <Turnstile 
+                siteKey={process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY || '1x00000000000000000000AA'} 
+                onSuccess={(token) => setTurnstileToken(token)}
               />
             </div>
             

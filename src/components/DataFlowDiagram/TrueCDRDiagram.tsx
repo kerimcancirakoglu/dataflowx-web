@@ -4,7 +4,7 @@ import React, { useEffect, useRef } from 'react';
 import { gsap } from 'gsap';
 import styles from './TrueCDRDiagram.module.css';
 
-export default function TrueCDRDiagram() {
+export default function DfxCdrDiagram() {
   const containerRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {

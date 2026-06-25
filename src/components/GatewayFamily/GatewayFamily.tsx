@@ -11,8 +11,10 @@ export default function GatewayFamily() {
   const t = useTranslations('GatewayFamily');
   const containerRef = useRef<HTMLDivElement>(null);
   const packet1Ref = useRef<HTMLDivElement>(null);
+  const packet1ReverseRef = useRef<HTMLDivElement>(null);
   const packet2Ref = useRef<HTMLDivElement>(null);
   const packet3Ref = useRef<HTMLDivElement>(null);
+  const packet3ReverseRef = useRef<HTMLDivElement>(null);
   const [activeElement, setActiveElement] = useState<ElementId | null>(null);
 
   const elementDetails = {
@@ -79,6 +81,25 @@ export default function GatewayFamily() {
           }
         );
       }
+      if (packet1ReverseRef.current) {
+        gsap.fromTo(
+          packet1ReverseRef.current,
+          { left: '0%', opacity: 0 },
+          {
+            left: '100%',
+            duration: 2,
+            ease: 'none',
+            repeat: -1,
+            delay: 0.5,
+            keyframes: {
+              '0%': { opacity: 0, left: '0%' },
+              '15%': { opacity: 1 },
+              '85%': { opacity: 1 },
+              '100%': { opacity: 0, left: '100%' }
+            }
+          }
+        );
+      }
       // Packet 2: TX → Air Gap → RX (the long center section)
       if (packet2Ref.current) {
         gsap.fromTo(
@@ -110,6 +131,26 @@ export default function GatewayFamily() {
             ease: 'none',
             repeat: -1,
             delay: 3.5,
+            keyframes: {
+              '0%': { opacity: 0, left: '0%' },
+              '15%': { opacity: 1 },
+              '85%': { opacity: 1 },
+              '100%': { opacity: 0, left: '100%' }
+            }
+          }
+        );
+      }
+      // Packet 3 File: RX → Protected Network
+      if (packet3ReverseRef.current) {
+        gsap.fromTo(
+          packet3ReverseRef.current,
+          { left: '0%', opacity: 0 },
+          {
+            left: '100%',
+            duration: 2,
+            ease: 'none',
+            repeat: -1,
+            delay: 4.0,
             keyframes: {
               '0%': { opacity: 0, left: '0%' },
               '15%': { opacity: 1 },
@@ -171,14 +212,26 @@ export default function GatewayFamily() {
             <div className={styles.clickHint}>{t('source.hint')}</div>
           </button>
 
-          {/* Line 1 */}
-          <div className={styles.connectionLine} style={{ flex: 1 }}>
-            <div className={styles.packet} ref={packet1Ref}>
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
-                <path d="M13 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9z" />
-                <polyline points="13 2 13 9 20 9" />
-              </svg>
-              <div className={styles.packetCheck}>✓</div>
+          {/* Line 1 (Source -> TX) */}
+          <div className={`${styles.channelContainer} ${styles.twoWayLine}`} style={{ flex: 1 }}>
+            <div className={styles.channelRow}>
+              <div className={styles.channelLine} />
+              <div className={`${styles.channelPacket} ${styles.packetData}`} ref={packet1Ref}>
+                <span className={styles.packetText}>DATA</span>
+              </div>
+            </div>
+            <div className={styles.channelRow}>
+              <div className={styles.channelLine} />
+              <div className={`${styles.channelPacket} ${styles.packetFile}`} ref={packet1ReverseRef}>
+                <svg className={styles.packetIcon} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                  <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+                  <polyline points="14 2 14 8 20 8"></polyline>
+                  <line x1="16" y1="13" x2="8" y2="13"></line>
+                  <line x1="16" y1="17" x2="8" y2="17"></line>
+                  <polyline points="10 9 9 9 8 9"></polyline>
+                </svg>
+                <span className={styles.packetText}>PDF</span>
+              </div>
             </div>
           </div>
 
@@ -194,7 +247,7 @@ export default function GatewayFamily() {
                   <path d="M5 12h14M14 7l5 5-5 5" />
                 </svg>
               </div>
-              <div className={styles.diodeName}>DFX UG</div>
+              <div className={styles.diodeName}>DFX UDG</div>
               <div className={styles.diodeRole}>TRANSMIT (TX)</div>
             </button>
             <div className={styles.featureInfo}>
@@ -205,13 +258,12 @@ export default function GatewayFamily() {
 
           {/* Air Gap + line across */}
           <div className={styles.middleSection} style={{ flex: 2 }}>
-            <div className={styles.connectionLine} style={{ width: '100%', position: 'relative' }}>
-              <div className={styles.packet} ref={packet2Ref}>
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
-                  <path d="M13 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9z" />
-                  <polyline points="13 2 13 9 20 9" />
-                </svg>
-                <div className={styles.packetCheck}>✓</div>
+            <div className={styles.channelContainer} style={{ width: '100%', position: 'relative' }}>
+              <div className={styles.channelRow}>
+                <div className={styles.channelLine} />
+                <div className={`${styles.channelPacket} ${styles.packetData}`} ref={packet2Ref}>
+                  <span className={styles.packetText}>DATA</span>
+                </div>
               </div>
             </div>
 
@@ -245,7 +297,7 @@ export default function GatewayFamily() {
                   <path d="M5 12h14M14 7l5 5-5 5" />
                 </svg>
               </div>
-              <div className={styles.diodeName}>DFX UG</div>
+              <div className={styles.diodeName}>DFX UDG</div>
               <div className={styles.diodeRole}>RECEIVE (RX)</div>
             </button>
             <div className={styles.featureInfo}>
@@ -254,14 +306,26 @@ export default function GatewayFamily() {
             </div>
           </div>
 
-          {/* Line 3: RX → Protected Network — now with packet animation */}
-          <div className={styles.connectionLine} style={{ flex: 1 }}>
-            <div className={styles.packet} ref={packet3Ref}>
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
-                <path d="M13 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9z" />
-                <polyline points="13 2 13 9 20 9" />
-              </svg>
-              <div className={styles.packetCheck}>✓</div>
+          {/* Line 3: RX → Protected Network */}
+          <div className={`${styles.channelContainer} ${styles.twoWayLine}`} style={{ flex: 1 }}>
+            <div className={styles.channelRow}>
+              <div className={styles.channelLine} />
+              <div className={`${styles.channelPacket} ${styles.packetData}`} ref={packet3Ref}>
+                <span className={styles.packetText}>DATA</span>
+              </div>
+            </div>
+            <div className={styles.channelRow}>
+              <div className={styles.channelLine} />
+              <div className={`${styles.channelPacket} ${styles.packetFile}`} ref={packet3ReverseRef}>
+                <svg className={styles.packetIcon} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                  <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+                  <polyline points="14 2 14 8 20 8"></polyline>
+                  <line x1="16" y1="13" x2="8" y2="13"></line>
+                  <line x1="16" y1="17" x2="8" y2="17"></line>
+                  <polyline points="10 9 9 9 8 9"></polyline>
+                </svg>
+                <span className={styles.packetText}>PDF</span>
+              </div>
             </div>
           </div>
 

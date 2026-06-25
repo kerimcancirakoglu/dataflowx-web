@@ -3,6 +3,7 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import Image from 'next/image';
 import styles from './EmailSecurityLayers.module.css';
 
 gsap.registerPlugin(ScrollTrigger);
@@ -25,7 +26,7 @@ const LAYER_IMAGES = [
   },
   {
     src: '/emailassets/newemail/40001.png',
-    label: 'Deep Content Disarm (CDR)',
+    label: 'Deep Content Disarm & Reconstruction (CDR)',
     desc: 'Detonates suspicious attachments in an isolated environment and strips active malicious content securely before final delivery.'
   },
 ];
@@ -153,7 +154,7 @@ export default function EmailSecurityLayers() {
 
               {/* The Combined Default Layer */}
               <div className={`${styles.combinedLayer} combinedLayer`} style={{ zIndex: 0 }}>
-                <img src={COMBINED_IMAGE} alt="Combined Infrastructure" className={styles.layerImage} />
+                <Image src={COMBINED_IMAGE} alt="Combined Infrastructure" width={800} height={600} style={{ width: '100%', height: 'auto' }} className={styles.layerImage} />
               </div>
 
               {/* Individual Layers (Hidden until hovered) */}
@@ -163,7 +164,7 @@ export default function EmailSecurityLayers() {
                   className={`${styles.stackedLayer} stackedLayer`}
                   style={{ zIndex: index + 1, opacity: 0 }}
                 >
-                  <img src={layer.src} alt={layer.label} className={styles.layerImage} />
+                  <Image src={layer.src} alt={layer.label} width={800} height={600} style={{ width: '100%', height: 'auto' }} className={styles.layerImage} />
                 </div>
               ))}
 

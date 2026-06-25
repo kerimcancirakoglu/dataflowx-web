@@ -1,15 +1,18 @@
 'use client';
 
 import React, { useState, useEffect } from 'react';
+import dynamic from 'next/dynamic';
+import Image from 'next/image';
 import styles from './Solutions.module.css';
-import DataFlowDiagram from '../DataFlowDiagram/DataFlowDiagram';
-import SecureRemoteAccessDiagram from '../DataFlowDiagram/SecureRemoteAccessDiagram';
-import EmailSecurityDiagram from '../DataFlowDiagram/EmailSecurityDiagram';
-import SandboxDiagram from '../DataFlowDiagram/SandboxDiagram';
-import KioskDiagram from '../DataFlowDiagram/KioskDiagram';
-import IntelRoomDiagram from '../DataFlowDiagram/IntelRoomDiagram';
-import TrueCDRDiagram from '../DataFlowDiagram/TrueCDRDiagram';
-import PortXAnimation from '../PortXAnimation/PortXAnimation';
+
+const DataFlowDiagram = dynamic(() => import('../DataFlowDiagram/DataFlowDiagram'), { ssr: false });
+const SecureRemoteAccessDiagram = dynamic(() => import('../DataFlowDiagram/SecureRemoteAccessDiagram'), { ssr: false });
+const EmailSecurityDiagram = dynamic(() => import('../DataFlowDiagram/EmailSecurityDiagram'), { ssr: false });
+const SandboxDiagram = dynamic(() => import('../DataFlowDiagram/SandboxDiagram'), { ssr: false });
+const KioskDiagram = dynamic(() => import('../DataFlowDiagram/KioskDiagram'), { ssr: false });
+const IntelRoomDiagram = dynamic(() => import('../DataFlowDiagram/IntelRoomDiagram'), { ssr: false });
+const DfxCdrDiagram = dynamic(() => import('../DataFlowDiagram/TrueCDRDiagram'), { ssr: false });
+const PortXAnimation = dynamic(() => import('../PortXAnimation/PortXAnimation'), { ssr: false });
 
 export interface SolutionType {
   id: string;
@@ -61,9 +64,10 @@ export default function SolutionsClient({
     if (activeSolution.id === 'sandbox') return <SandboxDiagram />;
     if (activeSolution.id === 'media-transfer') return <KioskDiagram />;
     if (activeSolution.id === 'intelroom') return <IntelRoomDiagram />;
-    if (activeSolution.id === 'trucdr') return <TrueCDRDiagram />;
+    if (activeSolution.id === 'trucdr') return <DfxCdrDiagram />;
     if (activeSolution.id === 'portable-access') return <PortXAnimation hideCards={true} />;
-    return <img src={activeSolution.image} alt={activeSolution.titlePrefix} className={styles.isometricImage} />;
+    if (!activeSolution.image) return null;
+    return <Image src={activeSolution.image} alt={activeSolution.titlePrefix} width={600} height={600} style={{ width: '100%', height: 'auto' }} className={styles.isometricImage} />;
   };
 
   return (

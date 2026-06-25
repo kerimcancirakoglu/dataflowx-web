@@ -6,6 +6,8 @@ import { OrbitControls, Environment, ContactShadows, Float, Html, Bounds, Center
 import { Model as PortXModel } from '../PortXAnimation/PortxModel';
 import styles from './PortXModelViewer.module.css';
 
+import { useTranslations } from 'next-intl';
+
 // Fallback loader
 function Loader() {
   return (
@@ -18,35 +20,31 @@ function Loader() {
 }
 
 export default function PortXModelViewer() {
+  const t = useTranslations('PortXModelViewer');
+  const features = ['f1', 'f2', 'f3', 'f4', 'f5', 'f6'] as const;
+
   return (
     <div className={styles.container}>
 
       {/* Left Panel: Content matching the requested layout */}
       <div className={styles.infoPanel}>
-        <h2 className={styles.mainTitle}>DFX Portable Access Security System</h2>
+        <h2 className={styles.mainTitle}>{t('title')}</h2>
 
         <div className={styles.subtitle}>
-          Learn how <a href="#" className={styles.subtitleLink}>Portable Zero Trust</a> protects your network.
+          {t('subtitle')} <a href="#" className={styles.subtitleLink}>{t('subtitleLink')}</a> {t('subtitleSuffix')}
         </div>
 
         <ul className={styles.featuresList}>
-          {[
-            'Zero USB Policy enforced physically',
-            'Military-grade AES-256 encryption',
-            'Full traceability and audit-ready logs',
-            'Hardened OS and TPM architecture',
-            'Dual-layer NFC authentication',
-            'Seamlessly integrates with DFX Unidirectional Gateway'
-          ].map((text, i) => (
-            <li key={i} className={styles.featureListItem}>
-              {text}
+          {features.map((key) => (
+            <li key={key} className={styles.featureListItem}>
+              {t(key)}
             </li>
           ))}
         </ul>
 
         <div className={styles.buttonGroup}>
-          <a href="#" className={styles.primaryButton}>Download Datasheet</a>
-          <a href="#" className={styles.secondaryLink}>View Documentation ➔</a>
+          <a href="#" className={styles.primaryButton}>{t('downloadBtn')}</a>
+          <a href="#" className={styles.secondaryLink}>{t('docsLink')} ➔</a>
         </div>
       </div>
 

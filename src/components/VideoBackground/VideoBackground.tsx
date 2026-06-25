@@ -1,6 +1,7 @@
 'use client';
 
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
+import Image from 'next/image';
 
 function lerp(a: number, b: number, t: number): number {
   return a + (b - a) * t;
@@ -18,8 +19,18 @@ export default function VideoBackground({
   playMode = 'scrub'
 }: VideoBackgroundProps = {}) {
   const videoRef = useRef<HTMLVideoElement>(null);
+  const [isMobile, setIsMobile] = useState(true); // Default to true for mobile-first performance
 
   useEffect(() => {
+    const checkMobile = () => setIsMobile(window.innerWidth < 768);
+    checkMobile(); // Check on mount
+    window.addEventListener('resize', checkMobile, { passive: true });
+    return () => window.removeEventListener('resize', checkMobile);
+  }, []);
+
+  useEffect(() => {
+    if (isMobile) return; // Do not run video logic on mobile
+
     const video = videoRef.current;
     if (!video) return;
 
@@ -94,7 +105,6 @@ export default function VideoBackground({
     window.addEventListener('resize', onScroll, { passive: true });
     document.addEventListener('visibilitychange', onVisibilityChange);
 
-    // Tek bir event handler — removeEventListener ile temizle
     const onVideoReady = () => {
       video.removeEventListener('loadeddata', onVideoReady);
       video.removeEventListener('canplay', onVideoReady);
@@ -123,7 +133,7 @@ export default function VideoBackground({
       document.removeEventListener('visibilitychange', onVisibilityChange);
       if (rafHandle !== null) cancelAnimationFrame(rafHandle);
     };
-  }, []);
+  }, [isMobile, playMode]);
 
   return (
     <div
@@ -139,23 +149,36 @@ export default function VideoBackground({
         background: '#000',
       }}
     >
-      <video
-        ref={videoRef}
-        src={videoSrc}
-        preload="auto"
-        autoPlay
-        muted
-        playsInline
-        style={{
-          width: '100%',
-          height: '100%',
-          objectFit: 'cover',
-          opacity: opacity,
-          display: 'block',
-          transform: 'translateZ(0)',
-          willChange: 'transform',
-        }}
-      />
+      {isMobile ? (
+        <Image
+          src="/mobile-video-fallback.jpg"
+          alt="DataFlowX Cyber Security Background"
+          fill
+          priority
+          style={{
+            objectFit: 'cover',
+            opacity: opacity,
+          }}
+        />
+      ) : (
+        <video
+          ref={videoRef}
+          src={videoSrc}
+          preload="auto"
+          autoPlay
+          muted
+          playsInline
+          style={{
+            width: '100%',
+            height: '100%',
+            objectFit: 'cover',
+            opacity: opacity,
+            display: 'block',
+            transform: 'translateZ(0)',
+            willChange: 'transform',
+          }}
+        />
+      )}
       <div
         style={{
           position: 'absolute',

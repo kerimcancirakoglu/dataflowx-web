@@ -1,4 +1,10 @@
+import { Metadata } from 'next';
 import Nav from '@/components/Nav/Nav';
+
+export const metadata: Metadata = {
+  title: 'DataFlowX (DFX) | Secure Critical Infrastructure via Unidirectional Gateway',
+  description: 'Secure your critical network infrastructure with DataFlowX (DFX). EAL4+ certified unidirectional gateway, data diode, and email security solutions for zero-trust environments.',
+};
 import Hero from '@/components/Hero/Hero';
 import HowItWorks from '@/components/HowItWorks/HowItWorks';
 import UseCases from '@/components/UseCases/UseCases';

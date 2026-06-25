@@ -1,0 +1,164 @@
+.container {
+  padding-top: var(--nav-height, 120px);
+  min-height: 100vh;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Background effects */
+.bg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 0;
+  pointer-events: none;
+  background: radial-gradient(circle at 50% 0%, rgba(245, 167, 6, 0.05), transparent 60%),
+              radial-gradient(circle at 100% 50%, rgba(var(--color-primary-cyan-rgb, 0, 240, 255), 0.05), transparent 50%);
+}
+
+.content {
+  position: relative;
+  z-index: 1;
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 4rem 2rem;
+}
+
+/* Hero Section */
+.hero {
+  text-align: center;
+  margin-bottom: 5rem;
+}
+
+.heroTitle {
+  font-family: var(--font-display);
+  font-size: clamp(2.5rem, 5vw, 4rem);
+  font-weight: 700;
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+  color: var(--color-text, #ffffff);
+  margin-bottom: 1rem;
+}
+
+.heroSubtitle {
+  color: var(--color-text-muted, #8b9bb4);
+  max-width: 600px;
+  margin: 0 auto 2rem;
+  font-size: 1.125rem;
+}
+
+.contactInfo {
+  display: flex;
+  justify-content: center;
+  gap: 3rem;
+  flex-wrap: wrap;
+}
+
+.infoItem {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  font-size: 1rem;
+  color: #fff;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  padding: 0.75rem 1.5rem;
+  border-radius: 100px;
+  transition: all 0.3s ease;
+}
+
+.infoItem:hover {
+  background: rgba(255, 255, 255, 0.08);
+  border-color: rgba(255, 255, 255, 0.15);
+  transform: translateY(-2px);
+}
+
+.infoItem svg {
+  color: var(--color-primary-cyan, #00f0ff);
+}
+
+/* Offices Grid */
+.officesHeader {
+  text-align: center;
+  margin-bottom: 3rem;
+  font-size: 2rem;
+}
+
+.officesGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 1.5rem;
+  margin-bottom: 5rem;
+}
+
+.officeCard {
+  background: var(--color-ui);
+  backdrop-filter: var(--blur-glass, blur(12px));
+  -webkit-backdrop-filter: var(--blur-glass, blur(12px));
+  border: 1px solid var(--color-border);
+  border-radius: 24px;
+  padding: 2.5rem;
+  transition: var(--transition-base, all 0.4s ease);
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+}
+
+.officeCard::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(45deg, transparent, rgba(0, 180, 255, 0.03), transparent);
+  transform: translateX(-100%);
+  transition: transform 0.6s ease;
+}
+
+.officeCard:hover {
+  transform: translateY(-5px);
+  border-color: rgba(245, 167, 6, 0.3);
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15), 0 0 20px rgba(245, 167, 6, 0.05) inset;
+}
+
+.officeCard:hover::before {
+  transform: translateX(100%);
+}
+
+.country {
+  font-size: 0.875rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--color-tx, #00B4FF);
+  margin-bottom: 0.5rem;
+  font-family: var(--font-mono);
+  font-weight: 600;
+}
+
+.city {
+  font-family: var(--font-display);
+  font-size: 1.75rem;
+  font-weight: 600;
+  color: var(--color-text);
+  margin-bottom: 1rem;
+}
+
+.address {
+  color: var(--color-text-muted);
+  line-height: 1.6;
+  font-size: 0.95rem;
+  font-family: var(--font-mono);
+}
+
+@media (max-width: 768px) {
+  .contactInfo {
+    gap: 1rem;
+  }
+  .infoItem {
+    width: 100%;
+    justify-content: center;
+  }
+}

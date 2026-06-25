@@ -2,11 +2,13 @@
 
 import { useState, useMemo } from 'react';
 import styles from './page.module.css';
+import Image from 'next/image';
 import { USE_CASES } from '@/data/useCases';
 import PdfLeadModal from '@/components/PdfLeadModal/PdfLeadModal';
+import { useTranslations } from 'next-intl';
 
 type ResourceType = 'Data Sheet' | 'Whitepaper' | 'Case Study' | 'Guide' | 'Report' | 'Use Case';
-type ProductType = 'DFX Unidirectional Gateway' | 'DFX Sandbox' | 'DFX E-Mail Security Platform' | 'DFX PortX' | 'DFX Secure Remote Access' | 'DFX Media Transfer Station' | 'DFX IntelRoom' | 'TrueCDR™';
+type ProductType = 'DFX Unidirectional Gateway' | 'DFX Malware Mitigation Sandbox' | 'DFX Email Security Platform' | 'DFX PASS' | 'DFX Secure Remote Access' | 'DFX Media Transfer Station' | 'DFX IntelRoom' | 'DFX CDR';
 type UseCaseType = 'Energy & SCADA' | 'Defense & Military' | 'Financial Services' | 'Critical Infrastructure' | 'Logistics' | 'Manufacturing';
 
 interface Resource {
@@ -105,10 +107,10 @@ const resourcesData: Resource[] = [
   },
   {
     id: 'ds-email',
-    title: 'DFX E-Mail Security Platform Data Sheet',
+    title: 'DFX Email Security Platform Data Sheet',
     description: 'Deep CDR and AI behavior detection for zero-trust email gateways.',
     type: 'Data Sheet',
-    product: 'DFX E-Mail Security Platform',
+    product: 'DFX Email Security Platform',
     useCase: 'Financial Services',
     date: '2024-05-15',
     link: '/resources/ds-email',
@@ -140,10 +142,56 @@ const allResourcesData: Resource[] = [
 ];
 
 const allTypes: ResourceType[] = ['Guide', 'Report', 'Data Sheet', 'Case Study', 'Whitepaper', 'Use Case'];
-const allProducts: ProductType[] = ['DFX Unidirectional Gateway', 'DFX Sandbox', 'DFX E-Mail Security Platform', 'DFX PortX', 'DFX Secure Remote Access', 'DFX Media Transfer Station', 'DFX IntelRoom', 'TrueCDR™'];
+const allProducts: ProductType[] = ['DFX Unidirectional Gateway', 'DFX Malware Mitigation Sandbox', 'DFX Email Security Platform', 'DFX PASS', 'DFX Secure Remote Access', 'DFX Media Transfer Station', 'DFX IntelRoom', 'DFX CDR'];
 const allUseCases: UseCaseType[] = ['Energy & SCADA', 'Defense & Military', 'Financial Services', 'Critical Infrastructure', 'Logistics', 'Manufacturing'];
 
-export default function ResourcesClient() {
+interface ResourcesClientProps {
+  wpResources?: any[];
+}
+
+function mapWpResourceToResource(wp: any): Resource {
+  let image = '/og-image.jpg';
+  if (wp._embedded?.['wp:featuredmedia']?.[0]?.source_url) {
+    image = wp._embedded['wp:featuredmedia'][0].source_url;
+  }
+
+  let type: ResourceType = 'Data Sheet';
+  const products: ProductType[] = [];
+  let useCase: UseCaseType | undefined = undefined;
+
+  if (wp._embedded?.['wp:term']) {
+    wp._embedded['wp:term'].forEach((termArray: any[]) => {
+      termArray.forEach((term: any) => {
+        if ((term.taxonomy === 'resource_type' || term.taxonomy === 'category') && allTypes.includes(term.name as ResourceType)) {
+          type = term.name as ResourceType;
+        }
+        if ((term.taxonomy === 'product' || term.taxonomy === 'category') && allProducts.includes(term.name as ProductType)) {
+          products.push(term.name as ProductType);
+        }
+        if ((term.taxonomy === 'use_case' || term.taxonomy === 'category') && allUseCases.includes(term.name as UseCaseType)) {
+          useCase = term.name as UseCaseType;
+        }
+      });
+    });
+  }
+
+  return {
+    id: wp.slug,
+    title: wp.title?.rendered || '',
+    description: wp.excerpt?.rendered?.replace(/<[^>]*>?/gm, '') || '',
+    type,
+    products: products.length > 0 ? products : undefined,
+    product: products.length > 0 ? products[0] : undefined,
+    useCase,
+    date: wp.date,
+    link: `/resources/${wp.slug}`,
+    image,
+    fileUrl: wp.acf?.pdf_file || wp.acf?.file_url || undefined,
+  };
+}
+
+export default function ResourcesClient({ wpResources = [] }: ResourcesClientProps) {
+  const t = useTranslations('Resources');
   const [searchQuery, setSearchQuery] = useState('');
   const [productSearchQuery, setProductSearchQuery] = useState('');
   const [selectedTypes, setSelectedTypes] = useState<Set<ResourceType>>(new Set());
@@ -171,9 +219,19 @@ export default function ResourcesClient() {
     setDownloadTarget(null);
   };
 
+  const finalResourcesData = useMemo(() => {
+    if (wpResources.length > 0) {
+      const dynamicResources = wpResources.map(mapWpResourceToResource);
+      const wpIds = new Set(dynamicResources.map(r => r.id));
+      const filteredStatic = allResourcesData.filter(r => !wpIds.has(r.id));
+      return [...dynamicResources, ...filteredStatic];
+    }
+    return allResourcesData;
+  }, [wpResources]);
+
   // Filter resources based on all active criteria
   const filteredResources = useMemo(() => {
-    return allResourcesData.filter((res) => {
+    return finalResourcesData.filter((res) => {
       // 1. Main Search Filter
       if (searchQuery) {
         const query = searchQuery.toLowerCase();
@@ -209,7 +267,7 @@ export default function ResourcesClient() {
 
       return true;
     });
-  }, [searchQuery, selectedTypes, selectedProducts, selectedUseCases]);
+  }, [searchQuery, selectedTypes, selectedProducts, selectedUseCases, finalResourcesData]);
 
   const toggleType = (type: ResourceType) => {
     const next = new Set(selectedTypes);
@@ -262,7 +320,7 @@ export default function ResourcesClient() {
             </svg>
             <input 
               type="text" 
-              placeholder="Search resources..." 
+              placeholder={t('searchPlaceholder')} 
               className={styles.searchInput}
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
@@ -280,18 +338,18 @@ export default function ResourcesClient() {
               <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={{marginRight: '8px'}}>
                 <polygon points="22 3 2 3 10 12.46 10 19 14 21 14 12.46 22 3"></polygon>
               </svg>
-              Filters
+              {t('filterTitle')}
             </h2>
             {(selectedTypes.size > 0 || selectedProducts.size > 0 || selectedUseCases.size > 0 || searchQuery) && (
               <button className={styles.clearAllBtn} onClick={clearFilters}>
-                Clear All
+                {t('clearAll')}
               </button>
             )}
           </div>
 
           <div className={styles.filterGroup}>
             {allTypes.map(type => {
-              const count = allResourcesData.filter(r => r.type === type).length;
+              const count = finalResourcesData.filter(r => r.type === type).length;
               if (count === 0) return null;
               return (
                 <label key={type} className={styles.checkboxLabel}>
@@ -309,7 +367,7 @@ export default function ResourcesClient() {
 
           {/* Product Filters */}
           <div className={styles.filterGroup}>
-            <h3 className={styles.groupTitle}>Product</h3>
+            <h3 className={styles.groupTitle}>{t('productLabel')}</h3>
             <div className={styles.subSearchBox}>
               <svg className={styles.subSearchIcon} width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                 <circle cx="11" cy="11" r="8"></circle>
@@ -317,7 +375,7 @@ export default function ResourcesClient() {
               </svg>
               <input 
                 type="text" 
-                placeholder="Filter by typing" 
+                placeholder={t('filterByTyping')} 
                 className={styles.subSearchInput}
                 value={productSearchQuery}
                 onChange={(e) => setProductSearchQuery(e.target.value)}
@@ -325,7 +383,7 @@ export default function ResourcesClient() {
             </div>
             <div className={styles.checkboxListScroll}>
               {visibleProducts.map(product => {
-                const count = allResourcesData.filter(r => r.product === product || (r.products && r.products.includes(product))).length;
+                const count = finalResourcesData.filter(r => r.product === product || (r.products && r.products.includes(product))).length;
                 return (
                   <label key={product} className={styles.checkboxLabel}>
                     <input 
@@ -339,17 +397,17 @@ export default function ResourcesClient() {
                 );
               })}
               {visibleProducts.length === 0 && (
-                <p className={styles.noMatchText}>No matching product found.</p>
+                <p className={styles.noMatchText}>{t('noProduct')}</p>
               )}
             </div>
           </div>
 
           {/* Use Case Filters */}
           <div className={styles.filterGroup}>
-            <h3 className={styles.groupTitle}>Use Case</h3>
+            <h3 className={styles.groupTitle}>{t('useCaseLabel')}</h3>
             <div className={styles.checkboxListScroll}>
               {allUseCases.map(useCase => {
-                const count = allResourcesData.filter(r => r.useCase === useCase).length;
+                const count = finalResourcesData.filter(r => r.useCase === useCase).length;
                 if (count === 0) return null; // Sadece içerik olanları göster
                 return (
                   <label key={useCase} className={styles.checkboxLabel}>
@@ -374,7 +432,7 @@ export default function ResourcesClient() {
             {filteredResources.map((resource) => (
               <div key={resource.id} className={styles.card}>
                 <div className={styles.cardImageWrapper}>
-                  <img src={resource.image} alt={resource.title} className={styles.cardImage} />
+                  <Image src={resource.image} alt={resource.title} fill style={{ objectFit: 'cover' }} className={styles.cardImage} />
                 </div>
                 <div className={styles.cardBody}>
                   <div className={styles.cardType}>{resource.type}</div>
@@ -387,7 +445,7 @@ export default function ResourcesClient() {
                     className={styles.readMoreLink}
                     onClick={(e) => handleResourceClick(e, resource)}
                   >
-                    {['Data Sheet', 'Whitepaper', 'Guide', 'Report'].includes(resource.type) ? 'Download PDF' : 'Read More'} 
+                    {['Data Sheet', 'Whitepaper', 'Guide', 'Report'].includes(resource.type) ? t('downloadPDF') : t('readMore')} 
                     <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={{marginLeft: '6px'}}>
                       <line x1="5" y1="12" x2="19" y2="12"></line>
                       <polyline points="12 5 19 12 12 19"></polyline>
@@ -401,9 +459,9 @@ export default function ResourcesClient() {
           {filteredResources.length === 0 && (
             <div className={styles.emptyState}>
               <div className={styles.emptyIcon}>🔍</div>
-              <h3>No resources found</h3>
-              <p>Try changing your filters or search query.</p>
-              <button className={styles.primaryBtn} onClick={clearFilters}>Clear Filters</button>
+              <h3>{t('noResources')}</h3>
+              <p>{t('noResourcesHint')}</p>
+              <button className={styles.primaryBtn} onClick={clearFilters}>{t('clearFilters')}</button>
             </div>
           )}
         </div>

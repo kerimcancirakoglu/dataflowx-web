@@ -25,11 +25,11 @@ const elementDetails: Record<string, {
     steps: [
       { label: 'What it is', text: 'The Client Module (CM) acts as a secure proxy, terminating connections from the source network and inspecting all requests before they proceed.' },
       { label: 'Granular Filtering', text: 'Performs protocol-specific, content-aware filtering. It integrates with Active Directory to enforce strict Zero Trust Network Access policies.' },
-      { label: 'Sandbox Integration', text: 'Via ICAP integration, the CM can route payloads to sandbox solutions (like DFX Sandbox) for deep analysis and malware mitigation before transmission.' },
+      { label: 'Sandbox Integration', text: 'Via ICAP integration, the CM can route payloads to sandbox solutions (like DFX Malware Mitigation Sandbox) for deep analysis and malware mitigation before transmission.' },
     ]
   },
   tx: {
-    title: 'DFX UG — TX',
+    title: 'DFX UDG — TX',
     role: 'Transmit (TX) Unit',
     steps: [
       { label: 'What it is', text: 'The TX unit takes the validated request from the CM module and converts it into light pulses to traverse the optical fiber.' },
@@ -47,7 +47,7 @@ const elementDetails: Record<string, {
     ]
   },
   rx: {
-    title: 'DFX UG — RX',
+    title: 'DFX UDG — RX',
     role: 'Receive (RX) Unit',
     steps: [
       { label: 'What it is', text: 'The RX unit receives the light pulses from the TX unit across the air gap and converts them back into data for the SM module.' },
@@ -79,11 +79,15 @@ type ElementId = keyof typeof elementDetails;
 
 export default function BrokerFamily() {
   const containerRef = useRef<HTMLDivElement>(null);
-  const req1Ref = useRef<HTMLDivElement>(null); // Source -> CM
-  const req2Ref = useRef<HTMLDivElement>(null); // Air Gap Top
-  const req3Ref = useRef<HTMLDivElement>(null); // SM -> Dest
+  const req1DataRef = useRef<HTMLDivElement>(null);
+  const req1FileRef = useRef<HTMLDivElement>(null);
+  const req2DataRef = useRef<HTMLDivElement>(null);
+  const req2FileRef = useRef<HTMLDivElement>(null);
+  const req3DataRef = useRef<HTMLDivElement>(null);
+  const req3FileRef = useRef<HTMLDivElement>(null);
 
-  const res1Ref = useRef<HTMLDivElement>(null); // Air Gap Bottom (Right to Left)
+  const res1DataRef = useRef<HTMLDivElement>(null);
+  const res1FileRef = useRef<HTMLDivElement>(null);
   
   const [activeElement, setActiveElement] = useState<ElementId | null>(null);
 
@@ -135,11 +139,15 @@ export default function BrokerFamily() {
         }
       };
 
-      animateLR(req1Ref, 0);
-      animateLR(req2Ref, 1);
-      animateLR(req3Ref, 2);
+      animateLR(req1DataRef, 0);
+      animateLR(req1FileRef, 0.5);
+      animateLR(req2DataRef, 1);
+      animateLR(req2FileRef, 1.5);
+      animateLR(req3DataRef, 2);
+      animateLR(req3FileRef, 2.5);
       
-      animateRL(res1Ref, 0.5);
+      animateRL(res1DataRef, 0.5);
+      animateRL(res1FileRef, 1.0);
 
     }, containerRef);
     return () => ctx.revert();
@@ -158,11 +166,11 @@ export default function BrokerFamily() {
         <div className={styles.header}>
           <p className={styles.overTitle}>SECURITY ARCHITECTURE</p>
           <h2 className={styles.title}>
-            Secure Cross-Domain <span className={styles.highlight}>Access</span>
+            Secure Remote <span className={styles.highlight}>Access</span>
           </h2>
           <p className={styles.subtitle}>
-            Click any element to understand how Secure Remote Access enables request-response based 
-            transmission between isolated networks via integrated CM/SM modules and DFX UG.
+            Click any element to understand how DFX Secure Remote Access enables request-response based 
+            transmission between isolated networks via integrated CM/SM modules and DFX UDG.
           </p>
         </div>
 
@@ -187,8 +195,26 @@ export default function BrokerFamily() {
           </button>
 
           {/* Line 1 */}
-          <div className={styles.straightLine}>
-            <div className={`${styles.packet} ${styles.packetReq}`} ref={req1Ref}></div>
+          <div className={styles.channelContainer}>
+            <div className={styles.channelRow}>
+              <div className={styles.channelLine} />
+              <div className={`${styles.channelPacket} ${styles.packetData}`} ref={req1DataRef}>
+                <span className={styles.packetText}>DATA</span>
+              </div>
+            </div>
+            <div className={styles.channelRow}>
+              <div className={styles.channelLine} />
+              <div className={`${styles.channelPacket} ${styles.packetFile}`} ref={req1FileRef}>
+                <svg className={styles.packetIcon} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                  <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+                  <polyline points="14 2 14 8 20 8"></polyline>
+                  <line x1="16" y1="13" x2="8" y2="13"></line>
+                  <line x1="16" y1="17" x2="8" y2="17"></line>
+                  <polyline points="10 9 9 9 8 9"></polyline>
+                </svg>
+                <span className={styles.packetText}>PDF</span>
+              </div>
+            </div>
           </div>
 
           {/* 2. CM Module */}
@@ -239,18 +265,32 @@ export default function BrokerFamily() {
 
           {/* 5. Air Gap Center */}
           <div className={styles.airGapCenter}>
-             <div className={styles.horizontalLineTop}>
+             <div className={styles.horizontalLineTop} style={{ background: 'transparent' }}>
                 <span className={styles.pathLabelReq}>Request</span>
-                <div className={`${styles.packet} ${styles.packetReq}`} ref={req2Ref}></div>
+                <div className={styles.channelContainer} style={{ width: '100%', position: 'absolute', top: -5 }}>
+                  <div className={styles.channelRow}>
+                    <div className={styles.channelLine} />
+                    <div className={`${styles.channelPacket} ${styles.packetData}`} ref={req2DataRef}>
+                      <span className={styles.packetText}>DATA</span>
+                    </div>
+                  </div>
+                </div>
              </div>
              
              <button className={`${styles.airGapVertical} ${activeElement === 'airgap' ? styles.activeNode : ''}`} onClick={() => handleClick('airgap')}>
                 <div className={styles.airGapText}>AIR GAP</div>
              </button>
              
-             <div className={styles.horizontalLineBottom}>
+             <div className={styles.horizontalLineBottom} style={{ background: 'transparent' }}>
                 <span className={styles.pathLabelRes}>Response</span>
-                <div className={`${styles.packet} ${styles.packetRes}`} ref={res1Ref}></div>
+                <div className={styles.channelContainer} style={{ width: '100%', position: 'absolute', top: -5 }}>
+                  <div className={styles.channelRow}>
+                    <div className={styles.channelLine} />
+                    <div className={`${styles.channelPacket} ${styles.packetData}`} ref={res1DataRef}>
+                      <span className={styles.packetText}>DATA</span>
+                    </div>
+                  </div>
+                </div>
              </div>
           </div>
 
@@ -302,8 +342,26 @@ export default function BrokerFamily() {
           </div>
 
           {/* Line 9 */}
-          <div className={styles.straightLine}>
-            <div className={`${styles.packet} ${styles.packetReq}`} ref={req3Ref}></div>
+          <div className={styles.channelContainer}>
+            <div className={styles.channelRow}>
+              <div className={styles.channelLine} />
+              <div className={`${styles.channelPacket} ${styles.packetData}`} ref={req3DataRef}>
+                <span className={styles.packetText}>DATA</span>
+              </div>
+            </div>
+            <div className={styles.channelRow}>
+              <div className={styles.channelLine} />
+              <div className={`${styles.channelPacket} ${styles.packetFile}`} ref={req3FileRef}>
+                <svg className={styles.packetIcon} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                  <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+                  <polyline points="14 2 14 8 20 8"></polyline>
+                  <line x1="16" y1="13" x2="8" y2="13"></line>
+                  <line x1="16" y1="17" x2="8" y2="17"></line>
+                  <polyline points="10 9 9 9 8 9"></polyline>
+                </svg>
+                <span className={styles.packetText}>PDF</span>
+              </div>
+            </div>
           </div>
 
           {/* 10. Destination Network */}

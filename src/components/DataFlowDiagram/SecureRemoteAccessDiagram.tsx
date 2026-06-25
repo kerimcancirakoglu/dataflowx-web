@@ -8,6 +8,10 @@ export default function SecureRemoteAccessDiagram() {
   const containerRef = useRef<HTMLDivElement>(null);
   const requestPacketRef = useRef<HTMLDivElement>(null);
   const responsePacketRef = useRef<HTMLDivElement>(null);
+  const dataPacketRef = useRef<HTMLDivElement>(null);
+  const filePacketRef = useRef<HTMLDivElement>(null);
+  const smDataPacketRef = useRef<HTMLDivElement>(null);
+  const smFilePacketRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     let ctx = gsap.context(() => {
@@ -26,6 +30,49 @@ export default function SecureRemoteAccessDiagram() {
               '0%': { opacity: 0 },
               '15%': { opacity: 1 },
               '85%': { opacity: 1 },
+              '100%': { opacity: 0 }
+            }
+          }
+        );
+      }
+
+      // Source to CM Data Packet
+      if (dataPacketRef.current) {
+        gsap.fromTo(
+          dataPacketRef.current,
+          { left: '-10%', opacity: 0 },
+          {
+            left: '110%',
+            opacity: 1,
+            duration: 2,
+            ease: 'power1.inOut',
+            repeat: -1,
+            keyframes: {
+              '0%': { opacity: 0 },
+              '20%': { opacity: 1 },
+              '80%': { opacity: 1 },
+              '100%': { opacity: 0 }
+            }
+          }
+        );
+      }
+
+      // Source to CM File (PDF) Packet
+      if (filePacketRef.current) {
+        gsap.fromTo(
+          filePacketRef.current,
+          { left: '-10%', opacity: 0 },
+          {
+            left: '110%',
+            opacity: 1,
+            duration: 2.5,
+            delay: 1,
+            ease: 'power1.inOut',
+            repeat: -1,
+            keyframes: {
+              '0%': { opacity: 0 },
+              '20%': { opacity: 1 },
+              '80%': { opacity: 1 },
               '100%': { opacity: 0 }
             }
           }
@@ -53,6 +100,48 @@ export default function SecureRemoteAccessDiagram() {
           }
         );
       }
+      // SM to Protected Network Data Packet
+      if (smDataPacketRef.current) {
+        gsap.fromTo(
+          smDataPacketRef.current,
+          { left: '-10%', opacity: 0 },
+          {
+            left: '110%',
+            opacity: 1,
+            duration: 2,
+            ease: 'power1.inOut',
+            repeat: -1,
+            keyframes: {
+              '0%': { opacity: 0 },
+              '20%': { opacity: 1 },
+              '80%': { opacity: 1 },
+              '100%': { opacity: 0 }
+            }
+          }
+        );
+      }
+
+      // SM to Protected Network File (PDF) Packet
+      if (smFilePacketRef.current) {
+        gsap.fromTo(
+          smFilePacketRef.current,
+          { left: '-10%', opacity: 0 },
+          {
+            left: '110%',
+            opacity: 1,
+            duration: 2.5,
+            delay: 1,
+            ease: 'power1.inOut',
+            repeat: -1,
+            keyframes: {
+              '0%': { opacity: 0 },
+              '20%': { opacity: 1 },
+              '80%': { opacity: 1 },
+              '100%': { opacity: 0 }
+            }
+          }
+        );
+      }
     }, containerRef);
 
     return () => ctx.revert();
@@ -70,6 +159,29 @@ export default function SecureRemoteAccessDiagram() {
           <line x1="6" y1="18" x2="6.01" y2="18" />
         </svg>
         <div className={styles.networkLabel}>Source<br />Network</div>
+      </div>
+
+      {/* Source to CM Connection */}
+      <div className={styles.sourceToCmConnection}>
+        <div className={styles.channelRow}>
+          <div className={styles.channelLine} />
+          <div className={`${styles.channelPacket} ${styles.packetData}`} ref={dataPacketRef}>
+            <span className={styles.packetText}>DATA</span>
+          </div>
+        </div>
+        <div className={styles.channelRow}>
+          <div className={styles.channelLine} />
+          <div className={`${styles.channelPacket} ${styles.packetFile}`} ref={filePacketRef}>
+            <svg className={styles.packetIcon} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+              <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+              <polyline points="14 2 14 8 20 8"></polyline>
+              <line x1="16" y1="13" x2="8" y2="13"></line>
+              <line x1="16" y1="17" x2="8" y2="17"></line>
+              <polyline points="10 9 9 9 8 9"></polyline>
+            </svg>
+            <span className={styles.packetText}>PDF</span>
+          </div>
+        </div>
       </div>
 
       {/* Gateway Area */}
@@ -131,10 +243,33 @@ export default function SecureRemoteAccessDiagram() {
         <div className={styles.brokerBox}>
           <div className={styles.brokerLabel}>SM</div>
           <div className={styles.brokerText}>
-            DFX Secure Remote Access
+            Secure Remote Access
           </div>
         </div>
 
+      </div>
+
+      {/* SM to Protected Network Connection */}
+      <div className={styles.sourceToCmConnection}>
+        <div className={styles.channelRow}>
+          <div className={styles.channelLine} />
+          <div className={`${styles.channelPacket} ${styles.packetData}`} ref={smDataPacketRef}>
+            <span className={styles.packetText}>DATA</span>
+          </div>
+        </div>
+        <div className={styles.channelRow}>
+          <div className={styles.channelLine} />
+          <div className={`${styles.channelPacket} ${styles.packetFile}`} ref={smFilePacketRef}>
+            <svg className={styles.packetIcon} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+              <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+              <polyline points="14 2 14 8 20 8"></polyline>
+              <line x1="16" y1="13" x2="8" y2="13"></line>
+              <line x1="16" y1="17" x2="8" y2="17"></line>
+              <polyline points="10 9 9 9 8 9"></polyline>
+            </svg>
+            <span className={styles.packetText}>PDF</span>
+          </div>
+        </div>
       </div>
 
       {/* Right Network Box (Destination) */}

@@ -1,4 +1,5 @@
 import React from 'react';
+import Image from 'next/image';
 import styles from './AboutUs.module.css';
 import { getTranslations } from 'next-intl/server';
 
@@ -12,11 +13,11 @@ export default async function AboutUs() {
         {/* Part 1: We Secure the Flow */}
         <div className={styles.topPart}>
           <div className={styles.textContent}>
-            <h2 className={styles.mainTitle}>
+            <h1 className={styles.mainTitle}>
               {t('part1.mainTitle1')} <br />
               <span className={styles.highlight}>{t('part1.mainTitleHighlight')}</span><br />
               {t('part1.mainTitle2')}
-            </h2>
+            </h1>
 
             <p className={styles.description}>
               {t('part1.description')}
@@ -61,9 +62,10 @@ export default async function AboutUs() {
 
           <div className={styles.imageContent}>
             <div className={styles.imageWrapper}>
-              <img
+              <Image
                 src="/images/aboutus.png"
                 alt="DataFlowX - Zero Trust. Zero Tolerance."
+                width={800} height={600} style={{ width: '100%', height: 'auto' }}
                 className={styles.aboutImage}
               />
               <div className={styles.xGlowOverlay}></div>
@@ -175,16 +177,17 @@ export default async function AboutUs() {
             <p className={styles.storyDescription} style={{ whiteSpace: 'pre-line' }}>
               {t('part3.desc')}
             </p>
-            <a href="mailto:hr@dataflowx.com" className={styles.primaryButton} style={{ textDecoration: 'none', display: 'inline-block', textAlign: 'center' }}>
+            <a href="https://www.linkedin.com/company/dataflowx/posts/?feedView=all" target="_blank" rel="noopener noreferrer" className={styles.primaryButton} style={{ textDecoration: 'none', display: 'inline-block', textAlign: 'center' }}>
               {t('part3.btn')}
             </a>
           </div>
 
           <div className={styles.imageContent}>
             <div className={styles.imageWrapper}>
-              <img
+              <Image
                 src={`${process.env.NEXT_PUBLIC_WP_URL}/wp-content/uploads/Kapak/kapaklar/data3.jpg`}
                 alt="DataFlowX Team"
+                width={800} height={600} style={{ width: '100%', height: 'auto' }}
                 className={styles.aboutImage}
               />
               <div className={styles.xGlowOverlay} style={{ top: 'auto', bottom: '10%', right: '10%' }}></div>

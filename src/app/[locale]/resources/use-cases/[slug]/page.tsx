@@ -1,6 +1,7 @@
 import { notFound } from 'next/navigation';
 import type { Metadata } from 'next';
 import Link from 'next/link';
+import Image from 'next/image';
 import Nav from '@/components/Nav/Nav';
 import styles from './page.module.css';
 import { USE_CASES } from '@/data/useCases';
@@ -32,12 +33,12 @@ const getProductUrl = (productName: string) => {
   switch (productName) {
     case 'DFX Unidirectional Gateway': return '/unidirectional-gateway';
     case 'DFX Secure Remote Access': return '/secure-remote-access';
-    case 'DFX E-Mail Security Platform': return '/email-security-platform';
+    case 'DFX Email Security Platform': return '/email-security-platform';
     case 'DFX IntelRoom': return '/intelroom';
-    case 'TrueCDR™': return '/true-cdr';
-    case 'DFX Sandbox': return '/sandbox';
+    case 'DFX CDR': return '/dfx-cdr';
+    case 'DFX Malware Mitigation Sandbox': return '/sandbox';
     case 'DFX Media Transfer Station': return '/media-transfer-station';
-    case 'DFX PortX': return '/portx';
+    case 'DFX PASS': return '/portx';
     default: return '/#solutions';
   }
 };
@@ -83,13 +84,13 @@ export default async function UseCaseDetailPage({ params }: PageProps) {
       {/* Hero Section with Photo and Overlay */}
       <section className={styles.hero}>
         <div className={styles.heroBg}>
-          <img src={useCase.image} alt={useCase.title} className={styles.heroImage} />
+          <Image src={useCase.image} alt={useCase.title} fill style={{ objectFit: 'cover' }} className={styles.heroImage} />
         </div>
         <div className={styles.heroOverlay} />
         
         <div className={styles.heroContent}>
           <h1 className={styles.heroTitle}>{useCase.title}</h1>
-          <img src="/DataFlowX_Logo_W.png" alt="DataFlowX Logo" className={styles.heroLogo} />
+          <Image src="/DataFlowX_Logo_W.png" alt="DataFlowX Logo" width={200} height={60} style={{ width: 'auto', height: '100%' }} className={styles.heroLogo} />
         </div>
       </section>
 

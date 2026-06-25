@@ -11,6 +11,8 @@ export async function POST(request: NextRequest) {
 
   try {
     // Revalidate blog listing and all dynamic post pages
+    revalidatePath('/resources');
+    revalidatePath('/news');
     revalidatePath('/resources/blog');
     revalidatePath('/resources/blog/[slug]', 'page');
 

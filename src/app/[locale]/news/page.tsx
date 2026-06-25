@@ -5,27 +5,30 @@ import VideoBackground from '@/components/VideoBackground/VideoBackground';
 import NewsClient from './NewsClient';
 import { getPosts, WPRestPost } from '@/lib/wp-api';
 
-export const metadata: Metadata = {
-  title: 'Newsroom | DataFlowX',
-  description:
-    'Follow the latest company news, press releases, and media coverage about DataFlowX.',
-  keywords: [
-    'DataFlowX news',
-    'cybersecurity press release',
-    'company news',
-    'OT security news',
-    'DataFlowX in the media',
-  ],
-  alternates: {
-    canonical: 'https://dataflowx.com/news',
-  },
-  openGraph: {
-    title: 'DataFlowX Newsroom',
-    description: 'DataFlowX company announcements and press releases.',
-    url: 'https://dataflowx.com/news',
-    images: [{ url: '/og-image.jpg', width: 1200, height: 630 }],
-  },
-};
+export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
+  const { locale } = await params;
+  return {
+    title: 'Newsroom | DataFlowX',
+    description:
+      'Follow the latest company news, press releases, and media coverage about DataFlowX.',
+    keywords: [
+      'DataFlowX news',
+      'cybersecurity press release',
+      'company news',
+      'OT security news',
+      'DataFlowX in the media',
+    ],
+    alternates: {
+      canonical: `https://dataflowx.com/${locale}/news`,
+    },
+    openGraph: {
+      title: 'DataFlowX Newsroom',
+      description: 'DataFlowX company announcements and press releases.',
+      url: `https://dataflowx.com/${locale}/news`,
+      images: [{ url: '/og-image.jpg', width: 1200, height: 630 }],
+    },
+  };
+}
 
 export const revalidate = 3600; // ISR: Revalidate every hour
 

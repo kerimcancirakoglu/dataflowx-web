@@ -7,39 +7,68 @@ import EmailSecurityLayers from '@/components/EmailSecurityLayers/EmailSecurityL
 import EmailFeaturesTabs from '@/components/EmailFeaturesTabs/EmailFeaturesTabs';
 import styles from './page.module.css';
 import { getTranslations } from 'next-intl/server';
+import { HreflangLinks } from '@/components/SEO/HreflangLinks';
+import ProductSchema from '@/components/SEO/ProductSchema';
+import BreadcrumbSchema from '@/components/SEO/BreadcrumbSchema';
 
-export const metadata: Metadata = {
-  title: 'Email Security Platform — AI-Powered Threat Detection & CDR',
-  description:
-    'DFX Email Security Platform: AI behavioral detection, deep CDR, and retrospective scanning. Zero Trust email gateway protecting critical infrastructure from phishing, BEC, and zero-day malware.',
-  keywords: [
-    'email security platform',
-    'AI threat detection',
-    'content disarm reconstruction',
-    'CDR email',
-    'anti-phishing',
-    'BEC protection',
-    'zero-day malware email',
-    'email gateway security',
-    'e-posta güvenlik platformu',
-    'siber tehdit tespiti',
-  ],
-  alternates: {
-    canonical: 'https://dataflowx.com/email-security-platform',
-  },
-  openGraph: {
-    title: 'DFX Email Security Platform — AI + CDR Protection',
+export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
+  const { locale } = await params;
+  const baseUrl = 'https://www.dataflowx.com';
+
+  return {
+    title: 'Email Security Platform — AI-Powered Threat Detection & CDR',
     description:
-      'Self-learning AI + Deep CDR + Retrospective scanning. Zero Trust email protection against advanced persistent threats.',
-    url: 'https://dataflowx.com/email-security-platform',
-    images: [{ url: '/og-image.jpg', width: 1200, height: 630 }],
-  },
-};
+      'DFX Email Security Platform: AI behavioral detection, deep CDR, and retrospective scanning. Zero Trust email gateway protecting critical infrastructure from phishing, BEC, and zero-day malware.',
+    keywords: [
+      'email security platform',
+      'AI threat detection',
+      'content disarm reconstruction',
+      'CDR email',
+      'anti-phishing',
+      'BEC protection',
+      'zero-day malware email',
+      'email gateway security',
+      'e-posta güvenlik platformu',
+      'siber tehdit tespiti',
+    ],
+    alternates: {
+      canonical: `${baseUrl}/${locale}/email-security-platform`,
+    },
+    openGraph: {
+      title: 'DFX Email Security Platform — AI + CDR Protection',
+      description:
+        'Self-learning AI + Deep CDR + Retrospective scanning. Zero Trust email protection against advanced persistent threats.',
+      url: `${baseUrl}/${locale}/email-security-platform`,
+      images: [{ url: `${baseUrl}/og/email-security.jpg`, width: 1200, height: 630 }],
+    },
+    twitter: {
+      card: 'summary_large_image',
+      title: 'DFX Email Security Platform — AI + CDR Protection',
+      description: 'Self-learning AI + Deep CDR + Retrospective scanning. Zero Trust email protection against advanced persistent threats.',
+      images: [`${baseUrl}/og/email-security.jpg`],
+    },
+  };
+}
 
 export default async function EmailSecurityPage() {
   const t = await getTranslations('EmailSecurity.page');
   return (
     <main>
+      <HreflangLinks slug="email-security-platform" />
+      <BreadcrumbSchema 
+        items={[
+          { name: 'DataFlowX', url: 'https://www.dataflowx.com' },
+          { name: 'Solutions', url: 'https://www.dataflowx.com' },
+          { name: 'DFX Email Security Platform', url: 'https://www.dataflowx.com/en/email-security-platform' }
+        ]} 
+      />
+      <ProductSchema 
+        name="DFX Email Security Platform"
+        description="Self-learning AI + Deep CDR + Retrospective scanning. Zero Trust email protection against advanced persistent threats."
+        url="https://www.dataflowx.com/en/email-security-platform"
+        image="https://www.dataflowx.com/og/email-security.jpg"
+        category="Cybersecurity Software"
+      />
       <VideoBackground />
       <Nav />
 

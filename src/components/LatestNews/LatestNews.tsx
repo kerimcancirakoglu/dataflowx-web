@@ -1,9 +1,18 @@
 import React from 'react';
+import Link from 'next/link';
+import Image from 'next/image';
 import styles from './LatestNews.module.css';
 import { getTranslations, getLocale } from 'next-intl/server';
 import client from '@/lib/apollo-client';
 import { GET_ALL_POSTS } from '@/lib/graphql-queries';
 import { localeToWPLanguage } from '@/lib/locale-map';
+import { decode } from 'html-entities';
+
+function getCoverImage(contentHtml: string, fallback: string = '/images/blog/blog-1.avif') {
+  if (!contentHtml) return fallback;
+  const match = contentHtml.match(/<img[^>]+src=["']([^"']+)["']/i);
+  return match ? match[1] : fallback;
+}
 
 interface Post {
   id: number;
@@ -57,13 +66,13 @@ const MOCK_POSTS: Post[] = [
 
 async function getLatestPosts(locale: string): Promise<Post[]> {
   try {
-    const { data } = await client.query<WPPostsResponse>({
+    const { data } = await client.query<any>({
       query: GET_ALL_POSTS,
       variables: { language: localeToWPLanguage(locale) },
       fetchPolicy: 'no-cache'
     });
 
-    if (!data?.posts?.nodes) {
+    if (!data?.posts?.nodes || data.posts.nodes.length === 0) {
       return MOCK_POSTS;
     }
 
@@ -73,9 +82,9 @@ async function getLatestPosts(locale: string): Promise<Post[]> {
       
       return {
         id: post.id || index,
-        title: post.title,
+        title: decode(post.title),
         date: formattedDate,
-        image: post.featuredImage?.node?.sourceUrl || '/images/blog/blog-1.avif',
+        image: post.featuredImage?.node?.sourceUrl || getCoverImage(post.content),
         featured: index === 0,
         link: `/${locale}/resources/blog/${post.slug}`
       };
@@ -116,7 +125,7 @@ export default async function LatestNews() {
           {featuredItem && (
             <a href={featuredItem.link} className={styles.featuredCard}>
               <div className={styles.featuredImageWrapper}>
-                <img src={featuredItem.image} alt={featuredItem.title} className={styles.featuredImage} />
+                <Image src={featuredItem.image} alt={featuredItem.title} fill style={{ objectFit: 'cover' }} className={styles.featuredImage} />
                 <div className={styles.overlay}></div>
               </div>
               <div className={styles.featuredContent}>
@@ -138,7 +147,7 @@ export default async function LatestNews() {
             {listItems.map((item) => (
               <a href={item.link} key={item.id} className={styles.listCard}>
                 <div className={styles.listImageWrapper}>
-                  <img src={item.image} alt={item.title} className={styles.listImage} />
+                  <Image src={item.image} alt={item.title} fill style={{ objectFit: 'cover' }} className={styles.listImage} />
                 </div>
                 <div className={styles.listContent}>
                   <div className={styles.date}>{item.date}</div>

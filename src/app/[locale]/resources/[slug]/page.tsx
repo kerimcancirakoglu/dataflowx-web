@@ -3,6 +3,7 @@ import type { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 import Nav from '@/components/Nav/Nav';
 import Contact from '@/components/Contact/Contact';
+import Image from 'next/image';
 import TableOfContents from '@/components/BlogLayout/TableOfContents';
 import SocialShare from '@/components/BlogLayout/SocialShare';
 import LeadModalTrigger from './LeadModalTrigger';
@@ -80,9 +81,9 @@ const MOCK_RESOURCES: Record<string, any> = {
     featuredImage: `${process.env.NEXT_PUBLIC_WP_URL}/wp-content/uploads/Kapak/kapaklar/data3.jpg`
   },
   'ds-email': {
-    title: 'DFX E-Mail Security Platform Data Sheet',
+    title: 'DFX Email Security Platform Data Sheet',
     date: '2024-05-15',
-    content: '<p>Deep CDR and AI behavior detection for zero-trust email gateways.</p><h2>Next-Gen Email Protection</h2><p>Stop advanced persistent threats, phishing, and zero-day malware before they reach your users inboxes with TrueCDR technology.</p><p><a href="#" class="downloadBtn">Download PDF</a></p>',
+    content: '<p>Deep CDR and AI behavior detection for zero-trust email gateways.</p><h2>Next-Gen Email Protection</h2><p>Stop advanced persistent threats, phishing, and zero-day malware before they reach your users inboxes with DFX CDR technology.</p><p><a href="#" class="downloadBtn">Download PDF</a></p>',
     excerpt: 'Deep CDR and AI behavior detection for zero-trust email gateways.',
     author: { name: 'DFX Product Team' },
     readingTime: '1 min read',
@@ -167,21 +168,22 @@ export default async function ResourcePostPage({ params }: Props) {
         {/* Full Width Featured Image */}
         {imageUrl && (
           <div className={styles.featuredImageContainer}>
-            <img 
-              src={imageUrl} 
-              alt={post.title} 
-              className={styles.featuredImageHero} 
+            <Image
+              src={imageUrl}
+              alt={post.title}
+              width={1200} height={600} style={{ width: '100%', height: 'auto' }}
+              className={styles.featuredImageHero}
             />
           </div>
         )}
 
         {/* Two-Column Layout */}
         <div className={styles.layoutGrid}>
-          
+
           {/* Main Content Column (Left) */}
           <article className={styles.contentColumn}>
-            <div 
-              className={contentStyles.prose} 
+            <div
+              className={contentStyles.prose}
               dangerouslySetInnerHTML={{ __html: post.content }}
             />
           </article>

@@ -5,14 +5,14 @@
     "unidirectional_gateway": "DFX Unidirectional Gateway",
     "secure_remote_access": "DFX Secure Remote Access",
     "file_security": "Dosya Güvenliği",
-    "sandbox": "DFX Sandbox",
+    "sandbox": "DFX Malware Mitigation Sandbox",
     "media_transfer_station": "DFX Media Transfer Station",
     "email_security": "E-Posta Güvenliği",
     "email_security_platform": "DFX E-Posta Güvenlik Platformu",
     "intelroom": "DFX IntelRoom",
-    "true_cdr": "TrueCDR™",
+    "true_cdr": "DFX CDR",
     "ot_security": "OT Güvenliği",
-    "portx": "DFX PortX",
+    "portx": "DFX PASS",
     "resources": "Kaynaklar",
     "resource_center": "Kaynak Merkezi",
     "blog": "Blog",
@@ -60,7 +60,7 @@
       "secureRemote": {
         "titlePrefix": "DFX Secure Remote",
         "titleHighlight": "Access",
-        "description": "DFX UDG donanımı ile doğrudan ve sorunsuz bir şekilde entegre edilen DFX CDS, izole edilmiş ağlar arasında istek-yanıt tabanlı veri iletimine olanak tanır.",
+        "description": "DFX UDG donanımı ile doğrudan ve sorunsuz bir şekilde entegre edilen DFX Secure Remote Access, izole edilmiş ağlar arasında istek-yanıt tabanlı veri iletimine olanak tanır.",
         "protects": "Ağlar arası veri trafiği üzerinde tam ve tavizsiz kontrol sağlayarak yetkisiz yanal hareketleri engeller.",
         "features": {
           "f1": "Sıfır Güven Erişimi",
@@ -73,7 +73,7 @@
       "sandbox": {
         "titlePrefix": "DFX",
         "titleHighlight": "Sandbox",
-        "description": "DFX Sandbox, ağ trafiğini sürekli izleyerek şüpheli davranışları proaktif olarak tespit eder. Şüpheli dosyaları sanal bir korumalı alan ortamında izole eder ve analiz eder.",
+        "description": "DFX Malware Mitigation Sandbox, ağ trafiğini sürekli izleyerek şüpheli davranışları proaktif olarak tespit eder. Şüpheli dosyaları sanal bir korumalı alan ortamında izole eder ve analiz eder.",
         "protects": "Gerçek üretim ortamını riske atmadan kötü amaçlı yazılım davranışlarını güvenli bir şekilde gözlemler ve siber tehditleri etkisiz hale getirir.",
         "features": {
           "f1": "Yapay Zeka Destekli Tespit",
@@ -129,8 +129,8 @@
         }
       },
       "portableAccess": {
-        "titlePrefix": "DFX Pass",
-        "titleHighlight": "(PortX)",
+        "titlePrefix": "DFX",
+        "titleHighlight": "PASS",
         "description": "Temel hava boşluklu ağı tehlikeye atmadan uzak veya geçici operatörler için güvenli erişim ve veri alışverişi sağlar. Sıkı bir 'hiçbir şeye güvenme, her şeyi doğrula' mimarisi üzerine inşa edilmiştir.",
         "protects": "Uzak oturumlar için sürekli kimlik doğrulama ve izolasyon sağlayarak harici veya güvenilmeyen cihazlardan yanal hareketi tamamen ortadan kaldırır.",
         "features": {
@@ -141,11 +141,11 @@
       }
     }
   },
-  "TrueCDR": {
+  "DFX CDR": {
     "hero": {
       "overTitle": "İçerik Arındırma ve Yeniden Oluşturma",
       "tagline": "Silahlanmış İçeriği Etkisiz Hale Getirin. Güvenli Dosyalar Teslim Edin.",
-      "subtitle": "TrueCDR™, kullanıcılarınıza, gelen kutularına, paylaşılan sürücülere, taşınabilir medya iş akışlarına ve hassas ağlara ulaşmadan önce dosya kaynaklı tehditleri etkisiz hale getirir. Kötü amaçlı, aktif, bozuk ve gereksiz riskleri ortadan kaldırır — ardından kesintisiz iş operasyonları için güvenli, kullanılabilir içeriği yeniden oluşturur.",
+      "subtitle": "DFX CDR, kullanıcılarınıza, gelen kutularına, paylaşılan sürücülere, taşınabilir medya iş akışlarına ve hassas ağlara ulaşmadan önce dosya kaynaklı tehditleri etkisiz hale getirir. Kötü amaçlı, aktif, bozuk ve gereksiz riskleri ortadan kaldırır — ardından kesintisiz iş operasyonları için güvenli, kullanılabilir içeriği yeniden oluşturur.",
       "reqDemo": "Demo İste",
       "reviewOpts": "Entegrasyon Seçeneklerini İncele"
     },
@@ -284,7 +284,7 @@
       "desc": "Kritik endüstriyel ortamlarda, USB sürücü en kalıcı ve hafife alınan saldırı vektörlerinden biri olmaya devam etmektedir. Çevre savunmalarını tamamen atlar.",
       "c1": {
         "title": "Fiziksel Kötü Amaçlı Yazılım İletimi",
-        "text": "Virüs bulaşmış tek bir USB sürücü; fidye yazılımı, yıkıcı kötü amaçlı yazılım veya casusluk araçlarını doğrudan hava boşluklu (air-gapped) OT ağlarına sokarak üretim durmalarına, ekipman hasarına ve operasyonel güvenliğe yönelik ciddi tehditlere yol açabilir."
+        "text": "Virüs bulaşmış tek bir USB sürücü; fidye yazılımı, yıkıcı kötü amaçlı yazılım veya casusluk araçlarını doğrudan hava boşluklu (air gapped) OT ağlarına sokarak üretim durmalarına, ekipman hasarına ve operasyonel güvenliğe yönelik ciddi tehditlere yol açabilir."
       },
       "c2": {
         "title": "Yetkisiz Veri Sızıntısı",
@@ -307,7 +307,7 @@
         "text": "Operatörler, iki yönlü bir bağlantı oluşturmadan IT ağında analiz etmek üzere yüksek düzeyde izole edilmiş bölgelerden operasyonel verileri, sistem günlüklerini veya uyumluluk raporlarını güvenli bir şekilde çıkarabilir."
       },
       "c3": {
-        "title": "Hava Boşluklu (Air-Gapped) İş İstasyonları",
+        "title": "Hava Boşluklu (Air gapped) İş İstasyonları",
         "text": "Savunma ve istihbarat uygulamalarında, görev açısından kritik istihbaratın fiziksel olarak ayrılmış sınıflandırma alanları arasında taşınması için onaylanmış tek yöntemi sağlar."
       }
     },
@@ -400,9 +400,9 @@
       }
     },
     "HowItWorks": {
-      "titlePrefix": "Her Tehdit Vektörü.",
-      "titleHighlight": "Tek Ekosistem.",
-      "subtitle": "Siber tehditler tek bir giriş noktası seçmez, biz de öyle.",
+      "titlePrefix": "Kritik Altyapı Savunmasının ",
+      "titleHighlight": "Tüm Yelpazesi.",
+      "subtitle": "Hatanın bir seçenek olmadığı ortamlar için tasarlanmış her çözüm.",
       "network": {
         "title": "Ağ Güvenliği",
         "description": "Donanım tabanlı tek yönlü ağ geçitleri, kritik SCADA ve ICS ağları için fiziksel izolasyon sağlar.",
@@ -412,7 +412,7 @@
       "file": {
         "title": "Dosya Güvenliği",
         "description": "Gelişmiş kötü amaçlı yazılımları yakalamak, analiz etmek ve etkisiz hale getirmek için tasarlanmış yapay zeka destekli ekosistem.",
-        "l1": "DFX Sandbox",
+        "l1": "DFX Malware Mitigation Sandbox",
         "l2": "DFX Media Transfer Station"
       },
       "email": {
@@ -420,12 +420,12 @@
         "description": "Yapay zeka destekli tehdit tespiti ve derin içerik arındırma (CDR) sunan gelişmiş e-posta ağ geçidi.",
         "l1": "DFX E-Posta Güvenlik Platformu",
         "l2": "DFX IntelRoom",
-        "l3": "TrueCDR™"
+        "l3": "DFX CDR"
       },
       "ot": {
         "title": "OT Güvenliği",
         "description": "Farklı güvenlik seviyelerindeki ağlar arasında izolasyondan ödün vermeden güvenli ve kontrollü veri değişimi.",
-        "l1": "DFX PortX"
+        "l1": "DFX PASS"
       }
     },
     "UseCases": {
@@ -470,7 +470,7 @@
     },
     "LatestNews": {
       "title": "En son",
-      "titleHighlight": "haberleri okuyun",
+      "titleHighlight": "içgörüleri okuyun",
       "viewAll": "Tümünü Gör",
       "readArticle": "Makaleyi Oku"
     },
@@ -519,7 +519,7 @@
       },
       "f6": {
         "title": "Sertifikalar",
-        "desc": "DFX UG, Common Criteria EAL4+ ve C1D2* sertifikalıdır. \n*Sadece DFX UG DIN raylı model. Kasım 2024 itibarıyla C1D2 sertifikası."
+        "desc": "DFX UDG, Common Criteria EAL4+ ve C1D2* sertifikalıdır. \n*Sadece DFX UDG DIN raylı model. Kasım 2024 itibarıyla C1D2 sertifikası."
       }
     },
     "testimonial": {
@@ -546,14 +546,14 @@
   "EmailSecurity": {
     "page": {
       "heroTitle": "E-Posta Güvenlik Platformu",
-      "heroSubtitle": "Gelişmiş kötü amaçlı yazılımları tuzağa düşürmek, analiz etmek ve etkisiz hale getirmek için tasarlanmış yapay zeka destekli ekosistem. Gelen ve giden iletişimlerinizi gelişmiş tehditlere karşı güvence altına alın.",
+      "heroSubtitle": "Gelişmiş kötü amaçlı yazılımları tuzağa düşürmek, analiz etmek ve etkisiz hale getirmek için tasarlanmış yapay zeka destekli ekosistem. Gelen ve giden e-postaları Zero Trust (Sıfır Güven) prensipleriyle filtreleyip silahsızlandırarak, oltalama, BEC ve sıfırıncı gün tehditlerine karşı iletişimlerinizi daha gelen kutusuna ulaşmadan güvence altına alın.",
       "btn": "Bilgi Alın ➔",
       "overviewOverTitle": "ÜRÜN BAKIŞI",
       "overviewTitle": "Çok Katmanlı Koruma",
       "overviewDesc": "DFX E-Posta Güvenlik Platformu, gelen ve giden e-postaları filtrelemek, silahsızlandırmak ve temizlemek için Zero Trust (Sıfır Güven) prensiplerine göre çalışır. Oltalama, BEC ve sıfırıncı gün kötü amaçlı yazılımları gelen kutusuna ulaşmadan önce tespit etmek için gelişmiş yapay zeka destekli motorları entegre eder.",
-      "aiLabel": "YAPAY ZEKA DAVRANIŞSAL TESPİT",
+      "aiLabel": "YAPAY ZEKA DAVRANIŞSAL ANALİZ",
       "aiText": "Yalnızca tehdit istihbaratı akışlarına dayanmadan bilinen ve bilinmeyen tehditleri durdurmak için işinizi anlayan Kendi Kendine Öğrenen Yapay Zeka ile yerel e-posta güvenliğini artırır.",
-      "cdrLabel": "DERİN İÇERİK SİLAHSIZLANDIRMA (CDR)",
+      "cdrLabel": "DERİN İÇERİK SİLAHSIZLANDIRMA VE YENİDEN OLUŞTURMA (CDR)",
       "cdrText": "İşlevselliği bozmadan dosyalardaki tüm yürütülebilir içeriği kaldırır. Tüm dosyaların kötü niyetli olduğunu varsayarak Zero Trust prensibine sadık kalır.",
       "retroLabel": "GERİYE DÖNÜK TARAMA",
       "retroText": "Anında müdahale ve tek tıkla iyileştirme. Platform, teslim edilen e-postaları yeni keşfedilen tehdit istihbaratlarına karşı sürekli olarak yeniden değerlendirir."
@@ -563,7 +563,7 @@
     "page": {
       "overviewOverTitle": "ÜRÜN BAKIŞI",
       "overviewTitle": "Gelişmiş Tehdit Azaltma",
-      "overviewDesc": "DFX Sandbox, bir ağdaki veri trafiğini izleyerek şüpheli davranışları tespit eden ve siber tehditleri izole bir ortamda yürüterek azaltan yapay zeka destekli yeni nesil bir çözümdür.",
+      "overviewDesc": "DFX Malware Mitigation Sandbox, bir ağdaki veri trafiğini izleyerek şüpheli davranışları tespit eden ve siber tehditleri izole bir ortamda yürüterek azaltan yapay zeka destekli yeni nesil bir çözümdür.",
       "isoLabel": "İZOLE PATLATMA",
       "isoText": "Sanal bir korumalı alanda dosyaları analiz etmek, kötü amaçlı yazılım davranışlarını gerçek sistemi riske atmadan güvenli bir şekilde patlatmak ve gözlemlemek için çok önemlidir.",
       "intLabel": "ENTEGRE EKOSİSTEM",
@@ -592,14 +592,14 @@
   "SRA": {
     "page": {
       "overviewOverTitle": "ÜRÜN BAKIŞI",
-      "overviewTitle": "Güvenli Alanlar Arası Erişim",
+      "overviewTitle": "Secure Remote Access",
       "overviewDesc": "DFX Secure Remote Access, kapsamlı bir Zero Trust alanlar arası (cross-domain) çözümüdür. Veri trafiği üzerinde tam görünürlük ve kontrol sağlayarak izole ağlar arasında istek-yanıt tabanlı iletim sağlar, bağımsız olarak veya DFX Unidirectional Gateway ile sorunsuz entegrasyon içinde çalışır.",
       "ztnaLabel": "SIFIR GÜVEN AĞ ERİŞİMİ",
       "ztnaText": "Her isteği, kullanıcıyı ve yükü fiziksel optik sınırı geçmesine izin vermeden önce doğrulayarak Zero Trust ilkelerini uzak operasyonlara genişletir.",
       "contentLabel": "İÇERİK FARKINDALIKLI FİLTRELEME",
       "contentText": "Protokole özgü ayrıntılı filtreleme gerçekleştirir ve erişim politikalarını bireysel kullanıcı veya grup düzeyinde uygulamak için Active Directory ile sorunsuz bir şekilde entegre olabilir.",
       "sandboxLabel": "KORUMALI ALAN (SANDBOX) ENTEGRASYONU",
-      "sandboxText": "Şüpheli dosyaları korunan ağa ulaşmadan önce patlatma ve analiz için korumalı alan çözümlerine (DFX Sandbox gibi) yönlendirmek üzere ICAP ile entegre olur."
+      "sandboxText": "Şüpheli dosyaları korunan ağa ulaşmadan önce patlatma ve analiz için korumalı alan çözümlerine (DFX Malware Mitigation Sandbox gibi) yönlendirmek üzere ICAP ile entegre olur."
     }
   },
   "IntelRoom": {
@@ -644,10 +644,10 @@
       "s2l": "Risk",
       "s2t": "Kaynak ve hedef ağlar arasındaki çift yönlü herhangi bir bağlantı bir saldırı yüzeyi oluşturur. Hedef tarafında ele geçirilen tek bir cihaz kaynağa pivot yapabilir.",
       "s3l": "DFX Nasıl Korur",
-      "s3t": "Kaynak Ağ yalnızca TX DFX UG'ye bağlanır. Hedefe hiçbir zaman rota oluşturmaz — tüm iletişim fiziksel olarak tek yönlüdür. Kaynak donanım düzeyinde tamamen yalıtılmış kalır."
+      "s3t": "Kaynak Ağ yalnızca TX DFX UDG'ye bağlanır. Hedefe hiçbir zaman rota oluşturmaz — tüm iletişim fiziksel olarak tek yönlüdür. Kaynak donanım düzeyinde tamamen yalıtılmış kalır."
     },
     "tx": {
-      "title": "DFX UG — TX",
+      "title": "DFX UDG — TX",
       "role": "İletim (TX) Birimi",
       "s1l": "Nedir",
       "s1t": "TX birimi, optik veri diyotunun gönderme tarafıdır. Veri sinyallerini ışık darbelerine dönüştürür ve fiber optik kablo üzerinden tek yönde iletir.",
@@ -667,7 +667,7 @@
       "s3t": "Işık yalnızca TX → RX yönünde ilerler. Protokol geçişi yok, meta veri sızıntısı yok. Fiber, dönüş yolu iletişimini desteklemez — tasarımı gereği tek mod, tek yöndür."
     },
     "rx": {
-      "title": "DFX UG — RX",
+      "title": "DFX UDG — RX",
       "role": "Alıcı (RX) Birimi",
       "s1l": "Nedir",
       "s1t": "RX birimi, TX biriminden gelen ışık darbelerini alır ve ağ verisine geri dönüştürür. Tamamen hedef/korunan ağ tarafında bulunur.",
@@ -755,5 +755,122 @@
       "title": "Sıfır USB Politikası",
       "desc": "Hiçbir harici, güvenilmeyen medyanın doğrudan temel operasyonel iş istasyonlarınıza bağlanmaması kuralını fiziksel olarak uygular."
     }
+  },
+  "DiodeModelViewer": {
+    "subtitle": "Nasıl çalıştığını öğren:",
+    "subtitleLink": "Veri Diyotları ağınızı nasıl korur",
+    "f1": "OT/ICS-IT iletişimi için sızdırmaz koruma",
+    "f2": "Güvenli, segmentli, tek yönlü veri yolları",
+    "f3": "Gerçek protokol kırma, yönlendirilemeyen bağlantı",
+    "f4": "Eşsiz güvenilirlik için yedekli optik bağlantı",
+    "f5": "Kolay kurulum ve işletim yapısı",
+    "f6": "DataFlowX Ekosistemiyle kusursuz entegrasyon",
+    "downloadBtn": "Teknik Veri Sayfasını İndir",
+    "docsLink": "Belgeleri Görüntüle"
+  },
+  "ContactMini": {
+    "title": "Kritik Altyapılar için Uçtan Uca",
+    "titleHighlight": "Siber Güvenlik Mimarisi",
+    "subtitle": "Operasyonel sürekliliğinizi güvence altına alın. İhtiyaçlarınıza özel DataFlowX çözümlerini değerlendirmek için stratejik bir danışmanlık talep edin; uzmanlarımız sizi kısa süre içinde arayacaktır.",
+    "firstName": "Ad*",
+    "lastName": "Soyad*",
+    "jobTitle": "Ünvan*",
+    "company": "Şirket*",
+    "phone": "Telefon Numarası*",
+    "email": "E-posta*",
+    "country": "Ülke*",
+    "consent": "Verilerimin DataFlowX Gizlilik Politikası çerçevesinde işlenmesini kabul ediyorum. İlgili güvenlik çözümleri ve sektör güncellemeleri hakkında benimle iletişime geçilmesini onaylıyorum.",
+    "submitBtn": "Stratejik Danışmanlık Talep Et",
+    "trustedText": "Dünya genelindeki kritik altyapılar tarafından güvenilmektedir.",
+    "countryTR": "Türkiye",
+    "countryAE": "Birleşik Arap Emirlikleri",
+    "countrySA": "Suudi Arabistan",
+    "countryQA": "Katar",
+    "countryUK": "Birleşik Krallık",
+    "countryUS": "Amerika Birleşik Devletleri",
+    "countryOther": "Diğer"
+  },
+  "Partners": {
+    "title": "Küresel Ağ. Yerel Uzmanlık. Güvenilir Teslimat.",
+    "desc": "Siber güvenlik zorlukları sektörler, bölgeler ve operasyonel ortamlar arasında farklılık göstermektedir. Dünya genelinde büyüyen güvenilir iş ortakları ağımız aracılığıyla DataFlowX, ihtiyaç duyulan her yerde uzman rehberlik, hızlı kurulum ve özelleştirilmiş güvenlik çözümleri sunar. Birlikte, kuruluşların dayanıklılığını güçlendirmeye, kritik altyapıyı korumaya ve dijital operasyonlarını güvenle sürdürmelerine yardımcı oluyoruz.",
+    "becomeTitle": "İş Ortağı Olun",
+    "becomeDesc": "Kritik altyapıyı küresel ölçekte korumak için seçkin siber güvenlik yenilikçileri ağımıza katılın."
+  },
+  "Resources": {
+    "searchPlaceholder": "Kaynakları ara...",
+    "filterTitle": "Filtreler",
+    "clearAll": "Tümünü Temizle",
+    "productLabel": "Ürün",
+    "filterByTyping": "Yazarak filtrele",
+    "useCaseLabel": "Kullanım Senaryosu",
+    "noResources": "Kaynak bulunamadı",
+    "noResourcesHint": "Filtrelerinizi veya arama sorgunuzu değiştirmeyi deneyin.",
+    "clearFilters": "Filtreleri Temizle",
+    "noProduct": "Eşleşen ürün bulunamadı.",
+    "downloadPDF": "PDF İndir",
+    "readMore": "Devamını Oku"
+  },
+  "News": {
+    "title": "Tüm Kaynaklar",
+    "allLabel": "Tümü",
+    "noNews": "Haber bulunamadı.",
+    "readMore": "Devamını Oku",
+    "newsroomTitle": "Haber Odası",
+    "newsroomSubtitle": "En son şirket duyuruları, basın bültenleri ve medya yansımaları.",
+    "featured": "Öne Çıkan",
+    "readFullStory": "Haberin Tamamını Oku",
+    "noNewsTitle": "Haber Bulunamadı",
+    "noNewsDesc": "Şu anda gösterilecek haber bulunmuyor."
+  },
+  "ProductSpecs": {
+    "title": "DFX UDG Modelleri",
+    "desc": "NATO Bilgi Güvencesi Ürün Kataloğunda listelenmiştir. DataFlowX Tek Yönlü Ağ Geçidi donanım cihazlarına ait teknik belgeler ve özellikler.",
+    "genInfo": "Genel Bilgiler",
+    "hwConn": "Donanım & Bağlantı",
+    "model": "Model",
+    "code": "Ürün Kodu",
+    "speed": "Diyot Hızı",
+    "network": "Ağ Arayüzü",
+    "memory": "Bellek",
+    "storage": "Depolama",
+    "uplink": "UpLink Port"
+  },
+  "MTSModelViewer": {
+    "title": "DFX MTS",
+    "subtitle": "Keşfedin:",
+    "subtitleLink": "DFX Medya Aktarım İstasyonu ağınızı nasıl korur",
+    "subtitleSuffix": "zararlı fiziksel medyalara karşı.",
+    "f1": "Hassas ortamlar için güvenli medya aktarım kiosku",
+    "f2": "Sıfırıncı gün (zero-day) autorun açıkları ve firmware düzeyindeki zararlı yazılımları önler",
+    "f3": "Gelişmiş içerik farkındalıklı filtreleme ve Dosya Arındırma (CDR)",
+    "f4": "Kimlik doğrulama için Active Directory / LDAP ile entegre çalışır",
+    "f5": "Kritik iş istasyonlarında Sıfır USB Politikası uygular",
+    "f6": "Tam uyumluluk için değiştirilemez denetim günlükleri",
+    "downloadBtn": "Teknik Veri Sayfasını İndir",
+    "docsLink": "Belgeleri Görüntüle"
+  },
+  "PortXModelViewer": {
+    "title": "DFX Taşınabilir Erişim Güvenlik Sistemi",
+    "subtitle": "Öğrenin:",
+    "subtitleLink": "Taşınabilir Sıfır Güven",
+    "subtitleSuffix": "ağınızı nasıl korur.",
+    "f1": "Fiziksel olarak uygulanan Sıfır USB Politikası",
+    "f2": "Askeri düzeyde AES-256 şifreleme",
+    "f3": "Tam izlenebilirlik ve denetime hazır günlükler",
+    "f4": "Sertleştirilmiş işletim sistemi ve TPM mimarisi",
+    "f5": "Çift katmanlı NFC kimlik doğrulaması",
+    "f6": "DFX Tek Yönlü Ağ Geçidi ile kusursuz entegrasyon",
+    "downloadBtn": "Teknik Veri Sayfasını İndir",
+    "docsLink": "Belgeleri Görüntüle"
+  },
+  "ContactForm": {
+    "title": "Dokümanı İndir",
+    "description": "Dokümana erişmek için lütfen aşağıdaki formu doldurun.",
+    "namePlaceholder": "Ad Soyad*",
+    "emailPlaceholder": "Kurumsal E-Posta*",
+    "genericError": "Bir hata oluştu. Lütfen tekrar deneyin.",
+    "successMessage": "Teşekkürler!",
+    "submitting": "Gönderiliyor...",
+    "submitBtn": "Hemen İndir"
   }
 }

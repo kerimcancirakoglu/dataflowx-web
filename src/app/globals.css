@@ -66,6 +66,7 @@ body {
   border-radius: 12px;
   transform-style: preserve-3d;
   transition: border-color var(--transition-base);
+  will-change: transform;
 }
 
 .glass-card:hover {
@@ -94,6 +95,7 @@ body {
   transition: border-color var(--transition-base), background var(--transition-base);
   position: relative;
   overflow: hidden;
+  will-change: transform;
 }
 
 .btn-pill::before {

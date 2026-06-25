@@ -1,0 +1,615 @@
+/* ── CDR Page Styles ───────────────────────────────── */
+
+/* Hero */
+.heroSection {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 8rem 2rem 4rem;
+  max-width: 1100px;
+  margin: 0 auto;
+  position: relative;
+  z-index: 10;
+}
+
+.overTitle {
+  font-family: var(--font-mono);
+  font-size: 1rem;
+  letter-spacing: 0.12em;
+  color: #F5A706;
+  margin-bottom: 1.5rem;
+  text-transform: uppercase;
+}
+
+.heroTitle {
+  font-size: clamp(3rem, 6vw, 6rem);
+  font-family: var(--font-display);
+  font-weight: 700;
+  color: #ffffff;
+  line-height: 1.05;
+  letter-spacing: -0.02em;
+  margin-bottom: 1.25rem;
+}
+
+.heroTagline {
+  font-family: var(--font-display);
+  font-size: clamp(1.2rem, 2.2vw, 1.5rem);
+  font-weight: 500;
+  color: rgba(255, 255, 255, 0.9);
+  margin-bottom: 1.5rem;
+}
+
+.heroSubtitle {
+  font-family: var(--font-mono);
+  color: var(--color-text-muted);
+  font-size: 1.15rem;
+  max-width: 660px;
+  margin: 0 auto 3rem;
+  line-height: 1.7;
+}
+
+.buttonGroup {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.primaryButton {
+  display: inline-block;
+  background: rgba(245, 167, 6, 0.15);
+  color: #F5A706;
+  padding: 16px 36px;
+  border-radius: 30px;
+  font-family: var(--font-mono);
+  font-weight: 600;
+  font-size: 0.95rem;
+  text-decoration: none;
+  border: 1px solid rgba(245, 167, 6, 0.4);
+  transition: all 0.3s ease;
+  backdrop-filter: blur(10px);
+  letter-spacing: 0.05em;
+}
+
+.primaryButton:hover {
+  background: #F5A706;
+  color: #000;
+  transform: translateY(-2px);
+  box-shadow: 0 10px 30px rgba(245, 167, 6, 0.25);
+}
+
+.secondaryButton {
+  display: inline-block;
+  background: rgba(255, 255, 255, 0.05);
+  color: rgba(255, 255, 255, 0.75);
+  padding: 16px 36px;
+  border-radius: 30px;
+  font-family: var(--font-mono);
+  font-weight: 500;
+  font-size: 0.95rem;
+  text-decoration: none;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  transition: all 0.3s ease;
+  backdrop-filter: blur(10px);
+  letter-spacing: 0.03em;
+}
+
+.secondaryButton:hover {
+  color: #fff;
+  border-color: rgba(255, 255, 255, 0.25);
+  background: rgba(255, 255, 255, 0.08);
+}
+
+/* Shared section labels */
+.sectionLabel {
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  letter-spacing: 0.15em;
+  color: #F5A706;
+  margin-bottom: 1rem;
+  text-transform: uppercase;
+}
+
+.sectionTitle {
+  font-family: var(--font-display);
+  font-size: clamp(2rem, 4vw, 3.5rem);
+  font-weight: 700;
+  color: #fff;
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+  margin-bottom: 1.25rem;
+}
+
+.sectionDesc {
+  font-size: 1.1rem;
+  line-height: 1.7;
+  color: var(--color-text-muted);
+  max-width: 640px;
+}
+
+/* ── Problem Section ──────────────────────────────── */
+.problemSection {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0 2rem;
+}
+
+.problemHeader {
+  margin-bottom: 3.5rem;
+}
+
+.problemGrid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.5rem;
+  margin-bottom: 4rem;
+}
+
+@media (max-width: 968px) {
+  .problemGrid { grid-template-columns: 1fr; }
+}
+
+.problemCard {
+  background: rgba(0, 0, 0, 0.4);
+  border: 1px solid rgba(255, 255, 255, 0.07);
+  border-radius: 16px;
+  padding: 2.5rem;
+  backdrop-filter: blur(12px);
+  transition: border-color 0.3s ease, transform 0.3s ease;
+}
+
+.problemCard:hover {
+  border-color: rgba(245, 167, 6, 0.25);
+  transform: translateY(-4px);
+}
+
+.problemIcon {
+  width: 32px;
+  height: 32px;
+  color: #F5A706;
+  margin-bottom: 1.5rem;
+  display: flex;
+  align-items: flex-start;
+}
+
+.problemIcon svg {
+  width: 100%;
+  height: 100%;
+}
+
+.problemCardTitle {
+  font-family: var(--font-display);
+  font-size: 1.125rem;
+  font-weight: 600;
+  color: var(--color-text);
+  margin-bottom: 1rem;
+}
+
+.problemCardText {
+  font-family: var(--font-mono);
+  font-size: 0.875rem;
+  line-height: 1.6;
+  color: var(--color-text-muted);
+}
+
+.problemQuote {
+  text-align: center;
+  font-family: var(--font-display);
+  font-size: clamp(1.1rem, 2vw, 1.5rem);
+  color: rgba(255, 255, 255, 0.75);
+  line-height: 1.7;
+  padding: 3rem 2rem;
+  border: 1px solid rgba(245, 167, 6, 0.15);
+  border-radius: 16px;
+  background: rgba(245, 167, 6, 0.04);
+  backdrop-filter: blur(8px);
+}
+
+.quoteAccent {
+  color: #F5A706;
+  font-size: 2.5rem;
+  line-height: 0;
+  vertical-align: -0.4em;
+  margin: 0 0.3rem;
+  font-family: Georgia, serif;
+}
+
+/* ── Features Section ────────────────────────────── */
+.featuresSection {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0 2rem;
+}
+
+.featuresHeader {
+  margin-bottom: 3.5rem;
+}
+
+.featuresGrid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.5rem;
+}
+
+@media (max-width: 1024px) {
+  .featuresGrid { grid-template-columns: repeat(2, 1fr); }
+}
+
+@media (max-width: 640px) {
+  .featuresGrid { grid-template-columns: 1fr; }
+}
+
+.featureCard {
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  border-radius: 14px;
+  padding: 2rem;
+  backdrop-filter: blur(10px);
+  transition: all 0.3s ease;
+}
+
+.featureCard:hover {
+  border-color: rgba(245, 167, 6, 0.3);
+  transform: translateY(-4px);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
+}
+
+.featureLabel {
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  color: #F5A706;
+  margin-bottom: 1.25rem;
+  padding-bottom: 0.75rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.featureText {
+  font-size: 0.975rem;
+  line-height: 1.7;
+  color: var(--color-text-muted);
+}
+
+/* ── Benefits Section ────────────────────────────── */
+.benefitsSection {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0 2rem;
+}
+
+.benefitsHeader {
+  margin-bottom: 3.5rem;
+}
+
+.benefitsGrid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.5rem;
+}
+
+@media (max-width: 968px) {
+  .benefitsGrid { grid-template-columns: repeat(2, 1fr); }
+}
+
+@media (max-width: 640px) {
+  .benefitsGrid { grid-template-columns: 1fr; }
+}
+
+.benefitCard {
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 12px;
+  padding: 2.5rem 2rem;
+  backdrop-filter: blur(12px);
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  overflow: hidden;
+  transition: transform 0.3s ease, border-color 0.3s ease, background 0.3s ease;
+}
+
+.benefitCard::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, rgba(245, 167, 6, 0.8), transparent);
+  opacity: 0.5;
+  transition: opacity 0.3s ease;
+}
+
+.benefitCard:hover {
+  transform: translateY(-4px);
+  border-color: rgba(255, 255, 255, 0.15);
+  background: rgba(255, 255, 255, 0.04);
+}
+
+.benefitCard:hover::before {
+  opacity: 1;
+}
+
+.benefitIconWrapper {
+  width: 32px;
+  height: 32px;
+  color: #F5A706;
+  margin-bottom: 1.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.benefitIconWrapper svg {
+  width: 100%;
+  height: 100%;
+}
+
+.benefitTitle {
+  font-family: var(--font-display);
+  font-size: 1.125rem;
+  font-weight: 600;
+  color: var(--color-text);
+  margin-bottom: 1rem;
+}
+
+.benefitDesc {
+  font-family: var(--font-mono);
+  font-size: 0.875rem;
+  line-height: 1.6;
+  color: var(--color-text-muted);
+}
+
+/* ── Use Cases Section (Image Cards) ───────────────────────────── */
+.useCasesSection {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0 2rem;
+}
+
+.useCasesHeader {
+  margin-bottom: 3.5rem;
+}
+
+.useCasesGrid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.5rem;
+}
+
+@media (max-width: 1024px) {
+  .useCasesGrid { grid-template-columns: repeat(2, 1fr); }
+}
+
+@media (max-width: 640px) {
+  .useCasesGrid { grid-template-columns: 1fr; }
+}
+
+/* Image Card Styles (from HowItWorks) */
+.card {
+  position: relative;
+  border-radius: 16px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  min-height: 480px;
+  border: 1px solid rgba(255, 255, 255, 0.03);
+  transition: transform 0.4s ease, box-shadow 0.4s ease, border-color 0.4s ease;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
+}
+
+.card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.6);
+  border-color: rgba(255, 255, 255, 0.3);
+}
+
+.cardBg {
+  position: absolute;
+  inset: 0;
+  background-size: cover;
+  background-position: center;
+  z-index: 1;
+  transition: transform 0.6s ease;
+}
+
+.card:hover .cardBg {
+  transform: scale(1.05);
+}
+
+.cardOverlay {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+}
+
+.cardContent {
+  position: relative;
+  z-index: 3;
+  display: flex;
+  flex-direction: column;
+  padding: 32px 24px;
+  height: 100%;
+}
+
+.iconWrapper {
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  backdrop-filter: blur(8px);
+  color: #F5A706;
+  margin-bottom: 24px;
+}
+
+.cardTitle {
+  font-family: var(--font-display);
+  font-size: 1.25rem;
+  font-weight: 600;
+  line-height: 1.3;
+  color: #fff;
+  margin-bottom: 12px;
+}
+
+.cardDesc {
+  font-size: 0.85rem;
+  line-height: 1.6;
+  color: rgba(255, 255, 255, 0.75);
+  margin-bottom: 24px;
+  flex-grow: 1;
+}
+
+.links {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-top: auto;
+  position: relative;
+  z-index: 10;
+  pointer-events: auto;
+}
+
+.linkItem {
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: #fff;
+  text-decoration: none;
+  padding: 10px 16px;
+  background: transparent;
+  border-radius: 6px;
+  transition: background 0.3s ease, color 0.3s ease;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border: 1px solid transparent;
+  position: relative;
+  z-index: 10;
+  cursor: pointer;
+  pointer-events: auto;
+}
+
+.card:hover .linkItem {
+  background: rgba(255, 255, 255, 0.05);
+  border-color: rgba(255, 255, 255, 0.1);
+}
+
+.linkItem:hover {
+  background: #fff !important;
+  color: #000 !important;
+}
+
+/* ── VS Section ──────────────────────────────────── */
+.vsSection {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0 2rem;
+}
+
+.vsGrid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1.25rem;
+  margin-top: 3rem;
+}
+
+@media (max-width: 1024px) {
+  .vsGrid { grid-template-columns: repeat(2, 1fr); }
+}
+
+@media (max-width: 640px) {
+  .vsGrid { grid-template-columns: 1fr; }
+}
+
+.vsCard {
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 14px;
+  padding: 1.75rem;
+  backdrop-filter: blur(10px);
+  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.vsCard:hover {
+  border-color: rgba(245, 167, 6, 0.4);
+  background: rgba(245, 167, 6, 0.05);
+  transform: translateY(-4px);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5), 0 0 20px rgba(245, 167, 6, 0.1);
+}
+
+.vsLabel {
+  display: inline-block;
+  align-self: flex-start;
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  color: #F5A706;
+  background: rgba(245, 167, 6, 0.1);
+  border: 1px solid rgba(245, 167, 6, 0.25);
+  border-radius: 4px;
+  padding: 0.25rem 0.65rem;
+  margin-bottom: 1rem;
+}
+
+.vsText {
+  font-size: 0.93rem;
+  line-height: 1.65;
+  color: var(--color-text-muted);
+}
+
+.vsDetails {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  margin-top: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  max-height: 0;
+  opacity: 0;
+  transform: translateY(10px);
+  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.vsCard:hover .vsDetails {
+  max-height: 200px;
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.vsDetails li {
+  font-family: var(--font-mono);
+  font-size: 0.85rem;
+  color: rgba(255, 255, 255, 0.85);
+  display: flex;
+  align-items: flex-start;
+  gap: 0.5rem;
+}
+
+.vsDetails li svg {
+  width: 16px;
+  height: 16px;
+  color: #22c55e;
+  flex-shrink: 0;
+  margin-top: 0.15rem;
+}
+
+@media (max-width: 1024px) {
+  .vsDetails {
+    max-height: 200px;
+    opacity: 1;
+    transform: translateY(0);
+  }
+}

@@ -15,7 +15,7 @@ export default function SecureRemoteAccessHero() {
           <br /><br />
           It extends Zero Trust principles to remote operations by verifying every request, user, and payload before allowing it to cross the physical optical boundary. This ensures that only authorized access is granted to critical infrastructure.
           <br /><br />
-          By integrating seamlessly with Active Directory for granular access policies and ICAP for sandbox detonation, Secure Remote Access neutralizes threats before they ever reach the protected network.
+          By integrating seamlessly with Active Directory for granular access policies and ICAP for sandbox detonation, DFX Secure Remote Access neutralizes threats before they ever reach the protected network.
         </p>
 
         <a href="#contact" className={styles.getInfoButton}>

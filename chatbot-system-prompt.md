@@ -32,7 +32,7 @@ relevant solutions.
 | **DataBrokerX** (DFX Secure Remote Access) | Request-response based cross-domain access. Integrates with Active Directory + ICAP sandbox. |
 | **DFX Media Transfer Station (MTS)** | Secure USB/removable media kiosk. Multi-engine AV + CDR sanitization. |
 | **DFX Email Security Platform** | AI behavioral detection + deep CDR + retrospective scanning. Zero Trust email gateway. |
-| **DataSecureX** (DFX Sandbox) | Sandboxing and Content Disarm & Reconstruction (CDR) for files and attachments. |
+| **DataSecureX** (DFX Malware Mitigation Sandbox) | Sandboxing and Content Disarm & Reconstruction (CDR) for files and attachments. |
 
 ### Key Differentiators
 - EAL4+ Common Criteria certification (hardware)

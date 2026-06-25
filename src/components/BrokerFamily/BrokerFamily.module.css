@@ -350,20 +350,69 @@
   white-space: nowrap;
 }
 
-/* ── Packets ── */
-.packet {
-  position: absolute;
-  top: -6px;
-  width: 14px;
-  height: 14px;
-  border-radius: 50%;
-  background: rgba(255, 255, 255, 0.9);
-  box-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
-  z-index: 3;
+/* ── Dual Channel Animated Packets ── */
+.channelContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 1.5rem;
+  flex: 1;
+  min-width: 50px;
+  position: relative;
+  z-index: 1;
 }
 
-.packetReq { background: #F5A706; box-shadow: 0 0 10px #F5A706; }
-.packetRes { background: #00b4d8; box-shadow: 0 0 10px #00b4d8; }
+.channelRow {
+  position: relative;
+  width: 100%;
+  height: 20px;
+  display: flex;
+  align-items: center;
+}
+
+.channelLine {
+  position: absolute;
+  width: 100%;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2) 10%, rgba(255,255,255,0.2) 90%, transparent);
+  z-index: 0;
+}
+
+.channelPacket {
+  position: absolute;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.25rem;
+  padding: 0.15rem 0.35rem;
+  border-radius: 4px;
+  z-index: 3;
+  opacity: 0;
+}
+
+.packetData {
+  border: 1px solid rgba(245, 167, 6, 0.5);
+  background: rgba(245, 167, 6, 0.15);
+  color: #F5A706;
+  box-shadow: 0 0 10px rgba(245, 167, 6, 0.2);
+}
+
+.packetFile {
+  border: 1px solid rgba(0, 229, 255, 0.5);
+  background: rgba(0, 229, 255, 0.15);
+  color: #00E5FF;
+  box-shadow: 0 0 10px rgba(0, 229, 255, 0.2);
+}
+
+.packetText {
+  font-size: 0.55rem;
+  font-weight: bold;
+}
+
+.packetIcon {
+  width: 10px;
+  height: 10px;
+}
 
 /* ── Info Panel ── */
 .infoPanel {

@@ -56,7 +56,7 @@ export default function HowItWorksClient({ t }: { t: any }) {
       links: [
         { text: t.email.l1, url: '/email-security-platform' },
         { text: t.email.l2, url: '/intelroom' },
-        { text: t.email.l3, url: '/true-cdr' }
+        { text: t.email.l3, url: '/dfx-cdr' }
       ]
     },
     {

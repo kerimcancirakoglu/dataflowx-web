@@ -1,5 +1,6 @@
 import React from 'react';
 import Link from 'next/link';
+import Image from 'next/image';
 import { getTranslations } from 'next-intl/server';
 import styles from './Footer.module.css';
 
@@ -15,7 +16,7 @@ export default async function Footer() {
 
           <div className={styles.brandColumn}>
             <Link href="/" className={styles.logo}>
-              <img src="/DataFlowX_Logo_W.png" alt="DataFlowX Logo" className={styles.logoImage} />
+              <Image src="/DataFlowX_Logo_W.png" alt="DataFlowX Logo" width={200} height={60} style={{ width: 'auto', height: '100%' }} className={styles.logoImage} />
             </Link>
             <p className={styles.brandDescription}>
               {t('description')}
@@ -47,7 +48,7 @@ export default async function Footer() {
             <ul className={styles.linkList}>
               <li><Link href="/email-security-platform">{tNav('email_security_platform')}</Link></li>
               <li><Link href="/intelroom">{tNav('intelroom')}</Link></li>
-              <li><Link href="/true-cdr">{tNav('true_cdr')}</Link></li>
+              <li><Link href="/dfx-cdr">{tNav('true_cdr')}</Link></li>
             </ul>
             <h3 className={styles.columnTitle} style={{ marginTop: '1.5rem' }}>{tNav('ot_security')}</h3>
             <ul className={styles.linkList}>

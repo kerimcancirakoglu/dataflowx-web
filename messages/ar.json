@@ -10,9 +10,9 @@
     "email_security": "أمن البريد الإلكتروني",
     "email_security_platform": "منصة أمن البريد الإلكتروني DFX",
     "intelroom": "غرفة استخبارات DFX",
-    "true_cdr": "TrueCDR™",
+    "true_cdr": "DFX CDR",
     "ot_security": "أمن التكنولوجيا التشغيلية",
-    "portx": "DFX PortX",
+    "portx": "DFX PASS",
     "resources": "الموارد",
     "resource_center": "مركز الموارد",
     "blog": "المدونة",
@@ -141,11 +141,11 @@
       }
     }
   },
-  "TrueCDR": {
+  "DFX CDR": {
     "hero": {
       "overTitle": "Content Disarm & Reconstruction",
       "tagline": "Disarm Weaponized Content. Deliver Safe Files.",
-      "subtitle": "TrueCDR™ neutralizes file-borne threats before they reach your users, inboxes, shared drives, removable media workflows, and sensitive networks. It removes malicious, active, malformed, and unnecessary risk — then reconstructs safe, usable content for seamless business operations.",
+      "subtitle": "DFX CDR neutralizes file-borne threats before they reach your users, inboxes, shared drives, removable media workflows, and sensitive networks. It removes malicious, active, malformed, and unnecessary risk — then reconstructs safe, usable content for seamless business operations.",
       "reqDemo": "Request a Demo",
       "reviewOpts": "Review Integration Options"
     },
@@ -284,7 +284,7 @@
       "desc": "In critical industrial environments, the USB drive remains one of the most persistent and underestimated attack vectors. It bypasses perimeter defenses entirely.",
       "c1": {
         "title": "Physical Malware Transmission",
-        "text": "A single infected USB drive can introduce ransomware, destructive malware, or espionage tools directly into air-gapped OT networks, leading to production shutdowns, equipment damage, and severe threats to operational safety."
+        "text": "A single infected USB drive can introduce ransomware, destructive malware, or espionage tools directly into air gapped OT networks, leading to production shutdowns, equipment damage, and severe threats to operational safety."
       },
       "c2": {
         "title": "Unauthorized Data Leakage",
@@ -307,7 +307,7 @@
         "text": "Operators can securely extract operational data, system logs, or compliance reports from highly isolated zones for analysis in the IT network, without creating a two-way connection."
       },
       "c3": {
-        "title": "Air-Gapped Workstations",
+        "title": "Air gapped Workstations",
         "text": "In defense and intelligence applications, it provides the only approved method for moving mission-critical intelligence across physically separated classification domains."
       }
     },
@@ -420,12 +420,12 @@
         "description": "بوابة بريد إلكتروني متقدمة مع اكتشاف التهديدات بالذكاء الاصطناعي وتفكيك وإعادة بناء المحتوى العميق (CDR).",
         "l1": "DFX منصة أمن البريد الإلكتروني",
         "l2": "DFX غرفة استخبارات",
-        "l3": "TrueCDR™"
+        "l3": "DFX CDR"
       },
       "ot": {
         "title": "أمن التكنولوجيا التشغيلية",
         "description": "تبادل آمن ومضبوط للبيانات بين الشبكات ذات مستويات الأمان المختلفة دون المساس بالعزل.",
-        "l1": "DFX PortX"
+        "l1": "DFX PASS"
       }
     },
     "UseCases": {
@@ -519,7 +519,7 @@
       },
       "f6": {
         "title": "الشهادات",
-        "desc": "DFX UG حاصلة على شهادة Common Criteria EAL4+."
+        "desc": "DFX UDG حاصلة على شهادة Common Criteria EAL4+."
       }
     },
     "testimonial": {
@@ -546,14 +546,14 @@
   "EmailSecurity": {
     "page": {
       "heroTitle": "منصة أمان البريد الإلكتروني",
-      "heroSubtitle": "نظام بيئي مدعوم بالذكاء الاصطناعي مصمم لاصطياد وتحليل وتحييد البرامج الضارة المعقدة. قم بتأمين اتصالاتك الواردة والصادرة ضد التهديدات المتقدمة.",
+      "heroSubtitle": "نظام بيئي مدعوم بالذكاء الاصطناعي مصمم لاصطياد وتحليل وتحييد البرامج الضارة المعقدة. يعمل وفقًا لمبادئ Zero Trust (عدم الثقة) لتصفية رسائل البريد الإلكتروني الواردة والصادرة ونزع سلاحها وتنظيفها، مما يؤمن اتصالاتك ضد التصيد الاحتيالي، وBEC، والتهديدات المتقدمة لليوم الصفر قبل وصولها إلى صندوق الوارد.",
       "btn": "الحصول على المعلومات ➔",
       "overviewOverTitle": "نظرة عامة على المنتج",
       "overviewTitle": "حماية متعددة الطبقات",
       "overviewDesc": "تعمل منصة DFX Email Security Platform وفقًا لمبادئ انعدام الثقة (Zero Trust) لتصفية ونزع سلاح وتعقيم رسائل البريد الإلكتروني الواردة والصادرة. تدمج محركات متقدمة تعتمد على الذكاء الاصطناعي لاكتشاف التصيد الاحتيالي واختراق البريد الإلكتروني للأعمال والبرامج الضارة قبل وصولها إلى صندوق الوارد.",
       "aiLabel": "اكتشاف السلوك بالذكاء الاصطناعي",
       "aiText": "يعزز أمان البريد الإلكتروني الأصلي باستخدام الذكاء الاصطناعي ذاتي التعلم الذي يفهم عملك لإيقاف التهديدات المعروفة وغير المعروفة دون الاعتماد فقط على خلاصات معلومات التهديدات.",
-      "cdrLabel": "نزع محتوى عميق (CDR)",
+      "cdrLabel": "نزع وإعادة بناء المحتوى العميق (CDR)",
       "cdrText": "يزيل كل المحتوى القابل للتنفيذ من الملفات مع الحفاظ على الوظائف سليمة. يظل صادقًا مع Zero Trust من خلال افتراض أن جميع الملفات ضارة.",
       "retroLabel": "مسح بأثر رجعي",
       "retroText": "إجراء فوري وعلاج بنقرة واحدة. تعيد المنصة تقييم رسائل البريد الإلكتروني المسلمة باستمرار في ضوء معلومات التهديدات المكتشفة حديثًا."
@@ -563,7 +563,7 @@
     "page": {
       "overviewOverTitle": "نظرة عامة على المنتج",
       "overviewTitle": "التخفيف المتقدم من التهديدات",
-      "overviewDesc": "منصة DFX Sandbox هي حل من الجيل التالي مدعوم بالذكاء الاصطناعي يراقب حركة البيانات في الشبكة لاكتشاف السلوك المشبوه والتخفيف من التهديدات السيبرانية عن طريق تنفيذها في بيئة معزولة.",
+      "overviewDesc": "منصة DFX Malware Mitigation Sandbox هي حل من الجيل التالي مدعوم بالذكاء الاصطناعي يراقب حركة البيانات في الشبكة لاكتشاف السلوك المشبوه والتخفيف من التهديدات السيبرانية عن طريق تنفيذها في بيئة معزولة.",
       "isoLabel": "التفجير المعزول",
       "isoText": "تحليل الملفات في صندوق رمل افتراضي أمر بالغ الأهمية لتفجير البرامج الضارة بأمان ومراقبة سلوكها دون تعريض النظام الفعلي للخطر.",
       "intLabel": "نظام بيئي متكامل",
@@ -599,7 +599,7 @@
       "contentLabel": "تصفية واعية بالمحتوى",
       "contentText": "تقوم بتصفية دقيقة خاصة بالبروتوكول ويمكن دمجها بسلاسة مع Active Directory لفرض سياسات الوصول على مستوى المستخدم الفردي أو المجموعة.",
       "sandboxLabel": "تكامل مع الصندوق الرملي",
-      "sandboxText": "تتكامل مع ICAP لتوجيه الملفات المشبوهة إلى حلول الصندوق الرملي (مثل DFX Sandbox) لتفجيرها وتحليلها قبل أن تصل إلى الشبكة المحمية."
+      "sandboxText": "تتكامل مع ICAP لتوجيه الملفات المشبوهة إلى حلول الصندوق الرملي (مثل DFX Malware Mitigation Sandbox) لتفجيرها وتحليلها قبل أن تصل إلى الشبكة المحمية."
     }
   },
   "IntelRoom": {
@@ -644,10 +644,10 @@
       "s2l": "الخطر",
       "s2t": "أي اتصال ثنائي الاتجاه بين الشبكة المصدر والوجهة يخلق سطح هجوم. يمكن لجهاز واحد مخترق على جانب الوجهة التمحور للوصول إلى المصدر.",
       "s3l": "كيف يحمي DFX",
-      "s3t": "تتصل شبكة المصدر فقط بـ TX DFX UG. لا يوجد لها مسار إلى الوجهة أبداً — جميع الاتصالات أحادية الاتجاه فعلياً. تبقى الشبكة المصدر معزولة تماماً على مستوى الأجهزة."
+      "s3t": "تتصل شبكة المصدر فقط بـ TX DFX UDG. لا يوجد لها مسار إلى الوجهة أبداً — جميع الاتصالات أحادية الاتجاه فعلياً. تبقى الشبكة المصدر معزولة تماماً على مستوى الأجهزة."
     },
     "tx": {
-      "title": "DFX UG — TX",
+      "title": "DFX UDG — TX",
       "role": "وحدة الإرسال (TX)",
       "s1l": "ما هي",
       "s1t": "وحدة TX هي الجانب المُرسِل من الصمام الضوئي للبيانات. تحول إشارات البيانات إلى نبضات ضوئية وترسلها عبر كابل ألياف ضوئية في اتجاه واحد.",
@@ -667,7 +667,7 @@
       "s3t": "الضوء يسير TX → RX فقط. لا عبور بروتوكول، لا تسريب للبيانات الوصفية. الألياف لا تدعم اتصال مسار العودة — إنها أحادية الوضع وأحادية الاتجاه بالتصميم."
     },
     "rx": {
-      "title": "DFX UG — RX",
+      "title": "DFX UDG — RX",
       "role": "وحدة الاستقبال (RX)",
       "s1l": "ما هي",
       "s1t": "وحدة RX تستقبل النبضات الضوئية من وحدة TX وتحولها مرة أخرى إلى بيانات شبكة. تقع بالكامل على جانب الشبكة المقصودة/المحمية.",
@@ -755,5 +755,122 @@
       "title": "سياسة USB الصفرية",
       "desc": "يطبق فعلياً قاعدة عدم توصيل أي وسائط خارجية غير موثوقة مباشرةً بمحطات العمل التشغيلية الأساسية."
     }
+  },
+  "DiodeModelViewer": {
+    "subtitle": "تعرف على كيفية",
+    "subtitleLink": "حماية صمامات البيانات لشبكتك",
+    "f1": "حماية محكمة لاتصالات OT/ICS-IT",
+    "f2": "مسارات بيانات آمنة ومجزأة وأحادية الاتجاه",
+    "f3": "قطع بروتوكول حقيقي، اتصال غير قابل للتوجيه",
+    "f4": "اتصال ضوئي مكرر لموثوقية لا مثيل لها",
+    "f5": "سهل النشر والتشغيل",
+    "f6": "يتكامل بسلاسة مع منظومة DataFlowX",
+    "downloadBtn": "تحميل ورقة البيانات",
+    "docsLink": "عرض التوثيق"
+  },
+  "ContactMini": {
+    "title": "بنية أمن سيبراني شاملة لـ",
+    "titleHighlight": "البنية التحتية الحيوية",
+    "subtitle": "قم بتأمين استمرارية عملياتك. اطلب استشارة استراتيجية لتقييم حلول DataFlowX المصممة خصيصاً لاحتياجاتك، وسيتواصل معك خبراؤنا في أقرب وقت.",
+    "firstName": "الاسم الأول*",
+    "lastName": "اسم العائلة*",
+    "jobTitle": "المسمى الوظيفي*",
+    "company": "الشركة*",
+    "phone": "رقم الهاتف*",
+    "email": "البريد الإلكتروني*",
+    "country": "الدولة*",
+    "consent": "أوافق على معالجة بياناتي وفقاً لسياسة الخصوصية الخاصة بـ DataFlowX. أوافق على التواصل معي بشأن الحلول الأمنية ذات الصلة وتحديثات الصناعة.",
+    "submitBtn": "طلب استشارة استراتيجية",
+    "trustedText": "موثوق به من قبل البنية التحتية الحيوية في جميع أنحاء العالم.",
+    "countryTR": "تركيا",
+    "countryAE": "الإمارات العربية المتحدة",
+    "countrySA": "المملكة العربية السعودية",
+    "countryQA": "قطر",
+    "countryUK": "المملكة المتحدة",
+    "countryUS": "الولايات المتحدة",
+    "countryOther": "أخرى"
+  },
+  "Partners": {
+    "title": "شبكة عالمية. خبرة محلية. تسليم موثوق.",
+    "desc": "تتباين تحديات الأمن السيبراني عبر الصناعات والمناطق والبيئات التشغيلية. من خلال شبكتنا المتنامية من الشركاء الموثوقين في جميع أنحاء العالم، تقدم DataFlowX التوجيه المتخصص والنشر السريع وحلول الأمن المخصصة أينما كانت الحاجة. معاً، نساعد المؤسسات على تعزيز المرونة وحماية البنية التحتية الحيوية وتأمين عملياتها الرقمية بثقة.",
+    "becomeTitle": "كن شريكاً",
+    "becomeDesc": "انضم إلى شبكتنا النخبوية من مبتكري الأمن السيبراني لحماية البنية التحتية الحيوية عالمياً."
+  },
+  "Resources": {
+    "searchPlaceholder": "ابحث في الموارد...",
+    "filterTitle": "الفلاتر",
+    "clearAll": "مسح الكل",
+    "productLabel": "المنتج",
+    "filterByTyping": "تصفية بالكتابة",
+    "useCaseLabel": "حالة الاستخدام",
+    "noResources": "لم يتم العثور على موارد",
+    "noResourcesHint": "جرب تغيير الفلاتر أو استعلام البحث.",
+    "clearFilters": "مسح الفلاتر",
+    "noProduct": "لم يتم العثور على منتج مطابق.",
+    "downloadPDF": "تحميل PDF",
+    "readMore": "اقرأ المزيد"
+  },
+  "News": {
+    "title": "جميع الموارد",
+    "allLabel": "الكل",
+    "noNews": "لم يتم العثور على أخبار.",
+    "readMore": "اقرأ المزيد",
+    "newsroomTitle": "غرفة الأخبار",
+    "newsroomSubtitle": "أحدث إعلانات الشركة، البيانات الصحفية، والتغطية الإعلامية.",
+    "featured": "مميز",
+    "readFullStory": "اقرأ القصة الكاملة",
+    "noNewsTitle": "لم يتم العثور على أخبار",
+    "noNewsDesc": "لا توجد أخبار لعرضها حالياً."
+  },
+  "ProductSpecs": {
+    "title": "موديلات DFX UDG",
+    "desc": "مدرج في كتالوج منتجات ضمان المعلومات لحلف الناتو. الوثائق التقنية والمواصفات لأجهزة DataFlowX أحادية الاتجاه.",
+    "genInfo": "المعلومات العامة",
+    "hwConn": "الأجهزة والاتصال",
+    "model": "الموديل",
+    "code": "كود المنتج",
+    "speed": "سرعة الصمام",
+    "network": "واجهة الشبكة",
+    "memory": "الذاكرة",
+    "storage": "التخزين",
+    "uplink": "منفذ UpLink"
+  },
+  "MTSModelViewer": {
+    "title": "DFX MTS",
+    "subtitle": "اكتشف كيف",
+    "subtitleLink": "تحمي محطة نقل الوسائط DFX شبكتك",
+    "subtitleSuffix": "من الوسائط المادية الضارة.",
+    "f1": "كشك نقل وسائط آمن للبيئات الحساسة",
+    "f2": "يمنع ثغرات التشغيل التلقائي والبرامج الضارة على مستوى البرامج الثابتة",
+    "f3": "تصفية متقدمة وتطهير الملفات (CDR)",
+    "f4": "يتكامل مع Active Directory / LDAP للمصادقة",
+    "f5": "يفرض سياسة عدم استخدام USB على محطات العمل الأساسية",
+    "f6": "سجلات تدقيق غير قابلة للتغيير للامتثال الكامل",
+    "downloadBtn": "تحميل ورقة البيانات",
+    "docsLink": "عرض التوثيق"
+  },
+  "PortXModelViewer": {
+    "title": "نظام الوصول المحمول الآمن DFX",
+    "subtitle": "تعرف على كيفية",
+    "subtitleLink": "انعدام الثقة المحمول",
+    "subtitleSuffix": "في حماية شبكتك.",
+    "f1": "فرض سياسة عدم استخدام USB فعليًا",
+    "f2": "تشفير AES-256 من الدرجة العسكرية",
+    "f3": "إمكانية التتبع الكامل وسجلات جاهزة للتدقيق",
+    "f4": "نظام تشغيل مقوى وبنية TPM",
+    "f5": "مصادقة NFC مزدوجة الطبقة",
+    "f6": "يتكامل بسلاسة مع بوابة DFX أحادية الاتجاه",
+    "downloadBtn": "تحميل ورقة البيانات",
+    "docsLink": "عرض التوثيق"
+  },
+  "ContactForm": {
+    "title": "تحميل المستند",
+    "description": "يرجى ملء النموذج أدناه للوصول إلى المستند.",
+    "namePlaceholder": "الاسم الكامل*",
+    "emailPlaceholder": "البريد الإلكتروني للعمل*",
+    "genericError": "حدث خطأ. يرجى المحاولة مرة أخرى.",
+    "successMessage": "شكرا لك!",
+    "submitting": "جاري الإرسال...",
+    "submitBtn": "تحميل الآن"
   }
 }

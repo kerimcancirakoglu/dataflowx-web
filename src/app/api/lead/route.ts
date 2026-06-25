@@ -1,4 +1,5 @@
 import { NextResponse } from 'next/server';
+import { Resend } from 'resend';
 
 // Honeypot field name (must match frontend exactly)
 const HONEYPOT_FIELD = 'website_url';
@@ -14,11 +15,31 @@ export async function POST(req: Request) {
       return NextResponse.json({ success: true, message: 'Received' }, { status: 200 });
     }
 
-    const { fullName, email, company, documentName } = body;
+    const { fullName, email, company, documentName, turnstileToken, country, message } = body;
 
     // 2. Basic Validation
     if (!fullName || !email) {
       return NextResponse.json({ error: 'Missing required fields' }, { status: 400 });
+    }
+
+    // 2.5 Cloudflare Turnstile Verification
+    if (process.env.TURNSTILE_SECRET_KEY && turnstileToken) {
+      const formData = new FormData();
+      formData.append('secret', process.env.TURNSTILE_SECRET_KEY);
+      formData.append('response', turnstileToken);
+
+      const turnstileRes = await fetch('https://challenges.cloudflare.com/turnstile/v0/siteverify', {
+        method: 'POST',
+        body: formData,
+      });
+      const turnstileData = await turnstileRes.json();
+      if (!turnstileData.success) {
+        console.warn('Turnstile verification failed', turnstileData);
+        return NextResponse.json({ error: 'Captcha verification failed. Please try again.' }, { status: 403 });
+      }
+    } else if (process.env.TURNSTILE_SECRET_KEY) {
+      // If secret is set but no token is provided, fail the request
+      return NextResponse.json({ error: 'Captcha token missing' }, { status: 403 });
     }
 
     // 3. Corporate Email Validation
@@ -46,35 +67,43 @@ export async function POST(req: Request) {
 
     // Task A: Email via Resend
     if (RESEND_API_KEY) {
+      const resend = new Resend(RESEND_API_KEY);
+      
       promises.push(
-        fetch('https://api.resend.com/emails', {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-            'Authorization': `Bearer ${RESEND_API_KEY}`
-          },
-          body: JSON.stringify({
-            // Alan adınız henüz doğrulanmadığı için Resend'in test e-postasını kullanıyoruz
-            from: 'DataFlowX Website <onboarding@resend.dev>',
+        (async () => {
+          // 1. Send internal notification
+          await resend.emails.send({
+            from: 'DataFlowX Website <onboarding@resend.dev>', // Update to leads@dataflowx.com when verified
             to: ['info@dataflowx.com'],
-            subject: `🚨 New Lead: ${fullName} downloaded ${documentName}`,
+            subject: `🚨 New Lead: ${fullName} / ${company} / ${country || 'N/A'}`,
             html: `
               <h2>New Lead Captured!</h2>
-              <p>A user has just downloaded the <strong>${documentName}</strong>.</p>
+              <p><strong>Source:</strong> ${documentName}</p>
               <ul>
                 <li><strong>Name:</strong> ${fullName}</li>
                 <li><strong>Company:</strong> ${company}</li>
                 <li><strong>Email:</strong> ${email}</li>
+                <li><strong>Country:</strong> ${country || 'N/A'}</li>
                 <li><strong>Time:</strong> ${new Date().toUTCString()}</li>
               </ul>
+              ${message ? `<h3>Message:</h3><p>${message}</p>` : ''}
             `
-          })
-        }).then(async (res) => {
-          if (!res.ok) {
-            const errText = await res.text();
-            throw new Error(`Resend API failed: ${errText}`);
+          });
+
+          // 2. Send auto-reply to the user (Requires verified domain to send to arbitrary addresses)
+          // Note: If onboarding@resend.dev is used, it can only send to verified emails (like info@dataflowx.com).
+          // You must verify dataflowx.com in Resend to enable this auto-reply to the user's 'email'.
+          try {
+            await resend.emails.send({
+              from: 'DataFlowX <onboarding@resend.dev>', // MUST change to noreply@dataflowx.com
+              to: email,
+              subject: 'DataFlowX — We received your request',
+              html: `<p>Hi ${fullName},</p><p>Thank you for reaching out to DataFlowX. We have received your request and our team will get back to you shortly.</p>`
+            });
+          } catch (autoReplyErr) {
+            console.error('Auto-reply failed (Domain likely not verified):', autoReplyErr);
           }
-        })
+        })()
       );
     } else {
       console.warn('RESEND_API_KEY is not set. Email notification skipped.');

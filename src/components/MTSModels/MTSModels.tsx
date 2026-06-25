@@ -1,6 +1,7 @@
 'use client';
 
 import React, { useState } from 'react';
+import Image from 'next/image';
 import styles from './MTSModels.module.css';
 
 const PRODUCT_DATA = {
@@ -61,15 +62,17 @@ export default function MTSModels() {
           {/* We can place an image of the kiosk or portable here if available */}
           <div className={styles.modelVisual}>
             {activeTab === 'KIOSK' ? (
-              <img 
+              <Image 
                 src="/models/kiosk.png" 
                 alt="DFX Media Transfer Station Kiosk" 
+                width={600} height={600}
                 style={{ width: '100%', height: '100%', objectFit: 'contain' }} 
               />
             ) : (
-              <img 
+              <Image 
                 src="/models/station-tablet.png" 
                 alt="DFX Media Transfer Station Portable" 
+                width={600} height={600}
                 style={{ width: '80%', height: '80%', objectFit: 'contain', filter: 'drop-shadow(0 10px 20px rgba(0,0,0,0.5))' }}
               />
             )}

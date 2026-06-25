@@ -2,6 +2,7 @@
 
 import React, { useEffect, useRef } from 'react';
 import { gsap } from 'gsap';
+import Image from 'next/image';
 import styles from './KioskDiagram.module.css';
 
 export default function KioskDiagram() {
@@ -112,7 +113,7 @@ export default function KioskDiagram() {
   return (
     <div className={styles.container} ref={containerRef}>
       <div className={styles.imageWrapper}>
-        <img src="/kiosk.png" alt="DataFlowX Kiosk" className={styles.kioskImage} />
+        <Image src="/kiosk.png" alt="DataFlowX Kiosk" width={800} height={600} style={{ width: '100%', height: 'auto' }} className={styles.kioskImage} />
         
         {/* USB Bellek */}
         <div className={`${styles.usbDrive} usb-drive`}>

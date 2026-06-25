@@ -18,7 +18,7 @@ const elementDetails: Record<string, {
     ]
   },
   esp: {
-    title: 'DFX E-Mail Security Platform',
+    title: 'DFX Email Security Platform',
     role: 'Threat Detection & Mitigation',
     steps: [
       { label: 'Behavioral AI', text: 'Analyzes communication patterns and sender behavior rather than just static signatures.' },
@@ -27,7 +27,7 @@ const elementDetails: Record<string, {
     ]
   },
   sandbox: {
-    title: 'DFX Sandbox',
+    title: 'DFX Malware Mitigation Sandbox',
     role: 'Deep Isolation Sandbox',
     steps: [
       { label: 'Detonation', text: 'Suspicious files are safely executed in an isolated environment to observe true behavior.' },
@@ -155,7 +155,7 @@ export default function EmailSecurityAnimation() {
         <div className={styles.header}>
           <p className={styles.overTitle}>THREAT DETECTION FLOW</p>
           <h2 className={styles.title}>
-            Detect, Disarm, <span className={styles.highlight}>Defend</span>
+            Detect, Neutralize, <span className={styles.highlight}>Defend</span>
           </h2>
           <p className={styles.subtitle}>
             Watch how the platform processes incoming mail in real-time. Threats are analyzed, categorized, and safely quarantined, while clean emails are passed to the user.

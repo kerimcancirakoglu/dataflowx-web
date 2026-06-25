@@ -2,7 +2,8 @@
 
 import { useMemo } from 'react';
 import Link from 'next/link';
-import { useLocale } from 'next-intl';
+import Image from 'next/image';
+import { useLocale, useTranslations } from 'next-intl';
 import styles from './page.module.css';
 
 import { WPRestPost } from '@/lib/wp-api';
@@ -13,6 +14,7 @@ interface NewsClientProps {
 
 export default function NewsClient({ posts }: NewsClientProps) {
   const locale = useLocale();
+  const t = useTranslations('News');
 
   // If we have WP posts, the first one is featured, the rest are grid
   const featuredNews = posts.length > 0 ? posts[0] : null;
@@ -36,8 +38,8 @@ export default function NewsClient({ posts }: NewsClientProps) {
 
       {/* Header */}
       <section className={styles.headerSection}>
-        <h1 className={styles.mainTitle}>Newsroom</h1>
-        <p className={styles.subtitle}>The latest company announcements, press releases, and media coverage.</p>
+        <h1 className={styles.mainTitle}>{t('newsroomTitle')}</h1>
+        <p className={styles.subtitle}>{t('newsroomSubtitle')}</p>
       </section>
 
       {/* Featured News Hero */}
@@ -46,19 +48,20 @@ export default function NewsClient({ posts }: NewsClientProps) {
           <div className={styles.heroCard}>
             <div className={styles.heroContent}>
               <div className={styles.metaData}>
-                <span className={styles.categoryBadge}>Featured</span>
+                <span className={styles.categoryBadge}>{t('featured')}</span>
                 <span>{formatDate(featuredNews.date)}</span>
               </div>
               <h2 className={styles.heroTitle}>{featuredNews.title.rendered}</h2>
               <p className={styles.heroDesc}>{stripHtml(featuredNews.excerpt.rendered)}</p>
               <Link href={`/${locale}/news/${encodeURIComponent(featuredNews.slug)}`} className={styles.readMoreBtn}>
-                Read Full Story
+                {t('readFullStory')}
               </Link>
             </div>
             <div className={styles.heroImageWrapper}>
-              <img
+              <Image
                 src={featuredNews._embedded?.['wp:featuredmedia']?.[0]?.source_url || `${process.env.NEXT_PUBLIC_WP_URL}/wp-content/uploads/Kapak/kapaklar/datamessage1.jpg`}
                 alt={featuredNews._embedded?.['wp:featuredmedia']?.[0]?.alt_text || featuredNews.title.rendered}
+                fill style={{ objectFit: 'cover' }}
                 className={styles.heroImage}
               />
             </div>
@@ -75,9 +78,10 @@ export default function NewsClient({ posts }: NewsClientProps) {
             filteredNews.map(news => (
               <div key={news.id} className={styles.card}>
                 <div className={styles.cardImageWrapper}>
-                  <img
+                  <Image
                     src={news._embedded?.['wp:featuredmedia']?.[0]?.source_url || `${process.env.NEXT_PUBLIC_WP_URL}/wp-content/uploads/Kapak/kapaklar/data3.jpg`}
                     alt={news._embedded?.['wp:featuredmedia']?.[0]?.alt_text || news.title.rendered}
+                    fill style={{ objectFit: 'cover' }}
                     className={styles.cardImage}
                   />
                 </div>
@@ -94,7 +98,7 @@ export default function NewsClient({ posts }: NewsClientProps) {
                   <h3 className={styles.cardTitle}>{news.title.rendered}</h3>
                   <p className={styles.cardDesc}>{stripHtml(news.excerpt.rendered || news.content.rendered).substring(0, 150)}...</p>
                   <Link href={`/${locale}/news/${encodeURIComponent(news.slug)}`} className={styles.cardLink}>
-                    Read More
+                    {t('readMore')}
                   </Link>
                 </div>
               </div>
@@ -103,8 +107,8 @@ export default function NewsClient({ posts }: NewsClientProps) {
             <div className={styles.emptyState}>
               {posts.length === 0 ? (
                 <>
-                  <h3>No News Found</h3>
-                  <p>There are currently no news items to display. Add posts in WP Engine to see them here.</p>
+                  <h3>{t('noNewsTitle')}</h3>
+                  <p>{t('noNewsDesc')}</p>
                 </>
               ) : null}
             </div>

@@ -4,6 +4,7 @@ import React, { Suspense } from 'react';
 import { Canvas } from '@react-three/fiber';
 import { OrbitControls, useGLTF, Environment, ContactShadows, Float, Html, Bounds, Center } from '@react-three/drei';
 import styles from './MTSModelViewer.module.css';
+import { useTranslations } from 'next-intl';
 
 function MTSModel() {
   const { scene } = useGLTF('/models/kiosk.glb');
@@ -35,34 +36,30 @@ function Loader() {
 }
 
 export default function MTSModelViewer() {
+  const t = useTranslations('MTSModelViewer');
+  const features = ['f1', 'f2', 'f3', 'f4', 'f5', 'f6'] as const;
+
   return (
     <div className={styles.container}>
       {/* Left Panel: Content matching the requested layout */}
       <div className={styles.infoPanel}>
-        <h2 className={styles.mainTitle}>DFX MTS</h2>
+        <h2 className={styles.mainTitle}>{t('title')}</h2>
 
         <div className={styles.subtitle}>
-          Discover how <a href="#" className={styles.subtitleLink}>DFX Media Transfer Station protects your network</a> from malicious physical media.
+          {t('subtitle')} <a href="#" className={styles.subtitleLink}>{t('subtitleLink')}</a> {t('subtitleSuffix')}
         </div>
 
         <ul className={styles.featuresList}>
-          {[
-            'Secure media transfer kiosk for sensitive environments',
-            'Prevents zero-day autorun exploits and firmware-level malware',
-            'Advanced content-aware filtering and File Purification (CDR)',
-            'Integrates with Active Directory / LDAP for authentication',
-            'Enforces Zero USB Policy on core workstations',
-            'Immutable audit logs for complete compliance'
-          ].map((text, i) => (
-            <li key={i} className={styles.featureListItem}>
-              {text}
+          {features.map((key) => (
+            <li key={key} className={styles.featureListItem}>
+              {t(key)}
             </li>
           ))}
         </ul>
 
         <div className={styles.buttonGroup}>
-          <a href="#" className={styles.primaryButton}>Download Datasheet</a>
-          <a href="#" className={styles.secondaryLink}>View Documentation ➔</a>
+          <a href="#" className={styles.primaryButton}>{t('downloadBtn')}</a>
+          <a href="#" className={styles.secondaryLink}>{t('docsLink')} ➔</a>
         </div>
       </div>
 
@@ -75,7 +72,7 @@ export default function MTSModelViewer() {
           <directionalLight position={[0, 5, 5]} intensity={0.5} />
 
           <Suspense fallback={<Loader />}>
-            <Bounds fit clip observe margin={1.1}>
+            <Bounds fit clip observe margin={1.5}>
               <Center>
                 <MTSModel />
               </Center>

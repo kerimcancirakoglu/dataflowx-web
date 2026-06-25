@@ -81,6 +81,8 @@
   transition: transform 0.4s ease, border-color 0.4s ease, box-shadow 0.4s ease;
   animation: syncGlowCard 3s linear infinite;
   animation-delay: var(--glow-delay);
+  text-decoration: none !important;
+  color: inherit !important;
 }
 
 .card:hover {
@@ -187,6 +189,7 @@
   font-size: 0.75rem;
   letter-spacing: 0.2em;
   opacity: 0.7;
+  color: var(--glow-color, #F5A706);
 }
 
 .stepHeadline {

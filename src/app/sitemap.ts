@@ -4,7 +4,7 @@ import { GET_ALL_POST_SLUGS } from '@/lib/graphql-queries';
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const locales = ['en', 'tr', 'ar'];
-  const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://dataflowx.com';
+  const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://www.dataflowx.com';
 
   // 1. Fetch WP Posts (with Pagination)
   let posts: any[] = [];
@@ -38,7 +38,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     '/media-transfer-station',
     '/email-security-platform',
     '/intelroom',
-    '/true-cdr',
+    '/dfx-cdr',
     '/portx',
     '/resources',
     '/resources/blog',

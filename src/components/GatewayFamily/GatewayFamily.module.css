@@ -148,37 +148,75 @@
   /* ~half of the networkBlock height to center on diode center */
 }
 
-/* ── Animated Packet ── */
-.packet {
-  position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
-  z-index: 4;
+.twoWayLine {
+  height: 6px;
+  background: transparent;
+  border-top: 1px dashed rgba(255, 255, 255, 0.15);
+  border-bottom: 1px dashed rgba(255, 255, 255, 0.15);
+  margin-top: 57px; /* adjusted slightly due to height */
+}
+
+/* ── Dual Channel Animated Packet ── */
+.channelContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 1.5rem;
+  position: relative;
+  z-index: 1;
+  margin-top: 28px; /* Perfectly aligns center of lines with center of 120px diodeBox */
+}
+
+.channelRow {
+  position: relative;
+  width: 100%;
+  height: 20px;
   display: flex;
   align-items: center;
 }
 
-.packet svg {
-  width: 22px;
-  height: 22px;
-  color: #ffffff;
+.channelLine {
+  position: absolute;
+  width: 100%;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2) 10%, rgba(255,255,255,0.2) 90%, transparent);
+  z-index: 0;
 }
 
-.packetCheck {
+.channelPacket {
   position: absolute;
-  bottom: -5px;
-  right: -5px;
-  width: 13px;
-  height: 13px;
-  background: #00E676;
-  border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 7px;
+  gap: 0.25rem;
+  padding: 0.15rem 0.35rem;
+  border-radius: 4px;
+  z-index: 3;
+  opacity: 0;
+}
+
+.packetData {
+  border: 1px solid rgba(245, 167, 6, 0.5);
+  background: rgba(245, 167, 6, 0.15);
+  color: #F5A706;
+  box-shadow: 0 0 10px rgba(245, 167, 6, 0.2);
+}
+
+.packetFile {
+  border: 1px solid rgba(0, 229, 255, 0.5);
+  background: rgba(0, 229, 255, 0.15);
+  color: #00E5FF;
+  box-shadow: 0 0 10px rgba(0, 229, 255, 0.2);
+}
+
+.packetText {
+  font-size: 0.55rem;
   font-weight: bold;
-  color: #000;
-  border: 1.5px solid rgba(10, 15, 30, 0.8);
+}
+
+.packetIcon {
+  width: 10px;
+  height: 10px;
 }
 
 /* ── Feature Column (Diode + label below) ── */
@@ -291,12 +329,12 @@
 
 .airGapZone {
   position: absolute;
-  top: 0px;
-  /* Sits at the same top as featureColumn diode */
+  top: 20px;
+  /* Sits centered with the featureColumn diode */
   left: 50%;
   transform: translateX(-50%);
   width: 56px;
-  height: 120px;
+  height: 80px;
   /* Matches diode box height */
   border-radius: 6px;
   overflow: hidden;

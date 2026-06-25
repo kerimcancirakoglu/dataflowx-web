@@ -33,7 +33,7 @@ export default async function Nav(props: NavProps) {
           items: [
             { label: t('email_security_platform'), href: '/email-security-platform' },
             { label: t('intelroom'), href: '/intelroom' },
-            { label: t('true_cdr'), href: '/true-cdr' },
+            { label: t('true_cdr'), href: '/dfx-cdr' },
           ]
         },
         {

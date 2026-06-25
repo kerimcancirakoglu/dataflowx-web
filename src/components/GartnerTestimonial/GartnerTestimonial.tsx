@@ -17,7 +17,7 @@ export default async function GartnerTestimonial() {
           </div>
         </div>
         <h2 className={styles.headline}>
-          {t('headlinePrefix')} 
+          {t('headlinePrefix')}{' '}
           <span className={styles.headlineHighlight}>{t('headlineHighlight')}</span>
         </h2>
 

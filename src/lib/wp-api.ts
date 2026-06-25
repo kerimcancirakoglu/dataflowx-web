@@ -70,3 +70,32 @@ export async function getPostBySlug(slug: string, locale: string = 'tr'): Promis
     return null;
   }
 }
+
+export interface WPRestResource extends WPRestPost {
+  acf?: {
+    file_url?: string;
+  };
+}
+
+export async function getResources(locale: string = 'en'): Promise<WPRestResource[]> {
+  const wpUrl = process.env.NEXT_PUBLIC_WP_URL || 'https://dataflowx1.wpenginepowered.com';
+  const endpoint = `${wpUrl}/wp-json/wp/v2/resource?_embed&per_page=100&lang=${locale}`;
+
+  try {
+    const res = await fetch(endpoint, { next: { revalidate: 3600 } });
+    if (!res.ok) {
+      if (res.status === 404 || res.status === 400) {
+        // CPT might not exist yet
+        return [];
+      }
+      throw new Error(`Failed to fetch WP resources: ${res.statusText}`);
+    }
+
+    const resources: WPRestResource[] = await res.json();
+    return resources;
+  } catch (error) {
+    console.warn('Error fetching resources from WP REST API (it may not be configured yet):', error);
+    return [];
+  }
+}
+

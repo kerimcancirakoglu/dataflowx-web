@@ -10,53 +10,49 @@ import VideoBackground from '@/components/VideoBackground/VideoBackground';
 import GatewayFamily from '@/components/GatewayFamily/GatewayFamily';
 import styles from './page.module.css';
 import { getTranslations } from 'next-intl/server';
+import { HreflangLinks } from '@/components/SEO/HreflangLinks';
+import ProductSchema from '@/components/SEO/ProductSchema';
+import BreadcrumbSchema from '@/components/SEO/BreadcrumbSchema';
 
-export const metadata: Metadata = {
-  title: 'DataFlowX Unidirectional Gateway & Data Diode — OT/SCADA Security',
-  description:
-    'DFX Unidirectional Gateway: EAL4+ certified hardware-enforced unidirectional gateway for OT/SCADA security. Physically isolates critical networks — recognized by Gartner for 3 consecutive years.',
-  keywords: [
-    'unidirectional gateway',
-    'data diode',
-    'OT security',
-    'SCADA security',
-    'ICS cybersecurity',
-    'EAL4+ certified',
-    'critical infrastructure protection',
-    'hardware enforced security',
-    'data diyodu',
-    'tek yönlü ağ geçidi',
-  ],
-  alternates: {
-    canonical: 'https://dataflowx.com/unidirectional-gateway',
-  },
-  openGraph: {
-    title: 'DFX Unidirectional Gateway — EAL4+ Certified',
+export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
+  const { locale } = await params;
+  const baseUrl = 'https://www.dataflowx.com';
+  return {
+    title: 'DataFlowX Unidirectional Gateway & Data Diode — OT/SCADA Security',
     description:
-      'Hardware-enforced one-way data transfer. Gartner-recognized. EAL4+ certified. Securing energy, defense, and critical infrastructure.',
-    url: 'https://dataflowx.com/unidirectional-gateway',
-    images: [{ url: '/og-image.jpg', width: 1200, height: 630 }],
-  },
-};
+      'DFX Unidirectional Gateway: EAL4+ certified hardware-enforced unidirectional gateway for OT/SCADA security. Physically isolates critical networks — recognized by Gartner for 3 consecutive years.',
+    keywords: [
+      'unidirectional gateway',
+      'data diode',
+      'OT security',
+      'SCADA security',
+      'ICS cybersecurity',
+      'EAL4+ certified',
+      'critical infrastructure protection',
+      'hardware enforced security',
+      'data diyodu',
+      'tek yönlü ağ geçidi',
+    ],
+    alternates: {
+      canonical: `${baseUrl}/${locale}/unidirectional-gateway`,
+    },
+    openGraph: {
+      title: 'DFX Unidirectional Gateway — EAL4+ Certified',
+      description:
+        'Hardware-enforced one-way data transfer. Gartner-recognized. EAL4+ certified. Securing energy, defense, and critical infrastructure.',
+      url: `${baseUrl}/${locale}/unidirectional-gateway`,
+      images: [{ url: `${baseUrl}/og/unidirectional-gateway.jpg`, width: 1200, height: 630 }],
+    },
+    twitter: {
+      card: 'summary_large_image',
+      title: 'DFX Unidirectional Gateway — EAL4+ Certified',
+      description: 'Hardware-enforced one-way data transfer. Gartner-recognized. EAL4+ certified.',
+      images: [`${baseUrl}/og/unidirectional-gateway.jpg`],
+    },
+  };
+}
 
-// Product structured data
-const productSchema = {
-  '@context': 'https://schema.org',
-  '@type': 'Product',
-  name: 'DFX Unidirectional Gateway',
-  description:
-    'EAL4+ certified hardware-enforced unidirectional gateway for OT/SCADA security. Physically prevents reverse data flow, securing critical infrastructure against cyber threats.',
-  brand: { '@type': 'Brand', name: 'DataFlowX' },
-  manufacturer: { '@type': 'Organization', name: 'DataFlowX', url: 'https://dataflowx.com' },
-  category: 'Cybersecurity Hardware',
-  url: 'https://dataflowx.com/unidirectional-gateway',
-  additionalProperty: [
-    { '@type': 'PropertyValue', name: 'Certification', value: 'Common Criteria EAL4+' },
-    { '@type': 'PropertyValue', name: 'Technology', value: 'Hardware-enforced optical diode' },
-    { '@type': 'PropertyValue', name: 'Compliance', value: 'IEC 62443, NERC CIP, NIS2, IEC 62443' },
-    { '@type': 'PropertyValue', name: 'Recognition', value: 'Gartner Hype Cycle for CPS Security' },
-  ],
-};
+// Product schema is now rendered via the ProductSchema component
 
 const faqSchema = {
   '@context': 'https://schema.org',
@@ -93,9 +89,22 @@ export default async function UnidirectionalGatewayPage() {
   const t = await getTranslations("UDG.page");
   return (
     <main>
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(productSchema) }}
+      <HreflangLinks slug="unidirectional-gateway" />
+      <BreadcrumbSchema 
+        items={[
+          { name: 'DataFlowX', url: 'https://www.dataflowx.com' },
+          { name: 'Solutions', url: 'https://www.dataflowx.com' },
+          { name: 'DFX Unidirectional Gateway', url: 'https://www.dataflowx.com/en/unidirectional-gateway' }
+        ]} 
+      />
+      <ProductSchema 
+        name="DFX Unidirectional Gateway"
+        description="EAL4+ certified hardware-enforced unidirectional gateway for OT/SCADA security. Physically prevents reverse data flow."
+        url="https://www.dataflowx.com/en/unidirectional-gateway"
+        image="https://www.dataflowx.com/og/unidirectional-gateway.jpg"
+        category="Cybersecurity Hardware"
+        award="Gartner Hype Cycle for CPS Security — Sample Vendor, 3 Consecutive Years"
+        certifications="Common Criteria EAL4+"
       />
       <script
         type="application/ld+json"

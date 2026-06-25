@@ -5,34 +5,37 @@ import ContactMini from '@/components/ContactMini/ContactMini';
 import VideoBackground from '@/components/VideoBackground/VideoBackground';
 import styles from './page.module.css';
 
-export const metadata: Metadata = {
-  title: 'DataFlowX vs OPSWAT — Data Diode & Unidirectional Gateway Comparison',
-  description:
-    'Comparing DataFlowX DFX Unidirectional Gateway vs OPSWAT MetaDefender: EAL4+ certification, regional support, TCO, and deployment. OPSWAT alternative with local support in Turkey, Gulf, and Balkans.',
-  keywords: [
-    'OPSWAT alternative',
-    'OPSWAT MetaDefender alternative',
-    'DataFlowX vs OPSWAT',
-    'data diode comparison',
-    'unidirectional gateway comparison',
-    'OPSWAT alternatifi Türkiye',
-    'yerli data diode ürünü',
-    'OT security vendor comparison',
-    'EAL4+ data diode',
-    'unidirectional gateway fiyat',
-    'data diode çözüm karşılaştırma',
-  ],
-  alternates: {
-    canonical: 'https://dataflowx.com/compare/dataflowx-vs-opswat',
-  },
-  openGraph: {
-    title: 'DataFlowX vs OPSWAT MetaDefender — Full Comparison',
+export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
+  const { locale } = await params;
+  return {
+    title: 'DataFlowX vs OPSWAT — Data Diode & Unidirectional Gateway Comparison',
     description:
-      'EAL4+ certification, regional support, TCO analysis. See why organizations in Turkey, Gulf, and Europe choose DataFlowX over OPSWAT.',
-    url: 'https://dataflowx.com/compare/dataflowx-vs-opswat',
-    images: [{ url: '/og-image.jpg', width: 1200, height: 630 }],
-  },
-};
+      'Comparing DataFlowX DFX Unidirectional Gateway vs OPSWAT MetaDefender: EAL4+ certification, regional support, TCO, and deployment. OPSWAT alternative with local support in Turkey, Gulf, and Balkans.',
+    keywords: [
+      'OPSWAT alternative',
+      'OPSWAT MetaDefender alternative',
+      'DataFlowX vs OPSWAT',
+      'data diode comparison',
+      'unidirectional gateway comparison',
+      'OPSWAT alternatifi Türkiye',
+      'yerli data diode ürünü',
+      'OT security vendor comparison',
+      'EAL4+ data diode',
+      'unidirectional gateway fiyat',
+      'data diode çözüm karşılaştırma',
+    ],
+    alternates: {
+      canonical: `https://dataflowx.com/${locale}/compare/dataflowx-vs-opswat`,
+    },
+    openGraph: {
+      title: 'DataFlowX vs OPSWAT MetaDefender — Full Comparison',
+      description:
+        'EAL4+ certification, regional support, TCO analysis. See why organizations in Turkey, Gulf, and Europe choose DataFlowX over OPSWAT.',
+      url: `https://dataflowx.com/${locale}/compare/dataflowx-vs-opswat`,
+      images: [{ url: '/og-image.jpg', width: 1200, height: 630 }],
+    },
+  };
+}
 
 const faqSchema = {
   '@context': 'https://schema.org',
@@ -134,7 +137,7 @@ const comparisonData = [
   },
   {
     feature: 'Content Inspection (CDR)',
-    dfx: 'Via DFX Sandbox integration',
+    dfx: 'Via DFX Malware Mitigation Sandbox integration',
     opswat: 'Core capability (MetaDefender)',
     dfxWins: false,
   },

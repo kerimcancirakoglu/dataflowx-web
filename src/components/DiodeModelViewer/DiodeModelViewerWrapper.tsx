@@ -7,6 +7,6 @@ const DiodeModelViewer = dynamic(
   { ssr: false }
 );
 
-export default function DiodeModelViewerWrapper() {
-  return <DiodeModelViewer />;
+export default function DiodeModelViewerWrapper({ title, modelPath }: { title?: string, modelPath?: string }) {
+  return <DiodeModelViewer title={title} modelPath={modelPath} />;
 }

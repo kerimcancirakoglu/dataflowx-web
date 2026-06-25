@@ -7,16 +7,62 @@ import SandboxHero from '@/components/SandboxHero/SandboxHero';
 import VideoBackground from '@/components/VideoBackground/VideoBackground';
 import styles from './page.module.css';
 import { getTranslations } from 'next-intl/server';
+import { HreflangLinks } from '@/components/SEO/HreflangLinks';
+import ProductSchema from '@/components/SEO/ProductSchema';
+import BreadcrumbSchema from '@/components/SEO/BreadcrumbSchema';
 
-export const metadata = {
-  title: 'DFX Sandbox | DataFlowX',
-  description: 'Proactive, Intelligence-led Threat Intervention and Sandbox Solution.',
-};
+import type { Metadata } from 'next';
+
+export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
+  const { locale } = await params;
+  const baseUrl = 'https://www.dataflowx.com';
+
+  return {
+    title: { absolute: 'DFX Malware Mitigation Sandbox — AI-Powered Threat Detection' },
+    description: 'AI-powered sandbox detonating suspicious files in isolated VMs. YARA, MITRE ATT&CK integration. Zero-day threat prevention for OT/ICS networks.',
+    keywords: ['malware sandbox', 'OT sandbox security', 'zero-day detection ICS', 'YARA sandbox', 'MITRE ATT&CK OT'],
+    alternates: {
+      canonical: `${baseUrl}/${locale}/sandbox`,
+    },
+    openGraph: {
+      title: 'DFX Malware Mitigation Sandbox | DataFlowX',
+      description: 'AI-powered sandbox for OT/ICS threat detection and zero-day prevention.',
+      url: `${baseUrl}/${locale}/sandbox`,
+      images: [{
+        url: `${baseUrl}/og/sandbox.jpg`,
+        width: 1200,
+        height: 630,
+        alt: 'DFX Sandbox Architecture — Isolated Threat Detonation',
+      }],
+    },
+    twitter: {
+      card: 'summary_large_image',
+      title: 'DFX Malware Mitigation Sandbox | DataFlowX',
+      description: 'AI-powered sandbox detonating threats in isolated VMs. YARA + MITRE ATT&CK.',
+      images: [`${baseUrl}/og/sandbox.jpg`],
+    },
+  };
+}
 
 export default async function SandboxPage() {
   const t = await getTranslations('Sandbox.page');
   return (
     <main className={styles.main}>
+      <HreflangLinks slug="sandbox" />
+      <BreadcrumbSchema 
+        items={[
+          { name: 'DataFlowX', url: 'https://www.dataflowx.com' },
+          { name: 'Solutions', url: 'https://www.dataflowx.com' },
+          { name: 'DFX Malware Mitigation Sandbox', url: 'https://www.dataflowx.com/en/sandbox' }
+        ]} 
+      />
+      <ProductSchema 
+        name="DFX Malware Mitigation Sandbox"
+        description="AI-powered sandbox detonating suspicious files in isolated VMs. YARA, MITRE ATT&CK integration. Zero-day threat prevention for OT/ICS networks."
+        url="https://www.dataflowx.com/en/sandbox"
+        image="https://www.dataflowx.com/og/sandbox.jpg"
+        category="Cybersecurity Software"
+      />
       <VideoBackground />
       <Nav />
       

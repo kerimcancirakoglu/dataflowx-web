@@ -2,6 +2,8 @@
 
 import { useState, useMemo } from 'react';
 import Link from 'next/link';
+import Image from 'next/image';
+import { decode } from 'html-entities';
 import styles from './page.module.css';
 
 // ──────────────────────────────────────────────────
@@ -11,6 +13,7 @@ export interface WPPost {
   title: string;
   slug: string;
   excerpt: string;
+  content?: string;
   date: string;
   categories?: {
     nodes: { name: string }[];
@@ -29,7 +32,14 @@ interface BlogClientProps {
 
 // Strip <p> and HTML tags from WP excerpt for plain text display
 function stripHtml(html: string): string {
+  if (!html) return '';
   return html.replace(/<[^>]*>/g, '').trim();
+}
+
+function getCoverImage(contentHtml?: string, fallback: string = '/og-image.jpg'): string {
+  if (!contentHtml) return fallback;
+  const match = contentHtml.match(/<img[^>]+src=["']([^"']+)["']/i);
+  return match ? match[1] : fallback;
 }
 
 // Format ISO date nicely
@@ -86,8 +96,8 @@ export default function BlogClient({ posts }: BlogClientProps) {
     if (searchQuery.trim()) {
       const q = searchQuery.toLowerCase();
       list = list.filter(p =>
-        p.title.toLowerCase().includes(q) ||
-        stripHtml(p.excerpt).toLowerCase().includes(q)
+        decode(p.title).toLowerCase().includes(q) ||
+        decode(stripHtml(p.excerpt)).toLowerCase().includes(q)
       );
     }
     return list;
@@ -143,19 +153,20 @@ export default function BlogClient({ posts }: BlogClientProps) {
           {heroPost ? (
             <div className={styles.heroCard}>
               <div className={styles.heroImageWrapper}>
-                <img
-                  src={heroPost.featuredImage?.node.sourceUrl ?? '/og-image.jpg'}
-                  alt={heroPost.featuredImage?.node.altText ?? heroPost.title}
-                  className={styles.heroImage}
-                />
+                  <Image
+                    src={heroPost.featuredImage?.node.sourceUrl ?? getCoverImage(heroPost.content)}
+                    alt={heroPost.featuredImage?.node.altText ?? decode(heroPost.title)}
+                    fill style={{ objectFit: 'cover' }}
+                    className={styles.heroImage}
+                  />
               </div>
               <div className={styles.heroContent}>
                 <span className={styles.metaData}>
                   {formatDate(heroPost.date)}
                   {heroPost.categories?.nodes[0] && ` | ${heroPost.categories.nodes[0].name}`}
                 </span>
-                <h2 className={styles.heroTitle}>{heroPost.title}</h2>
-                <p className={styles.heroDesc}>{stripHtml(heroPost.excerpt)}</p>
+                <h2 className={styles.heroTitle}>{decode(heroPost.title)}</h2>
+                <p className={styles.heroDesc}>{decode(stripHtml(heroPost.excerpt))}</p>
                 <Link href={`/resources/blog/${heroPost.slug}`} className={styles.readMoreBtn}>
                   Read More
                   <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={{ marginLeft: 6 }}>
@@ -178,17 +189,18 @@ export default function BlogClient({ posts }: BlogClientProps) {
                 : featuredSidebar.map(post => (
                   <Link href={`/resources/blog/${post.slug}`} key={post.slug} className={styles.featuredListItem}>
                     <div className={styles.featuredListImageWrapper}>
-                      <img
-                        src={post.featuredImage?.node.sourceUrl ?? '/og-image.jpg'}
-                        alt={post.featuredImage?.node.altText ?? post.title}
-                        className={styles.featuredListImage}
-                      />
+                        <Image
+                          src={post.featuredImage?.node.sourceUrl ?? getCoverImage(post.content)}
+                          alt={post.featuredImage?.node.altText ?? decode(post.title)}
+                          fill style={{ objectFit: 'cover' }}
+                          className={styles.featuredListImage}
+                        />
                     </div>
                     <div className={styles.featuredListContent}>
                       <span className={styles.metaDataSmall}>
                         {post.categories?.nodes[0]?.name}
                       </span>
-                      <h4 className={styles.featuredListTitle}>{post.title}</h4>
+                      <h4 className={styles.featuredListTitle}>{decode(post.title)}</h4>
                       <span className={styles.readMoreText}>Read More ➔</span>
                     </div>
                   </Link>
@@ -214,11 +226,11 @@ export default function BlogClient({ posts }: BlogClientProps) {
                   className={`${styles.card} ${isLarge ? styles.largeCard : ''}`}
                 >
                   <div className={styles.cardImageWrapper}>
-                    <img
-                      src={post.featuredImage?.node.sourceUrl ?? '/og-image.jpg'}
-                      alt={post.featuredImage?.node.altText ?? post.title}
+                    <Image
+                      src={post.featuredImage?.node.sourceUrl ?? getCoverImage(post.content)}
+                      alt={post.featuredImage?.node.altText ?? decode(post.title)}
+                      fill style={{ objectFit: 'cover' }}
                       className={styles.cardImage}
-                      loading="lazy"
                     />
                   </div>
                   <div className={styles.cardContent}>
@@ -226,9 +238,9 @@ export default function BlogClient({ posts }: BlogClientProps) {
                       {formatDate(post.date)}
                       {post.categories?.nodes[0] && ` | ${post.categories.nodes[0].name}`}
                     </span>
-                    <h3 className={styles.cardTitle}>{post.title}</h3>
+                    <h3 className={styles.cardTitle}>{decode(post.title)}</h3>
                     {isLarge && (
-                      <p className={styles.cardDesc}>{stripHtml(post.excerpt)}</p>
+                      <p className={styles.cardDesc}>{decode(stripHtml(post.excerpt))}</p>
                     )}
                     <Link href={`/resources/blog/${post.slug}`} className={styles.readMoreBtn}>
                       Read More

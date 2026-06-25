@@ -1,51 +1,43 @@
 import type { Metadata } from 'next';
 import { NextIntlClientProvider } from 'next-intl';
 import { getMessages } from 'next-intl/server';
+import Script from 'next/script';
 import '../globals.css';
 import Footer from '@/components/Footer/Footer';
 import { ApolloWrapper } from '@/providers/ApolloWrapper';
-const BASE_URL = 'https://dataflowx.com';
+import OrganizationSchema from '@/components/SEO/OrganizationSchema';
+const BASE_URL = 'https://www.dataflowx.com';
 
 export const metadata: Metadata = {
   metadataBase: new URL(BASE_URL),
   title: {
-    default: 'DataFlowX — Unidirectional Gateway & Data Diode Solutions',
-    template: '%s | DataFlowX',
+    default: 'DataFlowX (DFX) | Secure Critical Infrastructure via Unidirectional Gateway',
+    template: '%s | DataFlowX (DFX)',
   },
   description:
-    'Hardware-enforced unidirectional gateway and data diode solutions for critical infrastructure. EAL4+ certified. Trusted by energy, defense, and government sectors across Turkey, Gulf, and Europe.',
+    'Secure your critical network infrastructure with DataFlowX (DFX). EAL4+ certified unidirectional gateway, data diode, and email security solutions for zero-trust environments across Turkey, Gulf, and Europe.',
   keywords: [
+    'dfx',
+    'security',
+    'infrastructure',
+    'critical infrastructure',
+    'secure network',
+    'email security',
     'data diode',
     'unidirectional gateway',
     'OT security',
     'SCADA security',
-    'critical infrastructure protection',
     'zero trust',
     'ICS cybersecurity',
-    'NIS2 compliance',
-    'IEC 62443',
-    'air gap security',
-    'data diyodu',
-    'unidirectional gateway Türkiye',
-    'OT güvenlik',
-    'SCADA güvenliği',
+    'NIS2 compliance'
   ],
   authors: [{ name: 'DataFlowX', url: BASE_URL }],
   creator: 'DataFlowX',
   publisher: 'DataFlowX',
-  alternates: {
-    canonical: BASE_URL,
-    languages: {
-      'en': `${BASE_URL}/en`,
-      'tr': `${BASE_URL}/tr`,
-      'ar': `${BASE_URL}/ar`,
-      'x-default': BASE_URL,
-    },
-  },
   openGraph: {
-    title: 'DataFlowX — Unidirectional Gateway & Data Diode Solutions',
+    title: 'DataFlowX (DFX) | Secure Network & Email Infrastructure',
     description:
-      'Hardware-enforced data isolation for critical infrastructure. EAL4+ certified. Trusted by energy, defense, and government sectors.',
+      'Secure your critical network infrastructure with DataFlowX (DFX). EAL4+ certified unidirectional gateway and data diode solutions.',
     url: BASE_URL,
     siteName: 'DataFlowX',
     images: [
@@ -53,7 +45,7 @@ export const metadata: Metadata = {
         url: '/og-image.jpg',
         width: 1200,
         height: 630,
-        alt: 'DataFlowX Zero Trust Unidirectional Gateway Architecture',
+        alt: 'DataFlowX (DFX) Zero Trust Unidirectional Gateway Architecture',
       },
     ],
     locale: 'en_US',
@@ -61,9 +53,9 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'DataFlowX — Unidirectional Gateway & Data Diode Solutions',
+    title: 'DataFlowX (DFX) | Secure Network & Email Infrastructure',
     description:
-      'Hardware-enforced data isolation for critical infrastructure. EAL4+ certified.',
+      'Secure your critical network infrastructure with DataFlowX (DFX). EAL4+ certified unidirectional gateway and data diode solutions.',
     images: ['/og-image.jpg'],
   },
   robots: {
@@ -82,35 +74,7 @@ export const metadata: Metadata = {
   },
 };
 
-// Organization structured data (JSON-LD)
-const organizationSchema = {
-  '@context': 'https://schema.org',
-  '@type': 'Organization',
-  name: 'DataFlowX',
-  url: BASE_URL,
-  logo: `${BASE_URL}/logo.png`,
-  description:
-    'DataFlowX develops hardware-enforced unidirectional gateway and data diode solutions for critical infrastructure cybersecurity.',
-  foundingLocation: {
-    '@type': 'Place',
-    addressCountry: 'TR',
-  },
-  areaServed: ['TR', 'AE', 'SA', 'QA', 'RS', 'RO', 'BG', 'KZ', 'AZ', 'EG', 'DZ'],
-  sameAs: [
-    'https://www.linkedin.com/company/dataflowx',
-  ],
-  hasOfferCatalog: {
-    '@type': 'OfferCatalog',
-    name: 'DataFlowX Cybersecurity Product Portfolio',
-    itemListElement: [
-      { '@type': 'Offer', itemOffered: { '@type': 'Product', name: 'DFX Unidirectional Gateway' } },
-      { '@type': 'Offer', itemOffered: { '@type': 'Product', name: 'DFX Secure Remote Access' } },
-      { '@type': 'Offer', itemOffered: { '@type': 'Product', name: 'DFX Media Transfer Station' } },
-      { '@type': 'Offer', itemOffered: { '@type': 'Product', name: 'DFX Email Security Platform' } },
-      { '@type': 'Offer', itemOffered: { '@type': 'Product', name: 'DFX Sandbox' } },
-    ],
-  },
-};
+// Old organizationSchema was moved to OrganizationSchema.tsx
 
 // WebSite structured data for sitelinks searchbox
 const websiteSchema = {
@@ -154,28 +118,44 @@ export default async function RootLayout({
       <head>
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
-        {/* hreflang alternate links */}
-        <link rel="alternate" hrefLang="en" href={`${BASE_URL}/en`} />
-        <link rel="alternate" hrefLang="tr" href={`${BASE_URL}/tr`} />
-        <link rel="alternate" hrefLang="ar" href={`${BASE_URL}/ar`} />
-        <link rel="alternate" hrefLang="x-default" href={BASE_URL} />
-        {/* Organization & WebSite structured data - JSON-LD */}
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationSchema) }}
-        />
-        <script
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
+        {/* hreflang alternate links will be injected by individual pages using HreflangLinks component */}
+        {/* Organization structured data - JSON-LD */}
+        <OrganizationSchema />
+        <Script
+          id="website-schema"
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(websiteSchema) }}
         />
         {/* Theme init — runs before paint to prevent flash */}
-        <script
+        <Script
+          id="theme-init"
+          strategy="beforeInteractive"
           dangerouslySetInnerHTML={{
             __html: `(function(){try{var t=localStorage.getItem('theme');if(t==='light')document.documentElement.setAttribute('data-theme','light');}catch(e){}})();`,
           }}
         />
       </head>
       <body>
+        {/* Google Analytics Placeholder */}
+        <Script
+          strategy="afterInteractive"
+          src={`https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX`}
+        />
+        <Script
+          id="google-analytics"
+          strategy="afterInteractive"
+          dangerouslySetInnerHTML={{
+            __html: `
+              window.dataLayer = window.dataLayer || [];
+              function gtag(){dataLayer.push(arguments);}
+              gtag('js', new Date());
+              gtag('config', 'G-XXXXXXXXXX', {
+                page_path: window.location.pathname,
+              });
+            `,
+          }}
+        />
         <NextIntlClientProvider messages={messages}>
           <ApolloWrapper>
             {children}

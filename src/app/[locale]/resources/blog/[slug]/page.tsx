@@ -4,13 +4,20 @@ import type { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 import Nav from '@/components/Nav/Nav';
 import Contact from '@/components/Contact/Contact';
+import Image from 'next/image';
 import TableOfContents from '@/components/BlogLayout/TableOfContents';
 import SocialShare from '@/components/BlogLayout/SocialShare';
-import client from '@/lib/apollo-client';
-import { GET_POST_BY_SLUG, GET_ALL_POST_SLUGS } from '@/lib/graphql-queries';
+import { getPostBySlug } from '@/lib/wp-api';
 import styles from './post.module.css';
 import contentStyles from '@/components/BlogLayout/BlogContentStyles.module.css';
 import { localeToWPLanguage } from '@/lib/locale-map';
+import { decode } from 'html-entities';
+
+function getCoverImage(contentHtml: string, fallback: string = '/og-image.jpg') {
+  if (!contentHtml) return fallback;
+  const match = contentHtml.match(/<img[^>]+src=["']([^"']+)["']/i);
+  return match ? match[1] : fallback;
+}
 
 interface Props {
   params: Promise<{ slug: string; locale: string }>;
@@ -21,7 +28,7 @@ const MOCK_POSTS: Record<string, any> = {
   'content-disarm-reconstruction-cdr-8-best-vendors-in-2026': {
     title: 'M365 Email Attachment Disarming: Zero Trust in Practice',
     date: new Date().toISOString(),
-    content: '<p>Integrates directly with Microsoft 365 to disarm email attachments before users interact with them. Removes malicious macros, active content, and embedded payloads with zero workflow disruption.</p><h2>The Threat Landscape</h2><p>As email remains the primary vector for malware distribution, organizations must rethink how they handle attachments. Traditional antivirus engines rely on signatures, which are largely ineffective against zero-day threats.</p><h2>Why TrueCDR?</h2><p>True Content Disarm and Reconstruction (CDR) doesn\'t just scan for known threats. It breaks down files to their fundamental components, removes anything that isn\'t strictly data, and rebuilds a clean, fully functional copy. This ensures 100% protection against hidden payloads.</p>',
+    content: '<p>Integrates directly with Microsoft 365 to disarm email attachments before users interact with them. Removes malicious macros, active content, and embedded payloads with zero workflow disruption.</p><h2>The Threat Landscape</h2><p>As email remains the primary vector for malware distribution, organizations must rethink how they handle attachments. Traditional antivirus engines rely on signatures, which are largely ineffective against zero-day threats.</p><h2>Why DFX CDR?</h2><p>True Content Disarm and Reconstruction (CDR) doesn\'t just scan for known threats. It breaks down files to their fundamental components, removes anything that isn\'t strictly data, and rebuilds a clean, fully functional copy. This ensures 100% protection against hidden payloads.</p>',
     excerpt: 'Integrates directly with Microsoft 365 to disarm email attachments...',
     author: { name: 'DFX Security Team' },
     readingTime: '4 min read',
@@ -73,13 +80,28 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   
   let post: any = null;
   try {
-    const { data } = await client.query<any>({
-      query: GET_POST_BY_SLUG,
-      variables: { id: slug, language: wpLangCode },
-    });
-    post = data?.post?.translation;
-  } catch {
-    // handled below
+    const wpPost = await getPostBySlug(slug, locale);
+    if (wpPost) {
+      let featuredImage = null;
+      if (wpPost._embedded && wpPost._embedded['wp:featuredmedia'] && wpPost._embedded['wp:featuredmedia'][0]) {
+        const media = wpPost._embedded['wp:featuredmedia'][0];
+        featuredImage = {
+          node: {
+            sourceUrl: media.source_url,
+            altText: media.alt_text || ''
+          }
+        };
+      }
+      post = {
+        title: wpPost.title?.rendered || '',
+        excerpt: wpPost.excerpt?.rendered || '',
+        content: wpPost.content?.rendered || '',
+        date: wpPost.date,
+        featuredImage: featuredImage
+      };
+    }
+  } catch (err) {
+    console.warn('[Metadata] WP API error', err);
   }
 
   // Fallback to mock
@@ -94,10 +116,10 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   }
 
   const cleanExcerpt = post.excerpt
-    ? post.excerpt.replace(/<[^>]*>/g, '').trim().slice(0, 160)
+    ? decode(post.excerpt).replace(/<[^>]*>/g, '').trim().slice(0, 160)
     : 'Read the latest cybersecurity insights from DataFlowX.';
 
-  const imageUrl = post.featuredImage?.node?.sourceUrl ?? post.featuredImage ?? '/og-image.jpg';
+  const imageUrl = post.featuredImage?.node?.sourceUrl ?? post.featuredImage ?? getCoverImage(post.content);
 
   const languages: Record<string, string> = {};
   if (post.translations) {
@@ -112,23 +134,23 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   languages[locale] = `https://dataflowx.com/${locale}/resources/blog/${slug}`;
 
   return {
-    title: `${post.title} | DataFlowX Blog`,
+    title: `${decode(post.title)} | DataFlowX Blog`,
     description: cleanExcerpt,
     alternates: {
       canonical: `https://dataflowx.com/${locale}/resources/blog/${slug}`,
       languages,
     },
     openGraph: {
-      title: post.title,
+      title: decode(post.title),
       description: cleanExcerpt,
       url: `https://dataflowx.com/${locale}/resources/blog/${slug}`,
       type: 'article',
       publishedTime: post.date,
-      images: [{ url: imageUrl, width: 1200, height: 630, alt: post.title }],
+      images: [{ url: imageUrl, width: 1200, height: 630, alt: decode(post.title) }],
     },
     twitter: {
       card: 'summary_large_image',
-      title: post.title,
+      title: decode(post.title),
       description: cleanExcerpt,
       images: [imageUrl],
     },
@@ -141,14 +163,13 @@ export async function generateStaticParams() {
   const allParams: { locale: string; slug: string }[] = [];
 
   for (const locale of locales) {
-    const language = localeToWPLanguage(locale);
     try {
-      const { data } = await client.query<any>({ 
-        query: GET_ALL_POST_SLUGS,
-        variables: { language }
-      });
-      if (data?.posts?.nodes?.length > 0) {
-        data.posts.nodes.forEach((p: any) => {
+      const wpUrl = process.env.NEXT_PUBLIC_WP_URL || 'https://dataflowx1.wpenginepowered.com';
+      const endpoint = `${wpUrl}/wp-json/wp/v2/posts?per_page=100&lang=${locale}`;
+      const res = await fetch(endpoint, { next: { revalidate: 3600 } });
+      if (res.ok) {
+        const posts = await res.json();
+        posts.forEach((p: any) => {
           allParams.push({ locale, slug: p.slug });
         });
       }
@@ -178,11 +199,32 @@ export default async function BlogPostPage({ params }: Props) {
 
   let post: any = null;
   try {
-    const { data } = await client.query<any>({
-      query: GET_POST_BY_SLUG,
-      variables: { id: slug, language: wpLangCode },
-    });
-    post = data?.post?.translation;
+    const wpPost = await getPostBySlug(slug, locale);
+    if (wpPost) {
+      let featuredImage = null;
+      if (wpPost._embedded && wpPost._embedded['wp:featuredmedia'] && wpPost._embedded['wp:featuredmedia'][0]) {
+        const media = wpPost._embedded['wp:featuredmedia'][0];
+        featuredImage = {
+          node: {
+            sourceUrl: media.source_url,
+            altText: media.alt_text || ''
+          }
+        };
+      }
+      
+      let authorName = 'DataFlowX Team';
+      if (wpPost._embedded && wpPost._embedded.author && wpPost._embedded.author[0]) {
+        authorName = wpPost._embedded.author[0].name || authorName;
+      }
+
+      post = {
+        title: wpPost.title?.rendered || '',
+        content: wpPost.content?.rendered || '',
+        date: wpPost.date,
+        featuredImage: featuredImage,
+        author: { name: authorName }
+      };
+    }
   } catch (err) {
     console.warn('[BlogPostPage] WP API error, falling back to mock data if available.', err);
   }
@@ -203,14 +245,14 @@ export default async function BlogPostPage({ params }: Props) {
     day: 'numeric',
   });
   
-  const imageUrl = post.featuredImage?.node?.sourceUrl ?? post.featuredImage ?? null;
+  const imageUrl = post.featuredImage?.node?.sourceUrl ?? post.featuredImage ?? getCoverImage(post.content);
   const authorName = post.author?.name ?? post.author?.node?.name ?? 'DataFlowX Team';
   const readingTime = post.seo?.readingTime ? `${post.seo.readingTime} min read` : (post.readingTime ?? '5 min read');
 
   const articleSchema = {
     '@context': 'https://schema.org',
     '@type': 'Article',
-    headline: post.title,
+    headline: decode(post.title),
     datePublished: post.date,
     image: imageUrl ?? '/og-image.jpg',
     publisher: {
@@ -228,7 +270,7 @@ export default async function BlogPostPage({ params }: Props) {
       { '@type': 'ListItem', position: 1, name: 'Home', item: `https://dataflowx.com/${locale}` },
       { '@type': 'ListItem', position: 2, name: 'Resources', item: `https://dataflowx.com/${locale}/resources` },
       { '@type': 'ListItem', position: 3, name: 'Blog', item: `https://dataflowx.com/${locale}/resources/blog` },
-      { '@type': 'ListItem', position: 4, name: post.title, item: `https://dataflowx.com/${locale}/resources/blog/${slug}` },
+      { '@type': 'ListItem', position: 4, name: decode(post.title), item: `https://dataflowx.com/${locale}/resources/blog/${slug}` },
     ],
   };
 
@@ -250,7 +292,7 @@ export default async function BlogPostPage({ params }: Props) {
           <div className={styles.breadcrumbs}>
             <a href={`/${locale}`}>Home</a> <span>/</span> <a href={`/${locale}/resources`}>Resources</a> <span>/</span> <a href={`/${locale}/resources/blog`}>Blog</a>
           </div>
-          <h1 className={styles.title}>{post.title}</h1>
+          <h1 className={styles.title}>{decode(post.title)}</h1>
           <div className={styles.meta}>
             <div className={styles.metaItem}>
               <div className={styles.authorAvatar}>
@@ -270,9 +312,10 @@ export default async function BlogPostPage({ params }: Props) {
         {/* Full Width Featured Image */}
         {imageUrl && (
           <div className={styles.featuredImageContainer}>
-            <img 
+            <Image 
               src={imageUrl} 
-              alt={post.featuredImage?.node?.altText ?? post.title} 
+              alt={post.featuredImage?.node?.altText ?? decode(post.title)} 
+              width={1200} height={600} style={{ width: '100%', height: 'auto' }}
               className={styles.featuredImageHero} 
             />
           </div>

@@ -11,21 +11,44 @@ import IntelGlobalMap from '@/components/IntelRoom/IntelGlobalMap';
 import IntelHeroMap from '@/components/IntelRoom/IntelHeroMap';
 import IntelHeroGlobe from '@/components/IntelRoom/IntelHeroGlobe';
 import IntelOracleEngine from '@/components/IntelRoom/IntelOracleEngine';
+import { HreflangLinks } from '@/components/SEO/HreflangLinks';
+import ProductSchema from '@/components/SEO/ProductSchema';
+import BreadcrumbSchema from '@/components/SEO/BreadcrumbSchema';
 
-export const metadata: Metadata = {
-  title: 'DFX IntelRoom — Live Threat Intelligence Organism',
-  description:
-    'DFX IntelRoom: Analyzes billions of signals, establishes context, and generates actionable decisions. Advanced Threat Intelligence platform for SOC, CISO, and MSSP.',
-  keywords: [
-    'threat intelligence',
-    'intelroom',
-    'siber istihbarat',
-    'SOC',
-    'MSSP',
-    'CISO',
-    'dataflowx intelroom',
-  ],
-};
+export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
+  const { locale } = await params;
+  const baseUrl = 'https://www.dataflowx.com';
+
+  return {
+    title: 'DFX IntelRoom — Live Threat Intelligence Organism',
+    description:
+      'DFX IntelRoom: Analyzes billions of signals, establishes context, and generates actionable decisions. Advanced Threat Intelligence platform for SOC, CISO, and MSSP.',
+    keywords: [
+      'threat intelligence',
+      'intelroom',
+      'siber istihbarat',
+      'SOC',
+      'MSSP',
+      'CISO',
+      'dataflowx intelroom',
+    ],
+    alternates: {
+      canonical: `${baseUrl}/${locale}/intelroom`,
+    },
+    openGraph: {
+      title: 'DFX IntelRoom — Live Threat Intelligence Organism',
+      description: 'DFX IntelRoom: Analyzes billions of signals, establishes context, and generates actionable decisions.',
+      url: `${baseUrl}/${locale}/intelroom`,
+      images: [{ url: `${baseUrl}/og/intelroom.jpg`, width: 1200, height: 630 }],
+    },
+    twitter: {
+      card: 'summary_large_image',
+      title: 'DFX IntelRoom — Live Threat Intelligence Organism',
+      description: 'DFX IntelRoom: Analyzes billions of signals, establishes context, and generates actionable decisions.',
+      images: [`${baseUrl}/og/intelroom.jpg`],
+    },
+  };
+}
 
 
 
@@ -69,38 +92,53 @@ export default async function IntelRoomPage() {
     },
   ];
   return (
-    <div className={styles.pageWrapper}>
-      <VideoBackground videoSrc="/intelroom-bg.mp4" opacity={0.2} playMode="scrub" />
+    <main className={styles.main}>
+      <HreflangLinks slug="intelroom" />
+      <BreadcrumbSchema 
+        items={[
+          { name: 'DataFlowX', url: 'https://www.dataflowx.com' },
+          { name: 'Solutions', url: 'https://www.dataflowx.com' },
+          { name: 'DFX IntelRoom', url: 'https://www.dataflowx.com/en/intelroom' }
+        ]} 
+      />
+      <ProductSchema 
+        name="DFX IntelRoom"
+        description="Analyzes billions of signals, establishes context, and generates actionable decisions. Advanced Threat Intelligence platform for SOC, CISO, and MSSP."
+        url="https://www.dataflowx.com/en/intelroom"
+        image="https://www.dataflowx.com/og/intelroom.jpg"
+        category="Cybersecurity Software"
+      />
+      <VideoBackground videoSrc="/intelroom-bg.mp4" opacity={0.4} playMode="scrub" />
       <Nav logoSrc="/Intelroombeyaz.png" />
 
       {/* ── Hero ─────────────────────────────────────── */}
       <section className={styles.heroSection}>
         <div className={styles.heroContentWrapper}>
-        <div className={styles.heroLeftContainer}>
-          <h1 className="display-lg" style={{ marginBottom: '1.5rem', letterSpacing: '-0.02em', lineHeight: '1.1' }}>
-            {t('heroTitle1')}<br/>
-            {t('heroTitle2')}<span style={{ color: '#DC2626' }}>{t('heroTitle3')}</span>
-          </h1>
-          <p className="body-text" style={{ marginBottom: '3rem', maxWidth: '650px', fontSize: 'clamp(1rem, 1.5vw, 1.1rem)' }}>
-            {t('heroSubtitle')}
-          </p>
-          <div className={styles.buttonGroup}>
-            <a href="#contact" className={styles.primaryButton}>
-              {t('btn')}
-              <svg width="16" height="16" viewBox="0 0 16 16" fill="none" style={{ marginLeft: '8px' }}>
-                <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
-              </svg>
-            </a>
+          <div className={styles.heroLeftContainer}>
+            <h1 className="display-lg" style={{ marginBottom: '1.5rem', letterSpacing: '-0.02em', lineHeight: '1.1' }}>
+              {t('heroTitle1')}<br />
+              {t('heroTitle2')}<span style={{ color: '#DC2626' }}>{t('heroTitle3')}</span>
+            </h1>
+            <p className="body-text" style={{ marginBottom: '3rem', maxWidth: '650px', fontSize: 'clamp(1rem, 1.5vw, 1.1rem)' }}>
+              {t('heroSubtitle')}
+            </p>
+            <div className={styles.buttonGroup}>
+              <a href="#contact" className={styles.primaryButton}>
+                {t('btn')}
+                <svg width="16" height="16" viewBox="0 0 16 16" fill="none" style={{ marginLeft: '8px' }}>
+                  <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+                </svg>
+              </a>
+            </div>
           </div>
-        </div>
-        <div className={styles.heroRightContainer}>
-          <IntelHeroMap />
-        </div>
+          <div className={styles.heroRightContainer}>
+            <IntelHeroMap />
+          </div>
         </div>
       </section>
 
       {/* ── Visualizers & Components ──────────────────────────────── */}
-      
+
       {/* 1. Layer Story Scroll */}
       <section className={styles.featuresSection} style={{ paddingBottom: 0 }}>
         <div className={styles.problemHeader} style={{ marginBottom: '2rem' }}>
@@ -155,7 +193,7 @@ export default async function IntelRoomPage() {
               />
               <div
                 className={styles.cardOverlay}
-                
+
               />
               <div className={styles.cardContent}>
                 <div className={styles.iconWrapper}>
@@ -172,6 +210,6 @@ export default async function IntelRoomPage() {
       </section>
 
       <IntelContact />
-    </div>
+    </main>
   );
 }

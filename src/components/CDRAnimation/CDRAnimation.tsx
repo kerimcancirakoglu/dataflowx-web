@@ -91,7 +91,7 @@ export default function CDRAnimation() {
   };
 
   useEffect(() => {
-    intervalRef.current = setInterval(advance, 1600);
+    intervalRef.current = setInterval(advance, 3200);
     return () => { if (intervalRef.current) clearInterval(intervalRef.current); };
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [fileIndex]);
@@ -135,10 +135,10 @@ export default function CDRAnimation() {
     <div className={styles.wrapper}>
       {/* Section header */}
       <div className={styles.header}>
-        <p className={styles.overLabel}>HOW TrueCDR™ WORKS</p>
+        <p className={styles.overLabel}>HOW DFX CDR WORKS</p>
         <h2 className={styles.title}>A Reconstruction-First Model</h2>
         <p className={styles.subtitle}>
-          Every file is treated as hostile input. TrueCDR™ validates, strips unsafe capabilities,
+          Every file is treated as hostile input. DFX CDR validates, strips unsafe capabilities,
           and rebuilds a clean, usable version — in milliseconds.
         </p>
       </div>

@@ -135,22 +135,94 @@
   z-index: 0;
 }
 
-.packet {
+.centerLineOnly {
   position: absolute;
   top: 50%;
-  width: 12px;
-  height: 12px;
-  background: #00E5FF;
-  border-radius: 50%;
+  left: 32%;
+  width: 36%;
+  height: 2px;
+  background: rgba(255, 255, 255, 0.2);
   transform: translateY(-50%);
-  box-shadow: 0 0 10px #00E5FF, 0 0 20px #00E5FF;
-  opacity: 0;
+  z-index: 0;
+}
+
+.dualLineContainerSource {
+  position: absolute;
+  top: 50%;
+  left: 10%;
+  width: 22%;
+  height: 24px;
+  transform: translateY(-50%);
+  z-index: 0;
+}
+
+.dualLineContainerDest {
+  position: absolute;
+  top: 50%;
+  right: 10%;
+  width: 22%;
+  height: 24px;
+  transform: translateY(-50%);
+  z-index: 0;
+}
+
+.lineTop, .lineBot {
+  position: absolute;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background: rgba(255, 255, 255, 0.2);
+}
+
+.lineTop {
+  top: 0;
+}
+
+.lineBot {
+  bottom: 0;
+}
+
+.packet, .packetTop, .packetBot, .packetCenter {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
   z-index: 3;
+  display: flex;
+  align-items: center;
+  background: rgba(10, 15, 30, 0.8);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  padding: 4px;
+  border-radius: 6px;
+  opacity: 0;
+  box-shadow: 0 0 10px rgba(0, 229, 255, 0.5);
+}
+
+.packetTop {
+  top: calc(50% - 12px);
+}
+
+.packetBot {
+  top: calc(50% + 12px);
+  box-shadow: 0 0 10px rgba(245, 167, 6, 0.5);
+}
+
+.packetCenter {
+  top: 50%;
+}
+
+.packetIcons {
+  display: flex;
+  gap: 4px;
+  align-items: center;
+}
+
+.packetIcons svg {
+  width: 16px;
+  height: 16px;
 }
 
 .packetReverse {
-  background: #F5A706;
-  box-shadow: 0 0 10px #F5A706, 0 0 20px #F5A706;
+  box-shadow: 0 0 10px rgba(245, 167, 6, 0.5);
 }
 
 /* Animations are handled via GSAP in the component */

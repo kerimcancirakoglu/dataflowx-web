@@ -2,6 +2,7 @@
 
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
+import Image from 'next/image';
 import styles from './Nav.module.css';
 import React, { useEffect, useRef, useState } from 'react';
 import LanguageSwitcher from '../LanguageSwitcher/LanguageSwitcher';
@@ -70,9 +71,12 @@ export default function NavClient({ logoSrc = "/DataFlowX_Logo_W.png", hideMenu 
         aria-label="DataFlowX – Ana sayfa"
         onClick={() => setMobileMenuOpen(false)}
       >
-        <img 
+        <Image 
           src={logoSrc === '/Intelroombeyaz.png' ? '/Intelroombeyaz.png' : (theme === 'light' ? '/DataFlowX_Logo.png' : logoSrc)} 
           alt="DataFlowX Logo" 
+          width={200}
+          height={60}
+          style={{ width: 'auto', height: '100%' }}
           className={`${styles.logoImage} ${logoSrc === '/Intelroombeyaz.png' ? (theme === 'light' ? styles.intelRoomLogoLight : styles.intelRoomLogo) : ''}`} 
         />
       </Link>

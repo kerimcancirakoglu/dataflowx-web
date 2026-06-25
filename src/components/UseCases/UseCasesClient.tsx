@@ -2,6 +2,8 @@
 import React from 'react';
 
 import { useRef, useEffect } from 'react';
+import Link from 'next/link';
+import Image from 'next/image';
 import styles from './UseCases.module.css';
 
 
@@ -85,7 +87,8 @@ export default function UseCasesClient({ t }: { t: any }) {
           {CASES.map((c, i) => (
             <div key={c.id} className={styles.stepWrapper} data-step>
 
-              <div
+              <Link
+                href="/resources"
                 className={styles.card}
                 style={{
                   '--glow-color': c.glowColor,
@@ -96,7 +99,7 @@ export default function UseCasesClient({ t }: { t: any }) {
                 <div className={styles.pedestalArea}>
                   <div className={styles.pedestal} />
                   <div className={styles.iconFloat}>
-                    <img src={c.image} alt={c.headline} />
+                    <Image src={c.image} alt={c.headline} width={120} height={120} style={{ width: '100%', height: 'auto' }} />
                   </div>
                 </div>
 
@@ -106,7 +109,7 @@ export default function UseCasesClient({ t }: { t: any }) {
                   <h3 className={styles.stepHeadline}>{c.headline}</h3>
                   <p className={styles.stepDesc}>{c.description}</p>
                 </div>
-              </div>
+              </Link>
 
             </div>
           ))}

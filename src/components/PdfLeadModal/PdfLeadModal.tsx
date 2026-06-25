@@ -2,6 +2,7 @@
 
 import { useRef, useEffect, useState } from 'react';
 import { useTranslations } from 'next-intl';
+import { Turnstile } from '@marsidev/react-turnstile';
 import styles from './PdfLeadModal.module.css';
 
 interface PdfLeadModalProps {
@@ -60,6 +61,7 @@ export default function PdfLeadModal({
       email: formData.get('email'),
       company: formData.get('company'),
       website_url: formData.get('website_url'), // Honeypot
+      turnstileToken: formData.get('cf-turnstile-response'),
       documentName,
     };
 
@@ -192,6 +194,10 @@ export default function PdfLeadModal({
                   I consent to the processing of my data in accordance with the DataFlowX Privacy Policy.
                   I agree to be contacted regarding relevant security solutions and industry updates.
                 </label>
+              </div>
+
+              <div style={{ marginTop: '1rem', marginBottom: '1rem', display: 'flex', justifyContent: 'center' }}>
+                <Turnstile siteKey={process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY || '1x00000000000000000000AA'} />
               </div>
 
               <div className={styles.submitWrapper}>

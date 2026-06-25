@@ -126,7 +126,7 @@ export default async function Solutions() {
       titleHighlight: t('items.trucdr.titleHighlight'),
       description: t('items.trucdr.description'),
       protects: t('items.trucdr.protects'),
-      link: '/true-cdr',
+      link: '/dfx-cdr',
       features: [
         { text: t('items.trucdr.features.f1'), icon: <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg> },
         { text: t('items.trucdr.features.f2'), icon: <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"></path></svg> }

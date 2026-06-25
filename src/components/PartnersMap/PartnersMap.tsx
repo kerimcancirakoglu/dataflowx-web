@@ -46,6 +46,16 @@ const PINS = [
     label: 'ASIA PACIFIC', 
     lon: 110, lat: 10
   },
+  { 
+    id: 'pakistan', 
+    label: 'PAKISTAN', 
+    lon: 69, lat: 30 
+  },
+  { 
+    id: 'czech_republic', 
+    label: 'CZECH REPUBLIC', 
+    lon: 15, lat: 50 
+  },
 ];
 
 function PinItem({ pin, parentRef }: { pin: any, parentRef: React.RefObject<THREE.Group | null> }) {
@@ -154,7 +164,7 @@ function Globe() {
     vertexShader: `
       uniform float time;
       uniform float dpr;
-      uniform vec3 pins[5];
+      uniform vec3 pins[7];
       attribute float randomOffset;
       varying float vAlpha;
       varying vec3 vColor;
@@ -166,13 +176,13 @@ function Globe() {
         // Check distance to pins to color the dots instead of drawing geometric rings
         float isBorder = 0.0;
         float isInside = 0.0;
-        for(int i=0; i<5; i++) {
+        for(int i=0; i<7; i++) {
           float d = distance(position, pins[i]);
           // If the dot is within the territory
-          if (d < 0.16) {
+          if (d < 0.22) {
             isInside = 1.0;
             // If the dot is on the outer edge of the territory, it acts as the border
-            if (d > 0.13) {
+            if (d > 0.18) {
               isBorder = 1.0;
             }
           }

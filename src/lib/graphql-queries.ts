@@ -9,6 +9,7 @@ export const GET_ALL_POSTS = gql`
         title
         slug
         excerpt
+        content
         date
         author {
           node {

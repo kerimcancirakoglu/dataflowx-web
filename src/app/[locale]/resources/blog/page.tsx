@@ -6,37 +6,40 @@ import ContactMini from '@/components/ContactMini/ContactMini';
 import VideoBackground from '@/components/VideoBackground/VideoBackground';
 import BlogClient from './BlogClient';
 
-export const metadata: Metadata = {
-  title: 'Blog & Insights | DataFlowX Cybersecurity',
-  description:
-    'Trends shaping the cybersecurity world, threat intelligence analysis, and best practices for industrial control systems (ICS/OT).',
-  keywords: [
-    'cybersecurity blog',
-    'OT security analysis',
-    'threat intelligence',
-    'supply chain security',
-    'critical infrastructure security',
-    'data diode articles',
-    'ICS security',
-    'zero trust blog',
-  ],
-  alternates: {
-    canonical: 'https://dataflowx.com/resources/blog',
-  },
-  openGraph: {
-    title: 'DataFlowX Blog & Insights',
-    description: 'Strategic analysis and industry insights for cybersecurity leaders.',
-    url: 'https://dataflowx.com/resources/blog',
-    type: 'website',
-    images: [{ url: '/og-image.jpg', width: 1200, height: 630, alt: 'DataFlowX Blog' }],
-  },
-  twitter: {
-    card: 'summary_large_image',
-    title: 'DataFlowX Blog & Insights',
-    description: 'Strategic analysis and industry insights for cybersecurity leaders.',
-    images: ['/og-image.jpg'],
-  },
-};
+export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
+  const { locale } = await params;
+  return {
+    title: 'Blog & Insights | DataFlowX Cybersecurity',
+    description:
+      'Trends shaping the cybersecurity world, threat intelligence analysis, and best practices for industrial control systems (ICS/OT).',
+    keywords: [
+      'cybersecurity blog',
+      'OT security analysis',
+      'threat intelligence',
+      'supply chain security',
+      'critical infrastructure security',
+      'data diode articles',
+      'ICS security',
+      'zero trust blog',
+    ],
+    alternates: {
+      canonical: `https://dataflowx.com/${locale}/resources/blog`,
+    },
+    openGraph: {
+      title: 'DataFlowX Blog & Insights',
+      description: 'Strategic analysis and industry insights for cybersecurity leaders.',
+      url: `https://dataflowx.com/${locale}/resources/blog`,
+      type: 'website',
+      images: [{ url: '/og-image.jpg', width: 1200, height: 630, alt: 'DataFlowX Blog' }],
+    },
+    twitter: {
+      card: 'summary_large_image',
+      title: 'DataFlowX Blog & Insights',
+      description: 'Strategic analysis and industry insights for cybersecurity leaders.',
+      images: ['/og-image.jpg'],
+    },
+  };
+}
 
 const breadcrumbSchema = {
   '@context': 'https://schema.org',
@@ -61,10 +64,7 @@ const blogListingSchema = {
   },
 };
 
-import client from '@/lib/apollo-client';
-import { GET_ALL_POSTS } from '@/lib/graphql-queries';
 
-import { localeToWPLanguage } from '@/lib/locale-map';
 
 export const revalidate = 3600; // ISR: Revalidate every hour
 
@@ -76,23 +76,65 @@ export default async function BlogPage({
   const { locale } = await params;
   
   // Convert our path locale to WPGraphQL LanguageCodeFilterEnum
-  const wpLangCode = localeToWPLanguage(locale);
-
+  
   // Fetch real posts from WordPress — graceful fallback to empty array on error
   let wpPosts: any[] = [];
   try {
-    const { data } = await client.query<any>({
-      query: GET_ALL_POSTS,
-      variables: { language: wpLangCode },
-      fetchPolicy: 'no-cache', // Ensure we get fresh data
-    });
+    const wpUrl = process.env.NEXT_PUBLIC_WP_URL || 'https://dataflowx1.wpenginepowered.com';
+    const endpoint = `${wpUrl}/wp-json/wp/v2/posts?_embed&per_page=100&lang=${locale}`;
+    const res = await fetch(endpoint, { next: { revalidate: 3600 } });
     
-    // Sadece "dataflowx-news" kategorisine sahip OLMAYANLARI filtrele (Blog yazıları)
-    wpPosts = (data?.posts?.nodes || []).filter((post: any) => 
-      !post.categories?.nodes?.some((cat: any) => cat.slug === 'dataflowx-news')
-    );
+    if (res.ok) {
+      const restPosts = await res.json();
+      
+      // Map WPRestPost to the GraphQL-like structure expected by BlogClient
+      wpPosts = restPosts.map((post: any) => {
+        // Extract categories
+        const categories: { name: string }[] = [];
+        if (post._embedded && post._embedded['wp:term']) {
+          post._embedded['wp:term'].forEach((termArray: any) => {
+            termArray.forEach((term: any) => {
+              if (term.taxonomy === 'category') {
+                categories.push({ name: term.name });
+              }
+            });
+          });
+        }
+        
+        // Extract featured image
+        let featuredImage = null;
+        if (post._embedded && post._embedded['wp:featuredmedia'] && post._embedded['wp:featuredmedia'][0]) {
+          const media = post._embedded['wp:featuredmedia'][0];
+          featuredImage = {
+            node: {
+              sourceUrl: media.source_url,
+              altText: media.alt_text || ''
+            }
+          };
+        }
+
+        return {
+          title: post.title?.rendered || '',
+          slug: post.slug,
+          excerpt: post.excerpt?.rendered || '',
+          content: post.content?.rendered || '',
+          date: post.date,
+          categories: { nodes: categories },
+          featuredImage: featuredImage
+        };
+      });
+
+      // Sadece 'DataFlowX News' veya 'NEWS DFX' gibi kurumsal haber kategorilerine sahip OLMAYANLARI filtrele
+      wpPosts = wpPosts.filter((post: any) => 
+        !post.categories?.nodes?.some((cat: any) => {
+          const name = cat.name.toLowerCase();
+          return name === 'news dfx' || name === 'dataflowx news' || name === 'dataflowx-news';
+        })
+      );
+    } else {
+      console.warn('[BlogPage] WP API error:', res.statusText);
+    }
   } catch (err) {
-    // WP down or WPGraphQL not configured yet — page still renders with empty state
     console.warn('[BlogPage] WordPress API unreachable. Rendering with empty posts.', err);
   }
 

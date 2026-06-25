@@ -3,6 +3,7 @@ import type { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 import Nav from '@/components/Nav/Nav';
 import Contact from '@/components/Contact/Contact';
+import Image from 'next/image';
 import TableOfContents from '@/components/BlogLayout/TableOfContents';
 import SocialShare from '@/components/BlogLayout/SocialShare';
 import client from '@/lib/apollo-client';
@@ -206,9 +207,10 @@ export default async function NewsDetailPage({ params }: Props) {
       {/* Full Width Featured Image */}
       {imageUrl && (
         <div className={styles.featuredImageContainer}>
-          <img 
+          <Image 
             src={imageUrl} 
             alt={post._embedded?.['wp:featuredmedia']?.[0]?.alt_text ?? post.title.rendered} 
+            width={1200} height={600} style={{ width: '100%', height: 'auto' }}
             className={styles.featuredImageHero} 
           />
         </div>
