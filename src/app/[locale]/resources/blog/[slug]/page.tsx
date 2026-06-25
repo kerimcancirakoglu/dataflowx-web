@@ -13,6 +13,38 @@ import contentStyles from '@/components/BlogLayout/BlogContentStyles.module.css'
 import { localeToWPLanguage } from '@/lib/locale-map';
 import { decode } from 'html-entities';
 
+function rewriteWixUrls(content: string, locale: string): string {
+  if (!content) return content;
+  
+  const slugMap: Record<string, string> = {
+    '/datadiodex': '/unidirectional-gateway',
+    '/databrokerx': '/secure-remote-access',
+    '/dataportx': '/portx',
+    '/datastationx': '/media-transfer-station',
+    '/datasecurex': '/sandbox',
+    '/datamessagex': '/email-security-platform',
+    '/truecdr': locale === 'tr' ? '/dfx-cdr' : '/true-cdr',
+  };
+
+  let newContent = content;
+
+  Object.keys(slugMap).forEach(oldSlug => {
+    const newSlug = slugMap[oldSlug];
+    // Absolute URL: https://www.dataflowx.com/datadiodex
+    const absRegex = new RegExp(`href=["']https?:\\/\\/(www\\.)?dataflowx\\.com${oldSlug}\\/?["']`, 'gi');
+    newContent = newContent.replace(absRegex, `href="/${locale}${newSlug}"`);
+    
+    // Relative URL: /datadiodex
+    const relRegex = new RegExp(`href=["']${oldSlug}\\/?["']`, 'gi');
+    newContent = newContent.replace(relRegex, `href="/${locale}${newSlug}"`);
+  });
+
+  // Convert generic homepage links from absolute to relative to avoid domain issues
+  newContent = newContent.replace(/href=["']https?:\/\/(www\.)?dataflowx\.com\/?["']/gi, `href="/${locale}"`);
+
+  return newContent;
+}
+
 function getCoverImage(contentHtml: string, fallback: string = '/og-image.jpg') {
   if (!contentHtml) return fallback;
   const match = contentHtml.match(/<img[^>]+src=["']([^"']+)["']/i);
@@ -329,7 +361,7 @@ export default async function BlogPostPage({ params }: Props) {
             {/* WP Engine HTML injected here */}
             <div 
               className={contentStyles.prose} 
-              dangerouslySetInnerHTML={{ __html: post.content }}
+              dangerouslySetInnerHTML={{ __html: rewriteWixUrls(post.content, locale) }}
             />
           </article>
 

@@ -18,6 +18,38 @@ interface Props {
 import { GET_POST_BY_SLUG } from '@/lib/graphql-queries';
 import { localeToWPLanguage } from '@/lib/locale-map';
 
+function rewriteWixUrls(content: string, locale: string): string {
+  if (!content) return content;
+  
+  const slugMap: Record<string, string> = {
+    '/datadiodex': '/unidirectional-gateway',
+    '/databrokerx': '/secure-remote-access',
+    '/dataportx': '/portx',
+    '/datastationx': '/media-transfer-station',
+    '/datasecurex': '/sandbox',
+    '/datamessagex': '/email-security-platform',
+    '/truecdr': locale === 'tr' ? '/dfx-cdr' : '/true-cdr',
+  };
+
+  let newContent = content;
+
+  Object.keys(slugMap).forEach(oldSlug => {
+    const newSlug = slugMap[oldSlug];
+    // Absolute URL
+    const absRegex = new RegExp(`href=["']https?:\\/\\/(www\\.)?dataflowx\\.com${oldSlug}\\/?["']`, 'gi');
+    newContent = newContent.replace(absRegex, `href="/${locale}${newSlug}"`);
+    
+    // Relative URL
+    const relRegex = new RegExp(`href=["']${oldSlug}\\/?["']`, 'gi');
+    newContent = newContent.replace(relRegex, `href="/${locale}${newSlug}"`);
+  });
+
+  // Convert generic homepage links
+  newContent = newContent.replace(/href=["']https?:\/\/(www\.)?dataflowx\.com\/?["']/gi, `href="/${locale}"`);
+
+  return newContent;
+}
+
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const resolvedParams = await params;
   const { slug, locale } = resolvedParams;
@@ -224,7 +256,7 @@ export default async function NewsDetailPage({ params }: Props) {
           {/* WP Engine HTML injected here */}
           <div 
             className={contentStyles.prose} 
-            dangerouslySetInnerHTML={{ __html: post.content.rendered }}
+            dangerouslySetInnerHTML={{ __html: rewriteWixUrls(post.content.rendered, locale) }}
           />
         </article>
 
