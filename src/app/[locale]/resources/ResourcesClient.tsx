@@ -150,7 +150,8 @@ interface ResourcesClientProps {
 }
 
 function mapWpResourceToResource(wp: any): Resource {
-  let image = '/og-image.jpg';
+  const wpUrl = process.env.NEXT_PUBLIC_WP_URL || 'https://dataflowx1.wpenginepowered.com';
+  let image = `${wpUrl}/wp-content/uploads/Kapak/kapaklar/data3.jpg`;
   if (wp._embedded?.['wp:featuredmedia']?.[0]?.source_url) {
     image = wp._embedded['wp:featuredmedia'][0].source_url;
   }
