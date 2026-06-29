@@ -41,5 +41,9 @@
     "react-email": "^6.6.4",
     "typescript": "^5",
     "wrangler": "^4.105.0"
+  },
+  "overrides": {
+    "framer-motion": "12.40.0",
+    "@tanstack/react-virtual": "3.13.18"
   }
 }
