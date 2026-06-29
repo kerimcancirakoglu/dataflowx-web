@@ -189,38 +189,9 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   };
 }
 
-// ── Static path generation at build time ───────────
-export async function generateStaticParams() {
-  const locales = ['tr', 'en', 'ar'];
-  const allParams: { locale: string; slug: string }[] = [];
-
-  for (const locale of locales) {
-    try {
-      const wpUrl = process.env.NEXT_PUBLIC_WP_URL || 'https://dataflowx1.wpenginepowered.com';
-      const endpoint = `${wpUrl}/wp-json/wp/v2/posts?per_page=100&lang=${locale}`;
-      const res = await fetch(endpoint, { next: { revalidate: 3600 } });
-      if (res.ok) {
-        const posts = await res.json();
-        posts.forEach((p: any) => {
-          allParams.push({ locale, slug: p.slug });
-        });
-      }
-    } catch {
-      // ignore
-    }
-  }
-
-  // Fallback to mock slugs if API fails completely
-  if (allParams.length === 0) {
-    for (const locale of locales) {
-      Object.keys(MOCK_POSTS).forEach((slug) => {
-        allParams.push({ locale, slug });
-      });
-    }
-  }
-
-  return allParams;
-}
+// ISR mode: pages are generated on-demand, not at build time.
+// dynamicParams=true means unknown slugs render on first visit and are cached.
+export const dynamicParams = true;
 
 // ── Page ───────────────────────────────────────────
 export const revalidate = 3600;

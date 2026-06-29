@@ -8,32 +8,33 @@ import { GET_ALL_POSTS } from '@/lib/graphql-queries';
 import { localeToWPLanguage } from '@/lib/locale-map';
 import { decode } from 'html-entities';
 
-function getCoverImage(contentHtml: string, fallback: string = '/images/blog/blog-1.avif') {
+function getCoverImage(contentHtml: string, fallback: string = '/og-image.jpg') {
   if (!contentHtml) return fallback;
-  const match = contentHtml.match(/<img[^>]+src=["']([^"']+)["']/i);
-  return match ? match[1] : fallback;
+  const match = contentHtml.match(/<img[^>]+src=["']([^"']+\.(?:jpg|jpeg|png|webp|avif))["']/i);
+  if (!match) return fallback;
+  const src = match[1].toLowerCase();
+  if (src.includes('kapak') || src.includes('brosur') || src.includes('pdf') || src.includes('qr')) return fallback;
+  return match[1];
 }
 
 interface Post {
   id: number;
   title: string;
+  excerpt: string;
   date: string;
+  category: string;
   image: string;
   featured: boolean;
   link: string;
-}
-
-interface WPPostsResponse {
-  posts: {
-    nodes: any[];
-  };
 }
 
 const MOCK_POSTS: Post[] = [
   {
     id: 1,
     title: 'Beyond Network Visibility: Implementing Prevention-First Security for SCADA Environments',
-    date: '23 hours ago',
+    excerpt: 'Modern industrial efficiency depends entirely on deep data integration. The conceptual air gap, the idea that production networks can remain completely isolated from the outside world, and that network visibility is enough, is dead. To optimize supply chains, track predictive maintenance data, and feed enterprise analytics, corporate IT and operational technology (OT) have been permanently [...]',
+    date: 'JUNE 2, 2026',
+    category: 'CRITICAL INFRASTRUCTURE',
     image: `${process.env.NEXT_PUBLIC_WP_URL}/wp-content/uploads/Kapak/kapaklar/datamessage1.jpg`,
     featured: true,
     link: '#'
@@ -41,7 +42,9 @@ const MOCK_POSTS: Post[] = [
   {
     id: 2,
     title: 'OT Security Alert: How the "Broken Windows Theory" Predicts Your Next Breach',
-    date: 'May 18',
+    excerpt: '',
+    date: 'MAY 18, 2026',
+    category: 'SECURITY',
     image: `${process.env.NEXT_PUBLIC_WP_URL}/wp-content/uploads/Kapak/kapaklar/databroker1.jpg`,
     featured: false,
     link: '#'
@@ -49,7 +52,9 @@ const MOCK_POSTS: Post[] = [
   {
     id: 3,
     title: 'How AI Models Like Claude are Targeting SCADA Infrastructure: Monterrey Water Utility Breach',
-    date: 'May 11',
+    excerpt: '',
+    date: 'MAY 11, 2026',
+    category: 'AI THREATS',
     image: `${process.env.NEXT_PUBLIC_WP_URL}/wp-content/uploads/Kapak/kapaklar/datasecure1.jpg`,
     featured: false,
     link: '#'
@@ -57,12 +62,19 @@ const MOCK_POSTS: Post[] = [
   {
     id: 4,
     title: 'Zero Trust Architecture in Critical Infrastructure: A Comprehensive Guide for 2026',
-    date: 'May 04',
+    excerpt: '',
+    date: 'MAY 04, 2026',
+    category: 'ZERO TRUST',
     image: `${process.env.NEXT_PUBLIC_WP_URL}/wp-content/uploads/Kapak/kapaklar/datadiode1.jpg`,
     featured: false,
     link: '#'
   }
 ];
+
+function stripHtml(html: string) {
+  if (!html) return '';
+  return decode(html.replace(/<[^>]*>?/gm, '')).trim();
+}
 
 async function getLatestPosts(locale: string): Promise<Post[]> {
   try {
@@ -72,91 +84,125 @@ async function getLatestPosts(locale: string): Promise<Post[]> {
       fetchPolicy: 'no-cache'
     });
 
-    if (!data?.posts?.nodes || data.posts.nodes.length === 0) {
-      return MOCK_POSTS;
-    }
+    if (data?.posts?.nodes && data.posts.nodes.length > 0) {
+      return data.posts.nodes.slice(0, 4).map((post: any, index: number) => {
+        const dateObj = new Date(post.date);
+        const formattedDate = dateObj.toLocaleDateString(locale === 'ar' ? 'ar-SA' : locale === 'tr' ? 'tr-TR' : 'en-US', { month: 'short', day: 'numeric', year: 'numeric' }).toUpperCase();
+        
+        let category = 'INSIGHTS';
+        if (post.categories?.nodes?.length > 0) {
+          category = post.categories.nodes[0].name.toUpperCase();
+        }
 
-    return data.posts.nodes.slice(0, 4).map((post: any, index: number) => {
-      const dateObj = new Date(post.date);
-      const formattedDate = dateObj.toLocaleDateString(locale === 'ar' ? 'ar-SA' : locale === 'tr' ? 'tr-TR' : 'en-US', { month: 'short', day: 'numeric' });
-      
-      return {
-        id: post.id || index,
-        title: decode(post.title),
-        date: formattedDate,
-        image: post.featuredImage?.node?.sourceUrl || getCoverImage(post.content),
-        featured: index === 0,
-        link: `/${locale}/resources/blog/${post.slug}`
-      };
-    });
+        return {
+          id: post.id || index,
+          title: decode(post.title),
+          excerpt: stripHtml(post.excerpt) || '',
+          date: formattedDate,
+          category,
+          image: post.featuredImage?.node?.sourceUrl 
+            || getCoverImage(post.content)
+            || '/og-image.jpg',
+          featured: index === 0,
+          link: `/${locale}/resources/blog/${post.slug}`
+        };
+      });
+    }
   } catch (error) {
-    console.error('Error fetching WordPress posts via GraphQL:', error);
-    return MOCK_POSTS;
+    console.error('GraphQL error, trying REST fallback:', error);
   }
+
+  try {
+    const wpUrl = process.env.NEXT_PUBLIC_WP_URL || 'https://dataflowx1.wpenginepowered.com';
+    const res = await fetch(
+      `${wpUrl}/wp-json/wp/v2/posts?per_page=4&lang=${locale}&_embed=wp:featuredmedia`,
+      { next: { revalidate: 1800 } }
+    );
+    if (res.ok) {
+      const restPosts = await res.json();
+      return restPosts.map((post: any, index: number) => {
+        const dateObj = new Date(post.date);
+        const formattedDate = dateObj.toLocaleDateString(locale === 'ar' ? 'ar-SA' : locale === 'tr' ? 'tr-TR' : 'en-US', { month: 'short', day: 'numeric', year: 'numeric' }).toUpperCase();
+        const featuredMedia = post._embedded?.['wp:featuredmedia']?.[0];
+        
+        return {
+          id: post.id || index,
+          title: decode(post.title?.rendered || ''),
+          excerpt: stripHtml(post.excerpt?.rendered || ''),
+          date: formattedDate,
+          category: 'INSIGHTS',
+          image: featuredMedia?.source_url 
+            || getCoverImage(post.content?.rendered || '')
+            || '/og-image.jpg',
+          featured: index === 0,
+          link: `/${locale}/resources/blog/${post.slug}`
+        };
+      });
+    }
+  } catch (restError) {
+    console.error('REST API fallback also failed:', restError);
+  }
+
+  return MOCK_POSTS;
 }
 
 export default async function LatestNews() {
   const locale = await getLocale();
   const posts = await getLatestPosts(locale);
-  const featuredItem = posts.find(item => item.featured) || posts[0];
-  const listItems = posts.filter(item => item.id !== featuredItem.id).slice(0, 3);
+  // Take 3 posts for the 3-column grid
+  const listItems = posts.slice(0, 3);
   const t = await getTranslations('Home.LatestNews');
 
   return (
     <section className={styles.section} id="news">
       <div className={styles.inner}>
-        <div className={styles.header}>
-          <div className={styles.titleRow}>
-            <h2 className="display-lg">
-              {t('title')} <span style={{ color: '#F5A706' }}>{t('titleHighlight')}</span>
-            </h2>
-            <button className={styles.viewAllBtn}>
-              {t('viewAll')}
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                <line x1="5" y1="12" x2="19" y2="12"></line>
-                <polyline points="12 5 19 12 12 19"></polyline>
-              </svg>
-            </button>
-          </div>
+        
+        {/* Top Row: Navigation Buttons */}
+        <div className={styles.topNavGrid}>
+          <Link href={`/${locale}/resources`} className={styles.navButton}>
+            <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" className={styles.navIcon}>
+              <path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"></path>
+              <path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"></path>
+            </svg>
+            <span className={styles.navText}>Resource Center</span>
+          </Link>
+          <Link href={`/${locale}/news`} className={styles.navButton}>
+            <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" className={styles.navIcon}>
+              <path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"></path>
+            </svg>
+            <span className={styles.navText}>News</span>
+          </Link>
+          <Link href={`/${locale}/resources/blog`} className={styles.navButton}>
+            <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" className={styles.navIcon}>
+              <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path>
+              <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path>
+            </svg>
+            <span className={styles.navText}>Blog</span>
+          </Link>
         </div>
 
-        <div className={styles.grid}>
-          {/* Featured (Large) Item */}
-          {featuredItem && (
-            <a href={featuredItem.link} className={styles.featuredCard}>
-              <div className={styles.featuredImageWrapper}>
-                <Image src={featuredItem.image} alt={featuredItem.title} fill style={{ objectFit: 'cover' }} className={styles.featuredImage} />
-                <div className={styles.overlay}></div>
-              </div>
-              <div className={styles.featuredContent}>
-                <div className={styles.date}>{featuredItem.date}</div>
-                <h3 className={styles.featuredTitle}>{featuredItem.title}</h3>
-                <div className={styles.readMore}>
-                  {t('readArticle')}
-                  <svg width="16" height="16" viewBox="0 0 24 24" fill="#f5a706" stroke="currentColor" strokeWidth="2">
-                    <line x1="5" y1="12" x2="19" y2="12"></line>
-                    <polyline points="12 5 19 12 12 19"></polyline>
-                  </svg>
-                </div>
-              </div>
-            </a>
-          )}
-
-          {/* List Items */}
-          <div className={styles.listContainer}>
+        {/* Bottom Row: Featured Articles */}
+        <div className={styles.bottomNewsSection}>
+          <div className={styles.newsGrid}>
             {listItems.map((item) => (
-              <a href={item.link} key={item.id} className={styles.listCard}>
+              <Link href={item.link} key={item.id} className={styles.listCard}>
                 <div className={styles.listImageWrapper}>
                   <Image src={item.image} alt={item.title} fill style={{ objectFit: 'cover' }} className={styles.listImage} />
                 </div>
                 <div className={styles.listContent}>
-                  <div className={styles.date}>{item.date}</div>
-                  <h3 className={styles.listTitle}>{item.title}</h3>
+                  <div className={styles.listReadMore}>
+                    <span>{t('readArticle') || 'Read More'}</span>
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                      <line x1="5" y1="12" x2="19" y2="12"></line>
+                      <polyline points="12 5 19 12 12 19"></polyline>
+                    </svg>
+                  </div>
                 </div>
-              </a>
+              </Link>
             ))}
           </div>
         </div>
+
       </div>
     </section>
   );

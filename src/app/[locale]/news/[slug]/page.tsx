@@ -131,26 +131,8 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   };
 }
 
-// ── Static path generation at build time ───────────
-export async function generateStaticParams() {
-  const locales = ['tr', 'en', 'ar'];
-  const allParams: { locale: string; slug: string }[] = [];
-
-  for (const locale of locales) {
-    try {
-      const posts = await getPosts('news-dfx', locale);
-      if (posts.length > 0) {
-        posts.forEach((p) => {
-          allParams.push({ locale, slug: p.slug });
-        });
-      }
-    } catch {
-      // ignore
-    }
-  }
-
-  return allParams;
-}
+// ISR mode: pages rendered on-demand on first visit, cached by revalidate.
+export const dynamicParams = true;
 
 // ── Page ───────────────────────────────────────────
 export const revalidate = 3600;

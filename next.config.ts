@@ -53,6 +53,11 @@ const nextConfig: NextConfig = {
         hostname: 'dataflowx1.wpenginepowered.com',
         pathname: '/**',
       },
+      {
+        protocol: 'https',
+        hostname: 'static.wixstatic.com',
+        pathname: '/**',
+      },
     ],
   },
   async redirects() {
