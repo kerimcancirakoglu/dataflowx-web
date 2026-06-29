@@ -1,0 +1,4 @@
+# SSR yanıtlarına güvenilir uygulanmaz; security headers next.config.ts'teki headers() bloğunda kalır.
+# Bu dosya YALNIZCA statik asset cache'i için:
+/_next/static/*
+  Cache-Control: public, max-age=31536000, immutable
