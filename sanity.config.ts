@@ -1,5 +1,6 @@
 import { defineConfig } from 'sanity';
 import { structureTool } from 'sanity/structure';
+import { schema } from './src/sanity/schemaTypes';
 
 export default defineConfig({
   basePath: '/studio',
@@ -10,7 +11,6 @@ export default defineConfig({
   plugins: [structureTool()],
   
   schema: {
-    // Faz 3'te eklenecek
-    types: [],
+    types: schema.types,
   },
 });
