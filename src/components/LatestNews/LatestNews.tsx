@@ -3,22 +3,12 @@ import Link from 'next/link';
 import Image from 'next/image';
 import styles from './LatestNews.module.css';
 import { getTranslations, getLocale } from 'next-intl/server';
-import client from '@/lib/apollo-client';
-import { GET_ALL_POSTS } from '@/lib/graphql-queries';
-import { localeToWPLanguage } from '@/lib/locale-map';
+import { client } from '@/lib/sanity';
+import { GET_ALL_POSTS_QUERY } from '@/lib/sanity-queries';
 import { decode } from 'html-entities';
 
-function getCoverImage(contentHtml: string, fallback: string = '/og-image.jpg') {
-  if (!contentHtml) return fallback;
-  const match = contentHtml.match(/<img[^>]+src=["']([^"']+\.(?:jpg|jpeg|png|webp|avif))["']/i);
-  if (!match) return fallback;
-  const src = match[1].toLowerCase();
-  if (src.includes('kapak') || src.includes('brosur') || src.includes('pdf') || src.includes('qr')) return fallback;
-  return match[1];
-}
-
 interface Post {
-  id: number;
+  id: number | string;
   title: string;
   excerpt: string;
   date: string;
@@ -35,7 +25,7 @@ const MOCK_POSTS: Post[] = [
     excerpt: 'Modern industrial efficiency depends entirely on deep data integration. The conceptual air gap, the idea that production networks can remain completely isolated from the outside world, and that network visibility is enough, is dead. To optimize supply chains, track predictive maintenance data, and feed enterprise analytics, corporate IT and operational technology (OT) have been permanently [...]',
     date: 'JUNE 2, 2026',
     category: 'CRITICAL INFRASTRUCTURE',
-    image: `${process.env.NEXT_PUBLIC_WP_URL}/wp-content/uploads/Kapak/kapaklar/datamessage1.jpg`,
+    image: `/og-image.jpg`,
     featured: true,
     link: '#'
   },
@@ -45,7 +35,7 @@ const MOCK_POSTS: Post[] = [
     excerpt: '',
     date: 'MAY 18, 2026',
     category: 'SECURITY',
-    image: `${process.env.NEXT_PUBLIC_WP_URL}/wp-content/uploads/Kapak/kapaklar/databroker1.jpg`,
+    image: `/og-image.jpg`,
     featured: false,
     link: '#'
   },
@@ -55,7 +45,7 @@ const MOCK_POSTS: Post[] = [
     excerpt: '',
     date: 'MAY 11, 2026',
     category: 'AI THREATS',
-    image: `${process.env.NEXT_PUBLIC_WP_URL}/wp-content/uploads/Kapak/kapaklar/datasecure1.jpg`,
+    image: `/og-image.jpg`,
     featured: false,
     link: '#'
   },
@@ -65,7 +55,7 @@ const MOCK_POSTS: Post[] = [
     excerpt: '',
     date: 'MAY 04, 2026',
     category: 'ZERO TRUST',
-    image: `${process.env.NEXT_PUBLIC_WP_URL}/wp-content/uploads/Kapak/kapaklar/datadiode1.jpg`,
+    image: `/og-image.jpg`,
     featured: false,
     link: '#'
   }
@@ -78,69 +68,33 @@ function stripHtml(html: string) {
 
 async function getLatestPosts(locale: string): Promise<Post[]> {
   try {
-    const { data } = await client.query<any>({
-      query: GET_ALL_POSTS,
-      variables: { language: localeToWPLanguage(locale) },
-      fetchPolicy: 'no-cache'
-    });
+    const sanityLocale = locale.toUpperCase();
+    const posts = await client.fetch(GET_ALL_POSTS_QUERY, { language: sanityLocale });
 
-    if (data?.posts?.nodes && data.posts.nodes.length > 0) {
-      return data.posts.nodes.slice(0, 4).map((post: any, index: number) => {
+    if (posts && posts.length > 0) {
+      return posts.slice(0, 4).map((post: any, index: number) => {
         const dateObj = new Date(post.date);
         const formattedDate = dateObj.toLocaleDateString(locale === 'ar' ? 'ar-SA' : locale === 'tr' ? 'tr-TR' : 'en-US', { month: 'short', day: 'numeric', year: 'numeric' }).toUpperCase();
         
         let category = 'INSIGHTS';
-        if (post.categories?.nodes?.length > 0) {
-          category = post.categories.nodes[0].name.toUpperCase();
+        if (post.categories && post.categories.length > 0) {
+          category = post.categories[0].name.toUpperCase();
         }
 
         return {
-          id: post.id || index,
-          title: decode(post.title),
-          excerpt: stripHtml(post.excerpt) || '',
+          id: post._id || index,
+          title: post.title,
+          excerpt: post.excerpt ? stripHtml(post.excerpt) : '',
           date: formattedDate,
           category,
-          image: post.featuredImage?.node?.sourceUrl 
-            || getCoverImage(post.content)
-            || '/og-image.jpg',
+          image: post.featuredImage || '/og-image.jpg',
           featured: index === 0,
           link: `/${locale}/resources/blog/${post.slug}`
         };
       });
     }
   } catch (error) {
-    console.error('GraphQL error, trying REST fallback:', error);
-  }
-
-  try {
-    const wpUrl = process.env.NEXT_PUBLIC_WP_URL || 'https://dataflowx1.wpenginepowered.com';
-    const res = await fetch(
-      `${wpUrl}/wp-json/wp/v2/posts?per_page=4&lang=${locale}&_embed=wp:featuredmedia`,
-      { next: { revalidate: 1800 } }
-    );
-    if (res.ok) {
-      const restPosts = await res.json();
-      return restPosts.map((post: any, index: number) => {
-        const dateObj = new Date(post.date);
-        const formattedDate = dateObj.toLocaleDateString(locale === 'ar' ? 'ar-SA' : locale === 'tr' ? 'tr-TR' : 'en-US', { month: 'short', day: 'numeric', year: 'numeric' }).toUpperCase();
-        const featuredMedia = post._embedded?.['wp:featuredmedia']?.[0];
-        
-        return {
-          id: post.id || index,
-          title: decode(post.title?.rendered || ''),
-          excerpt: stripHtml(post.excerpt?.rendered || ''),
-          date: formattedDate,
-          category: 'INSIGHTS',
-          image: featuredMedia?.source_url 
-            || getCoverImage(post.content?.rendered || '')
-            || '/og-image.jpg',
-          featured: index === 0,
-          link: `/${locale}/resources/blog/${post.slug}`
-        };
-      });
-    }
-  } catch (restError) {
-    console.error('REST API fallback also failed:', restError);
+    console.error('Sanity fetch error:', error);
   }
 
   return MOCK_POSTS;

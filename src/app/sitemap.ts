@@ -1,32 +1,30 @@
 import { MetadataRoute } from 'next';
-import client from '@/lib/apollo-client';
-import { GET_ALL_POST_SLUGS } from '@/lib/graphql-queries';
+import { client } from '@/lib/sanity';
+import { GET_ALL_POST_SLUGS_QUERY } from '@/lib/sanity-queries';
+import { groq } from 'next-sanity';
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const locales = ['en', 'tr', 'ar'];
   const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://www.dataflowx.com';
 
-  // 1. Fetch WP Posts (with Pagination)
-  let posts: any[] = [];
-  try {
-    let hasNextPage = true;
-    let afterCursor = null;
+  // 1. Fetch Sanity Posts (Blog, News, Resources)
+  let blogSlugs: any[] = [];
+  let newsSlugs: any[] = [];
+  let resourceSlugs: any[] = [];
 
-    while (hasNextPage) {
-      const response: any = await client.query({
-        query: GET_ALL_POST_SLUGS,
-        variables: { language: 'en', after: afterCursor }, // Primary language
-        fetchPolicy: 'no-cache',
-      });
-      
-      const newPosts = response.data?.posts?.nodes || [];
-      posts = [...posts, ...newPosts];
-      
-      hasNextPage = response.data?.posts?.pageInfo?.hasNextPage || false;
-      afterCursor = response.data?.posts?.pageInfo?.endCursor || null;
-    }
+  try {
+    // Toplu cekim - slug ve language bilgileri
+    const query = groq`{
+      "blogs": *[_type == "blogPost"] { "slug": slug.current, language },
+      "news": *[_type == "news"] { "slug": slug.current, language },
+      "resources": *[_type == "resource"] { "slug": slug.current, language }
+    }`;
+    const data = await client.fetch(query);
+    blogSlugs = data.blogs || [];
+    newsSlugs = data.news || [];
+    resourceSlugs = data.resources || [];
   } catch (err) {
-    console.warn('[sitemap] WordPress API unreachable. Skipping posts in sitemap.');
+    console.warn('[sitemap] Sanity API unreachable. Skipping dynamic slugs in sitemap.', err);
   }
 
   // 2. Generate Static Pages
@@ -63,23 +61,38 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     });
   });
 
-  // 3. Generate Post Pages
-  const postUrls = locales.flatMap((locale) => {
-    return posts.map((post) => {
-      const slug = post.slug;
-      return {
-        url: `${baseUrl}/${locale}/resources/blog/${slug}`,
-        lastModified: new Date(),
-        changeFrequency: 'monthly' as const,
-        priority: 0.7,
-        alternates: {
-          languages: Object.fromEntries(
-            locales.map((l) => [l, `${baseUrl}/${l}/resources/blog/${slug}`])
-          ),
-        },
-      };
-    });
+  // 3. Generate Blog Pages
+  const blogPages = blogSlugs.map((post) => {
+    const loc = post.language ? post.language.toLowerCase() : 'en';
+    return {
+      url: `${baseUrl}/${loc}/resources/blog/${post.slug}`,
+      lastModified: new Date(),
+      changeFrequency: 'weekly' as const,
+      priority: 0.6,
+    };
   });
 
-  return [...staticPages, ...postUrls];
+  // 4. Generate News Pages
+  const newsPages = newsSlugs.map((item) => {
+    const loc = item.language ? item.language.toLowerCase() : 'en';
+    return {
+      url: `${baseUrl}/${loc}/news/${item.slug}`,
+      lastModified: new Date(),
+      changeFrequency: 'weekly' as const,
+      priority: 0.6,
+    };
+  });
+
+  // 5. Generate Resource Pages (e.g. whitepapers etc.)
+  const resourcePages = resourceSlugs.map((item) => {
+    const loc = item.language ? item.language.toLowerCase() : 'en';
+    return {
+      url: `${baseUrl}/${loc}/resources/${item.slug}`,
+      lastModified: new Date(),
+      changeFrequency: 'monthly' as const,
+      priority: 0.5,
+    };
+  });
+
+  return [...staticPages, ...blogPages, ...newsPages, ...resourcePages];
 }

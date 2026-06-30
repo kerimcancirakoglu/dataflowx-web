@@ -1,4 +1,3 @@
-// src/app/[locale]/news/[slug]/page.tsx
 import type { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 import Nav from '@/components/Nav/Nav';
@@ -6,146 +5,83 @@ import Contact from '@/components/Contact/Contact';
 import Image from 'next/image';
 import TableOfContents from '@/components/BlogLayout/TableOfContents';
 import SocialShare from '@/components/BlogLayout/SocialShare';
-import client from '@/lib/apollo-client';
-import { getPostBySlug, getPosts, WPRestPost } from '@/lib/wp-api';
+import { client } from '@/lib/sanity';
+import { GET_NEWS_BY_SLUG_QUERY } from '@/lib/sanity-queries';
 import styles from './page.module.css';
 import contentStyles from '@/components/BlogLayout/BlogContentStyles.module.css';
+import { PortableText } from '@portabletext/react';
 
 interface Props {
   params: Promise<{ slug: string; locale: string }>;
 }
 
-import { GET_POST_BY_SLUG } from '@/lib/graphql-queries';
-import { localeToWPLanguage } from '@/lib/locale-map';
-
-function rewriteWixUrls(content: string, locale: string): string {
-  if (!content) return content;
-  
-  const slugMap: Record<string, string> = {
-    '/datadiodex': '/unidirectional-gateway',
-    '/databrokerx': '/secure-remote-access',
-    '/dataportx': '/portx',
-    '/datastationx': '/media-transfer-station',
-    '/datasecurex': '/sandbox',
-    '/datamessagex': '/email-security-platform',
-    '/truecdr': locale === 'tr' ? '/dfx-cdr' : '/true-cdr',
-  };
-
-  let newContent = content;
-
-  Object.keys(slugMap).forEach(oldSlug => {
-    const newSlug = slugMap[oldSlug];
-    // Absolute URL
-    const absRegex = new RegExp(`href=["']https?:\\/\\/(www\\.)?dataflowx\\.com${oldSlug}\\/?["']`, 'gi');
-    newContent = newContent.replace(absRegex, `href="/${locale}${newSlug}"`);
-    
-    // Relative URL
-    const relRegex = new RegExp(`href=["']${oldSlug}\\/?["']`, 'gi');
-    newContent = newContent.replace(relRegex, `href="/${locale}${newSlug}"`);
-  });
-
-  // Convert generic homepage links
-  newContent = newContent.replace(/href=["']https?:\/\/(www\.)?dataflowx\.com\/?["']/gi, `href="/${locale}"`);
-
-  return newContent;
-}
-
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const resolvedParams = await params;
   const { slug, locale } = resolvedParams;
-  const wpLangCode = localeToWPLanguage(locale);
   
-  let graphPost: any = null;
-  try {
-    const { data } = await client.query<any>({
-      query: GET_POST_BY_SLUG,
-      variables: { id: slug, language: wpLangCode },
-    });
-    graphPost = data?.post?.translation;
-  } catch {
-    // handled below
+  const sanityLocale = locale.toUpperCase();
+  const post = await client.fetch(GET_NEWS_BY_SLUG_QUERY, { slug, language: sanityLocale });
+
+  if (!post) {
+    return { title: 'News Not Found | DataFlowX' };
   }
 
-  // Fallback to REST API if GraphQL fails
-  let post: WPRestPost | null = null;
-  if (!graphPost) {
-    try {
-      post = await getPostBySlug(slug, locale);
-    } catch {
-      // ignore
-    }
-  }
+  // Sanity'deki yeni SEO objesini kullan (varsa)
+  const seo = post.seo || {};
+  const title = seo.metaTitle || post.title || 'DataFlowX News';
+  const description = seo.metaDescription || post.excerpt || 'Read the latest company news from DataFlowX.';
+  const imageUrl = seo.openGraphImage?.asset?.url || post.featuredImage || '/og-image.jpg';
+  
+  // Eger noIndex isaretliyse indexlemeyi kapat
+  const robots = seo.noIndex ? { index: false, follow: false } : { index: true, follow: true };
 
-  if (!graphPost && !post) {
-    return {
-      title: 'News Not Found | DataFlowX',
-    };
-  }
+  const alternates: any = {
+    canonical: `https://dataflowx.com/${locale}/news/${slug}`,
+  };
 
-  // Use graphPost if available, else fallback to REST post
-  const cleanExcerpt = graphPost?.excerpt
-    ? graphPost.excerpt.replace(/<[^>]*>/g, '').trim().slice(0, 160)
-    : post?.excerpt?.rendered
-    ? post.excerpt.rendered.replace(/<[^>]*>/g, '').trim().slice(0, 160)
-    : 'Read the latest company news and press releases from DataFlowX.';
-
-  const imageUrl = graphPost?.featuredImage?.node?.sourceUrl 
-    ?? post?._embedded?.['wp:featuredmedia']?.[0]?.source_url 
-    ?? '/og-image.jpg';
-
-  const title = graphPost?.title ?? post?.title?.rendered ?? 'DataFlowX News';
-  const publishedTime = graphPost?.date ?? post?.date;
-
-  const languages: Record<string, string> = {};
-  if (graphPost?.translations) {
-    graphPost.translations.forEach((t: any) => {
-      const langCode = t.language?.code?.toLowerCase();
-      if (langCode) {
-        languages[langCode] = `https://dataflowx.com/${langCode}/news/${t.slug}`;
+  // Eger translations array'i donuyorsa metadata'ya diller eklenebilir
+  if (post.translations?.length > 0) {
+    const languages: Record<string, string> = {};
+    post.translations.forEach((t: any) => {
+      if (t.language && t.slug) {
+        languages[t.language.toLowerCase()] = `https://dataflowx.com/${t.language.toLowerCase()}/news/${t.slug}`;
       }
     });
+    languages[locale] = `https://dataflowx.com/${locale}/news/${slug}`;
+    alternates.languages = languages;
   }
-  languages[locale] = `https://dataflowx.com/${locale}/news/${slug}`;
 
   return {
-    title: `${title} | DataFlowX Newsroom`,
-    description: cleanExcerpt,
-    alternates: {
-      canonical: `https://dataflowx.com/${locale}/news/${slug}`,
-      languages,
-    },
+    title,
+    description,
+    robots,
+    alternates,
     openGraph: {
-      title: title,
-      description: cleanExcerpt,
+      title,
+      description,
       url: `https://dataflowx.com/${locale}/news/${slug}`,
       type: 'article',
-      publishedTime: publishedTime,
+      publishedTime: post.date,
       images: [{ url: imageUrl, width: 1200, height: 630, alt: title }],
     },
     twitter: {
       card: 'summary_large_image',
-      title: title,
-      description: cleanExcerpt,
+      title,
+      description,
       images: [imageUrl],
     },
   };
 }
 
-// ISR mode: pages rendered on-demand on first visit, cached by revalidate.
 export const dynamicParams = true;
-
-// ── Page ───────────────────────────────────────────
 export const revalidate = 3600;
+
 export default async function NewsDetailPage({ params }: Props) {
   const resolvedParams = await params;
   const { slug, locale } = resolvedParams;
   
-  let post: WPRestPost | null = null;
-  try {
-    post = await getPostBySlug(slug, locale);
-  } catch (err) {
-    console.warn('[NewsDetailPage] WP API error', err);
-  }
+  const sanityLocale = locale.toUpperCase();
+  const post = await client.fetch(GET_NEWS_BY_SLUG_QUERY, { slug, language: sanityLocale });
 
   if (!post) notFound();
 
@@ -155,14 +91,14 @@ export default async function NewsDetailPage({ params }: Props) {
     day: 'numeric',
   });
   
-  const imageUrl = post._embedded?.['wp:featuredmedia']?.[0]?.source_url ?? null;
-  const authorName = post._embedded?.author?.[0]?.name ?? 'DataFlowX Team';
-  const readingTime = '3 min read'; // Could be calculated dynamically
+  const imageUrl = post.featuredImage ?? null;
+  const authorName = 'DataFlowX Team'; // Haberlerde genelde kurumsal yazar olur
+  const readingTime = '3 min read'; // Dinamik hesaplanabilir
 
   const articleSchema = {
     '@context': 'https://schema.org',
     '@type': 'NewsArticle',
-    headline: post.title.rendered,
+    headline: post.title,
     datePublished: post.date,
     image: imageUrl ?? '/og-image.jpg',
     publisher: {
@@ -179,20 +115,14 @@ export default async function NewsDetailPage({ params }: Props) {
     itemListElement: [
       { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://dataflowx.com' },
       { '@type': 'ListItem', position: 2, name: 'Newsroom', item: `https://dataflowx.com/${locale}/news` },
-      { '@type': 'ListItem', position: 3, name: post.title.rendered, item: `https://dataflowx.com/${locale}/news/${slug}` },
+      { '@type': 'ListItem', position: 3, name: post.title, item: `https://dataflowx.com/${locale}/news/${slug}` },
     ],
   };
 
   return (
     <main className={styles.main}>
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(articleSchema) }}
-      />
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }}
-      />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(articleSchema) }} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }} />
       <div className={styles.bgGlow} aria-hidden="true" />
       <Nav />
 
@@ -201,12 +131,10 @@ export default async function NewsDetailPage({ params }: Props) {
         <div className={styles.breadcrumbs}>
           <a href={`/${locale}`}>Home</a> <span>/</span> <a href={`/${locale}/news`}>Newsroom</a>
         </div>
-        <h1 className={styles.title}>{post.title.rendered}</h1>
+        <h1 className={styles.title}>{post.title}</h1>
         <div className={styles.meta}>
           <div className={styles.metaItem}>
-            <div className={styles.authorAvatar}>
-              {authorName.charAt(0)}
-            </div>
+            <div className={styles.authorAvatar}>{authorName.charAt(0)}</div>
             <span>{authorName}</span>
           </div>
           <div className={styles.metaItem}>
@@ -223,7 +151,7 @@ export default async function NewsDetailPage({ params }: Props) {
         <div className={styles.featuredImageContainer}>
           <Image 
             src={imageUrl} 
-            alt={post._embedded?.['wp:featuredmedia']?.[0]?.alt_text ?? post.title.rendered} 
+            alt={post.title} 
             width={1200} height={600} style={{ width: '100%', height: 'auto' }}
             className={styles.featuredImageHero} 
           />
@@ -232,22 +160,28 @@ export default async function NewsDetailPage({ params }: Props) {
 
       {/* Two-Column Layout */}
       <div className={styles.layoutGrid}>
-        
-        {/* Main Content Column (Left) */}
         <article className={styles.contentColumn} id="article-content">
-          {/* WP Engine HTML injected here */}
-          <div 
-            className={contentStyles.prose} 
-            dangerouslySetInnerHTML={{ __html: rewriteWixUrls(post.content.rendered, locale) }}
-          />
+          <div className={contentStyles.prose}>
+            {post.content ? (
+              <PortableText value={post.content} />
+            ) : (
+              <p>{post.excerpt}</p>
+            )}
+            
+            {post.sourceUrl && (
+              <p style={{ marginTop: '2rem' }}>
+                <a href={post.sourceUrl} target="_blank" rel="noopener noreferrer">
+                  Orijinal Kaynağı Oku &rarr;
+                </a>
+              </p>
+            )}
+          </div>
         </article>
 
-        {/* Right Sidebar (Sticky) */}
         <aside className={styles.sidebar}>
           <TableOfContents />
           <SocialShare />
         </aside>
-
       </div>
 
       <Contact />
