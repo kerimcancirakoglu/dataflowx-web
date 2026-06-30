@@ -5,6 +5,7 @@ import ContactMini from '@/components/ContactMini/ContactMini';
 import VideoBackground from '@/components/VideoBackground/VideoBackground';
 import ResourcesClient from './ResourcesClient';
 import { getResources } from '@/lib/wp-api';
+import { buildAlternates } from '@/lib/seo-config';
 
 export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
   const { locale } = await params;
@@ -20,9 +21,7 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
       'cybersecurity case studies',
       'hardware isolation specs',
     ],
-    alternates: {
-      canonical: `https://dataflowx.com/${locale}/resources`,
-    },
+    alternates: buildAlternates(locale, '/resources'),
     openGraph: {
       title: 'DataFlowX Resources & Data Sheets',
       description: 'Technical documents and resources for DataFlowX OT security solutions.',

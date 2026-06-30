@@ -7,6 +7,7 @@ import TableOfContents from '@/components/BlogLayout/TableOfContents';
 import SocialShare from '@/components/BlogLayout/SocialShare';
 import { client } from '@/lib/sanity';
 import { GET_POST_BY_SLUG_QUERY } from '@/lib/sanity-queries';
+import { SITE_URL, ogLocale } from '@/lib/seo-config';
 import styles from './post.module.css';
 import contentStyles from '@/components/BlogLayout/BlogContentStyles.module.css';
 import { PortableText } from '@portabletext/react';
@@ -33,32 +34,37 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   
   const robots = seo.noIndex ? { index: false, follow: false } : { index: true, follow: true };
 
-  const alternates: any = {
-    canonical: `https://dataflowx.com/${locale}/resources/blog/${slug}`,
-  };
+  const pageUrl = `${SITE_URL}/${locale}/resources/blog/${slug}`;
 
+  const languages: Record<string, string> = {
+    [locale]: pageUrl,
+    'x-default': `${SITE_URL}/en/resources/blog/${slug}`,
+  };
   if (post.translations?.length > 0) {
-    const languages: Record<string, string> = {};
     post.translations.forEach((t: any) => {
       if (t.language && t.slug) {
-        languages[t.language.toLowerCase()] = `https://dataflowx.com/${t.language.toLowerCase()}/resources/blog/${t.slug}`;
+        languages[t.language.toLowerCase()] = `${SITE_URL}/${t.language.toLowerCase()}/resources/blog/${t.slug}`;
       }
     });
-    languages[locale] = `https://dataflowx.com/${locale}/resources/blog/${slug}`;
-    alternates.languages = languages;
   }
 
   return {
     title,
     description,
     robots,
-    alternates,
+    alternates: {
+      canonical: pageUrl,
+      languages,
+    },
     openGraph: {
       title,
       description,
-      url: `https://dataflowx.com/${locale}/resources/blog/${slug}`,
+      url: pageUrl,
+      siteName: 'DataFlowX',
+      locale: ogLocale(locale),
       type: 'article',
       publishedTime: post.date,
+      modifiedTime: post._updatedAt ?? post.date,
       images: [{ url: imageUrl, width: 1200, height: 630, alt: title }],
     },
     twitter: {

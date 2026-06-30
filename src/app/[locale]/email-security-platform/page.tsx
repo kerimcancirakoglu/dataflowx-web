@@ -10,10 +10,10 @@ import { getTranslations } from 'next-intl/server';
 import { HreflangLinks } from '@/components/SEO/HreflangLinks';
 import ProductSchema from '@/components/SEO/ProductSchema';
 import BreadcrumbSchema from '@/components/SEO/BreadcrumbSchema';
+import { buildAlternates, SITE_URL } from '@/lib/seo-config';
 
 export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
   const { locale } = await params;
-  const baseUrl = 'https://www.dataflowx.com';
 
   return {
     title: 'Email Security Platform — AI-Powered Threat Detection & CDR',
@@ -31,21 +31,19 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
       'e-posta güvenlik platformu',
       'siber tehdit tespiti',
     ],
-    alternates: {
-      canonical: `${baseUrl}/${locale}/email-security-platform`,
-    },
+    alternates: buildAlternates(locale, '/email-security-platform'),
     openGraph: {
       title: 'DFX Email Security Platform — AI + CDR Protection',
       description:
         'Self-learning AI + Deep CDR + Retrospective scanning. Zero Trust email protection against advanced persistent threats.',
-      url: `${baseUrl}/${locale}/email-security-platform`,
-      images: [{ url: `${baseUrl}/og/email-security.jpg`, width: 1200, height: 630 }],
+      url: `${SITE_URL}/${locale}/email-security-platform`,
+      images: [{ url: `${SITE_URL}/og/email-security.jpg`, width: 1200, height: 630 }],
     },
     twitter: {
       card: 'summary_large_image',
       title: 'DFX Email Security Platform — AI + CDR Protection',
       description: 'Self-learning AI + Deep CDR + Retrospective scanning. Zero Trust email protection against advanced persistent threats.',
-      images: [`${baseUrl}/og/email-security.jpg`],
+      images: [`${SITE_URL}/og/email-security.jpg`],
     },
   };
 }

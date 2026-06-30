@@ -2,6 +2,7 @@
 
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
+import { useLocale } from 'next-intl';
 import Image from 'next/image';
 import styles from './Nav.module.css';
 import React, { useEffect, useRef, useState } from 'react';
@@ -31,6 +32,11 @@ interface NavProps {
   contactLabel: string;
 }
 
+function localise(locale: string, href: string): string {
+  if (href.startsWith('#') || href.startsWith('http')) return href;
+  return `/${locale}${href}`;
+}
+
 export default function NavClient({ logoSrc = "/DataFlowX_Logo_W.png", hideMenu = false, navLinks, contactLabel }: NavProps) {
   const navRef = useRef<HTMLElement>(null);
   const [scrolled, setScrolled] = useState(false);
@@ -39,7 +45,7 @@ export default function NavClient({ logoSrc = "/DataFlowX_Logo_W.png", hideMenu 
   const [theme, setTheme] = useState<'dark' | 'light'>('dark');
 
   const pathname = usePathname();
-
+  const locale = useLocale();
 
   useEffect(() => {
     document.documentElement.setAttribute('data-theme', 'dark');
@@ -66,18 +72,18 @@ export default function NavClient({ logoSrc = "/DataFlowX_Logo_W.png", hideMenu 
     <nav ref={navRef} className={`${styles.nav} ${scrolled ? styles.scrolled : ''}`} role="navigation" aria-label="Main navigation" dir="ltr">
       {/* Logo */}
       <Link
-        href="/"
+        href={`/${locale}`}
         className={styles.logo}
         aria-label="DataFlowX – Ana sayfa"
         onClick={() => setMobileMenuOpen(false)}
       >
-        <Image 
-          src={logoSrc === '/Intelroombeyaz.png' ? '/Intelroombeyaz.png' : (theme === 'light' ? '/DataFlowX_Logo.png' : logoSrc)} 
-          alt="DataFlowX Logo" 
+        <Image
+          src={logoSrc === '/Intelroombeyaz.png' ? '/Intelroombeyaz.png' : (theme === 'light' ? '/DataFlowX_Logo.png' : logoSrc)}
+          alt="DataFlowX Logo"
           width={200}
           height={60}
-          style={{ width: 'auto', height: '100%' }}
-          className={`${styles.logoImage} ${logoSrc === '/Intelroombeyaz.png' ? (theme === 'light' ? styles.intelRoomLogoLight : styles.intelRoomLogo) : ''}`} 
+          unoptimized={true}
+          className={`${styles.logoImage} ${logoSrc === '/Intelroombeyaz.png' ? (theme === 'light' ? styles.intelRoomLogoLight : styles.intelRoomLogo) : ''}`}
         />
       </Link>
 
@@ -116,9 +122,9 @@ export default function NavClient({ logoSrc = "/DataFlowX_Logo_W.png", hideMenu 
                             <ul className={styles.megaMenuLinks}>
                               {group.items.map((sub) => (
                                 <li key={sub.href}>
-                                  <a href={sub.href} className={styles.dropdownLink}>
+                                  <Link href={localise(locale, sub.href)} className={styles.dropdownLink}>
                                     {sub.label}
-                                  </a>
+                                  </Link>
                                 </li>
                               ))}
                             </ul>
@@ -132,18 +138,18 @@ export default function NavClient({ logoSrc = "/DataFlowX_Logo_W.png", hideMenu 
                       <ul className={`${styles.dropdown} ${activeDropdown === link.label ? styles.dropdownOpen : ''}`} role="list">
                         {link.submenu.map((sub) => (
                           <li key={sub.href}>
-                            <a href={sub.href} className={styles.dropdownLink}>
+                            <Link href={localise(locale, sub.href)} className={styles.dropdownLink}>
                               {sub.label}
-                            </a>
+                            </Link>
                           </li>
                         ))}
                       </ul>
                     )}
                   </>
                 ) : (
-                  <a href={link.href} className={styles.link}>
+                  <Link href={localise(locale, link.href)} className={styles.link}>
                     {link.label}
-                  </a>
+                  </Link>
                 )}
               </li>
             );
@@ -154,7 +160,7 @@ export default function NavClient({ logoSrc = "/DataFlowX_Logo_W.png", hideMenu 
       {/* Right Actions */}
       <div className={styles.rightActions}>
         <LanguageSwitcher />
-        <Link href="/contact" className={styles.ctaButton}>
+        <Link href={`/${locale}/contact`} className={styles.ctaButton}>
           {contactLabel}
         </Link>
       </div>
@@ -198,9 +204,9 @@ export default function NavClient({ logoSrc = "/DataFlowX_Logo_W.png", hideMenu 
                           <li className={styles.mobileGroupTitle}>{group.groupLabel}</li>
                           {group.items.map((sub) => (
                             <li key={sub.href}>
-                              <a href={sub.href} className={styles.mobileSubLink} onClick={() => setMobileMenuOpen(false)}>
+                              <Link href={localise(locale, sub.href)} className={styles.mobileSubLink} onClick={() => setMobileMenuOpen(false)}>
                                 {sub.label}
-                              </a>
+                              </Link>
                             </li>
                           ))}
                         </React.Fragment>
@@ -209,17 +215,17 @@ export default function NavClient({ logoSrc = "/DataFlowX_Logo_W.png", hideMenu 
                       {/* Mobile Standard Submenu */}
                       {link.submenu && link.submenu.map((sub) => (
                         <li key={sub.href}>
-                          <a href={sub.href} className={styles.mobileSubLink} onClick={() => setMobileMenuOpen(false)}>
+                          <Link href={localise(locale, sub.href)} className={styles.mobileSubLink} onClick={() => setMobileMenuOpen(false)}>
                             {sub.label}
-                          </a>
+                          </Link>
                         </li>
                       ))}
                     </ul>
                   </div>
                 ) : (
-                  <a href={link.href} className={styles.mobileLink} onClick={() => setMobileMenuOpen(false)}>
+                  <Link href={localise(locale, link.href)} className={styles.mobileLink} onClick={() => setMobileMenuOpen(false)}>
                     {link.label}
-                  </a>
+                  </Link>
                 )}
               </li>
             );

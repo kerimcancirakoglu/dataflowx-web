@@ -6,6 +6,7 @@ import CDRAnimation from '@/components/CDRAnimation/CDRAnimation';
 import styles from './page.module.css';
 import { getTranslations } from 'next-intl/server';
 import React from 'react';
+import { buildAlternates } from '@/lib/seo-config';
 
 // For now keeping metadata hardcoded in English, or can be moved to translations later
 export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
@@ -26,9 +27,7 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
       'zero trust file transfer',
       'reconstruction-first security',
     ],
-    alternates: {
-      canonical: `https://dataflowx.com/${locale}/dfx-cdr`,
-    },
+    alternates: buildAlternates(locale, '/dfx-cdr'),
     openGraph: {
       title: 'DFX CDR — Disarm Weaponized Content. Deliver Safe Files.',
       description:

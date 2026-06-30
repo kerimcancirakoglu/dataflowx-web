@@ -1,4 +1,4 @@
-name = "dataflowx-web"
+name = "dataflowxtest26"
 main = ".open-next/worker.js"
 compatibility_date = "2026-06-29"
 compatibility_flags = ["nodejs_compat", "global_fetch_strictly_public"]
@@ -9,7 +9,7 @@ binding = "ASSETS"
 
 [[services]]
 binding = "WORKER_SELF_REFERENCE"
-service = "dataflowx-web"
+service = "dataflowxtest26"
 
 [[r2_buckets]]
 binding = "NEXT_INC_CACHE_R2_BUCKET"

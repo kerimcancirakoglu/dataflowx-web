@@ -90,7 +90,7 @@ export default async function UseCaseDetailPage({ params }: PageProps) {
         
         <div className={styles.heroContent}>
           <h1 className={styles.heroTitle}>{useCase.title}</h1>
-          <Image src="/DataFlowX_Logo_W.png" alt="DataFlowX Logo" width={200} height={60} style={{ width: 'auto', height: '100%' }} className={styles.heroLogo} />
+          <Image src="/DataFlowX_Logo_W.png" alt="DataFlowX Logo" width={200} height={60} unoptimized={true} className={styles.heroLogo} />
         </div>
       </section>
 

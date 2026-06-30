@@ -4,11 +4,16 @@ import PartnersMapWrapper from '@/components/PartnersMap/PartnersMapWrapper';
 import PartnerForm from '@/components/PartnerForm/PartnerForm';
 import styles from './page.module.css';
 import { getTranslations } from 'next-intl/server';
+import { buildAlternates } from '@/lib/seo-config';
 
-export const metadata: Metadata = {
-  title: 'DataFlowX | Partners',
-  description: 'A Global Network. Local Expertise. Trusted Delivery.',
-};
+export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
+  const { locale } = await params;
+  return {
+    title: 'DataFlowX | Partners',
+    description: 'A Global Network. Local Expertise. Trusted Delivery.',
+    alternates: buildAlternates(locale, '/partners'),
+  };
+}
 
 export default async function PartnersPage() {
   const t = await getTranslations('Partners');

@@ -12,10 +12,10 @@ import { getTranslations } from 'next-intl/server';
 import { HreflangLinks } from '@/components/SEO/HreflangLinks';
 import ProductSchema from '@/components/SEO/ProductSchema';
 import BreadcrumbSchema from '@/components/SEO/BreadcrumbSchema';
+import { buildAlternates, SITE_URL } from '@/lib/seo-config';
 
 export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
   const { locale } = await params;
-  const baseUrl = 'https://www.dataflowx.com';
   return {
     title: 'Secure Remote Access — Zero Trust Cross-Domain Solution',
     description:
@@ -31,21 +31,19 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
       'DataBrokerX',
       'güvenli uzak erişim',
     ],
-    alternates: {
-      canonical: `${baseUrl}/${locale}/secure-remote-access`,
-    },
+    alternates: buildAlternates(locale, '/secure-remote-access'),
     openGraph: {
       title: 'DFX Secure Remote Access — Zero Trust OT Access',
       description:
         'Request-response based secure access across isolated networks. Active Directory integration. ICAP sandbox support.',
-      url: `${baseUrl}/${locale}/secure-remote-access`,
-      images: [{ url: `${baseUrl}/og/secure-remote-access.jpg`, width: 1200, height: 630 }],
+      url: `${SITE_URL}/${locale}/secure-remote-access`,
+      images: [{ url: `${SITE_URL}/og/secure-remote-access.jpg`, width: 1200, height: 630 }],
     },
     twitter: {
       card: 'summary_large_image',
       title: 'DFX Secure Remote Access — Zero Trust OT Access',
       description: 'Request-response based secure access across isolated networks. Active Directory integration. ICAP sandbox support.',
-      images: [`${baseUrl}/og/secure-remote-access.jpg`],
+      images: [`${SITE_URL}/og/secure-remote-access.jpg`],
     },
   };
 }

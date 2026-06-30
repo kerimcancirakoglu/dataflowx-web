@@ -14,10 +14,10 @@ import IntelOracleEngine from '@/components/IntelRoom/IntelOracleEngine';
 import { HreflangLinks } from '@/components/SEO/HreflangLinks';
 import ProductSchema from '@/components/SEO/ProductSchema';
 import BreadcrumbSchema from '@/components/SEO/BreadcrumbSchema';
+import { buildAlternates, SITE_URL } from '@/lib/seo-config';
 
 export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
   const { locale } = await params;
-  const baseUrl = 'https://www.dataflowx.com';
 
   return {
     title: 'DFX IntelRoom — Live Threat Intelligence Organism',
@@ -32,20 +32,18 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
       'CISO',
       'dataflowx intelroom',
     ],
-    alternates: {
-      canonical: `${baseUrl}/${locale}/intelroom`,
-    },
+    alternates: buildAlternates(locale, '/intelroom'),
     openGraph: {
       title: 'DFX IntelRoom — Live Threat Intelligence Organism',
       description: 'DFX IntelRoom: Analyzes billions of signals, establishes context, and generates actionable decisions.',
-      url: `${baseUrl}/${locale}/intelroom`,
-      images: [{ url: `${baseUrl}/og/intelroom.jpg`, width: 1200, height: 630 }],
+      url: `${SITE_URL}/${locale}/intelroom`,
+      images: [{ url: `${SITE_URL}/og/intelroom.jpg`, width: 1200, height: 630 }],
     },
     twitter: {
       card: 'summary_large_image',
       title: 'DFX IntelRoom — Live Threat Intelligence Organism',
       description: 'DFX IntelRoom: Analyzes billions of signals, establishes context, and generates actionable decisions.',
-      images: [`${baseUrl}/og/intelroom.jpg`],
+      images: [`${SITE_URL}/og/intelroom.jpg`],
     },
   };
 }

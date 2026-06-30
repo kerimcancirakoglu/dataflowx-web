@@ -46,29 +46,29 @@ export default defineType({
     defineField({
       name: 'author',
       title: 'Yazar (Author)',
-      type: 'reference',
-      to: { type: 'author' },
+      type: 'reference' as const,
+      to: [{ type: 'author' }],
     }),
     defineField({
       name: 'featuredImage',
       title: 'Kapak Görseli (Featured Image)',
-      type: 'image',
+      type: 'image' as const,
       options: {
         hotspot: true,
       },
       fields: [
-        {
+        defineField({
           name: 'alt',
-          type: 'string',
+          type: 'string' as const,
           title: 'Alternatif Metin (Alt Text - SEO için)',
-        }
+        })
       ]
     }),
     defineField({
       name: 'categories',
       title: 'Kategoriler (Categories)',
-      type: 'array',
-      of: [{ type: 'reference', to: { type: 'category' } }],
+      type: 'array' as const,
+      of: [{ type: 'reference' as const, to: [{ type: 'category' }] }],
     }),
     defineField({
       name: 'date',
@@ -79,13 +79,13 @@ export default defineType({
     defineField({
       name: 'excerpt',
       title: 'Özet (Excerpt)',
-      type: 'text',
+      type: 'text' as const,
       rows: 4,
     }),
     defineField({
       name: 'content',
       title: 'İçerik (Content)',
-      type: 'array',
+      type: 'array' as const,
       of: [
         { type: 'block' },
         { type: 'image' },

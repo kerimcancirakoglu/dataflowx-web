@@ -1,10 +1,6 @@
-import { Metadata } from 'next';
+import type { Metadata } from 'next';
+import { buildAlternates } from '@/lib/seo-config';
 import Nav from '@/components/Nav/Nav';
-
-export const metadata: Metadata = {
-  title: 'DataFlowX (DFX) | Secure Critical Infrastructure via Unidirectional Gateway',
-  description: 'Secure your critical network infrastructure with DataFlowX (DFX). EAL4+ certified unidirectional gateway, data diode, and email security solutions for zero-trust environments.',
-};
 import Hero from '@/components/Hero/Hero';
 import HowItWorks from '@/components/HowItWorks/HowItWorks';
 import UseCases from '@/components/UseCases/UseCases';
@@ -13,8 +9,17 @@ import Testimonials from '@/components/Testimonials/Testimonials';
 import LatestNews from '@/components/LatestNews/LatestNews';
 import Contact from '@/components/Contact/Contact';
 import VideoBackground from '@/components/VideoBackground/VideoBackground';
-export default async function Home() {
 
+export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
+  const { locale } = await params;
+  return {
+    title: 'DataFlowX (DFX) | Secure Critical Infrastructure via Unidirectional Gateway',
+    description: 'Secure your critical network infrastructure with DataFlowX (DFX). EAL4+ certified unidirectional gateway, data diode, and email security solutions for zero-trust environments.',
+    alternates: buildAlternates(locale, ''),
+  };
+}
+
+export default async function Home() {
   return (
     <main>
       <VideoBackground />
@@ -23,7 +28,6 @@ export default async function Home() {
 
       {/* Section spacer — 25vh isolation */}
       <div className="section-spacer" aria-hidden="true" />
-
 
       <HowItWorks />
 

@@ -24,7 +24,7 @@ export default defineType({
     defineField({
       name: 'description',
       title: 'Açıklama (Description)',
-      type: 'text',
+      type: 'text' as const,
     }),
   ],
 });

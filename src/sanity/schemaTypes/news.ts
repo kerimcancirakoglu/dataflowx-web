@@ -45,7 +45,7 @@ export default defineType({
     defineField({
       name: 'excerpt',
       title: 'Özet (Excerpt)',
-      type: 'text',
+      type: 'text' as const,
       rows: 3,
       validation: (rule) => rule.max(200),
     }),
@@ -64,8 +64,8 @@ export default defineType({
     defineField({
       name: 'categories',
       title: 'Kategoriler (Categories)',
-      type: 'array',
-      of: [{ type: 'reference', to: { type: 'category' } }],
+      type: 'array' as const,
+      of: [{ type: 'reference' as const, to: [{ type: 'category' }] }],
     }),
     defineField({
       name: 'featuredImage',
@@ -76,7 +76,7 @@ export default defineType({
     defineField({
       name: 'content',
       title: 'İçerik (Content - Opsiyonel)',
-      type: 'array',
+      type: 'array' as const,
       of: [{ type: 'block' }, { type: 'image' }],
     }),
     // SEO Objesi

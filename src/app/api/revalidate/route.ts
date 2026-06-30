@@ -1,32 +1,41 @@
-import { revalidateTag } from 'next/cache';
+import { revalidatePath } from 'next/cache';
 import { type NextRequest, NextResponse } from 'next/server';
-import { parseBody } from 'next-sanity/webhook';
 
-// Sanity'den alacağımız secret (.env.local içinde tanımlanacak)
-const secret = process.env.SANITY_WEBHOOK_SECRET;
+const TYPE_TO_PATHS: Record<string, string[]> = {
+  blogPost:  ['/[locale]/resources/blog', '/[locale]/resources/blog/[slug]'],
+  news:      ['/[locale]/news',            '/[locale]/news/[slug]'],
+  resource:  ['/[locale]/resources'],
+  author:    ['/[locale]/resources/blog'],
+  category:  ['/[locale]/resources/blog', '/[locale]/news'],
+};
 
 export async function POST(req: NextRequest) {
   try {
-    const { isValidSignature, body } = await parseBody<{ _type: string }>(
-      req,
-      secret,
-    );
-
-    if (!isValidSignature) {
-      return new Response('Invalid signature', { status: 401 });
+    const secret = process.env.SANITY_WEBHOOK_SECRET;
+    if (secret) {
+      const auth = req.headers.get('authorization');
+      if (auth !== `Bearer ${secret}`) {
+        return new Response('Unauthorized', { status: 401 });
+      }
     }
 
+    const body = await req.json() as { _type?: string };
     if (!body?._type) {
-      return new Response('Bad Request', { status: 400 });
+      return new Response('Bad Request: missing _type', { status: 400 });
     }
 
-    // Gelen içeriğin tipine göre Next.js cache tag'ini temizle
-    // Örneğin "blogPost" güncellenirse, "blogPost" tag'ini kullanan fetch istekleri temizlenir.
-    revalidateTag(body._type);
+    const paths = TYPE_TO_PATHS[body._type] || ['/'];
+    paths.forEach(path => revalidatePath(path, 'page'));
 
-    return NextResponse.json({ status: 200, revalidated: true, now: Date.now() });
-  } catch (err: any) {
-    console.error(err);
-    return new Response(err.message, { status: 500 });
+    return NextResponse.json({
+      revalidated: true,
+      type: body._type,
+      paths,
+      now: Date.now(),
+    });
+  } catch (err: unknown) {
+    const message = err instanceof Error ? err.message : 'Unknown error';
+    console.error('[revalidate]', message);
+    return new Response(message, { status: 500 });
   }
 }

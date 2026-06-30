@@ -2,10 +2,11 @@ import { MetadataRoute } from 'next';
 import { client } from '@/lib/sanity';
 import { GET_ALL_POST_SLUGS_QUERY } from '@/lib/sanity-queries';
 import { groq } from 'next-sanity';
+import { SITE_URL } from '@/lib/seo-config';
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const locales = ['en', 'tr', 'ar'];
-  const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://www.dataflowx.com';
+  const baseUrl = SITE_URL;
 
   // 1. Fetch Sanity Posts (Blog, News, Resources)
   let blogSlugs: any[] = [];

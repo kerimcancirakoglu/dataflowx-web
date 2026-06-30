@@ -1,13 +1,16 @@
 import React from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
-import { getTranslations } from 'next-intl/server';
+import { getTranslations, getLocale } from 'next-intl/server';
 import styles from './Footer.module.css';
 
 export default async function Footer() {
   const currentYear = new Date().getFullYear();
+  const locale = await getLocale();
   const t = await getTranslations('Footer');
   const tNav = await getTranslations('Nav');
+
+  const l = (path: string) => `/${locale}${path}`;
 
   return (
     <footer className={styles.footer} role="contentinfo">
@@ -15,8 +18,8 @@ export default async function Footer() {
         <div className={styles.topSection}>
 
           <div className={styles.brandColumn}>
-            <Link href="/" className={styles.logo}>
-              <Image src="/DataFlowX_Logo_W.png" alt="DataFlowX Logo" width={200} height={60} style={{ width: 'auto', height: '100%' }} className={styles.logoImage} />
+            <Link href={`/${locale}`} className={styles.logo}>
+              <Image src="/DataFlowX_Logo_W.png" alt="DataFlowX Logo" width={200} height={60} unoptimized={true} className={styles.logoImage} />
             </Link>
             <p className={styles.brandDescription}>
               {t('description')}
@@ -33,46 +36,46 @@ export default async function Footer() {
           <div className={styles.linksColumn}>
             <h3 className={styles.columnTitle}>{tNav('network_security')}</h3>
             <ul className={styles.linkList}>
-              <li><Link href="/unidirectional-gateway">{tNav('unidirectional_gateway')}</Link></li>
-              <li><Link href="/secure-remote-access">{tNav('secure_remote_access')}</Link></li>
+              <li><Link href={l('/unidirectional-gateway')}>{tNav('unidirectional_gateway')}</Link></li>
+              <li><Link href={l('/secure-remote-access')}>{tNav('secure_remote_access')}</Link></li>
             </ul>
             <h3 className={styles.columnTitle} style={{ marginTop: '1.5rem' }}>{tNav('file_security')}</h3>
             <ul className={styles.linkList}>
-              <li><Link href="/sandbox">{tNav('sandbox')}</Link></li>
-              <li><Link href="/media-transfer-station">{tNav('media_transfer_station')}</Link></li>
+              <li><Link href={l('/sandbox')}>{tNav('sandbox')}</Link></li>
+              <li><Link href={l('/media-transfer-station')}>{tNav('media_transfer_station')}</Link></li>
             </ul>
           </div>
 
           <div className={styles.linksColumn}>
             <h3 className={styles.columnTitle}>{tNav('email_security')}</h3>
             <ul className={styles.linkList}>
-              <li><Link href="/email-security-platform">{tNav('email_security_platform')}</Link></li>
-              <li><Link href="/intelroom">{tNav('intelroom')}</Link></li>
-              <li><Link href="/dfx-cdr">{tNav('true_cdr')}</Link></li>
+              <li><Link href={l('/email-security-platform')}>{tNav('email_security_platform')}</Link></li>
+              <li><Link href={l('/intelroom')}>{tNav('intelroom')}</Link></li>
+              <li><Link href={l('/dfx-cdr')}>{tNav('true_cdr')}</Link></li>
             </ul>
             <h3 className={styles.columnTitle} style={{ marginTop: '1.5rem' }}>{tNav('ot_security')}</h3>
             <ul className={styles.linkList}>
-              <li><Link href="/portx">{tNav('portx')}</Link></li>
+              <li><Link href={l('/portx')}>{tNav('portx')}</Link></li>
             </ul>
           </div>
 
           <div className={styles.linksColumn}>
             <h3 className={styles.columnTitle}>{t('company')}</h3>
             <ul className={styles.linkList}>
-              <li><Link href="/about-us">{tNav('about_us')}</Link></li>
-              <li><Link href="/#partners">{tNav('partners')}</Link></li>
-              <li><Link href="/resources">{t('use_cases')}</Link></li>
-              <li><Link href="/#news">{tNav('news')}</Link></li>
-              <li><Link href="/contact">{tNav('contact')}</Link></li>
+              <li><Link href={l('/about-us')}>{tNav('about_us')}</Link></li>
+              <li><Link href={`/${locale}#partners`}>{tNav('partners')}</Link></li>
+              <li><Link href={l('/resources')}>{t('use_cases')}</Link></li>
+              <li><Link href={`/${locale}#news`}>{tNav('news')}</Link></li>
+              <li><Link href={l('/contact')}>{tNav('contact')}</Link></li>
             </ul>
           </div>
 
           <div className={styles.linksColumn}>
             <h3 className={styles.columnTitle}>{t('legal')}</h3>
             <ul className={styles.linkList}>
-              <li><Link href="/privacy">{t('privacy_policy')}</Link></li>
-              <li><Link href="/gdpr">{t('gdpr')}</Link></li>
-              <li><Link href="/cookie-policy">{t('cookie_policy')}</Link></li>
+              <li><Link href={l('/privacy')}>{t('privacy_policy')}</Link></li>
+              <li><Link href={l('/gdpr')}>{t('gdpr')}</Link></li>
+              <li><Link href={l('/cookie-policy')}>{t('cookie_policy')}</Link></li>
             </ul>
           </div>
 

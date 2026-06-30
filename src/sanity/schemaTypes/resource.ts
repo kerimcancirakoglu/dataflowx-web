@@ -60,7 +60,7 @@ export default defineType({
     defineField({
       name: 'excerpt',
       title: 'Kısa Açıklama (Excerpt)',
-      type: 'text',
+      type: 'text' as const,
       rows: 3,
     }),
     defineField({

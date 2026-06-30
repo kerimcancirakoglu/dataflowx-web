@@ -16,7 +16,7 @@ export default defineType({
       name: 'metaDescription',
       title: 'Meta Açıklama (Meta Description)',
       description: 'Arama sonuçlarında başlığın altında görünen özet metin.',
-      type: 'text',
+      type: 'text' as const,
       rows: 3,
       validation: (Rule) => Rule.max(160).warning('Açıklama 160 karakterden uzun olmamalıdır.'),
     }),

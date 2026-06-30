@@ -4,6 +4,7 @@ import Contact from '@/components/Contact/Contact';
 import Nav from '@/components/Nav/Nav';
 import VideoBackground from '@/components/VideoBackground/VideoBackground';
 import styles from './ContactPage.module.css';
+import { buildAlternates } from '@/lib/seo-config';
 
 export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
   const { locale } = await params;

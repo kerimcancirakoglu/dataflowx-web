@@ -7,6 +7,7 @@ import TableOfContents from '@/components/BlogLayout/TableOfContents';
 import SocialShare from '@/components/BlogLayout/SocialShare';
 import { client } from '@/lib/sanity';
 import { GET_NEWS_BY_SLUG_QUERY } from '@/lib/sanity-queries';
+import { SITE_URL, ogLocale } from '@/lib/seo-config';
 import styles from './page.module.css';
 import contentStyles from '@/components/BlogLayout/BlogContentStyles.module.css';
 import { PortableText } from '@portabletext/react';
@@ -35,33 +36,28 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   // Eger noIndex isaretliyse indexlemeyi kapat
   const robots = seo.noIndex ? { index: false, follow: false } : { index: true, follow: true };
 
-  const alternates: any = {
-    canonical: `https://dataflowx.com/${locale}/news/${slug}`,
-  };
-
-  // Eger translations array'i donuyorsa metadata'ya diller eklenebilir
-  if (post.translations?.length > 0) {
-    const languages: Record<string, string> = {};
-    post.translations.forEach((t: any) => {
-      if (t.language && t.slug) {
-        languages[t.language.toLowerCase()] = `https://dataflowx.com/${t.language.toLowerCase()}/news/${t.slug}`;
-      }
-    });
-    languages[locale] = `https://dataflowx.com/${locale}/news/${slug}`;
-    alternates.languages = languages;
-  }
+  const pageUrl = `${SITE_URL}/${locale}/news/${slug}`;
 
   return {
     title,
     description,
     robots,
-    alternates,
+    alternates: {
+      canonical: pageUrl,
+      languages: {
+        [locale]: pageUrl,
+        'x-default': `${SITE_URL}/en/news/${slug}`,
+      },
+    },
     openGraph: {
       title,
       description,
-      url: `https://dataflowx.com/${locale}/news/${slug}`,
+      url: pageUrl,
+      siteName: 'DataFlowX',
+      locale: ogLocale(locale),
       type: 'article',
       publishedTime: post.date,
+      modifiedTime: post._updatedAt ?? post.date,
       images: [{ url: imageUrl, width: 1200, height: 630, alt: title }],
     },
     twitter: {

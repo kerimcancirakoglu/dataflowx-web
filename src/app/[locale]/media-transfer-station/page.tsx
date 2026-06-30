@@ -12,10 +12,10 @@ import { getTranslations } from 'next-intl/server';
 import { HreflangLinks } from '@/components/SEO/HreflangLinks';
 import ProductSchema from '@/components/SEO/ProductSchema';
 import BreadcrumbSchema from '@/components/SEO/BreadcrumbSchema';
+import { buildAlternates, SITE_URL } from '@/lib/seo-config';
 
 export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
   const { locale } = await params;
-  const baseUrl = 'https://www.dataflowx.com';
   return {
     title: 'Media Transfer Station — Secure USB & Removable Media Sanitization',
     description:
@@ -32,21 +32,19 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
       'USB güvenlik kiosk',
       'çıkarılabilir medya güvenliği',
     ],
-    alternates: {
-      canonical: `${baseUrl}/${locale}/media-transfer-station`,
-    },
+    alternates: buildAlternates(locale, '/media-transfer-station'),
     openGraph: {
       title: 'DFX Media Transfer Station — USB & Removable Media Security',
       description:
         'Secure USB kiosk with multi-engine AV + CDR. Prevents physical malware attacks on critical OT networks.',
-      url: `${baseUrl}/${locale}/media-transfer-station`,
-      images: [{ url: `${baseUrl}/og/media-transfer-station.jpg`, width: 1200, height: 630 }],
+      url: `${SITE_URL}/${locale}/media-transfer-station`,
+      images: [{ url: `${SITE_URL}/og/media-transfer-station.jpg`, width: 1200, height: 630 }],
     },
     twitter: {
       card: 'summary_large_image',
       title: 'DFX Media Transfer Station — USB & Removable Media Security',
       description: 'Secure USB kiosk with multi-engine AV + CDR. Prevents physical malware attacks on critical OT networks.',
-      images: [`${baseUrl}/og/media-transfer-station.jpg`],
+      images: [`${SITE_URL}/og/media-transfer-station.jpg`],
     },
   };
 }

@@ -4,9 +4,9 @@ import { getMessages } from 'next-intl/server';
 import Script from 'next/script';
 import '../globals.css';
 import Footer from '@/components/Footer/Footer';
-import { ApolloWrapper } from '@/providers/ApolloWrapper';
+
 import OrganizationSchema from '@/components/SEO/OrganizationSchema';
-const BASE_URL = 'https://www.dataflowx.com';
+import { SITE_URL as BASE_URL } from '@/lib/seo-config';
 
 export const metadata: Metadata = {
   metadataBase: new URL(BASE_URL),
@@ -157,10 +157,8 @@ export default async function RootLayout({
           }}
         />
         <NextIntlClientProvider messages={messages}>
-          <ApolloWrapper>
-            {children}
-            <Footer />
-          </ApolloWrapper>
+          {children}
+          <Footer />
         </NextIntlClientProvider>
       </body>
     </html>

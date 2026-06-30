@@ -24,13 +24,13 @@ export const GET_POST_BY_SLUG_QUERY = groq`
     content,
     excerpt,
     date,
+    _updatedAt,
     "author": author->{name, "image": image.asset->url},
     "featuredImage": featuredImage.asset->url,
     "categories": categories[]->{name, "slug": slug.current},
     seo,
     language,
     translationId,
-    // Çevirileri getir: Aynı translationId'ye sahip, ancak bu dil (ve ID) olmayan diğer postlar
     "translations": *[_type == "blogPost" && translationId == ^.translationId && _id != ^._id] {
       language,
       "slug": slug.current
@@ -69,6 +69,7 @@ export const GET_NEWS_BY_SLUG_QUERY = groq`
     excerpt,
     sourceUrl,
     date,
+    _updatedAt,
     "featuredImage": featuredImage.asset->url,
     "categories": categories[]->{name, "slug": slug.current},
     seo,

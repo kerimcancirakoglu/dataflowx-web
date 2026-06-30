@@ -3,7 +3,10 @@ import Nav from '@/components/Nav/Nav';
 import Contact from '@/components/Contact/Contact';
 import VideoBackground from '@/components/VideoBackground/VideoBackground';
 import NewsClient from './NewsClient';
-import { getPosts, WPRestPost } from '@/lib/wp-api';
+import { client } from '@/lib/sanity';
+import { GET_ALL_NEWS_QUERY } from '@/lib/sanity-queries';
+import type { WPRestPost } from '@/lib/wp-api';
+import { buildAlternates } from '@/lib/seo-config';
 
 export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
   const { locale } = await params;
@@ -18,9 +21,7 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
       'OT security news',
       'DataFlowX in the media',
     ],
-    alternates: {
-      canonical: `https://dataflowx.com/${locale}/news`,
-    },
+    alternates: buildAlternates(locale, '/news'),
     openGraph: {
       title: 'DataFlowX Newsroom',
       description: 'DataFlowX company announcements and press releases.',
@@ -30,7 +31,7 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
   };
 }
 
-export const revalidate = 3600; // ISR: Revalidate every hour
+export const revalidate = 3600;
 
 export default async function NewsPage({
   params,
@@ -38,6 +39,7 @@ export default async function NewsPage({
   params: Promise<{ locale: string }>;
 }) {
   const { locale } = await params;
+  const sanityLocale = locale.toUpperCase();
 
   const breadcrumbSchema = {
     '@context': 'https://schema.org',
@@ -48,11 +50,23 @@ export default async function NewsPage({
     ],
   };
 
-  let wpPosts: WPRestPost[] = [];
+  let posts: WPRestPost[] = [];
   try {
-    wpPosts = await getPosts('news-dfx', locale);
+    const sanityNews = await client.fetch(GET_ALL_NEWS_QUERY, { language: sanityLocale });
+    // Map Sanity news → WPRestPost shape that NewsClient expects
+    posts = (sanityNews || []).map((item: any, idx: number) => ({
+      id: idx,
+      slug: item.slug,
+      date: item.date,
+      title: { rendered: item.title },
+      excerpt: { rendered: item.excerpt || '' },
+      content: { rendered: '' },
+      _embedded: item.featuredImage
+        ? { 'wp:featuredmedia': [{ source_url: item.featuredImage, alt_text: item.title }] }
+        : undefined,
+    }));
   } catch (err) {
-    console.warn('[NewsPage] WordPress API unreachable. Rendering with empty posts.', err);
+    console.warn('[NewsPage] Sanity API unreachable. Rendering with empty posts.', err);
   }
 
   return (
@@ -63,7 +77,7 @@ export default async function NewsPage({
       />
       <VideoBackground />
       <Nav />
-      <NewsClient posts={wpPosts} />
+      <NewsClient posts={posts} />
       <Contact />
     </main>
   );

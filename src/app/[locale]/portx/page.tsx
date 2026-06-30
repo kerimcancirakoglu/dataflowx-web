@@ -10,11 +10,16 @@ import PortXFeaturesGrid from '@/components/PortXFeaturesGrid/PortXFeaturesGrid'
 import VideoBackground from '@/components/VideoBackground/VideoBackground';
 import Contact from '@/components/Contact/Contact';
 import { getTranslations } from 'next-intl/server';
+import { buildAlternates } from '@/lib/seo-config';
 
-export const metadata: Metadata = {
-  title: 'DFX Portable Access Security System | Hardware-Based Zero Trust Data Bridge | DFX',
-  description: 'Eliminate the USB Risk. Keep the Workflow. DFX Portable Access Security System is a hardware-based Zero Trust secure data bridge purpose-built for industrial and operational environments.',
-};
+export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
+  const { locale } = await params;
+  return {
+    title: 'DFX Portable Access Security System | Hardware-Based Zero Trust Data Bridge | DFX',
+    description: 'Eliminate the USB Risk. Keep the Workflow. DFX Portable Access Security System is a hardware-based Zero Trust secure data bridge purpose-built for industrial and operational environments.',
+    alternates: buildAlternates(locale, '/portx'),
+  };
+}
 
 export default async function PortXPage() {
   const t = await getTranslations('PortX');

@@ -32,7 +32,7 @@ export default defineType({
     defineField({
       name: 'bio',
       title: 'Biyografi (Bio)',
-      type: 'text',
+      type: 'text' as const,
     }),
   ],
   preview: {

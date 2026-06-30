@@ -3,6 +3,7 @@ import Nav from '@/components/Nav/Nav';
 import AboutUs from '@/components/AboutUs/AboutUs';
 import Contact from '@/components/Contact/Contact';
 import VideoBackground from '@/components/VideoBackground/VideoBackground';
+import { buildAlternates } from '@/lib/seo-config';
 
 export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
   const { locale } = await params;
@@ -19,9 +20,7 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
       'EAL4+ certified company',
       'Gartner recognized cybersecurity',
     ],
-    alternates: {
-      canonical: `https://dataflowx.com/${locale}/about-us`,
-    },
+    alternates: buildAlternates(locale, '/about-us'),
     openGraph: {
       title: 'About DataFlowX — OT Cybersecurity Specialists',
       description:

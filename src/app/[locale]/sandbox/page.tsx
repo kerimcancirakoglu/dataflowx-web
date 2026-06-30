@@ -12,24 +12,22 @@ import ProductSchema from '@/components/SEO/ProductSchema';
 import BreadcrumbSchema from '@/components/SEO/BreadcrumbSchema';
 
 import type { Metadata } from 'next';
+import { buildAlternates, SITE_URL } from '@/lib/seo-config';
 
 export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
   const { locale } = await params;
-  const baseUrl = 'https://www.dataflowx.com';
 
   return {
     title: { absolute: 'DFX Malware Mitigation Sandbox — AI-Powered Threat Detection' },
     description: 'AI-powered sandbox detonating suspicious files in isolated VMs. YARA, MITRE ATT&CK integration. Zero-day threat prevention for OT/ICS networks.',
     keywords: ['malware sandbox', 'OT sandbox security', 'zero-day detection ICS', 'YARA sandbox', 'MITRE ATT&CK OT'],
-    alternates: {
-      canonical: `${baseUrl}/${locale}/sandbox`,
-    },
+    alternates: buildAlternates(locale, '/sandbox'),
     openGraph: {
       title: 'DFX Malware Mitigation Sandbox | DataFlowX',
       description: 'AI-powered sandbox for OT/ICS threat detection and zero-day prevention.',
-      url: `${baseUrl}/${locale}/sandbox`,
+      url: `${SITE_URL}/${locale}/sandbox`,
       images: [{
-        url: `${baseUrl}/og/sandbox.jpg`,
+        url: `${SITE_URL}/og/sandbox.jpg`,
         width: 1200,
         height: 630,
         alt: 'DFX Sandbox Architecture — Isolated Threat Detonation',
@@ -39,7 +37,7 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
       card: 'summary_large_image',
       title: 'DFX Malware Mitigation Sandbox | DataFlowX',
       description: 'AI-powered sandbox detonating threats in isolated VMs. YARA + MITRE ATT&CK.',
-      images: [`${baseUrl}/og/sandbox.jpg`],
+      images: [`${SITE_URL}/og/sandbox.jpg`],
     },
   };
 }

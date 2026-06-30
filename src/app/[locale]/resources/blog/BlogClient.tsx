@@ -4,6 +4,7 @@ import { useState, useMemo } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { decode } from 'html-entities';
+import { useLocale } from 'next-intl';
 import styles from './page.module.css';
 
 // ──────────────────────────────────────────────────
@@ -71,6 +72,7 @@ function SkeletonCard() {
 // Main component
 // ──────────────────────────────────────────────────
 export default function BlogClient({ posts }: BlogClientProps) {
+  const locale = useLocale();
   const [searchQuery, setSearchQuery] = useState('');
 
   // Derive unique categories from real WP data
@@ -167,7 +169,7 @@ export default function BlogClient({ posts }: BlogClientProps) {
                 </span>
                 <h2 className={styles.heroTitle}>{decode(heroPost.title)}</h2>
                 <p className={styles.heroDesc}>{decode(stripHtml(heroPost.excerpt))}</p>
-                <Link href={`/resources/blog/${heroPost.slug}`} className={styles.readMoreBtn}>
+                <Link href={`/${locale}/resources/blog/${heroPost.slug}`} className={styles.readMoreBtn}>
                   Read More
                   <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={{ marginLeft: 6 }}>
                     <line x1="5" y1="12" x2="19" y2="12" />
@@ -187,7 +189,7 @@ export default function BlogClient({ posts }: BlogClientProps) {
               {showSkeletons
                 ? [1, 2, 3].map(i => <SkeletonCard key={i} />)
                 : featuredSidebar.map(post => (
-                  <Link href={`/resources/blog/${post.slug}`} key={post.slug} className={styles.featuredListItem}>
+                  <Link href={`/${locale}/resources/blog/${post.slug}`} key={post.slug} className={styles.featuredListItem}>
                     <div className={styles.featuredListImageWrapper}>
                         <Image
                           src={post.featuredImage?.node.sourceUrl ?? getCoverImage(post.content)}
@@ -242,7 +244,7 @@ export default function BlogClient({ posts }: BlogClientProps) {
                     {isLarge && (
                       <p className={styles.cardDesc}>{decode(stripHtml(post.excerpt))}</p>
                     )}
-                    <Link href={`/resources/blog/${post.slug}`} className={styles.readMoreBtn}>
+                    <Link href={`/${locale}/resources/blog/${post.slug}`} className={styles.readMoreBtn}>
                       Read More
                       <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={{ marginLeft: 6 }}>
                         <line x1="5" y1="12" x2="19" y2="12" />

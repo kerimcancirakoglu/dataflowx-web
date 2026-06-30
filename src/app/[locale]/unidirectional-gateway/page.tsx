@@ -13,10 +13,10 @@ import { getTranslations } from 'next-intl/server';
 import { HreflangLinks } from '@/components/SEO/HreflangLinks';
 import ProductSchema from '@/components/SEO/ProductSchema';
 import BreadcrumbSchema from '@/components/SEO/BreadcrumbSchema';
+import { buildAlternates, SITE_URL } from '@/lib/seo-config';
 
 export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
   const { locale } = await params;
-  const baseUrl = 'https://www.dataflowx.com';
   return {
     title: 'DataFlowX Unidirectional Gateway & Data Diode — OT/SCADA Security',
     description:
@@ -33,21 +33,19 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
       'data diyodu',
       'tek yönlü ağ geçidi',
     ],
-    alternates: {
-      canonical: `${baseUrl}/${locale}/unidirectional-gateway`,
-    },
+    alternates: buildAlternates(locale, '/unidirectional-gateway'),
     openGraph: {
       title: 'DFX Unidirectional Gateway — EAL4+ Certified',
       description:
         'Hardware-enforced one-way data transfer. Gartner-recognized. EAL4+ certified. Securing energy, defense, and critical infrastructure.',
-      url: `${baseUrl}/${locale}/unidirectional-gateway`,
-      images: [{ url: `${baseUrl}/og/unidirectional-gateway.jpg`, width: 1200, height: 630 }],
+      url: `${SITE_URL}/${locale}/unidirectional-gateway`,
+      images: [{ url: `${SITE_URL}/og/unidirectional-gateway.jpg`, width: 1200, height: 630 }],
     },
     twitter: {
       card: 'summary_large_image',
       title: 'DFX Unidirectional Gateway — EAL4+ Certified',
       description: 'Hardware-enforced one-way data transfer. Gartner-recognized. EAL4+ certified.',
-      images: [`${baseUrl}/og/unidirectional-gateway.jpg`],
+      images: [`${SITE_URL}/og/unidirectional-gateway.jpg`],
     },
   };
 }
