@@ -41,23 +41,30 @@ const nextConfig: NextConfig = {
           },
           {
             key: 'Content-Security-Policy-Report-Only',
-            value: "default-src 'self'; script-src 'self' 'unsafe-eval' 'unsafe-inline' https://vercel.live; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; img-src 'self' data: https: blob:; font-src 'self' https://fonts.gstatic.com; connect-src 'self' https://dataflowx1.wpenginepowered.com https://vercel.live wss://ws-eu.pusher.com; media-src 'self'; frame-ancestors 'none';"
+            value: "default-src 'self'; script-src 'self' 'unsafe-eval' 'unsafe-inline' https://vercel.live; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; img-src 'self' data: https: blob:; font-src 'self' https://fonts.gstatic.com; connect-src 'self' https://*.sanity.io https://vercel.live wss://ws-eu.pusher.com; media-src 'self'; frame-ancestors 'none';"
           }
         ],
       },
     ];
   },
   images: {
+    loader: 'custom',
+    loaderFile: './src/lib/image.ts',
     remotePatterns: [
       {
         protocol: 'https',
-        hostname: 'dataflowx1.wpenginepowered.com',
+        hostname: 'cdn.sanity.io',
         pathname: '/**',
       },
       {
         protocol: 'https',
-        hostname: 'static.wixstatic.com',
-        pathname: '/**',
+        hostname: 'wp.dataflowx.com',
+        pathname: '/wp-content/uploads/**',
+      },
+      {
+        protocol: 'https',
+        hostname: 'secure.gravatar.com',
+        pathname: '/avatar/**',
       },
     ],
   },
