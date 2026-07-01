@@ -10,21 +10,23 @@ interface Props {
 
 export default function LeadModalTrigger({ documentName, fileUrl }: Props) {
   const [isOpen, setIsOpen] = useState(false);
+  const [resolvedFileUrl, setResolvedFileUrl] = useState<string | undefined>(fileUrl);
 
   useEffect(() => {
-    // Tüm sayfa tıklamalarını dinleyip sadece .downloadBtn sınıfına sahip butonları yakalayacağız
-    // Çünkü içerik WordPress'ten veya HTML string olarak (dangerouslySetInnerHTML) geliyor.
     const handleDownloadClick = (e: MouseEvent) => {
       const target = e.target as HTMLElement;
-      if (target.closest('.downloadBtn')) {
+      const btn = target.closest('.downloadBtn') as HTMLAnchorElement | null;
+      if (btn) {
         e.preventDefault();
+        // Static fileUrl prop takes priority; otherwise capture the link's own href
+        setResolvedFileUrl(fileUrl ?? btn.href ?? undefined);
         setIsOpen(true);
       }
     };
 
     document.addEventListener('click', handleDownloadClick);
     return () => document.removeEventListener('click', handleDownloadClick);
-  }, []);
+  }, [fileUrl]);
 
   return (
     <PdfLeadModal
@@ -32,7 +34,7 @@ export default function LeadModalTrigger({ documentName, fileUrl }: Props) {
       onClose={() => setIsOpen(false)}
       onSubmit={() => setIsOpen(false)}
       documentName={documentName}
-      fileUrl={fileUrl}
+      fileUrl={resolvedFileUrl}
     />
   );
 }

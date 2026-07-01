@@ -5,6 +5,9 @@ import author from './author';
 import blogPost from './blogPost';
 import news from './news';
 import resource from './resource';
+import homePage from './homePage';
+import siteSettings from './siteSettings';
+import productPage from './productPage';
 
 export const schema: { types: SchemaTypeDefinition[] } = {
   types: [
@@ -14,5 +17,8 @@ export const schema: { types: SchemaTypeDefinition[] } = {
     blogPost,
     news,
     resource,
+    homePage,
+    siteSettings,
+    productPage,
   ],
 };

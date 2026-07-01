@@ -1,4 +1,5 @@
 import type { Metadata } from 'next';
+import { draftMode } from 'next/headers';
 import Nav from '@/components/Nav/Nav';
 import IntelContact from '@/components/IntelRoom/IntelContact';
 import styles from './page.module.css';
@@ -15,14 +16,22 @@ import { HreflangLinks } from '@/components/SEO/HreflangLinks';
 import ProductSchema from '@/components/SEO/ProductSchema';
 import BreadcrumbSchema from '@/components/SEO/BreadcrumbSchema';
 import { buildAlternates, SITE_URL } from '@/lib/seo-config';
+import { getClient } from '@/sanity/lib/client';
+import { productPageQuery } from '@/sanity/lib/queries';
 
 export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
   const { locale } = await params;
+  const { isEnabled: preview } = await draftMode();
+  const sanityData = locale === 'en'
+    ? await getClient(preview).fetch(productPageQuery, { slug: 'intelroom' })
+    : null;
+
+  const defaultTitle = 'DFX IntelRoom — Live Threat Intelligence Organism';
+  const defaultDesc = 'DFX IntelRoom: Analyzes billions of signals, establishes context, and generates actionable decisions. Advanced Threat Intelligence platform for SOC, CISO, and MSSP.';
 
   return {
-    title: 'DFX IntelRoom — Live Threat Intelligence Organism',
-    description:
-      'DFX IntelRoom: Analyzes billions of signals, establishes context, and generates actionable decisions. Advanced Threat Intelligence platform for SOC, CISO, and MSSP.',
+    title: sanityData?.seoTitle ?? defaultTitle,
+    description: sanityData?.seoDescription ?? defaultDesc,
     keywords: [
       'threat intelligence',
       'intelroom',
@@ -35,14 +44,14 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
     alternates: buildAlternates(locale, '/intelroom'),
     openGraph: {
       title: 'DFX IntelRoom — Live Threat Intelligence Organism',
-      description: 'DFX IntelRoom: Analyzes billions of signals, establishes context, and generates actionable decisions.',
+      description: sanityData?.seoDescription ?? defaultDesc,
       url: `${SITE_URL}/${locale}/intelroom`,
       images: [{ url: `${SITE_URL}/og/intelroom.jpg`, width: 1200, height: 630 }],
     },
     twitter: {
       card: 'summary_large_image',
       title: 'DFX IntelRoom — Live Threat Intelligence Organism',
-      description: 'DFX IntelRoom: Analyzes billions of signals, establishes context, and generates actionable decisions.',
+      description: sanityData?.seoDescription ?? defaultDesc,
       images: [`${SITE_URL}/og/intelroom.jpg`],
     },
   };
@@ -50,8 +59,13 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
 
 
 
-export default async function IntelRoomPage() {
+export default async function IntelRoomPage({ params }: { params: Promise<{ locale: string }> }) {
+  const { locale } = await params;
   const t = await getTranslations('IntelRoom.page');
+  const { isEnabled: preview } = await draftMode();
+  const sanityData = locale === 'en'
+    ? await getClient(preview).fetch(productPageQuery, { slug: 'intelroom' })
+    : null;
   const PERSONAS = [
     {
       num: '01',

@@ -3,6 +3,13 @@ main = ".open-next/worker.js"
 compatibility_date = "2026-06-29"
 compatibility_flags = ["nodejs_compat", "global_fetch_strictly_public"]
 
+# Public environment variables (NEXT_PUBLIC_* prefix)
+# These cannot be set via `wrangler secret`; they must be declared here.
+[vars]
+NEXT_PUBLIC_TURNSTILE_SITE_KEY = "0x4AAAAAADq91aSFD3VABRaY"
+NEXT_PUBLIC_SANITY_PROJECT_ID = "15oto8dp"
+NEXT_PUBLIC_SANITY_DATASET = "production"
+
 [assets]
 directory = ".open-next/assets"
 binding = "ASSETS"

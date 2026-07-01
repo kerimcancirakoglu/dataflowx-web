@@ -181,7 +181,7 @@ export default function BlogClient({ posts }: BlogClientProps) {
           ) : (
             <SkeletonCard />
           )}
-
+  
           {/* Featured Sidebar */}
           <div className={styles.featuredListSidebar}>
             <h3 className={styles.featuredSidebarTitle}>Featured Articles</h3>

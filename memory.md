@@ -72,3 +72,68 @@ Kariyer için cv yükleme msj gönderme bölümü
 
 ## ⚙️ Entegrasyon Hedefleri
 - [ ] **WordPress Engine Entegrasyonu**: İlerleyen aşamalarda tüm bu sayfaların ve dinamik içeriklerin (Blog, News, Çözümler vb.) WordPress backend sistemine (headless CMS veya doğrudan entegrasyon) bağlanması.
+
+---
+
+## 🔴 Lead Toplama Sistemi (2026-07-01 itibarıyla tam aktif)
+
+### Mimari Özet
+
+Proje **Vercel'den Cloudflare Workers'a** taşındı. Deploy komutu:
+```bash
+npm run deploy:cf
+# = opennextjs-cloudflare build && rm -rf .open-next/cache && opennextjs-cloudflare deploy
+```
+
+### Form Noktaları (3 adet, hepsi `/api/lead` endpoint'ine POST atar)
+
+| Form | Dosya | `documentName` |
+|------|-------|----------------|
+| PDF Lead Modal (whitepaper indirme) | `src/components/PdfLeadModal/PdfLeadModal.tsx` | PDF başlığı (dinamik) |
+| Contact Formu | `src/components/Contact/ContactClient.tsx` | `GENERAL_CONTACT` |
+| Partner Başvuru | `src/components/PartnerForm/PartnerForm.tsx` | `PARTNER_APPLICATION` |
+
+### API Route: `src/app/api/lead/route.ts`
+
+Sıra ile şu adımları izler:
+1. **Honeypot** → `website_url` field dolu ise bot, 200 dön (sessiz reddet)
+2. **Validasyon** → `fullName` + `email` zorunlu
+3. **Cloudflare Turnstile** → CAPTCHA doğrulama (secret: `TURNSTILE_SECRET_KEY`)
+4. **Kurumsal email filtresi** → gmail/yahoo/hotmail vb. reddedilir
+5. **Paralel görevler:**
+   - **Task A — Resend email** → `info@dataflowx.com`'a bildirim + kullanıcıya auto-reply
+   - **Task B — WP Webhook** → WordPress CF7 (form ID: 363) entegrasyonu
+
+### Cloudflare Secrets (tam liste)
+
+```
+MY_SECRET_TOKEN       → /api/revalidate endpoint güvenliği
+RESEND_API_KEY        → Resend email servisi (aktif key: re_MfydrDTM_...)
+SANITY_API_READ_TOKEN → Sanity CMS okuma
+SANITY_WEBHOOK_SECRET → Sanity on-demand revalidation
+TURNSTILE_SECRET_KEY  → Cloudflare CAPTCHA server-side doğrulama
+WP_LEAD_WEBHOOK       → WP CF7 endpoint (2026-07-01 eklendi)
+```
+
+### wrangler.toml [vars] (public değişkenler)
+
+```toml
+[vars]
+NEXT_PUBLIC_TURNSTILE_SITE_KEY = "0x4AAAAAADq91aSFD3VABRaY"
+NEXT_PUBLIC_SANITY_PROJECT_ID  = "15oto8dp"
+NEXT_PUBLIC_SANITY_DATASET     = "production"
+```
+
+> ⚠️ ÖNEMLI: `NEXT_PUBLIC_*` değişkenler `wrangler secret put` ile DEĞİL,
+> `wrangler.toml` içindeki `[vars]` bloğu ile tanımlanmalıdır.
+
+### Bilinen Notlar
+
+- `resend` paketi v6.14.0 — `nodejs_compat` flag'i ile Cloudflare Workers'da çalışıyor
+- `global_fetch_strictly_public` flag'i aktif — sadece public internet'e istek yapılabilir
+- Resend `from` adresi hâlâ `onboarding@resend.dev` — `dataflowx.com` Resend'de domain verify edilince `leads@dataflowx.com` yapılacak
+- WordPress CF7 form ID: `363`, unit tag: `wpcf7-f363-p1-o1`
+- Worker adı: `dataflowxtest26`
+- Worker URL: `https://dataflowxtest26.kerimcan-cirakoglu.workers.dev`
+- R2 Bucket (ISR cache): `dataflowx-isr-cache`
+

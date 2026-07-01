@@ -2,11 +2,23 @@ import { revalidatePath } from 'next/cache';
 import { type NextRequest, NextResponse } from 'next/server';
 
 const TYPE_TO_PATHS: Record<string, string[]> = {
-  blogPost:  ['/[locale]/resources/blog', '/[locale]/resources/blog/[slug]'],
-  news:      ['/[locale]/news',            '/[locale]/news/[slug]'],
-  resource:  ['/[locale]/resources'],
-  author:    ['/[locale]/resources/blog'],
-  category:  ['/[locale]/resources/blog', '/[locale]/news'],
+  blogPost:     ['/[locale]/resources/blog', '/[locale]/resources/blog/[slug]'],
+  news:         ['/[locale]/news',            '/[locale]/news/[slug]'],
+  resource:     ['/[locale]/resources'],
+  author:       ['/[locale]/resources/blog'],
+  category:     ['/[locale]/resources/blog', '/[locale]/news'],
+  homePage:     ['/[locale]'],
+  siteSettings: ['/[locale]', '/[locale]/contact'],
+  productPage:  [
+    '/[locale]/unidirectional-gateway',
+    '/[locale]/portx',
+    '/[locale]/sandbox',
+    '/[locale]/dfx-cdr',
+    '/[locale]/email-security-platform',
+    '/[locale]/secure-remote-access',
+    '/[locale]/media-transfer-station',
+    '/[locale]/intelroom',
+  ],
 };
 
 export async function POST(req: NextRequest) {

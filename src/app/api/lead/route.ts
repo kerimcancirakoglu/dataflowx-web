@@ -73,7 +73,7 @@ export async function POST(req: Request) {
         (async () => {
           // 1. Send internal notification
           await resend.emails.send({
-            from: 'DataFlowX Website <onboarding@resend.dev>', // Update to leads@dataflowx.com when verified
+            from: 'DataFlowX Website <leads@dataflowx.com>',
             to: ['info@dataflowx.com'],
             subject: `🚨 New Lead: ${fullName} / ${company} / ${country || 'N/A'}`,
             html: `
@@ -95,7 +95,7 @@ export async function POST(req: Request) {
           // You must verify dataflowx.com in Resend to enable this auto-reply to the user's 'email'.
           try {
             await resend.emails.send({
-              from: 'DataFlowX <onboarding@resend.dev>', // MUST change to noreply@dataflowx.com
+              from: 'DataFlowX <noreply@dataflowx.com>',
               to: email,
               subject: 'DataFlowX — We received your request',
               html: `<p>Hi ${fullName},</p><p>Thank you for reaching out to DataFlowX. We have received your request and our team will get back to you shortly.</p>`

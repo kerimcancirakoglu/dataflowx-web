@@ -1,6 +1,8 @@
 import type { Metadata } from 'next';
 import { NextIntlClientProvider } from 'next-intl';
 import { getMessages } from 'next-intl/server';
+import { draftMode } from 'next/headers';
+import { VisualEditing } from 'next-sanity/visual-editing';
 import Script from 'next/script';
 import '../globals.css';
 import Footer from '@/components/Footer/Footer';
@@ -110,6 +112,7 @@ export default async function RootLayout({
   const { locale } = await params;
   const direction = locale === 'ar' ? 'rtl' : 'ltr';
   const messages = await getMessages();
+  const { isEnabled: preview } = await draftMode();
   
   const fontClass = locale === 'ar' ? notoSansArabic.variable : '';
 
@@ -160,6 +163,7 @@ export default async function RootLayout({
           {children}
           <Footer />
         </NextIntlClientProvider>
+        {preview && <VisualEditing />}
       </body>
     </html>
   );

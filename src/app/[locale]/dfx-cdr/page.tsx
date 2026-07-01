@@ -1,4 +1,5 @@
 import type { Metadata } from 'next';
+import { draftMode } from 'next/headers';
 import Nav from '@/components/Nav/Nav';
 import Contact from '@/components/Contact/Contact';
 import VideoBackground from '@/components/VideoBackground/VideoBackground';
@@ -7,13 +8,18 @@ import styles from './page.module.css';
 import { getTranslations } from 'next-intl/server';
 import React from 'react';
 import { buildAlternates } from '@/lib/seo-config';
+import { getClient } from '@/sanity/lib/client';
+import { productPageQuery } from '@/sanity/lib/queries';
 
-// For now keeping metadata hardcoded in English, or can be moved to translations later
 export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
   const { locale } = await params;
+  const { isEnabled: preview } = await draftMode();
+  const sanityData = locale === 'en'
+    ? await getClient(preview).fetch(productPageQuery, { slug: 'dfx-cdr' })
+    : null;
   return {
-    title: 'DFX CDR — Content Disarm & Reconstruction Platform',
-    description:
+    title: sanityData?.seoTitle ?? 'DFX CDR — Content Disarm & Reconstruction Platform',
+    description: sanityData?.seoDescription ??
       'DFX CDR neutralizes file-borne threats before they reach your users. A reconstruction-first security control that disarms weaponized content and delivers safe, usable files across email, M365, SharePoint, OneDrive, and removable media.',
     keywords: [
       'content disarm and reconstruction',
@@ -38,35 +44,29 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
   };
 }
 
-export default async function CDRPage() {
+export default async function CDRPage({ params }: { params: Promise<{ locale: string }> }) {
+  const { locale } = await params;
   const t = await getTranslations('DFX CDR');
+  const { isEnabled: preview } = await draftMode();
+  const sanityData = locale === 'en'
+    ? await getClient(preview).fetch(productPageQuery, { slug: 'dfx-cdr' })
+    : null;
+  const hero = sanityData?.hero;
+  const featuresSection = sanityData?.features;
 
-  const FEATURES = [
-    {
-      label: t('features.f1.label'),
-      text: t('features.f1.text'),
-    },
-    {
-      label: t('features.f2.label'),
-      text: t('features.f2.text'),
-    },
-    {
-      label: t('features.f3.label'),
-      text: t('features.f3.text'),
-    },
-    {
-      label: t('features.f4.label'),
-      text: t('features.f4.text'),
-    },
-    {
-      label: t('features.f5.label'),
-      text: t('features.f5.text'),
-    },
-    {
-      label: t('features.f6.label'),
-      text: t('features.f6.text'),
-    },
-  ];
+  const FEATURES: Array<{ label: string; text: string }> = featuresSection?.items?.length
+    ? featuresSection.items.map((item: { title: string; description: string }) => ({
+        label: item.title,
+        text: item.description,
+      }))
+    : [
+        { label: t('features.f1.label'), text: t('features.f1.text') },
+        { label: t('features.f2.label'), text: t('features.f2.text') },
+        { label: t('features.f3.label'), text: t('features.f3.text') },
+        { label: t('features.f4.label'), text: t('features.f4.text') },
+        { label: t('features.f5.label'), text: t('features.f5.text') },
+        { label: t('features.f6.label'), text: t('features.f6.text') },
+      ];
 
   const BENEFITS = [
     { 
@@ -136,23 +136,22 @@ export default async function CDRPage() {
 
       {/* ── Hero ─────────────────────────────────────── */}
       <section className={styles.heroSection}>
-        <p className={styles.overTitle}>{t('hero.overTitle')}</p>
+        <p className={styles.overTitle}>{hero?.overTitle ?? t('hero.overTitle')}</p>
         <h1 className={styles.heroTitle}>
           <span style={{ color: '#F5A706' }}>True</span>CDR™
         </h1>
-        <p className={styles.heroTagline}>{t('hero.tagline')}</p>
         <p className={styles.heroSubtitle}>
-          {t('hero.subtitle')}
+          {hero?.subtitle ?? t('hero.subtitle')}
         </p>
         <div className={styles.buttonGroup}>
-          <a href="#contact" className="btn-pill">
-            {t('hero.reqDemo')}
+          <a href={hero?.primaryButtonLink ?? '#contact'} className="btn-pill">
+            {hero?.primaryButtonText ?? t('hero.reqDemo')}
             <svg width="16" height="16" viewBox="0 0 16 16" fill="none" style={{ marginLeft: '8px' }}>
               <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
             </svg>
           </a>
-          <a href="#use-cases" className="btn-pill" style={{ background: 'rgba(255,255,255,0.05)', borderColor: 'rgba(255,255,255,0.1)' }}>
-            {t('hero.reviewOpts')}
+          <a href={hero?.secondaryButtonLink ?? '#use-cases'} className="btn-pill" style={{ background: 'rgba(255,255,255,0.05)', borderColor: 'rgba(255,255,255,0.1)' }}>
+            {hero?.secondaryButtonText ?? t('hero.reviewOpts')}
           </a>
         </div>
       </section>
@@ -224,10 +223,10 @@ export default async function CDRPage() {
       {/* ── Key Features ──────────────────────────────── */}
       <section className={styles.featuresSection}>
         <div className={styles.featuresHeader}>
-          <p className={styles.sectionLabel}>{t('features.label')}</p>
-          <h2 className={styles.sectionTitle}>{t('features.title')}</h2>
+          <p className={styles.sectionLabel}>{featuresSection?.overTitle ?? t('features.label')}</p>
+          <h2 className={styles.sectionTitle}>{featuresSection?.title ?? t('features.title')}</h2>
           <p className={styles.sectionDesc}>
-            {t('features.desc')}
+            {featuresSection?.description ?? t('features.desc')}
           </p>
         </div>
         <div className={styles.featuresGrid}>

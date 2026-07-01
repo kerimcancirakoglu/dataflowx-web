@@ -1,4 +1,5 @@
 import type { Metadata } from 'next';
+import { draftMode } from 'next/headers';
 
 import Nav from '@/components/Nav/Nav';
 import ContactMini from '@/components/ContactMini/ContactMini';
@@ -14,12 +15,18 @@ import { HreflangLinks } from '@/components/SEO/HreflangLinks';
 import ProductSchema from '@/components/SEO/ProductSchema';
 import BreadcrumbSchema from '@/components/SEO/BreadcrumbSchema';
 import { buildAlternates, SITE_URL } from '@/lib/seo-config';
+import { getClient } from '@/sanity/lib/client';
+import { productPageQuery } from '@/sanity/lib/queries';
 
 export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
   const { locale } = await params;
+  const { isEnabled: preview } = await draftMode();
+  const sanityData = locale === 'en'
+    ? await getClient(preview).fetch(productPageQuery, { slug: 'unidirectional-gateway' })
+    : null;
   return {
-    title: 'DataFlowX Unidirectional Gateway & Data Diode — OT/SCADA Security',
-    description:
+    title: sanityData?.seoTitle ?? 'DataFlowX Unidirectional Gateway & Data Diode — OT/SCADA Security',
+    description: sanityData?.seoDescription ??
       'DFX Unidirectional Gateway: EAL4+ certified hardware-enforced unidirectional gateway for OT/SCADA security. Physically isolates critical networks — recognized by Gartner for 3 consecutive years.',
     keywords: [
       'unidirectional gateway',
@@ -83,8 +90,14 @@ const faqSchema = {
   ],
 };
 
-export default async function UnidirectionalGatewayPage() {
+export default async function UnidirectionalGatewayPage({ params }: { params: Promise<{ locale: string }> }) {
+  const { locale } = await params;
   const t = await getTranslations("UDG.page");
+  const { isEnabled: preview } = await draftMode();
+  const sanityData = locale === 'en'
+    ? await getClient(preview).fetch(productPageQuery, { slug: 'unidirectional-gateway' })
+    : null;
+  const overview = sanityData?.overview;
   return (
     <main>
       <HreflangLinks slug="unidirectional-gateway" />
@@ -128,29 +141,29 @@ export default async function UnidirectionalGatewayPage() {
       {/* UG Text Details — the content from the old diagram's right column, now as full-width text */}
       <section className={styles.ugDetails} style={{ padding: '0 2rem', maxWidth: '1400px', margin: '0 auto' }}>
         <div className={styles.ugDetailsHeader}>
-          <p className={styles.ugDetailsOverTitle}>{t("overviewOverTitle")}</p>
-          <h2 className={styles.ugDetailsTitle}>Unidirectional Gateway</h2>
+          <p className={styles.ugDetailsOverTitle}>{overview?.overTitle ?? t("overviewOverTitle")}</p>
+          <h2 className={styles.ugDetailsTitle}>{overview?.title ?? "Unidirectional Gateway"}</h2>
           <p className={styles.ugDetailsDesc}>
-            {t("overviewDesc")}
+            {overview?.description ?? t("overviewDesc")}
           </p>
         </div>
         <div className={styles.ugDetailsGrid}>
           <div className={styles.ugDetailCard}>
-            <div className={styles.ugDetailLabel}>{t("protectsLabel")}</div>
+            <div className={styles.ugDetailLabel}>{overview?.infoBlocks?.[0]?.label ?? t("protectsLabel")}</div>
             <p className={styles.ugDetailText}>
-              {t("protectsText")}
+              {overview?.infoBlocks?.[0]?.text ?? t("protectsText")}
             </p>
           </div>
           <div className={styles.ugDetailCard}>
-            <div className={styles.ugDetailLabel}>{t("gartnerLabel")}</div>
+            <div className={styles.ugDetailLabel}>{overview?.infoBlocks?.[1]?.label ?? t("gartnerLabel")}</div>
             <p className={styles.ugDetailText}>
-              {t("gartnerText")}
+              {overview?.infoBlocks?.[1]?.text ?? t("gartnerText")}
             </p>
           </div>
           <div className={styles.ugDetailCard}>
-            <div className={styles.ugDetailLabel}>{t("eal4Label")}</div>
+            <div className={styles.ugDetailLabel}>{overview?.infoBlocks?.[2]?.label ?? t("eal4Label")}</div>
             <p className={styles.ugDetailText}>
-              {t("eal4Text")}
+              {overview?.infoBlocks?.[2]?.text ?? t("eal4Text")}
             </p>
           </div>
         </div>

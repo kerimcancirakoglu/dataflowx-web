@@ -1,3 +1,4 @@
+import { draftMode } from 'next/headers';
 import Nav from '@/components/Nav/Nav';
 import ContactMini from '@/components/ContactMini/ContactMini';
 import SandboxFamily from '@/components/SandboxFamily/SandboxFamily';
@@ -10,16 +11,24 @@ import { getTranslations } from 'next-intl/server';
 import { HreflangLinks } from '@/components/SEO/HreflangLinks';
 import ProductSchema from '@/components/SEO/ProductSchema';
 import BreadcrumbSchema from '@/components/SEO/BreadcrumbSchema';
+import { getClient } from '@/sanity/lib/client';
+import { productPageQuery } from '@/sanity/lib/queries';
 
 import type { Metadata } from 'next';
 import { buildAlternates, SITE_URL } from '@/lib/seo-config';
 
 export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
   const { locale } = await params;
+  const { isEnabled: preview } = await draftMode();
+  const sanityData = locale === 'en'
+    ? await getClient(preview).fetch(productPageQuery, { slug: 'sandbox' })
+    : null;
 
   return {
-    title: { absolute: 'DFX Malware Mitigation Sandbox — AI-Powered Threat Detection' },
-    description: 'AI-powered sandbox detonating suspicious files in isolated VMs. YARA, MITRE ATT&CK integration. Zero-day threat prevention for OT/ICS networks.',
+    title: sanityData?.seoTitle
+      ? { absolute: sanityData.seoTitle }
+      : { absolute: 'DFX Malware Mitigation Sandbox — AI-Powered Threat Detection' },
+    description: sanityData?.seoDescription ?? 'AI-powered sandbox detonating suspicious files in isolated VMs. YARA, MITRE ATT&CK integration. Zero-day threat prevention for OT/ICS networks.',
     keywords: ['malware sandbox', 'OT sandbox security', 'zero-day detection ICS', 'YARA sandbox', 'MITRE ATT&CK OT'],
     alternates: buildAlternates(locale, '/sandbox'),
     openGraph: {
@@ -42,8 +51,15 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
   };
 }
 
-export default async function SandboxPage() {
+export default async function SandboxPage({ params }: { params: Promise<{ locale: string }> }) {
+  const { locale } = await params;
   const t = await getTranslations('Sandbox.page');
+  const { isEnabled: preview } = await draftMode();
+  const sanityData = locale === 'en'
+    ? await getClient(preview).fetch(productPageQuery, { slug: 'sandbox' })
+    : null;
+  const overview = sanityData?.overview;
+  const features = sanityData?.features;
   return (
     <main className={styles.main}>
       <HreflangLinks slug="sandbox" />
@@ -88,29 +104,29 @@ export default async function SandboxPage() {
       {/* Text Details */}
       <section className={styles.ugDetails} style={{ padding: '0 2rem', maxWidth: '1400px', margin: '0 auto' }}>
         <div className={styles.ugDetailsHeader}>
-          <p className={styles.ugDetailsOverTitle}>{t('overviewOverTitle')}</p>
-          <h2 className={styles.ugDetailsTitle}>{t('overviewTitle')}</h2>
+          <p className={styles.ugDetailsOverTitle}>{overview?.overTitle ?? t('overviewOverTitle')}</p>
+          <h2 className={styles.ugDetailsTitle}>{overview?.title ?? t('overviewTitle')}</h2>
           <p className={styles.ugDetailsDesc}>
-            {t('overviewDesc')}
+            {overview?.description ?? t('overviewDesc')}
           </p>
         </div>
         <div className={styles.ugDetailsGrid}>
           <div className={styles.ugDetailCard}>
-            <div className={styles.ugDetailLabel}>{t('isoLabel')}</div>
+            <div className={styles.ugDetailLabel}>{overview?.infoBlocks?.[0]?.label ?? t('isoLabel')}</div>
             <p className={styles.ugDetailText}>
-              {t('isoText')}
+              {overview?.infoBlocks?.[0]?.text ?? t('isoText')}
             </p>
           </div>
           <div className={styles.ugDetailCard}>
-            <div className={styles.ugDetailLabel}>{t('intLabel')}</div>
+            <div className={styles.ugDetailLabel}>{overview?.infoBlocks?.[1]?.label ?? t('intLabel')}</div>
             <p className={styles.ugDetailText}>
-              {t('intText')}
+              {overview?.infoBlocks?.[1]?.text ?? t('intText')}
             </p>
           </div>
           <div className={styles.ugDetailCard}>
-            <div className={styles.ugDetailLabel}>{t('contentLabel')}</div>
+            <div className={styles.ugDetailLabel}>{overview?.infoBlocks?.[2]?.label ?? t('contentLabel')}</div>
             <p className={styles.ugDetailText}>
-              {t('contentText')}
+              {overview?.infoBlocks?.[2]?.text ?? t('contentText')}
             </p>
           </div>
         </div>
@@ -122,10 +138,10 @@ export default async function SandboxPage() {
       <section style={{ padding: '4rem 2rem 0', maxWidth: '1400px', margin: '0 auto' }}>
         <div style={{ textAlign: 'center', margin: '3rem 0 4rem' }}>
           <p style={{ fontFamily: 'var(--font-mono)', fontSize: '0.85rem', color: 'var(--color-text-muted)', letterSpacing: '0.1em', marginBottom: '0.5rem', textTransform: 'uppercase' }}>
-            {t('keyCapabilitiesLabel')}
+            {features?.overTitle ?? t('keyCapabilitiesLabel')}
           </p>
           <h2 style={{ fontFamily: 'var(--font-display)', fontSize: '2.5rem', color: '#ffffff' }}>
-            {t('keyCapabilitiesTitle')}
+            {features?.title ?? t('keyCapabilitiesTitle')}
           </h2>
         </div>
         <SandboxFeaturesGrid />

@@ -10,7 +10,8 @@ import { GET_NEWS_BY_SLUG_QUERY } from '@/lib/sanity-queries';
 import { SITE_URL, ogLocale } from '@/lib/seo-config';
 import styles from './page.module.css';
 import contentStyles from '@/components/BlogLayout/BlogContentStyles.module.css';
-import { PortableText } from '@portabletext/react';
+import { PortableText, type PortableTextComponents } from '@portabletext/react';
+import LeadModalTrigger from '@/app/[locale]/resources/[slug]/LeadModalTrigger';
 
 interface Props {
   params: Promise<{ slug: string; locale: string }>;
@@ -71,6 +72,22 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
 export const dynamicParams = true;
 export const revalidate = 3600;
+
+const portableTextComponents: PortableTextComponents = {
+  marks: {
+    link: ({ value, children }) => {
+      const href: string = value?.href ?? '';
+      if (href.toLowerCase().endsWith('.pdf')) {
+        return <a href={href} className="downloadBtn">{children}</a>;
+      }
+      return (
+        <a href={href} target="_blank" rel="noopener noreferrer">
+          {children}
+        </a>
+      );
+    },
+  },
+};
 
 export default async function NewsDetailPage({ params }: Props) {
   const resolvedParams = await params;
@@ -159,7 +176,7 @@ export default async function NewsDetailPage({ params }: Props) {
         <article className={styles.contentColumn} id="article-content">
           <div className={contentStyles.prose}>
             {post.content ? (
-              <PortableText value={post.content} />
+              <PortableText value={post.content} components={portableTextComponents} />
             ) : (
               <p>{post.excerpt}</p>
             )}
@@ -181,6 +198,7 @@ export default async function NewsDetailPage({ params }: Props) {
       </div>
 
       <Contact />
+      <LeadModalTrigger documentName={post.title} />
     </main>
   );
 }

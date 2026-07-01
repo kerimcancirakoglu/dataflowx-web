@@ -1,9 +1,9 @@
 import React from 'react';
 import { Metadata } from 'next';
 import Link from 'next/link';
+import { draftMode } from 'next/headers';
 import styles from './page.module.css';
 import Nav from '@/components/Nav/Nav';
-import Footer from '@/components/Footer/Footer';
 import PortXAnimation from '@/components/PortXAnimation/PortXAnimation';
 import PortXModelViewerWrapper from '@/components/PortXModelViewer/PortXModelViewerWrapper';
 import PortXFeaturesGrid from '@/components/PortXFeaturesGrid/PortXFeaturesGrid';
@@ -11,18 +11,31 @@ import VideoBackground from '@/components/VideoBackground/VideoBackground';
 import Contact from '@/components/Contact/Contact';
 import { getTranslations } from 'next-intl/server';
 import { buildAlternates } from '@/lib/seo-config';
+import { getClient } from '@/sanity/lib/client';
+import { productPageQuery } from '@/sanity/lib/queries';
 
 export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
   const { locale } = await params;
+  const { isEnabled: preview } = await draftMode();
+  const sanityData = locale === 'en'
+    ? await getClient(preview).fetch(productPageQuery, { slug: 'portx' })
+    : null;
   return {
-    title: 'DFX Portable Access Security System | Hardware-Based Zero Trust Data Bridge | DFX',
-    description: 'Eliminate the USB Risk. Keep the Workflow. DFX Portable Access Security System is a hardware-based Zero Trust secure data bridge purpose-built for industrial and operational environments.',
+    title: sanityData?.seoTitle ?? 'DFX Portable Access Security System | Hardware-Based Zero Trust Data Bridge | DFX',
+    description: sanityData?.seoDescription ?? 'Eliminate the USB Risk. Keep the Workflow. DFX Portable Access Security System is a hardware-based Zero Trust secure data bridge purpose-built for industrial and operational environments.',
     alternates: buildAlternates(locale, '/portx'),
   };
 }
 
-export default async function PortXPage() {
+export default async function PortXPage({ params }: { params: Promise<{ locale: string }> }) {
+  const { locale } = await params;
   const t = await getTranslations('PortX');
+  const { isEnabled: preview } = await draftMode();
+  const sanityData = locale === 'en'
+    ? await getClient(preview).fetch(productPageQuery, { slug: 'portx' })
+    : null;
+  const hero = sanityData?.hero;
+  const overview = sanityData?.overview;
 
   return (
     <>
@@ -33,22 +46,19 @@ export default async function PortXPage() {
 
         {/* HERO SECTION */}
         <section className={styles.heroSection}>
-          <div className={styles.overTitle}>{t('hero.overTitle')}</div>
+          <div className={styles.overTitle}>{hero?.overTitle ?? t('hero.overTitle')}</div>
           <h1 className={styles.heroTitle}>
-            Hardware-Based Zero Trust <br /> Data Bridge
+            {hero?.title ?? <>Hardware-Based Zero Trust <br /> Data Bridge</>}
           </h1>
-          <div className={styles.heroTagline}>
-            {t('hero.tagline')}
-          </div>
           <p className={styles.heroSubtitle}>
-            {t('hero.subtitle')}
+            {hero?.subtitle ?? t('hero.subtitle')}
           </p>
           <div className={styles.buttonGroup}>
-            <Link href="/contact" className={styles.primaryButton}>
-              {t('hero.reqDemo')}
+            <Link href={hero?.primaryButtonLink ?? '/contact'} className={styles.primaryButton}>
+              {hero?.primaryButtonText ?? t('hero.reqDemo')}
             </Link>
-            <Link href="#animation" className={styles.secondaryButton}>
-              {t('hero.howItWorks')}
+            <Link href={hero?.secondaryButtonLink ?? '#animation'} className={styles.secondaryButton}>
+              {hero?.secondaryButtonText ?? t('hero.howItWorks')}
             </Link>
           </div>
         </section>
@@ -58,29 +68,29 @@ export default async function PortXPage() {
         {/* OVERVIEW SECTION (DIODE STYLE) */}
         <section className={styles.ugDetails} style={{ padding: '0 2rem', maxWidth: '1400px', margin: '0 auto' }}>
           <div className={styles.ugDetailsHeader}>
-            <p className={styles.ugDetailsOverTitle}>{t('overview.overTitle')}</p>
-            <h2 className={styles.ugDetailsTitle}>{t('overview.title')}</h2>
+            <p className={styles.ugDetailsOverTitle}>{overview?.overTitle ?? t('overview.overTitle')}</p>
+            <h2 className={styles.ugDetailsTitle}>{overview?.title ?? t('overview.title')}</h2>
             <p className={styles.ugDetailsDesc}>
-              {t('overview.desc')}
+              {overview?.description ?? t('overview.desc')}
             </p>
           </div>
           <div className={styles.ugDetailsGrid}>
             <div className={styles.ugDetailCard}>
-              <div className={styles.ugDetailLabel}>{t('overview.c1.label')}</div>
+              <div className={styles.ugDetailLabel}>{overview?.infoBlocks?.[0]?.label ?? t('overview.c1.label')}</div>
               <p className={styles.ugDetailText}>
-                {t('overview.c1.text')}
+                {overview?.infoBlocks?.[0]?.text ?? t('overview.c1.text')}
               </p>
             </div>
             <div className={styles.ugDetailCard}>
-              <div className={styles.ugDetailLabel}>{t('overview.c2.label')}</div>
+              <div className={styles.ugDetailLabel}>{overview?.infoBlocks?.[1]?.label ?? t('overview.c2.label')}</div>
               <p className={styles.ugDetailText}>
-                {t('overview.c2.text')}
+                {overview?.infoBlocks?.[1]?.text ?? t('overview.c2.text')}
               </p>
             </div>
             <div className={styles.ugDetailCard}>
-              <div className={styles.ugDetailLabel}>{t('overview.c3.label')}</div>
+              <div className={styles.ugDetailLabel}>{overview?.infoBlocks?.[2]?.label ?? t('overview.c3.label')}</div>
               <p className={styles.ugDetailText}>
-                {t('overview.c3.text')}
+                {overview?.infoBlocks?.[2]?.text ?? t('overview.c3.text')}
               </p>
             </div>
           </div>
