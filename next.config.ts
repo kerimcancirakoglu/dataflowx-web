@@ -184,9 +184,15 @@ const nextConfig: NextConfig = {
       },
       {
         source: '/post/ai-in-cybersecurity-benefits-vs-risks',
-        destination: '/resources/blog', 
+        destination: '/resources/blog',
         permanent: true,
       },
+
+      // 7. Broken sitelinks — product renames + Turkish old slugs
+      { source: '/databrokerx', destination: '/secure-remote-access', permanent: true },
+      { source: '/hakkimizda', destination: '/tr/about-us', permanent: true },
+      { source: '/partnerler', destination: '/tr/partners', permanent: true },
+      { source: '/about', destination: '/about-us', permanent: true },
     ];
   },
 };
