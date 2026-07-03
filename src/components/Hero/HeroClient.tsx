@@ -48,8 +48,8 @@ export default function HeroClient({ slides, sanityDocumentId }: HeroClientProps
   const contentRef = useRef<HTMLDivElement>(null);
   const isAnimating = useRef(false);
 
-  // Visual Editing overlay için — sanityDocumentId yoksa (TR/AR) attribute basılmaz
-  const sanityAttr = (path: string) =>
+  // Visual Editing overlay — sanityDocumentId yoksa (TR/AR) attribute basılmaz
+  const sanityAttr = (path: string): Record<string, string> =>
     sanityDocumentId
       ? { 'data-sanity': JSON.stringify({ id: sanityDocumentId, type: 'homePage', path }) }
       : {};

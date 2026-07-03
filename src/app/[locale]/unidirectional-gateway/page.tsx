@@ -1,7 +1,6 @@
 import type { Metadata } from 'next';
 import { draftMode } from 'next/headers';
 
-import Nav from '@/components/Nav/Nav';
 import ContactMini from '@/components/ContactMini/ContactMini';
 import GartnerTestimonial from '@/components/GartnerTestimonial/GartnerTestimonial';
 import DiodeModelViewerWrapper from '@/components/DiodeModelViewer/DiodeModelViewerWrapper';
@@ -122,7 +121,6 @@ export default async function UnidirectionalGatewayPage({ params }: { params: Pr
         dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
       />
       <VideoBackground />
-      <Nav />
 
       {/* Opening hero statement */}
       <div style={{ paddingTop: '8rem' }}>

@@ -119,7 +119,7 @@
         }
       },
       "trucdr": {
-        "titlePrefix": "True",
+        "titlePrefix": "DFX",
         "titleHighlight": "CDR",
         "description": "Content Disarm and Reconstruction engine that intercepts files, removes malicious active content, and rebuilds clean files in real-time.",
         "protects": "Stops zero-day exploits hidden in common file formats by mathematically ensuring only safe components enter.",

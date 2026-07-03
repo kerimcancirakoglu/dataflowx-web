@@ -1,6 +1,5 @@
 import type { Metadata } from 'next';
 
-import Nav from '@/components/Nav/Nav';
 import ContactMini from '@/components/ContactMini/ContactMini';
 import VideoBackground from '@/components/VideoBackground/VideoBackground';
 import BlogClient, { type WPPost } from './BlogClient';
@@ -103,7 +102,6 @@ export default async function BlogPage({
         dangerouslySetInnerHTML={{ __html: JSON.stringify(blogListingSchema) }}
       />
       <VideoBackground />
-      <Nav />
       <BlogClient posts={posts} />
       <ContactMini />
     </main>

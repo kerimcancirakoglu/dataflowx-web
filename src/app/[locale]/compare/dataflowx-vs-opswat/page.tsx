@@ -1,6 +1,5 @@
 import type { Metadata } from 'next';
 
-import Nav from '@/components/Nav/Nav';
 import ContactMini from '@/components/ContactMini/ContactMini';
 import VideoBackground from '@/components/VideoBackground/VideoBackground';
 import styles from './page.module.css';
@@ -161,7 +160,6 @@ export default function DataFlowXVsOpswatPage() {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }}
       />
       <VideoBackground />
-      <Nav />
 
       {/* Hero */}
       <section className={styles.hero}>

@@ -1,6 +1,6 @@
 import { defineConfig } from 'sanity';
 import { structureTool } from 'sanity/structure';
-import { presentationTool } from 'sanity/presentation';
+import { presentationTool, defineDocuments } from 'sanity/presentation';
 import { schema } from './src/sanity/schemaTypes';
 
 const SITE_URL =
@@ -72,6 +72,46 @@ export default defineConfig({
           ]),
     }),
     presentationTool({
+      resolve: {
+        mainDocuments: defineDocuments([
+          {
+            route: '/:locale',
+            filter: `_type == "homePage" && _id == "homePage"`,
+          },
+          {
+            route: '/:locale/unidirectional-gateway',
+            filter: `_type == "productPage" && _id == "product-unidirectional-gateway"`,
+          },
+          {
+            route: '/:locale/portx',
+            filter: `_type == "productPage" && _id == "product-portx"`,
+          },
+          {
+            route: '/:locale/sandbox',
+            filter: `_type == "productPage" && _id == "product-sandbox"`,
+          },
+          {
+            route: '/:locale/dfx-cdr',
+            filter: `_type == "productPage" && _id == "product-dfx-cdr"`,
+          },
+          {
+            route: '/:locale/email-security-platform',
+            filter: `_type == "productPage" && _id == "product-email-security-platform"`,
+          },
+          {
+            route: '/:locale/secure-remote-access',
+            filter: `_type == "productPage" && _id == "product-secure-remote-access"`,
+          },
+          {
+            route: '/:locale/media-transfer-station',
+            filter: `_type == "productPage" && _id == "product-media-transfer-station"`,
+          },
+          {
+            route: '/:locale/intelroom',
+            filter: `_type == "productPage" && _id == "product-intelroom"`,
+          },
+        ]),
+      },
       previewUrl: {
         origin: SITE_URL,
         preview: '/',

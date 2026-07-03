@@ -1,9 +1,7 @@
 import type { Metadata } from 'next';
 import { draftMode } from 'next/headers';
-import Nav from '@/components/Nav/Nav';
 import ContactMini from '@/components/ContactMini/ContactMini';
 import DiodeModelViewerWrapper from '@/components/DiodeModelViewer/DiodeModelViewerWrapper';
-import ProductSpecs from '@/components/ProductSpecs/ProductSpecs';
 import FeaturesGrid from '@/components/FeaturesGrid/FeaturesGrid';
 import VideoBackground from '@/components/VideoBackground/VideoBackground';
 import BrokerFamily from '@/components/BrokerFamily/BrokerFamily';
@@ -82,7 +80,6 @@ export default async function SecureRemoteAccessPage({ params }: { params: Promi
         category="Cybersecurity Software"
       />
       <VideoBackground />
-      <Nav />
 
       {/* Opening hero statement */}
       <div style={{ paddingTop: '8rem' }}>
@@ -144,13 +141,6 @@ export default async function SecureRemoteAccessPage({ params }: { params: Promi
       {/* Interactive 3D Model Viewer - keeping as Diode for now */}
       <section style={{ padding: '0 2rem', maxWidth: '1400px', margin: '0 auto' }}>
         <DiodeModelViewerWrapper title="Secure Remote Access" modelPath="/models/Secure Remote Access.glb" />
-      </section>
-
-      <div className="section-spacer" aria-hidden="true" />
-
-      {/* Product Catalog / Specs */}
-      <section style={{ padding: '0 2rem' }}>
-        <ProductSpecs titleOverride="Secure Remote Access Models" modelNameOverride="Secure Remote Access" imagePath="/models/Secure Remote Access0001.png0001.png" />
       </section>
 
       <div className="section-spacer" aria-hidden="true" />

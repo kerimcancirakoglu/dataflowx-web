@@ -26,7 +26,6 @@ export interface NavLink {
 }
 
 interface NavProps {
-  logoSrc?: string;
   hideMenu?: boolean;
   navLinks: NavLink[];
   contactLabel: string;
@@ -37,7 +36,7 @@ function localise(locale: string, href: string): string {
   return `/${locale}${href}`;
 }
 
-export default function NavClient({ logoSrc = "/DataFlowX_Logo_W.png", hideMenu = false, navLinks, contactLabel }: NavProps) {
+export default function NavClient({ hideMenu = false, navLinks, contactLabel }: NavProps) {
   const navRef = useRef<HTMLElement>(null);
   const [scrolled, setScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -46,6 +45,7 @@ export default function NavClient({ logoSrc = "/DataFlowX_Logo_W.png", hideMenu 
 
   const pathname = usePathname();
   const locale = useLocale();
+  const logoSrc = pathname.includes('/intelroom') ? '/Intelroombeyaz.png' : '/DataFlowX_Logo_W.png';
 
   useEffect(() => {
     document.documentElement.setAttribute('data-theme', 'dark');

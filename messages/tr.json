@@ -119,7 +119,7 @@
         }
       },
       "trucdr": {
-        "titlePrefix": "True",
+        "titlePrefix": "DFX",
         "titleHighlight": "CDR",
         "description": "Dosyaları araya giren, kötü amaçlı aktif içeriği kaldıran ve temiz dosyaları gerçek zamanlı olarak yeniden oluşturan İçerik Silahsızlandırma ve Yeniden Oluşturma motoru.",
         "protects": "Matematiksel olarak yalnızca güvenli bileşenlerin girmesini sağlayarak yaygın dosya formatlarında gizlenen sıfır gün (zero-day) açıklarını durdurur.",

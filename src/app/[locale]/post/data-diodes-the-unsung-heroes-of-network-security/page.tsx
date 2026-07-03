@@ -1,5 +1,4 @@
 import type { Metadata } from 'next';
-import Nav from '@/components/Nav/Nav';
 import ContactMini from '@/components/ContactMini/ContactMini';
 import styles from './page.module.css';
 
@@ -58,7 +57,6 @@ export default function DataDiodeBlogPost() {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(articleSchema) }}
       />
       <div className={styles.bgGlow} aria-hidden="true" />
-      <Nav />
 
       {/* Article Header */}
       <header className={styles.header}>

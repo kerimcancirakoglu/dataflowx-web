@@ -1,7 +1,6 @@
 import type { Metadata } from 'next';
 import { draftMode } from 'next/headers';
 import { buildAlternates } from '@/lib/seo-config';
-import Nav from '@/components/Nav/Nav';
 import Hero from '@/components/Hero/Hero';
 import HowItWorks from '@/components/HowItWorks/HowItWorks';
 import UseCases from '@/components/UseCases/UseCases';
@@ -35,7 +34,6 @@ export default async function Home({ params }: { params: Promise<{ locale: strin
   return (
     <main>
       <VideoBackground />
-      <Nav />
       <Hero sanityData={homeData} locale={locale} />
 
       <div className="section-spacer" aria-hidden="true" />

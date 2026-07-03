@@ -179,6 +179,13 @@ const emailSecurityDoc = {
   _type: 'productPage',
   productName: 'DFX Email Security Platform',
   slug: { _type: 'slug', current: 'email-security-platform' },
+  hero: {
+    overTitle: 'EMAIL SECURITY',
+    title: esp.heroTitle,
+    subtitle: esp.heroSubtitle,
+    primaryButtonText: esp.btn.replace(' ➔', ''),
+    primaryButtonLink: '/contact',
+  },
   overview: {
     overTitle: esp.overviewOverTitle,
     title: esp.overviewTitle,

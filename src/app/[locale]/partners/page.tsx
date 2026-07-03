@@ -1,5 +1,4 @@
 import type { Metadata } from 'next';
-import Nav from '@/components/Nav/Nav';
 import PartnersMapWrapper from '@/components/PartnersMap/PartnersMapWrapper';
 import PartnerForm from '@/components/PartnerForm/PartnerForm';
 import styles from './page.module.css';
@@ -20,7 +19,6 @@ export default async function PartnersPage() {
 
   return (
     <main className={styles.main}>
-      <Nav />
       
       {/* 1. Map at the top (transparent background) */}
       <section className={styles.mapSection}>

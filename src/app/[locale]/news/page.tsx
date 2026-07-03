@@ -1,5 +1,4 @@
 import type { Metadata } from 'next';
-import Nav from '@/components/Nav/Nav';
 import Contact from '@/components/Contact/Contact';
 import VideoBackground from '@/components/VideoBackground/VideoBackground';
 import NewsClient from './NewsClient';
@@ -76,7 +75,6 @@ export default async function NewsPage({
         dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }}
       />
       <VideoBackground />
-      <Nav />
       <NewsClient posts={posts} />
       <Contact />
     </main>

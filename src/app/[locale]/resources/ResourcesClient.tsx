@@ -27,7 +27,7 @@ interface Resource {
 }
 
 const BROCHURE_DATA_DIODE_X =
-  'https://dataflowx1.wpenginepowered.com/wp-content/uploads/2026/06/converted_yeni_DataDiodeX_TS_Brosur_EN-1.pdf';
+  '/resources/ds-datadiodex'; // PDF upload via Sanity once migrated
 
 const resourcesData: Resource[] = [
   {
@@ -39,7 +39,7 @@ const resourcesData: Resource[] = [
     useCase: 'Critical Infrastructure',
     date: '2023-11-15',
     link: '/resources/ds-datadiodex',
-    image: `${process.env.NEXT_PUBLIC_WP_URL}/wp-content/uploads/Kapak/kapaklar/datadiode1.jpg`,
+    image: '/images/resource-datadiode.jpg',
     fileUrl: BROCHURE_DATA_DIODE_X,
   },
   {
@@ -51,7 +51,7 @@ const resourcesData: Resource[] = [
     useCase: 'Defense & Military',
     date: '2023-12-01',
     link: '/resources/ds-sra',
-    image: `${process.env.NEXT_PUBLIC_WP_URL}/wp-content/uploads/Kapak/kapaklar/databroker1.jpg`,
+    image: '/images/resource-sra.jpg',
   },
   {
     id: 'wp-ot-security',
@@ -61,7 +61,7 @@ const resourcesData: Resource[] = [
     useCase: 'Critical Infrastructure',
     date: '2024-01-20',
     link: '/resources/wp-ot-security',
-    image: `${process.env.NEXT_PUBLIC_WP_URL}/wp-content/uploads/Kapak/kapaklar/data3.jpg`,
+    image: '/images/resource-ot.jpg',
   },
   {
     id: 'cs-energy',
@@ -72,7 +72,7 @@ const resourcesData: Resource[] = [
     useCase: 'Energy & SCADA',
     date: '2024-02-10',
     link: '/resources/cs-energy',
-    image: `${process.env.NEXT_PUBLIC_WP_URL}/wp-content/uploads/Kapak/kapaklar/datasecure1.jpg`,
+    image: '/images/resource-energy.jpg',
   },
   {
     id: 'wp-nis2',
@@ -82,7 +82,7 @@ const resourcesData: Resource[] = [
     useCase: 'Critical Infrastructure',
     date: '2024-03-05',
     link: '/resources/wp-nis2',
-    image: `${process.env.NEXT_PUBLIC_WP_URL}/wp-content/uploads/Kapak/kapaklar/datastation1.jpg`,
+    image: '/images/resource-nis2.jpg',
   },
   {
     id: 'ds-mts',
@@ -93,7 +93,7 @@ const resourcesData: Resource[] = [
     useCase: 'Defense & Military',
     date: '2024-04-12',
     link: '/resources/ds-mts',
-    image: `${process.env.NEXT_PUBLIC_WP_URL}/wp-content/uploads/Kapak/kapaklar/datamessage1.jpg`,
+    image: '/images/resource-mts.jpg',
   },
   {
     id: 'rep-threat-2024',
@@ -103,7 +103,7 @@ const resourcesData: Resource[] = [
     useCase: 'Energy & SCADA',
     date: '2024-05-01',
     link: '/resources/rep-threat-2024',
-    image: `${process.env.NEXT_PUBLIC_WP_URL}/wp-content/uploads/Kapak/kapaklar/data3.jpg`,
+    image: '/images/resource-threat.jpg',
   },
   {
     id: 'ds-email',
@@ -114,7 +114,7 @@ const resourcesData: Resource[] = [
     useCase: 'Financial Services',
     date: '2024-05-15',
     link: '/resources/ds-email',
-    image: `${process.env.NEXT_PUBLIC_WP_URL}/wp-content/uploads/Kapak/kapaklar/datamessage1.jpg`,
+    image: '/images/resource-email.jpg',
   }
 ];
 
@@ -145,53 +145,9 @@ const allTypes: ResourceType[] = ['Guide', 'Report', 'Data Sheet', 'Case Study',
 const allProducts: ProductType[] = ['DFX Unidirectional Gateway', 'DFX Malware Mitigation Sandbox', 'DFX Email Security Platform', 'DFX PASS', 'DFX Secure Remote Access', 'DFX Media Transfer Station', 'DFX IntelRoom', 'DFX CDR'];
 const allUseCases: UseCaseType[] = ['Energy & SCADA', 'Defense & Military', 'Financial Services', 'Critical Infrastructure', 'Logistics', 'Manufacturing'];
 
-interface ResourcesClientProps {
-  wpResources?: any[];
-}
 
-function mapWpResourceToResource(wp: any): Resource {
-  const wpUrl = process.env.NEXT_PUBLIC_WP_URL || 'https://dataflowx1.wpenginepowered.com';
-  let image = `${wpUrl}/wp-content/uploads/Kapak/kapaklar/data3.jpg`;
-  if (wp._embedded?.['wp:featuredmedia']?.[0]?.source_url) {
-    image = wp._embedded['wp:featuredmedia'][0].source_url;
-  }
 
-  let type: ResourceType = 'Data Sheet';
-  const products: ProductType[] = [];
-  let useCase: UseCaseType | undefined = undefined;
-
-  if (wp._embedded?.['wp:term']) {
-    wp._embedded['wp:term'].forEach((termArray: any[]) => {
-      termArray.forEach((term: any) => {
-        if ((term.taxonomy === 'resource_type' || term.taxonomy === 'category') && allTypes.includes(term.name as ResourceType)) {
-          type = term.name as ResourceType;
-        }
-        if ((term.taxonomy === 'product' || term.taxonomy === 'category') && allProducts.includes(term.name as ProductType)) {
-          products.push(term.name as ProductType);
-        }
-        if ((term.taxonomy === 'use_case' || term.taxonomy === 'category') && allUseCases.includes(term.name as UseCaseType)) {
-          useCase = term.name as UseCaseType;
-        }
-      });
-    });
-  }
-
-  return {
-    id: wp.slug,
-    title: wp.title?.rendered || '',
-    description: wp.excerpt?.rendered?.replace(/<[^>]*>?/gm, '') || '',
-    type,
-    products: products.length > 0 ? products : undefined,
-    product: products.length > 0 ? products[0] : undefined,
-    useCase,
-    date: wp.date,
-    link: `/resources/${wp.slug}`,
-    image,
-    fileUrl: wp.acf?.pdf_file || wp.acf?.file_url || undefined,
-  };
-}
-
-export default function ResourcesClient({ wpResources = [] }: ResourcesClientProps) {
+export default function ResourcesClient() {
   const t = useTranslations('Resources');
   const [searchQuery, setSearchQuery] = useState('');
   const [productSearchQuery, setProductSearchQuery] = useState('');
@@ -221,14 +177,8 @@ export default function ResourcesClient({ wpResources = [] }: ResourcesClientPro
   };
 
   const finalResourcesData = useMemo(() => {
-    if (wpResources.length > 0) {
-      const dynamicResources = wpResources.map(mapWpResourceToResource);
-      const wpIds = new Set(dynamicResources.map(r => r.id));
-      const filteredStatic = allResourcesData.filter(r => !wpIds.has(r.id));
-      return [...dynamicResources, ...filteredStatic];
-    }
     return allResourcesData;
-  }, [wpResources]);
+  }, []);
 
   // Filter resources based on all active criteria
   const filteredResources = useMemo(() => {

@@ -1,5 +1,4 @@
 import { draftMode } from 'next/headers';
-import Nav from '@/components/Nav/Nav';
 import ContactMini from '@/components/ContactMini/ContactMini';
 import SandboxFamily from '@/components/SandboxFamily/SandboxFamily';
 import SandboxAnimation from '@/components/SandboxAnimation/SandboxAnimation';
@@ -78,7 +77,6 @@ export default async function SandboxPage({ params }: { params: Promise<{ locale
         category="Cybersecurity Software"
       />
       <VideoBackground />
-      <Nav />
       
       {/* Opening hero statement */}
       <div style={{ paddingTop: '8rem' }}>

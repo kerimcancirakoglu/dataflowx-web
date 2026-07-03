@@ -12,7 +12,7 @@ export const sanityClient = createClient({
   useCdn: true,
 });
 
-// Preview client — Draft Mode için cache'siz, draft'ları gösterir
+// Preview client — Draft Mode için cache'siz, draft'ları gösterir + Visual Editing stega
 export const previewClient = createClient({
   projectId,
   dataset,
@@ -20,6 +20,10 @@ export const previewClient = createClient({
   useCdn: false,
   token: process.env.SANITY_API_READ_TOKEN,
   perspective: 'previewDrafts',
+  stega: {
+    enabled: true,
+    studioUrl: '/studio',
+  },
 });
 
 export function getClient(preview = false) {

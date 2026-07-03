@@ -185,7 +185,7 @@ export default async function AboutUs() {
           <div className={styles.imageContent}>
             <div className={styles.imageWrapper}>
               <Image
-                src={`${process.env.NEXT_PUBLIC_WP_URL}/wp-content/uploads/Kapak/kapaklar/data3.jpg`}
+                src="/images/aboutus.png"
                 alt="DataFlowX Team"
                 width={800} height={600} style={{ width: '100%', height: 'auto' }}
                 className={styles.aboutImage}

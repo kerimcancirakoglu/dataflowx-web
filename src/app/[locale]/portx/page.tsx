@@ -3,7 +3,6 @@ import { Metadata } from 'next';
 import Link from 'next/link';
 import { draftMode } from 'next/headers';
 import styles from './page.module.css';
-import Nav from '@/components/Nav/Nav';
 import PortXAnimation from '@/components/PortXAnimation/PortXAnimation';
 import PortXModelViewerWrapper from '@/components/PortXModelViewer/PortXModelViewerWrapper';
 import PortXFeaturesGrid from '@/components/PortXFeaturesGrid/PortXFeaturesGrid';
@@ -39,7 +38,6 @@ export default async function PortXPage({ params }: { params: Promise<{ locale: 
 
   return (
     <>
-      <Nav />
 
       <main className={styles.pageWrapper}>
         <VideoBackground />

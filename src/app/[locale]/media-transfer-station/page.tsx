@@ -1,6 +1,5 @@
 import type { Metadata } from 'next';
 import { draftMode } from 'next/headers';
-import Nav from '@/components/Nav/Nav';
 import ContactMini from '@/components/ContactMini/ContactMini';
 import VideoBackground from '@/components/VideoBackground/VideoBackground';
 import MTSHero from '@/components/MTSHero/MTSHero';
@@ -83,7 +82,6 @@ export default async function MediaTransferStationPage({ params }: { params: Pro
         category="Cybersecurity Hardware"
       />
       <VideoBackground />
-      <Nav />
       
       {/* Hero Section */}
       <div style={{ paddingTop: '8rem' }}>

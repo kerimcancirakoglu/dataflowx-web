@@ -1,5 +1,4 @@
 import type { Metadata } from 'next';
-import Nav from '@/components/Nav/Nav';
 import AboutUs from '@/components/AboutUs/AboutUs';
 import Contact from '@/components/Contact/Contact';
 import VideoBackground from '@/components/VideoBackground/VideoBackground';
@@ -35,7 +34,6 @@ export default function AboutUsPage() {
   return (
     <main>
       <VideoBackground />
-      <Nav />
       
       {/* Spacer to push content below the fixed navigation */}
       <div style={{ paddingTop: '80px' }}>

@@ -1,6 +1,5 @@
 import type { Metadata } from 'next';
 import { draftMode } from 'next/headers';
-import Nav from '@/components/Nav/Nav';
 import Contact from '@/components/Contact/Contact';
 import VideoBackground from '@/components/VideoBackground/VideoBackground';
 import CDRAnimation from '@/components/CDRAnimation/CDRAnimation';
@@ -132,7 +131,6 @@ export default async function CDRPage({ params }: { params: Promise<{ locale: st
   return (
     <main>
       <VideoBackground />
-      <Nav />
 
       {/* ── Hero ─────────────────────────────────────── */}
       <section className={styles.heroSection}>

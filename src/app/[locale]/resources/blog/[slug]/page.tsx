@@ -1,6 +1,5 @@
 import type { Metadata } from 'next';
 import { notFound } from 'next/navigation';
-import Nav from '@/components/Nav/Nav';
 import Contact from '@/components/Contact/Contact';
 import Image from 'next/image';
 import TableOfContents from '@/components/BlogLayout/TableOfContents';
@@ -137,7 +136,6 @@ export default async function BlogDetailPage({ params }: Props) {
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }} />
       
       <div className={styles.bgGlow} aria-hidden="true" />
-      <Nav />
 
       {/* Hero Header */}
       <header className={styles.hero}>

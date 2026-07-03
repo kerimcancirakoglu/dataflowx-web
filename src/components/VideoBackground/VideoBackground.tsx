@@ -14,7 +14,7 @@ interface VideoBackgroundProps {
 }
 
 export default function VideoBackground({ 
-  videoSrc = "/dynamic-particle-flow.mp4", 
+  videoSrc = "/dynamic-particle-flow.mp4",
   opacity = 0.45,
   playMode = 'scrub'
 }: VideoBackgroundProps = {}) {

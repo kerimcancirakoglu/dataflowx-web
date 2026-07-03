@@ -6,6 +6,7 @@ import { VisualEditing } from 'next-sanity/visual-editing';
 import Script from 'next/script';
 import '../globals.css';
 import Footer from '@/components/Footer/Footer';
+import Nav from '@/components/Nav/Nav';
 
 import OrganizationSchema from '@/components/SEO/OrganizationSchema';
 import { SITE_URL as BASE_URL } from '@/lib/seo-config';
@@ -117,20 +118,16 @@ export default async function RootLayout({
   const fontClass = locale === 'ar' ? notoSansArabic.variable : '';
 
   return (
-    <html lang={locale} dir={direction} suppressHydrationWarning className={fontClass}>
+    <html lang={locale} dir={direction} className={fontClass} suppressHydrationWarning>
       <head>
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
-        {/* hreflang alternate links will be injected by individual pages using HreflangLinks component */}
-        {/* Organization structured data - JSON-LD */}
         <OrganizationSchema />
         <Script
           id="website-schema"
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(websiteSchema) }}
         />
-        {/* Theme init — runs before paint to prevent flash */}
         <Script
           id="theme-init"
           strategy="beforeInteractive"
@@ -140,7 +137,6 @@ export default async function RootLayout({
         />
       </head>
       <body>
-        {/* Google Analytics Placeholder */}
         <Script
           strategy="afterInteractive"
           src={`https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX`}
@@ -160,6 +156,7 @@ export default async function RootLayout({
           }}
         />
         <NextIntlClientProvider messages={messages}>
+          <Nav />
           {children}
           <Footer />
         </NextIntlClientProvider>

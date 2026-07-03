@@ -1,6 +1,5 @@
 import type { Metadata } from 'next';
 import { draftMode } from 'next/headers';
-import Nav from '@/components/Nav/Nav';
 import ContactMini from '@/components/ContactMini/ContactMini';
 import VideoBackground from '@/components/VideoBackground/VideoBackground';
 import EmailSecurityAnimation from '@/components/EmailSecurityAnimation/EmailSecurityAnimation';
@@ -81,18 +80,23 @@ export default async function EmailSecurityPage({ params }: { params: Promise<{ 
         category="Cybersecurity Software"
       />
       <VideoBackground />
-      <Nav />
 
-      {/* Opening hero statement (Image 4 reference) */}
+      {/* Opening hero statement */}
       <div className={styles.heroSection}>
         <h1 className={styles.heroTitle}>
-          <span style={{ color: '#F5A706' }}>DFX</span> {t('heroTitle')}
+          <span style={{ color: '#F5A706' }}>DFX</span>{' '}
+          {sanityData?.hero?.title ?? t('heroTitle')}
         </h1>
         <p className={styles.heroSubtitle}>
-          {t('heroSubtitle')}
+          {sanityData?.hero?.subtitle ?? t('heroSubtitle')}
         </p>
         <div className={styles.buttonGroup}>
-          <a href="#contact" className={styles.primaryButton}>{t('btn')}</a>
+          <a
+            href={sanityData?.hero?.primaryButtonLink ?? '#contact'}
+            className={styles.primaryButton}
+          >
+            {sanityData?.hero?.primaryButtonText ?? t('btn').replace(' ➔', '')}
+          </a>
         </div>
       </div>
 

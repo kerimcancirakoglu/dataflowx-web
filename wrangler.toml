@@ -2,6 +2,13 @@ name = "dataflowxtest26"
 main = ".open-next/worker.js"
 compatibility_date = "2026-06-29"
 compatibility_flags = ["nodejs_compat", "global_fetch_strictly_public"]
+account_id = "8b3d589a1626059c16fb283c3b09c092"
+
+routes = [
+  { pattern = "dataflowx.com", custom_domain = true },
+  { pattern = "www.dataflowx.com", custom_domain = true }
+]
+
 
 # Public environment variables (NEXT_PUBLIC_* prefix)
 # These cannot be set via `wrangler secret`; they must be declared here.
@@ -20,4 +27,4 @@ service = "dataflowxtest26"
 
 [[r2_buckets]]
 binding = "NEXT_INC_CACHE_R2_BUCKET"
-bucket_name = "dataflowx-isr-cache"
+bucket_name = "dataflowxweb"

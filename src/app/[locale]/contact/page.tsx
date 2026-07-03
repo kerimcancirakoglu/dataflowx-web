@@ -1,7 +1,6 @@
 import { getTranslations } from 'next-intl/server';
 import { Metadata } from 'next';
 import Contact from '@/components/Contact/Contact';
-import Nav from '@/components/Nav/Nav';
 import VideoBackground from '@/components/VideoBackground/VideoBackground';
 import styles from './ContactPage.module.css';
 import { buildAlternates } from '@/lib/seo-config';
@@ -59,7 +58,6 @@ export default async function ContactPage() {
     <main className={styles.container}>
       <VideoBackground playMode="scrub" />
       <div className={styles.bg}></div>
-      <Nav />
       
       {/* 1. Split Layout (Left: Title/Subtitle, Right: Form) */}
       <div style={{ position: 'relative', zIndex: 2 }}>

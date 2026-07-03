@@ -2,7 +2,6 @@ import { notFound } from 'next/navigation';
 import type { Metadata } from 'next';
 import Link from 'next/link';
 import Image from 'next/image';
-import Nav from '@/components/Nav/Nav';
 import styles from './page.module.css';
 import { USE_CASES } from '@/data/useCases';
 
@@ -79,7 +78,6 @@ export default async function UseCaseDetailPage({ params }: PageProps) {
 
   return (
     <div className={styles.pageWrapper}>
-      <Nav />
       
       {/* Hero Section with Photo and Overlay */}
       <section className={styles.hero}>

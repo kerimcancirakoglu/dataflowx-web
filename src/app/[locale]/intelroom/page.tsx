@@ -1,6 +1,5 @@
 import type { Metadata } from 'next';
 import { draftMode } from 'next/headers';
-import Nav from '@/components/Nav/Nav';
 import IntelContact from '@/components/IntelRoom/IntelContact';
 import styles from './page.module.css';
 import { getTranslations } from 'next-intl/server';
@@ -121,7 +120,6 @@ export default async function IntelRoomPage({ params }: { params: Promise<{ loca
         category="Cybersecurity Software"
       />
       <VideoBackground videoSrc="/intelroom-bg.mp4" opacity={0.4} playMode="scrub" />
-      <Nav logoSrc="/Intelroombeyaz.png" />
 
       {/* ── Hero ─────────────────────────────────────── */}
       <section className={styles.heroSection}>

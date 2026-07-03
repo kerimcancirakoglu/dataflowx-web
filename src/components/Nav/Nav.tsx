@@ -2,7 +2,6 @@ import { getTranslations } from 'next-intl/server';
 import NavClient from './NavClient';
 
 interface NavProps {
-  logoSrc?: string;
   hideMenu?: boolean;
 }
 
