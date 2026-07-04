@@ -1,5 +1,6 @@
 import type { Metadata } from 'next';
 import { notFound } from 'next/navigation';
+import { redirect } from 'next/navigation';
 import Contact from '@/components/Contact/Contact';
 import Image from 'next/image';
 import TableOfContents from '@/components/BlogLayout/TableOfContents';
@@ -85,7 +86,7 @@ export default async function BlogDetailPage({ params }: Props) {
   const sanityLocale = locale.toUpperCase();
   const post = await client.fetch(GET_POST_BY_SLUG_QUERY, { slug, language: sanityLocale });
 
-  if (!post) notFound();
+  if (!post) redirect(`/${locale}/resources/blog`);
 
   const formattedDate = new Date(post.date).toLocaleDateString(locale, {
     year: 'numeric',
