@@ -23,7 +23,7 @@ export interface WPRestPost {
 }
 
 export async function getPosts(categorySlug: string = 'news-dfx', locale: string = 'tr'): Promise<WPRestPost[]> {
-  const wpUrl = process.env.NEXT_PUBLIC_WP_URL || 'https://dataflowx1.wpenginepowered.com';
+  const wpUrl = process.env.NEXT_PUBLIC_WP_URL || '';
   
   try {
     // 1. Fetch category ID from slug
@@ -55,7 +55,7 @@ export async function getPosts(categorySlug: string = 'news-dfx', locale: string
 }
 
 export async function getPostBySlug(slug: string, locale: string = 'tr'): Promise<WPRestPost | null> {
-  const wpUrl = process.env.NEXT_PUBLIC_WP_URL || 'https://dataflowx1.wpenginepowered.com';
+  const wpUrl = process.env.NEXT_PUBLIC_WP_URL || '';
   const endpoint = `${wpUrl}/wp-json/wp/v2/posts?slug=${encodeURIComponent(slug)}&_embed&lang=${locale}`;
 
   try {
@@ -78,7 +78,7 @@ export interface WPRestResource extends WPRestPost {
 }
 
 export async function getResources(locale: string = 'en'): Promise<WPRestResource[]> {
-  const wpUrl = process.env.NEXT_PUBLIC_WP_URL || 'https://dataflowx1.wpenginepowered.com';
+  const wpUrl = process.env.NEXT_PUBLIC_WP_URL || '';
   const endpoint = `${wpUrl}/wp-json/wp/v2/resource?_embed&per_page=100&lang=${locale}`;
 
   try {

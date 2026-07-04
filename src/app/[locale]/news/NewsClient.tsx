@@ -59,7 +59,7 @@ export default function NewsClient({ posts }: NewsClientProps) {
             </div>
             <div className={styles.heroImageWrapper}>
               <Image
-                src={featuredNews._embedded?.['wp:featuredmedia']?.[0]?.source_url || `${process.env.NEXT_PUBLIC_WP_URL}/wp-content/uploads/Kapak/kapaklar/datamessage1.jpg`}
+                src={featuredNews._embedded?.['wp:featuredmedia']?.[0]?.source_url || '/Kapak/kapaklar/datamessage1.jpg'}
                 alt={featuredNews._embedded?.['wp:featuredmedia']?.[0]?.alt_text || featuredNews.title.rendered}
                 fill style={{ objectFit: 'cover' }}
                 className={styles.heroImage}
@@ -79,7 +79,7 @@ export default function NewsClient({ posts }: NewsClientProps) {
               <div key={news.id} className={styles.card}>
                 <div className={styles.cardImageWrapper}>
                   <Image
-                    src={news._embedded?.['wp:featuredmedia']?.[0]?.source_url || `${process.env.NEXT_PUBLIC_WP_URL}/wp-content/uploads/Kapak/kapaklar/data3.jpg`}
+                    src={news._embedded?.['wp:featuredmedia']?.[0]?.source_url || '/Kapak/kapaklar/data3.jpg'}
                     alt={news._embedded?.['wp:featuredmedia']?.[0]?.alt_text || news.title.rendered}
                     fill style={{ objectFit: 'cover' }}
                     className={styles.cardImage}

@@ -70,7 +70,7 @@ export default async function IntelRoomPage({ params }: { params: Promise<{ loca
       num: '01',
       title: t('p1Title'),
       desc: t('p1Desc'),
-      image: `${process.env.NEXT_PUBLIC_WP_URL}/wp-content/uploads/Kapak/pexels-rsantos1232-3888149-scaled.jpg`,
+      image: `/Kapak/pexels-rsantos1232-3888149-scaled.jpg`,
       icon: (
         <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
           <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" stroke="currentColor" strokeWidth="1.5" strokeLinejoin="round" />
@@ -81,7 +81,7 @@ export default async function IntelRoomPage({ params }: { params: Promise<{ loca
       num: '02',
       title: t('p2Title'),
       desc: t('p2Desc'),
-      image: `${process.env.NEXT_PUBLIC_WP_URL}/wp-content/uploads/Kapak/New-Project-2025-08-02T043719.908.jpg`,
+      image: `/Kapak/New-Project-2025-08-02T043719.908.jpg`,
       icon: (
         <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
           <circle cx="11" cy="11" r="8" stroke="currentColor" strokeWidth="1.5" />
@@ -93,7 +93,7 @@ export default async function IntelRoomPage({ params }: { params: Promise<{ loca
       num: '03',
       title: t('p3Title'),
       desc: t('p3Desc'),
-      image: `${process.env.NEXT_PUBLIC_WP_URL}/wp-content/uploads/Kapak/networksecurity.png`,
+      image: `/Kapak/networksecurity.png`,
       icon: (
         <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
           <path d="M4 6h16v10H4V6z" stroke="currentColor" strokeWidth="1.5" />

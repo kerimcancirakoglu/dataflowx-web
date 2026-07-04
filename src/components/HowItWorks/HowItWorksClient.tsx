@@ -17,7 +17,7 @@ export default function HowItWorksClient({ t }: { t: any }) {
           <circle cx="12" cy="11" r="2" stroke="currentColor" strokeWidth="1.5" />
         </svg>
       ),
-      image: `${process.env.NEXT_PUBLIC_WP_URL}/wp-content/uploads/Kapak/networksecurity.png`,
+      image: '/Kapak/networksecurity.png',
       overlay: 'linear-gradient(to bottom, rgba(0, 15, 40, 0.4) 0%, rgba(0, 5, 20, 0.95) 100%)',
       description: t.network.description,
       links: [
@@ -50,7 +50,7 @@ export default function HowItWorksClient({ t }: { t: any }) {
           <path d="M4 7l8 5 8-5M4 7v10h16V7H4z" stroke="currentColor" strokeWidth="1.5" strokeLinejoin="round" />
         </svg>
       ),
-      image: `${process.env.NEXT_PUBLIC_WP_URL}/wp-content/uploads/Kapak/pexels-rsantos1232-3888149-scaled.jpg`,
+      image: '/Kapak/pexels-rsantos1232-3888149-scaled.jpg',
       overlay: 'linear-gradient(to bottom, rgba(10, 20, 30, 0.4) 0%, rgba(0, 5, 15, 0.95) 100%)',
       description: t.email.description,
       links: [

@@ -8,35 +8,33 @@ import styles from './UseCases.module.css';
 
 
 export default function UseCasesClient({ t }: { t: any }) {
-  const wpUrl = process.env.NEXT_PUBLIC_WP_URL || 'https://dataflowx1.wpenginepowered.com';
-
   const CASES = [
     {
       id: '01',
       headline: t.c1.headline,
       description: t.c1.description,
-      image: `${wpUrl}/wp-content/uploads/svgler/server.svg`,
+      image: '/svgler/server.svg',
       glowColor: '#00B4FF',
     },
     {
       id: '02',
       headline: t.c2.headline,
       description: t.c2.description,
-      image: `${wpUrl}/wp-content/uploads/svgler/trafoyeni.svg`,
+      image: '/svgler/trafoyeni.svg',
       glowColor: '#FFFFFF',
     },
     {
       id: '03',
       headline: t.c3.headline,
       description: t.c3.description,
-      image: `${wpUrl}/wp-content/uploads/svgler/walletcrypto.svg`,
+      image: '/svgler/walletcrypto.svg',
       glowColor: '#FFD700',
     },
     {
       id: '04',
       headline: t.c4.headline,
       description: t.c4.description,
-      image: `${wpUrl}/wp-content/uploads/svgler/robot.svg`,
+      image: '/svgler/robot.svg',
       glowColor: '#F5A706',
     },
   ];

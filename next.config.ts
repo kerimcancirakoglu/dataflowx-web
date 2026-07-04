@@ -58,16 +58,6 @@ const nextConfig: NextConfig = {
       },
       {
         protocol: 'https',
-        hostname: 'wp.dataflowx.com',
-        pathname: '/wp-content/uploads/**',
-      },
-      {
-        protocol: 'https',
-        hostname: 'dataflowx1.wpenginepowered.com',
-        pathname: '/wp-content/uploads/**',
-      },
-      {
-        protocol: 'https',
         hostname: 'secure.gravatar.com',
         pathname: '/avatar/**',
       },
