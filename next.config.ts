@@ -189,6 +189,9 @@ const nextConfig: NextConfig = {
       { source: '/partnerler', destination: '/tr/partners', permanent: true },
       { source: '/about', destination: '/about-us', permanent: true },
 
+      // 8a. Wix posts not migrated to Sanity → blog index
+      { source: '/en/post/industrial-architecture-reporting-and-network-visualization', destination: '/en/resources/blog', permanent: true },
+
       // 8. Old /post/ URL format → new /resources/blog/ structure
       // Locale-prefixed wildcards (specific exceptions above take priority)
       { source: '/en/post/:slug*', destination: '/en/resources/blog/:slug*', permanent: true },
