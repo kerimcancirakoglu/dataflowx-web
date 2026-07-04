@@ -37,3 +37,5 @@ jobs:
           NEXT_PUBLIC_SANITY_PROJECT_ID: "15oto8dp"
           NEXT_PUBLIC_SANITY_DATASET: "production"
           NEXT_PUBLIC_TURNSTILE_SITE_KEY: "0x4AAAAAADq91aSFD3VABRaY"
+          NEXT_PUBLIC_WP_URL: "https://dataflowx1.wpenginepowered.com"
+          NEXT_PUBLIC_WORDPRESS_API_URL: "https://dataflowx1.wpenginepowered.com/graphql"

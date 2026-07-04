@@ -63,6 +63,11 @@ const nextConfig: NextConfig = {
       },
       {
         protocol: 'https',
+        hostname: 'dataflowx1.wpenginepowered.com',
+        pathname: '/wp-content/uploads/**',
+      },
+      {
+        protocol: 'https',
         hostname: 'secure.gravatar.com',
         pathname: '/avatar/**',
       },
@@ -193,6 +198,14 @@ const nextConfig: NextConfig = {
       { source: '/hakkimizda', destination: '/tr/about-us', permanent: true },
       { source: '/partnerler', destination: '/tr/partners', permanent: true },
       { source: '/about', destination: '/about-us', permanent: true },
+
+      // 8. Old /post/ URL format → new /resources/blog/ structure
+      // Locale-prefixed wildcards (specific exceptions above take priority)
+      { source: '/en/post/:slug*', destination: '/en/resources/blog/:slug*', permanent: true },
+      { source: '/tr/post/:slug*', destination: '/tr/resources/blog/:slug*', permanent: true },
+      { source: '/ar/post/:slug*', destination: '/ar/resources/blog/:slug*', permanent: true },
+      // Non-locale-prefixed catch-all (specific exceptions in section 6 still take priority)
+      { source: '/post/:slug*', destination: '/en/resources/blog/:slug*', permanent: true },
     ];
   },
 };
