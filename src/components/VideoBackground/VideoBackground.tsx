@@ -173,6 +173,7 @@ export default function VideoBackground({
           autoPlay
           muted
           playsInline
+          disablePictureInPicture
           style={{
             width: '100%',
             height: '100%',

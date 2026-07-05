@@ -169,3 +169,8 @@ body {
     transition-duration: 0.01ms !important;
   }
 }
+
+video::-webkit-media-controls,
+video::-webkit-media-controls-overlay-play-button {
+  display: none !important;
+}
