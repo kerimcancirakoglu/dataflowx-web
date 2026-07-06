@@ -95,6 +95,17 @@ function htmlToPortableText(html) {
     .replace(/&quot;/g, '"')
     .replace(/&#39;/g, "'")
     .replace(/&nbsp;/g, ' ')
+    .replace(/&#8216;/g, '‘')
+    .replace(/&#8217;/g, '’')
+    .replace(/&#8218;/g, '‚')
+    .replace(/&#8220;/g, '“')
+    .replace(/&#8221;/g, '”')
+    .replace(/&#8222;/g, '„')
+    .replace(/&#8211;/g, '–')
+    .replace(/&#8212;/g, '—')
+    .replace(/&#8230;/g, '…')
+    .replace(/&#8226;/g, '•')
+    .replace(/&#(\d+);/g, (_, code) => String.fromCharCode(Number(code)))
     .replace(/\n{3,}/g, '\n\n')
     .trim();
 
@@ -335,7 +346,20 @@ async function migratePosts() {
         const excerptLimit = docType === 'news' ? 200 : 300;
         const excerpt = (wpPost.excerpt?.rendered || '')
           .replace(/<[^>]+>/g, '')
+          .replace(/&amp;/g, '&')
+          .replace(/&lt;/g, '<')
+          .replace(/&gt;/g, '>')
+          .replace(/&quot;/g, '"')
+          .replace(/&#39;/g, "'")
           .replace(/&nbsp;/g, ' ')
+          .replace(/&#8216;/g, '‘')
+          .replace(/&#8217;/g, '’')
+          .replace(/&#8220;/g, '“')
+          .replace(/&#8221;/g, '”')
+          .replace(/&#8211;/g, '–')
+          .replace(/&#8212;/g, '—')
+          .replace(/&#8230;/g, '…')
+          .replace(/&#(\d+);/g, (_, code) => String.fromCharCode(Number(code)))
           .trim()
           .slice(0, excerptLimit);
 
@@ -347,8 +371,18 @@ async function migratePosts() {
         // 7. Ortak alanlar
         const title = wpPost.title?.rendered
           ?.replace(/&amp;/g, '&')
-          .replace(/&#8217;/g, "'")
-          .replace(/&#8220;|&#8221;/g, '"') || '';
+          .replace(/&lt;/g, '<')
+          .replace(/&gt;/g, '>')
+          .replace(/&quot;/g, '"')
+          .replace(/&#39;/g, "'")
+          .replace(/&#8216;/g, '‘')
+          .replace(/&#8217;/g, '’')
+          .replace(/&#8220;/g, '“')
+          .replace(/&#8221;/g, '”')
+          .replace(/&#8211;/g, '–')
+          .replace(/&#8212;/g, '—')
+          .replace(/&#8230;/g, '…')
+          .replace(/&#(\d+);/g, (_, code) => String.fromCharCode(Number(code))) || '';
 
         const doc = {
           _type: docType,

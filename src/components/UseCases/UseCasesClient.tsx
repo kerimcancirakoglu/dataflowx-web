@@ -15,7 +15,7 @@ export default function UseCasesClient({ t }: { t: any }) {
       description: t.c1.description,
       image: '/svgler/server.svg',
       glowColor: '#00B4FF',
-      url: '/resources/use-cases/secure-remote-access-defense',
+      url: '/resources/use-cases/defense-government-controlled-access',
     },
     {
       id: '02',
@@ -23,7 +23,7 @@ export default function UseCasesClient({ t }: { t: any }) {
       description: t.c2.description,
       image: '/svgler/trafoyeni.svg',
       glowColor: '#FFFFFF',
-      url: '/resources/use-cases/unidirectional-gateway-critical-infrastructure',
+      url: '/resources/use-cases/energy-utilities-critical-infrastructure',
     },
     {
       id: '03',
@@ -31,7 +31,7 @@ export default function UseCasesClient({ t }: { t: any }) {
       description: t.c3.description,
       image: '/svgler/walletcrypto.svg',
       glowColor: '#FFD700',
-      url: '/resources/use-cases/email-security-zero-tolerance',
+      url: '/resources/use-cases/financial-services-targeted-sector',
     },
     {
       id: '04',
@@ -39,7 +39,7 @@ export default function UseCasesClient({ t }: { t: any }) {
       description: t.c4.description,
       image: '/svgler/robot.svg',
       glowColor: '#F5A706',
-      url: '/resources/use-cases/media-transfer-station-manufacturing',
+      url: '/resources/use-cases/manufacturing-industrial-production-floor',
     },
   ];
 

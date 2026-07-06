@@ -122,10 +122,11 @@ const allResourcesData: Resource[] = [
   ...resourcesData,
   ...USE_CASES.map((uc) => {
     let assignedUseCase: UseCaseType | undefined = undefined;
-    if (uc.slug === 'email-security-zero-tolerance') assignedUseCase = 'Financial Services';
-    if (uc.slug === 'unidirectional-gateway-critical-infrastructure') assignedUseCase = 'Energy & SCADA';
-    if (uc.slug === 'secure-remote-access-defense') assignedUseCase = 'Defense & Military';
-    if (uc.slug === 'media-transfer-station-manufacturing') assignedUseCase = 'Manufacturing';
+    if (uc.slug === 'financial-services-targeted-sector') assignedUseCase = 'Financial Services';
+    if (uc.slug === 'energy-utilities-critical-infrastructure') assignedUseCase = 'Energy & SCADA';
+    if (uc.slug === 'defense-government-controlled-access') assignedUseCase = 'Defense & Military';
+    if (uc.slug === 'manufacturing-industrial-production-floor') assignedUseCase = 'Manufacturing';
+    if (uc.slug === 'oil-gas-physical-catastrophe') assignedUseCase = 'Critical Infrastructure';
 
     return {
       id: uc.slug,
