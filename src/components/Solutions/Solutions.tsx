@@ -107,7 +107,7 @@ export default async function Solutions() {
     },
     {
       id: 'intelroom',
-      category: t('categories.emailSecurity'),
+      category: t('categories.dataSecurity'),
       titlePrefix: t('items.intelroom.titlePrefix'),
       titleHighlight: t('items.intelroom.titleHighlight'),
       description: t('items.intelroom.description'),
@@ -121,7 +121,7 @@ export default async function Solutions() {
     },
     {
       id: 'trucdr',
-      category: t('categories.emailSecurity'),
+      category: t('categories.dataSecurity'),
       titlePrefix: t('items.trucdr.titlePrefix'),
       titleHighlight: t('items.trucdr.titleHighlight'),
       description: t('items.trucdr.description'),

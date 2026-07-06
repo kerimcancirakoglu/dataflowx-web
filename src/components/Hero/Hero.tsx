@@ -32,7 +32,7 @@ export default async function Hero({ sanityData, locale }: HeroProps) {
       titleHighlight: t('slide1.titleHighlight'),
       description: t('slide1.description'),
       buttonText: t('slide1.buttonText'),
-      buttonLink: '#product',
+      buttonLink: '/contact',
     },
     {
       titlePrefix: t('slide2.titlePrefix'),

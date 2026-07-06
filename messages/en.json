@@ -41,7 +41,8 @@
       "networkSecurity": "Network Security",
       "fileSecurity": "File Security",
       "emailSecurity": "Email Security",
-      "otSecurity": "OT Security"
+      "otSecurity": "OT Security",
+      "dataSecurity": "Data Security"
     },
     "items": {
       "unidirectional": {
@@ -60,7 +61,7 @@
       "secureRemote": {
         "titlePrefix": "DFX Secure Remote",
         "titleHighlight": "Access",
-        "description": "Built directly upon and seamlessly integrated with DFX UDG hardware, DFX Secure Remote Access enables request-response based data transmission between isolated networks.",
+        "description": "Built directly upon and seamlessly integrated with DFX UDG, DFX Secure Remote Access enables request-response based data transmission between isolated networks.",
         "protects": "Provides complete and uncompromising control over inter-network data traffic, blocking unauthorized lateral movement.",
         "features": {
           "f1": "Zero Trust Access",
@@ -71,7 +72,7 @@
         }
       },
       "sandbox": {
-        "titlePrefix": "DFX",
+        "titlePrefix": "DFX Malware Mitigation",
         "titleHighlight": "Sandbox",
         "description": "DFX Malware Mitigation Sandbox proactively detects suspicious behavior by continuously monitoring network traffic. It isolates and analyzes suspicious files within a virtual sandbox environment.",
         "protects": "Safely observes malware behavior and neutralizes cyber threats without risking the actual production environment.",
@@ -91,8 +92,8 @@
         "features": {
           "f1": "Data Loss Prevention (DLP)",
           "f2": "Zero-Day Prevention",
-          "f3": "File Purification (CDR)",
-          "f4": "Zero USB Policy"
+          "f3": "Logging & Audit Trail",
+          "f4": "User Management"
         }
       },
       "emailSecurity": {

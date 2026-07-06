@@ -18,7 +18,7 @@ export default function HowItWorksClient({ t }: { t: any }) {
         </svg>
       ),
       image: '/Kapak/networksecurity.png',
-      overlay: 'linear-gradient(to bottom, rgba(0, 15, 40, 0.4) 0%, rgba(0, 5, 20, 0.95) 100%)',
+      overlay: 'linear-gradient(to bottom, rgba(0, 15, 40, 0.2) 0%, rgba(0, 5, 20, 0.92) 100%)',
       description: t.network.description,
       links: [
         { text: t.network.l1, url: '/unidirectional-gateway' },
@@ -35,7 +35,7 @@ export default function HowItWorksClient({ t }: { t: any }) {
         </svg>
       ),
       image: '/cyber-security-concept-digital-art.jpg',
-      overlay: 'linear-gradient(to bottom, rgba(40, 20, 10, 0.3) 0%, rgba(15, 5, 0, 0.95) 100%)',
+      overlay: 'linear-gradient(to bottom, rgba(40, 20, 10, 0.15) 0%, rgba(15, 5, 0, 0.92) 100%)',
       description: t.file.description,
       links: [
         { text: t.file.l1, url: '/sandbox' },
@@ -51,7 +51,7 @@ export default function HowItWorksClient({ t }: { t: any }) {
         </svg>
       ),
       image: '/Kapak/pexels-rsantos1232-3888149-scaled.jpg',
-      overlay: 'linear-gradient(to bottom, rgba(10, 20, 30, 0.4) 0%, rgba(0, 5, 15, 0.95) 100%)',
+      overlay: 'linear-gradient(to bottom, rgba(10, 20, 30, 0.2) 0%, rgba(0, 5, 15, 0.92) 100%)',
       description: t.email.description,
       links: [
         { text: t.email.l1, url: '/email-security-platform' },
@@ -67,8 +67,8 @@ export default function HowItWorksClient({ t }: { t: any }) {
           <path d="M12 2L15 8L22 9L17 14L18 21L12 18L6 21L7 14L2 9L9 8L12 2Z" stroke="currentColor" strokeWidth="1.5" strokeLinejoin="round" />
         </svg>
       ),
-      image: '/secured-file-folder-futuristic-data-network.jpg',
-      overlay: 'linear-gradient(to bottom, rgba(30, 30, 10, 0.3) 0%, rgba(10, 10, 0, 0.95) 100%)',
+      image: '/Kapak/kapaklar/datasecure1.jpg',
+      overlay: 'linear-gradient(to bottom, rgba(10, 20, 30, 0.2) 0%, rgba(0, 5, 15, 0.92) 100%)',
       description: t.ot.description,
       links: [
         { text: t.ot.l1, url: '/portx' }

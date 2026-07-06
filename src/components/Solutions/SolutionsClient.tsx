@@ -3,6 +3,7 @@
 import React, { useState, useEffect } from 'react';
 import dynamic from 'next/dynamic';
 import Image from 'next/image';
+import Link from 'next/link';
 import styles from './Solutions.module.css';
 
 const DataFlowDiagram = dynamic(() => import('../DataFlowDiagram/DataFlowDiagram'), { ssr: false });
@@ -128,9 +129,9 @@ export default function SolutionsClient({
             {/* Using activeSolution.link explicitly if it exists */}
             {activeSolution.link && (
               <div style={{ display: 'flex', justifyContent: 'flex-end', width: '100%', marginTop: 'auto', paddingTop: '2rem' }}>
-                <a href={activeSolution.link} className={styles.productLink} style={{ marginTop: 0 }}>
+                <Link href={activeSolution.link} className={styles.productLink} style={{ marginTop: 0 }}>
                   {goToProductLabel}
-                </a>
+                </Link>
               </div>
             )}
           </div>

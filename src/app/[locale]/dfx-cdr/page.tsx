@@ -136,7 +136,7 @@ export default async function CDRPage({ params }: { params: Promise<{ locale: st
       <section className={styles.heroSection}>
         <p className={styles.overTitle}>{hero?.overTitle ?? t('hero.overTitle')}</p>
         <h1 className={styles.heroTitle}>
-          <span style={{ color: '#F5A706' }}>True</span>CDR™
+          <span style={{ color: '#F5A706' }}>DFX</span> CDR
         </h1>
         <p className={styles.heroSubtitle}>
           {hero?.subtitle ?? t('hero.subtitle')}
