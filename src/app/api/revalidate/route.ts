@@ -24,11 +24,12 @@ const TYPE_TO_PATHS: Record<string, string[]> = {
 export async function POST(req: NextRequest) {
   try {
     const secret = process.env.SANITY_WEBHOOK_SECRET;
-    if (secret) {
-      const auth = req.headers.get('authorization');
-      if (auth !== `Bearer ${secret}`) {
-        return new Response('Unauthorized', { status: 401 });
-      }
+    if (!secret) {
+      return new Response('Server misconfiguration: SANITY_WEBHOOK_SECRET not set', { status: 500 });
+    }
+    const auth = req.headers.get('authorization');
+    if (auth !== `Bearer ${secret}`) {
+      return new Response('Unauthorized', { status: 401 });
     }
 
     const body = await req.json() as { _type?: string };

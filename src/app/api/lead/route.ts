@@ -1,8 +1,16 @@
 import { NextResponse } from 'next/server';
 import { Resend } from 'resend';
 
-// Honeypot field name (must match frontend exactly)
 const HONEYPOT_FIELD = 'website_url';
+
+function escapeHtml(str: string): string {
+  return str
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;')
+    .replace(/'/g, '&#x27;');
+}
 
 export async function POST(req: Request) {
   try {
@@ -20,6 +28,15 @@ export async function POST(req: Request) {
     // 2. Basic Validation
     if (!fullName || !email) {
       return NextResponse.json({ error: 'Missing required fields' }, { status: 400 });
+    }
+    if (
+      fullName.length > 100 ||
+      email.length > 200 ||
+      (company && company.length > 200) ||
+      (message && message.length > 2000) ||
+      (documentName && documentName.length > 300)
+    ) {
+      return NextResponse.json({ error: 'Input too long' }, { status: 400 });
     }
 
     // 2.5 Cloudflare Turnstile Verification
@@ -74,18 +91,18 @@ export async function POST(req: Request) {
         await resend.emails.send({
           from: 'DataFlowX Website <leads@dataflowx.com>',
           to: ['info@dataflowx.com'],
-          subject: `🚨 New Lead: ${fullName} / ${company} / ${country || 'N/A'}`,
+          subject: `New Lead: ${escapeHtml(fullName)} / ${escapeHtml(company ?? '')} / ${escapeHtml(country || 'N/A')}`,
           html: `
             <h2>New Lead Captured!</h2>
-            <p><strong>Source:</strong> ${documentName}</p>
+            <p><strong>Source:</strong> ${escapeHtml(documentName ?? '')}</p>
             <ul>
-              <li><strong>Name:</strong> ${fullName}</li>
-              <li><strong>Company:</strong> ${company}</li>
-              <li><strong>Email:</strong> ${email}</li>
-              <li><strong>Country:</strong> ${country || 'N/A'}</li>
+              <li><strong>Name:</strong> ${escapeHtml(fullName)}</li>
+              <li><strong>Company:</strong> ${escapeHtml(company ?? '')}</li>
+              <li><strong>Email:</strong> ${escapeHtml(email)}</li>
+              <li><strong>Country:</strong> ${escapeHtml(country || 'N/A')}</li>
               <li><strong>Time:</strong> ${new Date().toUTCString()}</li>
             </ul>
-            ${message ? `<h3>Message:</h3><p>${message}</p>` : ''}
+            ${message ? `<h3>Message:</h3><p>${escapeHtml(message)}</p>` : ''}
           `
         });
 
@@ -95,7 +112,7 @@ export async function POST(req: Request) {
             from: 'DataFlowX <noreply@dataflowx.com>',
             to: email,
             subject: 'DataFlowX — We received your request',
-            html: `<p>Hi ${fullName},</p><p>Thank you for reaching out to DataFlowX. We have received your request and our team will get back to you shortly.</p>`
+            html: `<p>Hi ${escapeHtml(fullName)},</p><p>Thank you for reaching out to DataFlowX. We have received your request and our team will get back to you shortly.</p>`
           });
         } catch (autoReplyErr) {
           console.error('Auto-reply failed (domain likely not verified in Resend):', autoReplyErr);
