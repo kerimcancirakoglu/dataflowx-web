@@ -335,15 +335,17 @@ export default function PartnersMap() {
   })), []);
 
   useEffect(() => {
-    gsap.to('.bg-particle', {
-      y: 'random(-40, 40)',
-      x: 'random(-40, 40)',
-      opacity: 'random(0.1, 0.4)',
-      scale: 'random(0.5, 1.5)',
-      duration: () => 6 + Math.random() * 6,
-      yoyo: true,
-      repeat: -1,
-      ease: 'sine.inOut'
+    import('gsap').then(({ gsap }) => {
+      gsap.to('.bg-particle', {
+        y: 'random(-40, 40)',
+        x: 'random(-40, 40)',
+        opacity: 'random(0.1, 0.4)',
+        scale: 'random(0.5, 1.5)',
+        duration: () => 6 + Math.random() * 6,
+        yoyo: true,
+        repeat: -1,
+        ease: 'sine.inOut'
+      });
     });
   }, []);
 

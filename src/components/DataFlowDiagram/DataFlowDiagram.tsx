@@ -22,7 +22,9 @@ export default function DataFlowDiagram({ type }: DataFlowDiagramProps) {
   const packetBot2Ref = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    let ctx = gsap.context(() => {
+    let ctx: any;
+    import('gsap').then(({ gsap }) => {
+      ctx = gsap.context(() => {
       if (type === 'unidirectional') {
         if (!packetTop1Ref.current) return;
         const tl = gsap.timeline({ repeat: -1 });
@@ -99,9 +101,9 @@ export default function DataFlowDiagram({ type }: DataFlowDiagramProps) {
           );
         }
       }
-    }, containerRef);
-
-    return () => ctx.revert();
+      }, containerRef);
+    });
+    return () => ctx?.revert();
   }, [type]);
 
   return (

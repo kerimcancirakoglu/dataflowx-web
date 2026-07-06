@@ -13,7 +13,9 @@ export default function SecureRemoteAccessDiagram() {
   const smFilePacketRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    let ctx = gsap.context(() => {
+    let ctx: any;
+    import('gsap').then(({ gsap }) => {
+      ctx = gsap.context(() => {
       // Top Row (Request) - Moves Left to Right
       if (requestPacketRef.current) {
         gsap.fromTo(
@@ -141,9 +143,9 @@ export default function SecureRemoteAccessDiagram() {
           }
         );
       }
-    }, containerRef);
-
-    return () => ctx.revert();
+      }, containerRef);
+    });
+    return () => ctx?.revert();
   }, []);
 
   return (
