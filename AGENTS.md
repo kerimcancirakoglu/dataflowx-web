@@ -15,7 +15,7 @@ Bu dosyayı oku, sonra koda dokun. Projeyi yanlış anlamak saatlerce hata ayık
 | Katman | Teknoloji |
 |---|---|
 | Framework | Next.js 16 (App Router), TypeScript |
-| Deploy | **Cloudflare Workers** — `npm run deploy:cf` |
+| Deploy | **Cloudflare Workers** — CI/CD via GitHub Actions (`.github/workflows/deploy.yml`) |
 | CMS | Sanity (`projectId: 15oto8dp`, `dataset: production`) |
 | i18n | next-intl, 3 dil: `en` / `tr` / `ar` → `messages/` klasörü |
 | Stil | CSS Modules (`*.module.css`) |
@@ -24,7 +24,8 @@ Bu dosyayı oku, sonra koda dokun. Projeyi yanlış anlamak saatlerce hata ayık
 | E-posta | Resend API |
 | Form koruması | Cloudflare Turnstile + honeypot alanı |
 
-**KRITIK:** `npm run build` değil, `npm run deploy:cf` kullan. Vercel'e deploy etme — proje Cloudflare Workers üzerinde.
+**DEPLOY AKIŞI:** `git push origin main` → GitHub Actions tetiklenir → `pnpm run deploy:cf` → Cloudflare Workers'a yayınlanır.
+Hiçbir zaman lokal olarak `npm run deploy:cf` çalıştırma — deploy CI/CD üzerinden gerçekleşir, Vercel'e deploy etme.
 
 ---
 
@@ -196,7 +197,7 @@ HeroClient.tsx (Client Component)
 
 1. **Client component'lerde async/await kullanma** — `'use client'` + `async` birlikte çalışmaz.
 2. **GSAP'i dinamik import et** — `import('gsap')` şeklinde, SSR hatasını önler.
-3. **`npm run build` değil `npm run deploy:cf`** — build artefaktı farklı.
+3. **Lokal `deploy:cf` çalıştırma** — deploy her zaman `git push origin main` + GitHub Actions üzerinden yapılır.
 4. **CSS Modules kullan** — global stil ekleme, `styles.xxx` class'larını koru.
 5. **`messages/` dosyalarına dokunma** — TR/AR içerikleri buradan geliyor, Sanity'e taşıma.
 6. **Yeni schema = revalidate route güncelle** — `TYPE_TO_PATHS` map'ini unutma.
@@ -211,13 +212,15 @@ HeroClient.tsx (Client Component)
 # Geliştirme
 npm run dev
 
-# Cloudflare deploy
-npm run deploy:cf
+# Yayına almak için — LOKAL DEPLOY YOK
+# Sadece git push origin main yap, GitHub Actions otomatik deploy eder:
+#   .github/workflows/deploy.yml → pnpm run deploy:cf → Cloudflare Workers
+git push origin main
 
 # Sanity seed scripti (homePage + 4 ürün sayfası)
 SANITY_API_WRITE_TOKEN="..." node scripts/seed-sanity.mjs
 
-# Cloudflare secret ekleme
+# Cloudflare secret ekleme (GitHub Actions secrets'a da eklemeyi unutma)
 echo "değer" | npx wrangler secret put DEĞİŞKEN_ADI
 
 # TypeScript kontrol

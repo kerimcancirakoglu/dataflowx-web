@@ -1,6 +1,6 @@
 'use client';
 
-import React, { Suspense } from 'react';
+import React, { Suspense, useRef, useEffect, useState } from 'react';
 import { Canvas } from '@react-three/fiber';
 import { OrbitControls, useGLTF, Environment, ContactShadows, Float, Html, Bounds, Center } from '@react-three/drei';
 import styles from './MTSModelViewer.module.css';
@@ -39,6 +39,26 @@ export default function MTSModelViewer() {
   const t = useTranslations('MTSModelViewer');
   const features = ['f1', 'f2', 'f3', 'f4', 'f5', 'f6'] as const;
 
+  // Lazy-load: only mount Canvas when visible in viewport
+  const containerRef = useRef<HTMLDivElement>(null);
+  const [isVisible, setIsVisible] = useState(false);
+
+  useEffect(() => {
+    const el = containerRef.current;
+    if (!el) return;
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setIsVisible(true);
+          observer.disconnect();
+        }
+      },
+      { rootMargin: '200px' }
+    );
+    observer.observe(el);
+    return () => observer.disconnect();
+  }, []);
+
   return (
     <div className={styles.container}>
       {/* Left Panel: Content matching the requested layout */}
@@ -63,34 +83,40 @@ export default function MTSModelViewer() {
         </div>
       </div>
 
-      {/* Right Panel: 3D Model Canvas */}
-      <div className={styles.canvasWrapper}>
-        <Canvas camera={{ position: [2, 1, 5], fov: 45 }}>
-          <ambientLight intensity={0.4} />
-          <spotLight position={[10, 10, 10]} angle={0.15} penumbra={1} intensity={1} color="#FFFFFF" />
-          <spotLight position={[-10, 10, -10]} angle={0.15} penumbra={1} intensity={1} color="#F5A706" />
-          <directionalLight position={[0, 5, 5]} intensity={0.5} />
+      {/* Right Panel: 3D Model Canvas — lazy-loaded */}
+      <div className={styles.canvasWrapper} ref={containerRef}>
+        {isVisible ? (
+          <Canvas camera={{ position: [2, 1, 5], fov: 45 }}>
+            <ambientLight intensity={0.4} />
+            <spotLight position={[10, 10, 10]} angle={0.15} penumbra={1} intensity={1} color="#FFFFFF" />
+            <spotLight position={[-10, 10, -10]} angle={0.15} penumbra={1} intensity={1} color="#F5A706" />
+            <directionalLight position={[0, 5, 5]} intensity={0.5} />
 
-          <Suspense fallback={<Loader />}>
-            <Bounds fit clip observe margin={1.5}>
-              <Center>
-                <MTSModel />
-              </Center>
-            </Bounds>
-            <Environment preset="city" />
-            <ContactShadows position={[0, -1, 0]} opacity={0.4} scale={10} blur={2} far={4} />
-          </Suspense>
+            <Suspense fallback={<Loader />}>
+              <Bounds fit clip observe margin={1.5}>
+                <Center>
+                  <MTSModel />
+                </Center>
+              </Bounds>
+              <Environment preset="city" />
+              <ContactShadows position={[0, -1, 0]} opacity={0.4} scale={10} blur={2} far={4} />
+            </Suspense>
 
-          <OrbitControls 
-            makeDefault
-            enablePan={false}
-            enableZoom={false}
-            minDistance={2}
-            maxDistance={20}
-            autoRotate
-            autoRotateSpeed={0.5}
-          />
-        </Canvas>
+            <OrbitControls 
+              makeDefault
+              enablePan={false}
+              enableZoom={false}
+              minDistance={2}
+              maxDistance={20}
+              autoRotate
+              autoRotateSpeed={0.5}
+            />
+          </Canvas>
+        ) : (
+          <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', height: '100%' }}>
+            <div style={{ color: 'rgba(255,255,255,0.3)', fontSize: '0.875rem' }}>3D Model</div>
+          </div>
+        )}
       </div>
     </div>
   );

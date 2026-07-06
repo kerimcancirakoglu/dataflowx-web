@@ -140,7 +140,7 @@ export default async function SecureRemoteAccessPage({ params }: { params: Promi
 
       {/* Interactive 3D Model Viewer - keeping as Diode for now */}
       <section style={{ padding: '0 2rem', maxWidth: '1400px', margin: '0 auto' }}>
-        <DiodeModelViewerWrapper title="Secure Remote Access" modelPath="/models/Secure Remote Access.glb" />
+        <DiodeModelViewerWrapper title="Secure Remote Access" modelPath="/models/secure-remote-access-opt.glb" />
       </section>
 
       <div className="section-spacer" aria-hidden="true" />
