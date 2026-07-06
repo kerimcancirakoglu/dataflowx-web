@@ -1,7 +1,6 @@
 'use client';
 
 import React, { useEffect, useRef, useState } from 'react';
-import { gsap } from 'gsap';
 import styles from './GatewayFamily.module.css';
 import { useTranslations } from 'next-intl';
 
@@ -61,7 +60,9 @@ export default function GatewayFamily() {
   };
 
   useEffect(() => {
-    const ctx = gsap.context(() => {
+    let ctx: any;
+    import('gsap').then(({ gsap }) => {
+      ctx = gsap.context(() => {
       if (packet1Ref.current) {
         gsap.fromTo(
           packet1Ref.current,
@@ -161,6 +162,7 @@ export default function GatewayFamily() {
         );
       }
     }, containerRef);
+    });
     return () => ctx.revert();
   }, []);
 

@@ -1,7 +1,6 @@
 'use client';
 
 import React, { useEffect, useRef, useState } from 'react';
-import { gsap } from 'gsap';
 import styles from './BrokerFamily.module.css';
 
 /* ── Detail cards for each clickable element ── */
@@ -92,7 +91,9 @@ export default function BrokerFamily() {
   const [activeElement, setActiveElement] = useState<ElementId | null>(null);
 
   useEffect(() => {
-    const ctx = gsap.context(() => {
+    let ctx: any;
+    import('gsap').then(({ gsap }) => {
+      ctx = gsap.context(() => {
       // Request Packets (Left to Right)
       const animateLR = (ref: React.RefObject<HTMLDivElement | null>, delay: number) => {
         if (ref.current) {
@@ -150,6 +151,7 @@ export default function BrokerFamily() {
       animateRL(res1FileRef, 1.0);
 
     }, containerRef);
+    });
     return () => ctx.revert();
   }, []);
 

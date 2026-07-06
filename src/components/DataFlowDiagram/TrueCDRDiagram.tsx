@@ -1,14 +1,15 @@
 'use client';
 
 import React, { useEffect, useRef } from 'react';
-import { gsap } from 'gsap';
 import styles from './TrueCDRDiagram.module.css';
 
 export default function DfxCdrDiagram() {
   const containerRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    const ctx = gsap.context(() => {
+    let ctx: any;
+    import('gsap').then(({ gsap }) => {
+      ctx = gsap.context(() => {
       // Background elements floating
       gsap.to('.floating-element', {
         y: '-=15',
@@ -128,6 +129,7 @@ export default function DfxCdrDiagram() {
       }, '+=0.5');
 
     }, containerRef);
+    });
 
     return () => ctx.revert();
   }, []);

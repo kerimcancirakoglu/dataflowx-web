@@ -1,7 +1,6 @@
 'use client';
 
 import React, { useEffect, useRef, useState } from 'react';
-import { gsap } from 'gsap';
 import styles from './SandboxAnimation.module.css';
 
 const SOURCES = [
@@ -180,7 +179,9 @@ export default function SandboxAnimation() {
   }, [autoPlay]);
 
   useEffect(() => {
-    const ctx = gsap.context(() => {
+    let ctx: any;
+    import('gsap').then(({ gsap }) => {
+      ctx = gsap.context(() => {
       // Feature label'lar için floating animasyon
       gsap.to('.feature-label-inner', {
         y: '-=8',
@@ -249,6 +250,7 @@ export default function SandboxAnimation() {
         }
       });
     }, containerRef);
+    });
 
     return () => ctx.revert();
     // eslint-disable-next-line react-hooks/exhaustive-deps

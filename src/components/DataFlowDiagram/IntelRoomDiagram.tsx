@@ -1,14 +1,15 @@
 'use client';
 
 import React, { useEffect, useRef } from 'react';
-import { gsap } from 'gsap';
 import styles from './IntelRoomDiagram.module.css';
 
 export default function IntelRoomDiagram() {
   const containerRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    const ctx = gsap.context(() => {
+    let ctx: any;
+    import('gsap').then(({ gsap }) => {
+      ctx = gsap.context(() => {
       // Rotate the radar dish/circle
       gsap.to('.radar-sweep', {
         rotation: 360,
@@ -64,6 +65,7 @@ export default function IntelRoomDiagram() {
       });
 
     }, containerRef);
+    });
 
     return () => ctx.revert();
   }, []);

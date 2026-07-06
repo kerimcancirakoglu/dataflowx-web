@@ -1,7 +1,6 @@
 'use client';
 
 import React, { useEffect, useRef, useState } from 'react';
-import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import Image from 'next/image';
 import styles from './EmailSecurityLayers.module.css';
@@ -39,7 +38,9 @@ export default function EmailSecurityLayers() {
   const [activeLayer, setActiveLayer] = useState<number | null>(null);
 
   useEffect(() => {
-    const ctx = gsap.context(() => {
+    let ctx: any;
+    import('gsap').then(({ gsap }) => {
+      ctx = gsap.context(() => {
       const texts = gsap.utils.toArray('.textBox');
 
       const tl = gsap.timeline({
@@ -68,6 +69,7 @@ export default function EmailSecurityLayers() {
       );
 
     }, containerRef);
+    });
 
     return () => ctx.revert();
   }, []);

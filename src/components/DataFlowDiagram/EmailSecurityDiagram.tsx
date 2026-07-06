@@ -1,14 +1,15 @@
 'use client';
 
 import React, { useEffect, useRef } from 'react';
-import { gsap } from 'gsap';
 import styles from './EmailSecurityDiagram.module.css';
 
 export default function EmailSecurityDiagram() {
   const containerRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    const ctx = gsap.context(() => {
+    let ctx: any;
+    import('gsap').then(({ gsap }) => {
+      ctx = gsap.context(() => {
       const mails = gsap.utils.toArray<HTMLElement>('.mail-wrapper');
       const masterTl = gsap.timeline({ repeat: -1 });
 
@@ -92,6 +93,7 @@ export default function EmailSecurityDiagram() {
         ease: 'sine.inOut',
       });
     }, containerRef);
+    });
 
     return () => ctx.revert();
   }, []);

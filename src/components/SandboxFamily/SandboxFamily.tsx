@@ -1,7 +1,6 @@
 'use client';
 
 import React, { useEffect, useRef, useState } from 'react';
-import { gsap } from 'gsap';
 import Image from 'next/image';
 import styles from './SandboxFamily.module.css';
 
@@ -97,7 +96,9 @@ export default function SandboxFamily() {
   const [activeElement, setActiveElement] = useState<ElementId | null>(null);
 
   useEffect(() => {
-    const ctx = gsap.context(() => {
+    let ctx: any;
+    import('gsap').then(({ gsap }) => {
+      ctx = gsap.context(() => {
       // Floating animation for nodes
       gsap.to('.arc-node-wrap', {
         y: '-=10',
@@ -108,6 +109,7 @@ export default function SandboxFamily() {
         ease: 'sine.inOut'
       });
     }, containerRef);
+    });
     return () => ctx.revert();
   }, []);
 

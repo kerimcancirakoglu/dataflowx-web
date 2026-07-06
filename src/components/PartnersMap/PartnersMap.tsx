@@ -6,7 +6,6 @@ import { OrbitControls, Html } from '@react-three/drei';
 import * as THREE from 'three';
 import styles from './PartnersMap.module.css';
 import mapData3D from './mapData3D.json';
-import gsap from 'gsap';
 
 const PINS = [
   { 

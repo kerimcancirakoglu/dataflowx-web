@@ -1,7 +1,6 @@
 'use client';
 
 import { useEffect, useRef, useState } from 'react';
-import { gsap } from 'gsap';
 import styles from './CDRAnimation.module.css';
 
 // File types that cycle through the animation
@@ -98,7 +97,9 @@ export default function CDRAnimation() {
 
   useEffect(() => {
     if (!isoContainerRef.current) return;
-    const ctx = gsap.context(() => {
+    let ctx: any;
+    import('gsap').then(({ gsap }) => {
+      ctx = gsap.context(() => {
        gsap.to('.scan-plane', { opacity: 0, duration: 0.2 });
        gsap.to('.float-label-validate, .float-label-disarm, .float-label-reconstruct', { opacity: 0, y: 0, duration: 0.2 });
        
@@ -126,6 +127,7 @@ export default function CDRAnimation() {
           gsap.to('.float-label-reconstruct', { opacity: 1, y: -15, duration: 0.5 });
        }
     }, isoContainerRef);
+    });
     return () => ctx.revert();
   }, [step]);
 

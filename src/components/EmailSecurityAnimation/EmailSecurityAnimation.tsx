@@ -1,7 +1,6 @@
 'use client';
 
 import React, { useEffect, useRef, useState } from 'react';
-import { gsap } from 'gsap';
 import styles from './EmailSecurityAnimation.module.css';
 
 const elementDetails: Record<string, {
@@ -59,7 +58,9 @@ export default function EmailSecurityAnimation() {
   const [activeElement, setActiveElement] = useState<ElementId | null>(null);
 
   useEffect(() => {
-    const ctx = gsap.context(() => {
+    let ctx: any;
+    import('gsap').then(({ gsap }) => {
+      ctx = gsap.context(() => {
       const tl       = gsap.timeline({ repeat: -1 });
       const packet   = packetRef.current;
       const dash     = dashboardRef.current;
@@ -139,6 +140,7 @@ export default function EmailSecurityAnimation() {
       tl.to({}, { duration: 1 });
 
     }, containerRef);
+    });
     return () => ctx.revert();
   }, []);
 

@@ -1,7 +1,6 @@
 'use client';
 
 import React, { useEffect, useRef } from 'react';
-import { gsap } from 'gsap';
 import styles from './UnidirectionalGatewayDiagram.module.css';
 
 export default function UnidirectionalGatewayDiagram() {
@@ -9,7 +8,9 @@ export default function UnidirectionalGatewayDiagram() {
   const packetRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    const ctx = gsap.context(() => {
+    let ctx: any;
+    import('gsap').then(({ gsap }) => {
+      ctx = gsap.context(() => {
       // Packet - Moves Left to Right across the diodes
       if (packetRef.current) {
         gsap.fromTo(
@@ -31,6 +32,7 @@ export default function UnidirectionalGatewayDiagram() {
         );
       }
     }, containerRef);
+    });
 
     return () => ctx.revert();
   }, []);

@@ -4,7 +4,7 @@ import ContactMini from '@/components/ContactMini/ContactMini';
 import VideoBackground from '@/components/VideoBackground/VideoBackground';
 import MTSHero from '@/components/MTSHero/MTSHero';
 import MTSAnimation from '@/components/MTSAnimation/MTSAnimation';
-import MTSModelViewer from '@/components/MTSModelViewer/MTSModelViewer';
+import MTSModelViewerWrapper from '@/components/MTSModelViewer/MTSModelViewerWrapper';
 import MTSModels from '@/components/MTSModels/MTSModels';
 import MTSFeaturesGrid from '@/components/MTSFeaturesGrid/MTSFeaturesGrid';
 import styles from './page.module.css';
@@ -143,7 +143,7 @@ export default async function MediaTransferStationPage({ params }: { params: Pro
 
       {/* 3D Model Viewer */}
       <section style={{ padding: '0 2rem', maxWidth: '1400px', margin: '0 auto' }}>
-        <MTSModelViewer />
+        <MTSModelViewerWrapper />
       </section>
 
       <div className="section-spacer" aria-hidden="true" />

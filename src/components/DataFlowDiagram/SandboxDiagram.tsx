@@ -1,7 +1,6 @@
 'use client';
 
 import React, { useEffect, useRef } from 'react';
-import { gsap } from 'gsap';
 import styles from './SandboxDiagram.module.css';
 
 export default function SandboxDiagram() {
@@ -16,7 +15,9 @@ export default function SandboxDiagram() {
   ];
 
   useEffect(() => {
-    const ctx = gsap.context(() => {
+    let ctx: any;
+    import('gsap').then(({ gsap }) => {
+      ctx = gsap.context(() => {
       // Hologram ikonlarının hafifçe süzülmesi
       gsap.to('.hologram-icon', {
         y: '-=10',
@@ -135,6 +136,7 @@ export default function SandboxDiagram() {
       });
 
     }, containerRef);
+    });
 
     return () => ctx.revert();
   }, []);
