@@ -176,14 +176,15 @@ const nextConfig: NextConfig = {
         destination: '/unidirectional-gateway',
         permanent: true,
       },
+      // Now in Sanity — redirect to specific posts instead of blog index
       {
         source: '/post/sharing-threat-intelligence-between-networks-misp-and-data-diodes',
-        destination: '/resources/blog', 
+        destination: '/en/resources/blog/sharing-threat-intelligence-misp-and-data-diodes',
         permanent: true,
       },
       {
         source: '/post/ai-in-cybersecurity-benefits-vs-risks',
-        destination: '/resources/blog',
+        destination: '/en/resources/blog/ai-in-cybersecurity-benefits-vs-risks',
         permanent: true,
       },
 
@@ -193,8 +194,8 @@ const nextConfig: NextConfig = {
       { source: '/partnerler', destination: '/tr/partners', permanent: true },
       { source: '/about', destination: '/about-us', permanent: true },
 
-      // 8a. Wix posts not migrated to Sanity → blog index
-      { source: '/en/post/industrial-architecture-reporting-and-network-visualization', destination: '/en/resources/blog', permanent: true },
+      // 8a. Now in Sanity — redirect to specific post
+      { source: '/en/post/industrial-architecture-reporting-and-network-visualization', destination: '/en/resources/blog/industrial-architecture-reporting-and-network-visualization', permanent: true },
 
       // 8. Old /post/ URL format → new /resources/blog/ structure
       // Locale-prefixed wildcards (specific exceptions above take priority)
@@ -203,6 +204,10 @@ const nextConfig: NextConfig = {
       { source: '/ar/post/:slug*', destination: '/ar/resources/blog/:slug*', permanent: true },
       // Non-locale-prefixed catch-all (specific exceptions in section 6 still take priority)
       { source: '/post/:slug*', destination: '/en/resources/blog/:slug*', permanent: true },
+
+      // 9. Short /blog/ URLs for LinkedIn posts
+      // Usage: dataflowx.com/blog/{sanity-slug} → /en/resources/blog/{sanity-slug}
+      { source: '/blog/:slug*', destination: '/en/resources/blog/:slug*', permanent: false },
     ];
   },
 };
