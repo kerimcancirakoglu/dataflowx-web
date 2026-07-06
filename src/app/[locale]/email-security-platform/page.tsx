@@ -1,9 +1,10 @@
 import type { Metadata } from 'next';
 import { draftMode } from 'next/headers';
+import dynamic from 'next/dynamic';
 import ContactMini from '@/components/ContactMini/ContactMini';
 import VideoBackground from '@/components/VideoBackground/VideoBackground';
 import EmailSecurityAnimation from '@/components/EmailSecurityAnimation/EmailSecurityAnimation';
-import EmailSecurityLayers from '@/components/EmailSecurityLayers/EmailSecurityLayers';
+const EmailSecurityLayers = dynamic(() => import('@/components/EmailSecurityLayers/EmailSecurityLayers'), { ssr: false });
 import EmailFeaturesTabs from '@/components/EmailFeaturesTabs/EmailFeaturesTabs';
 import styles from './page.module.css';
 import { getTranslations } from 'next-intl/server';

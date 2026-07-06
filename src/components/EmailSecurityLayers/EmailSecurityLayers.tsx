@@ -1,11 +1,8 @@
 'use client';
 
 import React, { useEffect, useRef, useState } from 'react';
-import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import Image from 'next/image';
 import styles from './EmailSecurityLayers.module.css';
-
-gsap.registerPlugin(ScrollTrigger);
 
 const LAYER_IMAGES = [
   {
@@ -39,7 +36,8 @@ export default function EmailSecurityLayers() {
 
   useEffect(() => {
     let ctx: any;
-    import('gsap').then(({ gsap }) => {
+    Promise.all([import('gsap'), import('gsap/ScrollTrigger')]).then(([{ gsap }, { ScrollTrigger }]) => {
+      gsap.registerPlugin(ScrollTrigger);
       ctx = gsap.context(() => {
       const texts = gsap.utils.toArray('.textBox');
 
@@ -78,31 +76,29 @@ export default function EmailSecurityLayers() {
   useEffect(() => {
     if (!isInteractive) return;
 
-    const layers = gsap.utils.toArray('.stackedLayer');
-    const texts = gsap.utils.toArray('.textBox');
+    import('gsap').then(({ gsap }) => {
+      const layers = gsap.utils.toArray('.stackedLayer');
+      const texts = gsap.utils.toArray('.textBox');
 
-    if (activeLayer === null) {
-      // Default State: Combined image
-      gsap.to(texts, { opacity: 0.4, duration: 0.3, overwrite: 'auto' });
-      gsap.to(layers, { opacity: 0, duration: 0.3, overwrite: 'auto' });
-      gsap.to('.combinedLayer', { opacity: 1, duration: 0.3, overwrite: 'auto' });
-    } else {
-      // Highlight specific layer
-      texts.forEach((txt, i) => {
-        gsap.to(txt as Element, { opacity: i === activeLayer ? 1 : 0.2, duration: 0.3, overwrite: 'auto' });
-      });
-      // Keep the base combined image faintly visible so floating pieces have a platform
-      gsap.to('.combinedLayer', { opacity: 0.2, duration: 0.3, overwrite: 'auto' });
+      if (activeLayer === null) {
+        gsap.to(texts, { opacity: 0.4, duration: 0.3, overwrite: 'auto' });
+        gsap.to(layers, { opacity: 0, duration: 0.3, overwrite: 'auto' });
+        gsap.to('.combinedLayer', { opacity: 1, duration: 0.3, overwrite: 'auto' });
+      } else {
+        texts.forEach((txt, i) => {
+          gsap.to(txt as Element, { opacity: i === activeLayer ? 1 : 0.2, duration: 0.3, overwrite: 'auto' });
+        });
+        gsap.to('.combinedLayer', { opacity: 0.2, duration: 0.3, overwrite: 'auto' });
 
-      layers.forEach((layer, i) => {
-        if (i === activeLayer) {
-          // DO NOT scale the image. Scaling breaks isometric alignment!
-          gsap.to(layer as Element, { opacity: 1, duration: 0.4, zIndex: 10, overwrite: 'auto' });
-        } else {
-          gsap.to(layer as Element, { opacity: 0, duration: 0.4, zIndex: 1, overwrite: 'auto' });
-        }
-      });
-    }
+        layers.forEach((layer, i) => {
+          if (i === activeLayer) {
+            gsap.to(layer as Element, { opacity: 1, duration: 0.4, zIndex: 10, overwrite: 'auto' });
+          } else {
+            gsap.to(layer as Element, { opacity: 0, duration: 0.4, zIndex: 1, overwrite: 'auto' });
+          }
+        });
+      }
+    });
   }, [activeLayer, isInteractive]);
 
   return (
