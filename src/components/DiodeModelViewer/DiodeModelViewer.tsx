@@ -6,9 +6,6 @@ import { OrbitControls, useGLTF, Environment, ContactShadows, Float, Html, Bound
 import styles from './DiodeModelViewer.module.css';
 import { useTranslations } from 'next-intl';
 
-// Point useGLTF to the Draco decoder shipped by drei
-useGLTF.setDecoderPath('https://www.gstatic.com/draco/versioned/decoders/1.5.6/');
-
 // A sub-component to load the model
 function DiodeModel({ modelPath }: { modelPath: string }) {
   const { scene } = useGLTF(modelPath);
