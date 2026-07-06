@@ -2,6 +2,7 @@
 
 import dynamic from 'next/dynamic';
 import React from 'react';
+import CanvasErrorBoundary from '../ErrorBoundary/CanvasErrorBoundary';
 
 // Dynamically import the 3D viewer to avoid SSR issues with Three.js
 const PortXModelViewer = dynamic(() => import('./PortXModelViewer'), {
@@ -26,7 +27,9 @@ const PortXModelViewer = dynamic(() => import('./PortXModelViewer'), {
 export default function PortXModelViewerWrapper() {
   return (
     <div style={{ width: '100%', height: '100%' }}>
-      <PortXModelViewer />
+      <CanvasErrorBoundary>
+        <PortXModelViewer />
+      </CanvasErrorBoundary>
     </div>
   );
 }

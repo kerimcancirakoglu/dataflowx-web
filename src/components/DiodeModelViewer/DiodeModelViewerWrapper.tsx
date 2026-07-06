@@ -1,6 +1,7 @@
 'use client';
 
 import dynamic from 'next/dynamic';
+import CanvasErrorBoundary from '../ErrorBoundary/CanvasErrorBoundary';
 
 const DiodeModelViewer = dynamic(
   () => import('./DiodeModelViewer'),
@@ -8,5 +9,9 @@ const DiodeModelViewer = dynamic(
 );
 
 export default function DiodeModelViewerWrapper({ title, modelPath }: { title?: string, modelPath?: string }) {
-  return <DiodeModelViewer title={title} modelPath={modelPath} />;
+  return (
+    <CanvasErrorBoundary>
+      <DiodeModelViewer title={title} modelPath={modelPath} />
+    </CanvasErrorBoundary>
+  );
 }

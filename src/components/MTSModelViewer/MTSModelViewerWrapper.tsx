@@ -1,6 +1,7 @@
 'use client';
 
 import dynamic from 'next/dynamic';
+import CanvasErrorBoundary from '../ErrorBoundary/CanvasErrorBoundary';
 
 const MTSModelViewer = dynamic(
   () => import('./MTSModelViewer'),
@@ -8,5 +9,9 @@ const MTSModelViewer = dynamic(
 );
 
 export default function MTSModelViewerWrapper() {
-  return <MTSModelViewer />;
+  return (
+    <CanvasErrorBoundary>
+      <MTSModelViewer />
+    </CanvasErrorBoundary>
+  );
 }
