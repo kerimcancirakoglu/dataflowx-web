@@ -21,8 +21,11 @@ export default async function GartnerTestimonial() {
           {t('p3')}
         </p>
 
-        <a href="#contact" className={styles.getInfoButton}>
-          {t('btn')} <span className={styles.arrow}>→</span>
+        <a href="#contact" className="btn-pill" style={{ marginTop: '3rem' }}>
+          {t('btn')} 
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+            <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+          </svg>
         </a>
       </div>
     </section>
