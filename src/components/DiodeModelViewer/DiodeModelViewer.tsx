@@ -24,7 +24,7 @@ function Loader() {
   );
 }
 
-export default function DiodeModelViewer({ title = "DFX UDG", modelPath = '/models/diode-opt.glb' }: { title?: string, modelPath?: string }) {
+export default function DiodeModelViewer({ title = "DFX UDG", modelPath = '/models/diode-opt.glb', hideInfoPanel = false }: { title?: string, modelPath?: string, hideInfoPanel?: boolean }) {
   const t = useTranslations('DiodeModelViewer');
   const features = ['f1', 'f2', 'f3', 'f4', 'f5', 'f6'] as const;
 
@@ -49,22 +49,24 @@ export default function DiodeModelViewer({ title = "DFX UDG", modelPath = '/mode
   }, []);
 
   return (
-    <div className={styles.container}>
-      <div className={styles.infoPanel}>
-        <h2 className={styles.mainTitle}>{title}</h2>
-        <div className={styles.subtitle}>
-          {t('subtitle')} <a href="#" className={styles.subtitleLink}>{t('subtitleLink')}</a>.
+    <div className={styles.container} style={hideInfoPanel ? { gridTemplateColumns: '1fr', padding: 0 } : {}}>
+      {!hideInfoPanel && (
+        <div className={styles.infoPanel}>
+          <h2 className={styles.mainTitle}>{title}</h2>
+          <div className={styles.subtitle}>
+            {t('subtitle')} <a href="#" className={styles.subtitleLink}>{t('subtitleLink')}</a>.
+          </div>
+          <ul className={styles.featuresList}>
+            {features.map((key) => (
+              <li key={key} className={styles.featureListItem}>{t(key)}</li>
+            ))}
+          </ul>
+          <div className={styles.buttonGroup}>
+            <a href="#" className={styles.primaryButton}>{t('downloadBtn')}</a>
+            <a href="#" className={styles.secondaryLink}>{t('docsLink')} ➔</a>
+          </div>
         </div>
-        <ul className={styles.featuresList}>
-          {features.map((key) => (
-            <li key={key} className={styles.featureListItem}>{t(key)}</li>
-          ))}
-        </ul>
-        <div className={styles.buttonGroup}>
-          <a href="#" className={styles.primaryButton}>{t('downloadBtn')}</a>
-          <a href="#" className={styles.secondaryLink}>{t('docsLink')} ➔</a>
-        </div>
-      </div>
+      )}
 
       <div className={styles.canvasWrapper} ref={containerRef}>
         {isVisible ? (

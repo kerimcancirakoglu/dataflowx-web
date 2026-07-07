@@ -499,6 +499,13 @@
   },
   "UDG": {
     "page": {
+      "hero": {
+        "title1": "DFX",
+        "title2": "Unidirectional Gateway",
+        "subtitle": "One Direction. Zero Compromise.",
+        "desc": "DFX Unidirectional Gateway is not just a data diode. It is a diode-based Zero Trust Gateway combining hardware-enforced unidirectional data transfer with advanced content inspection, protocol support, and full auditability. The result is an isolation architecture that is physically unbreachable, operationally seamless, and built for the environments where both matter equally.",
+        "btn": "LEARN MORE"
+      },
       "overviewOverTitle": "PRODUCT OVERVIEW",
       "overviewTitle": "Unidirectional Gateway",
       "overviewDesc": "DFX UDG is a diode-based gateway operating on Zero Trust principles. It physically isolates critical networks, allowing only authorized one-way data transmission.",

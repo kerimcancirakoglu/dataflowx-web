@@ -487,6 +487,13 @@
   },
   "UDG": {
     "page": {
+      "hero": {
+        "title1": "DFX",
+        "title2": "Unidirectional Gateway",
+        "subtitle": "Tek Yön. Sıfır Taviz.",
+        "desc": "DFX Unidirectional Gateway sadece bir veri diyodu değildir. Donanım tabanlı tek yönlü veri transferini; gelişmiş içerik denetimi, protokol desteği ve tam denetlenebilirlik ile birleştiren diyot tabanlı bir Sıfır Güven Ağ Geçididir. Sonuç; fiziksel olarak aşılamaz, operasyonel olarak kusursuz ve her ikisinin de eşit derecede önemli olduğu ortamlar için inşa edilmiş bir izolasyon mimarisidir.",
+        "btn": "BİLGİ ALIN"
+      },
       "overviewOverTitle": "ÜRÜN BAKIŞI",
       "overviewTitle": "Unidirectional Gateway",
       "overviewDesc": "DFX UDG, Zero Trust prensiplerine göre çalışan diyot tabanlı bir ağ geçididir. Kritik ağları fiziksel olarak izole eder, sadece yetkilendirilmiş tek yönlü veri iletimine izin verir.",

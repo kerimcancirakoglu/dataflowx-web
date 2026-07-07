@@ -122,8 +122,39 @@ export default async function UnidirectionalGatewayPage({ params }: { params: Pr
       />
       <VideoBackground />
 
+      {/* ── Hero ─────────────────────────────────────── */}
+      <section className={styles.heroSection}>
+        <div className={styles.heroContentWrapper}>
+          <div className={styles.heroLeftContainer}>
+            <h1 className={styles.heroHeadline}>
+              <span className={styles.heroHeadlineWhite}>{t('hero.title1')} </span>
+              <span className={styles.heroHeadlineWhite}>{t('hero.title2')}</span>
+            </h1>
+            <div className={styles.heroSubtitle}>
+              {t('hero.subtitle')}
+            </div>
+            <p className={styles.heroDescription}>
+              {t('hero.desc')}
+            </p>
+            <div className={styles.buttonGroup}>
+              <a href="#contact" className={styles.primaryButton}>
+                {t('hero.btn')}
+                <svg width="16" height="16" viewBox="0 0 16 16" fill="none" style={{ marginLeft: '8px' }}>
+                  <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+                </svg>
+              </a>
+            </div>
+          </div>
+          <div className={styles.heroRightContainer}>
+            <div style={{ width: '100%', height: '500px', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+              <DiodeModelViewerWrapper hideInfoPanel={true} />
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* Opening hero statement */}
-      <div style={{ paddingTop: '8rem' }}>
+      <div style={{ paddingTop: '4rem' }}>
         <GartnerTestimonial />
       </div>
 

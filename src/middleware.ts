@@ -6,8 +6,9 @@ const intlMiddleware = createMiddleware(routing);
 
 export default function middleware(request: NextRequest) {
   if (
-    request.headers.get('x-forwarded-proto') === 'http' ||
-    request.headers.get('cf-visitor')?.includes('"scheme":"http"')
+    process.env.NODE_ENV === 'production' &&
+    (request.headers.get('x-forwarded-proto') === 'http' ||
+    request.headers.get('cf-visitor')?.includes('"scheme":"http"'))
   ) {
     return NextResponse.redirect(
       `https://${request.headers.get('host')}${request.nextUrl.pathname}${request.nextUrl.search}`,
