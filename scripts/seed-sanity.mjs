@@ -146,7 +146,7 @@ const cdrDoc = {
   slug: { _type: 'slug', current: 'dfx-cdr' },
   hero: {
     overTitle: cdr.hero.overTitle,
-    title: 'TrueCDR™',
+    title: 'DFX CDR',
     subtitle: cdr.hero.subtitle,
     primaryButtonText: cdr.hero.reqDemo,
     primaryButtonLink: '#contact',

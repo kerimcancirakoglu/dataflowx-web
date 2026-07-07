@@ -8,6 +8,7 @@
     "sandbox": "DFX Malware Mitigation Sandbox",
     "media_transfer_station": "DFX Media Transfer Station",
     "email_security": "E-Posta Güvenliği",
+    "data_security": "Veri Güvenliği",
     "email_security_platform": "DFX E-Posta Güvenlik Platformu",
     "intelroom": "DFX IntelRoom",
     "true_cdr": "DFX CDR",
@@ -60,7 +61,7 @@
       "secureRemote": {
         "titlePrefix": "DFX Secure Remote",
         "titleHighlight": "Access",
-        "description": "DFX UDG donanımı ile doğrudan ve sorunsuz bir şekilde entegre edilen DFX Secure Remote Access, izole edilmiş ağlar arasında istek-yanıt tabanlı veri iletimine olanak tanır.",
+        "description": "DFX UDG ile doğrudan ve sorunsuz bir şekilde entegre edilen DFX Secure Remote Access, izole edilmiş ağlar arasında istek-yanıt tabanlı veri iletimine olanak tanır.",
         "protects": "Ağlar arası veri trafiği üzerinde tam ve tavizsiz kontrol sağlayarak yetkisiz yanal hareketleri engeller.",
         "features": {
           "f1": "Sıfır Güven Erişimi",
@@ -842,9 +843,9 @@
     "subtitleSuffix": "zararlı fiziksel medyalara karşı.",
     "f1": "Hassas ortamlar için güvenli medya aktarım kiosku",
     "f2": "Sıfırıncı gün (zero-day) autorun açıkları ve firmware düzeyindeki zararlı yazılımları önler",
-    "f3": "Gelişmiş içerik farkındalıklı filtreleme ve Dosya Arındırma (CDR)",
-    "f4": "Kimlik doğrulama için Active Directory / LDAP ile entegre çalışır",
-    "f5": "Kritik iş istasyonlarında Sıfır USB Politikası uygular",
+    "f3": "Loglama",
+    "f4": "Kullanıcı Yönetimi",
+    "f5": "DFX Platformları ile Sorunsuz Entegrasyon",
     "f6": "Tam uyumluluk için değiştirilemez denetim günlükleri",
     "downloadBtn": "Teknik Veri Sayfasını İndir",
     "docsLink": "Belgeleri Görüntüle"

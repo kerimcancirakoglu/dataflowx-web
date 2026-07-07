@@ -31,6 +31,11 @@ export default async function Nav(props: NavProps) {
           groupLabel: t('email_security'),
           items: [
             { label: t('email_security_platform'), href: '/email-security-platform' },
+          ]
+        },
+        {
+          groupLabel: t('data_security'),
+          items: [
             { label: t('intelroom'), href: '/intelroom' },
             { label: t('true_cdr'), href: '/dfx-cdr' },
           ]

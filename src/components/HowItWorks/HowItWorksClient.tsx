@@ -2,10 +2,12 @@
 
 import { useRef, useEffect } from 'react';
 import Link from 'next/link';
+import { useLocale } from 'next-intl';
 import styles from './HowItWorks.module.css';
 
 
 export default function HowItWorksClient({ t }: { t: any }) {
+  const locale = useLocale();
   const CARDS = [
     {
       id: 'network',
@@ -30,12 +32,12 @@ export default function HowItWorksClient({ t }: { t: any }) {
       title: t.file.title,
       icon: (
         <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <circle cx="12" cy="12" r="5" stroke="currentColor" strokeWidth="1.5" />
-          <path d="M12 2v2M12 20v2M2 12h2M20 12h2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
+          <path d="M13 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9z" stroke="currentColor" strokeWidth="1.5" strokeLinejoin="round" />
+          <polyline points="13 2 13 9 20 9" stroke="currentColor" strokeWidth="1.5" strokeLinejoin="round" />
         </svg>
       ),
       image: '/cyber-security-concept-digital-art.jpg',
-      overlay: 'linear-gradient(to bottom, rgba(40, 20, 10, 0.15) 0%, rgba(15, 5, 0, 0.92) 100%)',
+      overlay: 'linear-gradient(to bottom, rgba(20, 10, 5, 0.6) 0%, rgba(10, 5, 0, 0.95) 100%)',
       description: t.file.description,
       links: [
         { text: t.file.l1, url: '/sandbox' },
@@ -64,10 +66,10 @@ export default function HowItWorksClient({ t }: { t: any }) {
       title: t.ot.title,
       icon: (
         <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <path d="M12 2L15 8L22 9L17 14L18 21L12 18L6 21L7 14L2 9L9 8L12 2Z" stroke="currentColor" strokeWidth="1.5" strokeLinejoin="round" />
+          <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" stroke="currentColor" strokeWidth="1.5" strokeLinejoin="round" />
         </svg>
       ),
-      image: '/Kapak/kapaklar/datasecure1.jpg',
+      image: '/Kapak/networksecurity.png',
       overlay: 'linear-gradient(to bottom, rgba(10, 20, 30, 0.2) 0%, rgba(0, 5, 15, 0.92) 100%)',
       description: t.ot.description,
       links: [
@@ -142,11 +144,11 @@ export default function HowItWorksClient({ t }: { t: any }) {
                   {card.links.map((link, idx) => (
                     <Link 
                       key={idx} 
-                      href={link.url} 
+                      href={`/${locale}${link.url}`} 
                       className={styles.linkItem}
                       onClick={(e) => {
                         if (link.url !== '#') {
-                          window.location.href = link.url;
+                          window.location.href = `/${locale}${link.url}`;
                         }
                       }}
                     >

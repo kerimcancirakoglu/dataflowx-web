@@ -3,11 +3,13 @@ import React from 'react';
 
 import { useRef, useEffect } from 'react';
 import Link from 'next/link';
+import { useLocale } from 'next-intl';
 import Image from 'next/image';
 import styles from './UseCases.module.css';
 
 
 export default function UseCasesClient({ t }: { t: any }) {
+  const locale = useLocale();
   const CASES = [
     {
       id: '01',
@@ -92,7 +94,7 @@ export default function UseCasesClient({ t }: { t: any }) {
             <div key={c.id} className={styles.stepWrapper} data-step>
 
               <Link
-                href={c.url}
+                href={`/${locale}${c.url}`}
                 className={styles.card}
                 style={{
                   '--glow-color': c.glowColor,

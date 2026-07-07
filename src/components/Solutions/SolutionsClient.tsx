@@ -4,6 +4,7 @@ import React, { useState, useEffect } from 'react';
 import dynamic from 'next/dynamic';
 import Image from 'next/image';
 import Link from 'next/link';
+import { useLocale } from 'next-intl';
 import styles from './Solutions.module.css';
 
 const DataFlowDiagram = dynamic(() => import('../DataFlowDiagram/DataFlowDiagram'), { ssr: false });
@@ -46,6 +47,7 @@ export default function SolutionsClient({
 }: SolutionsClientProps) {
   const [activeId, setActiveId] = useState<string | null>(solutionsList[0]?.id || null);
   const [isMobile, setIsMobile] = useState(false);
+  const locale = useLocale();
 
   useEffect(() => {
     const checkMobile = () => setIsMobile(window.innerWidth <= 900);
@@ -129,7 +131,7 @@ export default function SolutionsClient({
             {/* Using activeSolution.link explicitly if it exists */}
             {activeSolution.link && (
               <div style={{ display: 'flex', justifyContent: 'flex-end', width: '100%', marginTop: 'auto', paddingTop: '2rem' }}>
-                <Link href={activeSolution.link} className={styles.productLink} style={{ marginTop: 0 }}>
+                <Link href={`/${locale}${activeSolution.link}`} className={styles.productLink} style={{ marginTop: 0 }}>
                   {goToProductLabel}
                 </Link>
               </div>

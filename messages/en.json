@@ -8,6 +8,7 @@
     "sandbox": "DFX Malware Mitigation Sandbox",
     "media_transfer_station": "DFX Media Transfer Station",
     "email_security": "Email Security",
+    "data_security": "Data Security",
     "email_security_platform": "DFX Email Security Platform",
     "intelroom": "DFX IntelRoom",
     "true_cdr": "DFX CDR",
@@ -102,11 +103,11 @@
         "description": "DFX ESP holistically addresses enterprise security needs, combining high precision, flexibility, and control. Built for modern messaging threats.",
         "protects": "Establishes active defense against SPAM, Phishing, BEC (Business Email Compromise), Malware, and Exploit attacks.",
         "features": {
-          "f1": "YARA Engine",
-          "f2": "LDAP Integration",
-          "f3": "Content Disarming (CDR)",
-          "f4": "Antivirus Control",
-          "f5": "Phishing Protection"
+          "f1": "Logging",
+          "f2": "User Management",
+          "f3": "Seamless Integration with DFX platforms",
+          "f4": "Multi-AV Scanning",
+          "f5": "Zero-Day Protection"
         }
       },
       "intelroom": {
@@ -854,9 +855,9 @@
     "subtitleSuffix": "from malicious physical media.",
     "f1": "Secure media transfer kiosk for sensitive environments",
     "f2": "Prevents zero-day autorun exploits and firmware-level malware",
-    "f3": "Advanced content-aware filtering and File Purification (CDR)",
-    "f4": "Integrates with Active Directory / LDAP for authentication",
-    "f5": "Enforces Zero USB Policy on core workstations",
+    "f3": "Logging",
+    "f4": "User Management",
+    "f5": "Seamless Integration with DFX platforms",
     "f6": "Immutable audit logs for complete compliance",
     "downloadBtn": "Download Datasheet",
     "docsLink": "View Documentation"
