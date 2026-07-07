@@ -3,7 +3,6 @@ import { draftMode } from 'next/headers';
 
 import ContactMini from '@/components/ContactMini/ContactMini';
 import GartnerTestimonial from '@/components/GartnerTestimonial/GartnerTestimonial';
-import DiodeModelViewerWrapper from '@/components/DiodeModelViewer/DiodeModelViewerWrapper';
 import ProductSpecs from '@/components/ProductSpecs/ProductSpecs';
 import FeaturesGrid from '@/components/FeaturesGrid/FeaturesGrid';
 import VideoBackground from '@/components/VideoBackground/VideoBackground';
@@ -127,27 +126,22 @@ export default async function UnidirectionalGatewayPage({ params }: { params: Pr
         <div className={styles.heroContentWrapper}>
           <div className={styles.heroLeftContainer}>
             <h1 className={styles.heroHeadline}>
-              <span className={styles.heroHeadlineWhite}>{t('hero.title1')} </span>
-              <span className={styles.heroHeadlineWhite}>{t('hero.title2')}</span>
+              <span className={styles.heroHeadlineWhite}>{t('hero.title1')} Unidirectional{' '}</span>
+              <span className={styles.heroHeadlineYellow}>Gateway</span>
             </h1>
             <div className={styles.heroSubtitle}>
-              {t('hero.subtitle')}
+              One Direction.{' '}<span className={styles.heroSubtitleHighlight}>Zero Compromise.</span>
             </div>
             <p className={styles.heroDescription}>
               {t('hero.desc')}
             </p>
             <div className={styles.buttonGroup}>
-              <a href="#contact" className={styles.primaryButton}>
+              <a href="#contact" className="btn-pill">
                 {t('hero.btn')}
-                <svg width="16" height="16" viewBox="0 0 16 16" fill="none" style={{ marginLeft: '8px' }}>
+                <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
                   <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
                 </svg>
               </a>
-            </div>
-          </div>
-          <div className={styles.heroRightContainer}>
-            <div style={{ width: '100%', height: '500px', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
-              <DiodeModelViewerWrapper hideInfoPanel={true} />
             </div>
           </div>
         </div>
@@ -198,12 +192,6 @@ export default async function UnidirectionalGatewayPage({ params }: { params: Pr
         </div>
       </section>
 
-      <div className="section-spacer" aria-hidden="true" />
-
-      {/* Interactive 3D Model Viewer */}
-      <section style={{ padding: '0 2rem', maxWidth: '1400px', margin: '0 auto' }}>
-        <DiodeModelViewerWrapper />
-      </section>
 
       <div className="section-spacer" aria-hidden="true" />
 
