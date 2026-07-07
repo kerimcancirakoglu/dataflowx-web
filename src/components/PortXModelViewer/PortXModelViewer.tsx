@@ -78,7 +78,7 @@ export default function PortXModelViewer() {
             <directionalLight position={[0, 5, 5]} intensity={0.5} />
 
             <Suspense fallback={<Loader />}>
-              <Bounds fit clip observe margin={1.1}>
+              <Bounds fit clip observe margin={1.6}>
                 <Center>
                   <Float
                     speed={1.5}
