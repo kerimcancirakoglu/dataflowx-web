@@ -105,21 +105,21 @@ export default function SecureRemoteAccessDiagram() {
           }
         );
       }
-      // CM → Source reverse Data Packet
+      // CM → Source reverse Data Packet (right to left, stays within container)
       if (dataRevPacketRef.current) {
         gsap.fromTo(dataRevPacketRef.current,
-          { left: '110%', opacity: 0 },
-          { left: '-10%', opacity: 1, duration: 2, delay: 1.2, ease: 'power1.inOut', repeat: -1,
-            keyframes: { '0%': { opacity: 0 }, '20%': { opacity: 1 }, '80%': { opacity: 1 }, '100%': { opacity: 0 } }
+          { left: '95%', opacity: 0 },
+          { left: '0%', opacity: 1, duration: 2, delay: 1.0, ease: 'power1.inOut', repeat: -1,
+            keyframes: { '0%': { opacity: 0 }, '15%': { opacity: 1 }, '85%': { opacity: 1 }, '100%': { opacity: 0 } }
           }
         );
       }
-      // CM → Source reverse File (PDF) Packet
+      // CM → Source reverse File (PDF) Packet (right to left)
       if (fileRevPacketRef.current) {
         gsap.fromTo(fileRevPacketRef.current,
-          { left: '110%', opacity: 0 },
-          { left: '-10%', opacity: 1, duration: 2.5, delay: 2.2, ease: 'power1.inOut', repeat: -1,
-            keyframes: { '0%': { opacity: 0 }, '20%': { opacity: 1 }, '80%': { opacity: 1 }, '100%': { opacity: 0 } }
+          { left: '95%', opacity: 0 },
+          { left: '0%', opacity: 1, duration: 2.5, delay: 2.0, ease: 'power1.inOut', repeat: -1,
+            keyframes: { '0%': { opacity: 0 }, '15%': { opacity: 1 }, '85%': { opacity: 1 }, '100%': { opacity: 0 } }
           }
         );
       }
@@ -167,21 +167,21 @@ export default function SecureRemoteAccessDiagram() {
         );
       }
 
-      // Protected → SM reverse Data Packet
+      // Protected → SM reverse Data Packet (right to left, stays within container)
       if (smDataRevPacketRef.current) {
         gsap.fromTo(smDataRevPacketRef.current,
-          { left: '110%', opacity: 0 },
-          { left: '-10%', opacity: 1, duration: 2, delay: 1.2, ease: 'power1.inOut', repeat: -1,
-            keyframes: { '0%': { opacity: 0 }, '20%': { opacity: 1 }, '80%': { opacity: 1 }, '100%': { opacity: 0 } }
+          { left: '95%', opacity: 0 },
+          { left: '0%', opacity: 1, duration: 2, delay: 1.0, ease: 'power1.inOut', repeat: -1,
+            keyframes: { '0%': { opacity: 0 }, '15%': { opacity: 1 }, '85%': { opacity: 1 }, '100%': { opacity: 0 } }
           }
         );
       }
-      // Protected → SM reverse File (PDF) Packet
+      // Protected → SM reverse File (PDF) Packet (right to left)
       if (smFileRevPacketRef.current) {
         gsap.fromTo(smFileRevPacketRef.current,
-          { left: '110%', opacity: 0 },
-          { left: '-10%', opacity: 1, duration: 2.5, delay: 2.2, ease: 'power1.inOut', repeat: -1,
-            keyframes: { '0%': { opacity: 0 }, '20%': { opacity: 1 }, '80%': { opacity: 1 }, '100%': { opacity: 0 } }
+          { left: '95%', opacity: 0 },
+          { left: '0%', opacity: 1, duration: 2.5, delay: 2.0, ease: 'power1.inOut', repeat: -1,
+            keyframes: { '0%': { opacity: 0 }, '15%': { opacity: 1 }, '85%': { opacity: 1 }, '100%': { opacity: 0 } }
           }
         );
       }
@@ -211,6 +211,9 @@ export default function SecureRemoteAccessDiagram() {
           <div className={`${styles.channelPacket} ${styles.packetData}`} ref={dataPacketRef}>
             <span className={styles.packetText}>DATA</span>
           </div>
+        </div>
+        <div className={styles.channelRow}>
+          <div className={styles.channelLine} />
           <div className={`${styles.channelPacket} ${styles.packetData}`} ref={dataRevPacketRef}>
             <span className={styles.packetText}>DATA</span>
           </div>
@@ -227,6 +230,9 @@ export default function SecureRemoteAccessDiagram() {
             </svg>
             <span className={styles.packetText}>PDF</span>
           </div>
+        </div>
+        <div className={styles.channelRow}>
+          <div className={styles.channelLine} />
           <div className={`${styles.channelPacket} ${styles.packetFile}`} ref={fileRevPacketRef}>
             <svg className={styles.packetIcon} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
               <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
@@ -312,6 +318,9 @@ export default function SecureRemoteAccessDiagram() {
           <div className={`${styles.channelPacket} ${styles.packetData}`} ref={smDataPacketRef}>
             <span className={styles.packetText}>DATA</span>
           </div>
+        </div>
+        <div className={styles.channelRow}>
+          <div className={styles.channelLine} />
           <div className={`${styles.channelPacket} ${styles.packetData}`} ref={smDataRevPacketRef}>
             <span className={styles.packetText}>DATA</span>
           </div>
@@ -328,6 +337,9 @@ export default function SecureRemoteAccessDiagram() {
             </svg>
             <span className={styles.packetText}>PDF</span>
           </div>
+        </div>
+        <div className={styles.channelRow}>
+          <div className={styles.channelLine} />
           <div className={`${styles.channelPacket} ${styles.packetFile}`} ref={smFileRevPacketRef}>
             <svg className={styles.packetIcon} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
               <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
