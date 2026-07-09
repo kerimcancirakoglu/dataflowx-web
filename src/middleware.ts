@@ -4,7 +4,7 @@ import { routing } from './routing';
 
 const intlMiddleware = createMiddleware(routing);
 
-export default function proxy(request: NextRequest) {
+export default function middleware(request: NextRequest) {
   if (
     process.env.NODE_ENV === 'production' &&
     (request.headers.get('x-forwarded-proto') === 'http' ||
