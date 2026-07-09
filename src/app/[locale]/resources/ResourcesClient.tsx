@@ -37,7 +37,7 @@ const resourcesData: Resource[] = [
     useCase: 'Critical Infrastructure',
     date: '2023-11-15',
     link: '/resources/ds-unidirectional-gateway',
-    image: '/images/resource-datadiode.jpg',
+    image: '/Kapak/kapaklar/datadiode1.jpg',
     fileUrls: {
       en: 'https://cdn.sanity.io/files/15oto8dp/production/bb5414c1b49bad2a4a6a8c14d135d9c7e7b1c803.pdf',
       tr: 'https://cdn.sanity.io/files/15oto8dp/production/ca93d525146da686651471dd93aa1c8973fddb49.pdf',
@@ -52,42 +52,11 @@ const resourcesData: Resource[] = [
     useCase: 'Defense & Military',
     date: '2023-12-01',
     link: '/resources/ds-secure-remote-access',
-    image: '/images/resource-sra.jpg',
+    image: '/Kapak/kapaklar/databroker1.jpg',
     fileUrls: {
       en: 'https://cdn.sanity.io/files/15oto8dp/production/509b91b3b92053520d3feff09f3d94933caa089c.pdf',
       tr: 'https://cdn.sanity.io/files/15oto8dp/production/8f4d0ba10c9301795f006aaf8facfb72ac3efaa6.pdf',
     },
-  },
-  {
-    id: 'wp-ot-security',
-    title: 'Zero Trust in OT Environments',
-    description: 'Comprehensive whitepaper on applying Zero Trust principles to industrial control systems using hardware isolation.',
-    type: 'Whitepaper',
-    useCase: 'Critical Infrastructure',
-    date: '2024-01-20',
-    link: '/resources/wp-ot-security',
-    image: '/images/resource-ot.jpg',
-  },
-  {
-    id: 'cs-energy',
-    title: 'Securing National Grid Infrastructure',
-    description: 'Case study on how a major European energy provider achieved IEC 62443 compliance using DataFlowX.',
-    type: 'Case Study',
-    product: 'DFX Unidirectional Gateway',
-    useCase: 'Energy & SCADA',
-    date: '2024-02-10',
-    link: '/resources/cs-energy',
-    image: '/images/resource-energy.jpg',
-  },
-  {
-    id: 'wp-nis2',
-    title: 'NIS2 Compliance Guide for Critical Infrastructure',
-    description: 'Understanding the OT security requirements of the NIS2 directive and how unidirectional gateways help.',
-    type: 'Guide',
-    useCase: 'Critical Infrastructure',
-    date: '2024-03-05',
-    link: '/resources/wp-nis2',
-    image: '/images/resource-nis2.jpg',
   },
   {
     id: 'ds-media-transfer-station',
@@ -98,21 +67,11 @@ const resourcesData: Resource[] = [
     useCase: 'Defense & Military',
     date: '2024-04-12',
     link: '/resources/ds-media-transfer-station',
-    image: '/images/resource-mts.jpg',
+    image: '/Kapak/kapaklar/datastation1.jpg',
     fileUrls: {
       en: 'https://cdn.sanity.io/files/15oto8dp/production/696accc5bea7ff5a4587c93640cae548fd0a3398.pdf',
       tr: 'https://cdn.sanity.io/files/15oto8dp/production/5bef34b392aeaafa7a63392e202498e642637aab.pdf',
     },
-  },
-  {
-    id: 'rep-threat-2024',
-    title: '2024 ICS Threat Landscape Report',
-    description: 'Analysis of emerging threats targeting industrial control systems and critical infrastructure.',
-    type: 'Report',
-    useCase: 'Energy & SCADA',
-    date: '2024-05-01',
-    link: '/resources/rep-threat-2024',
-    image: '/images/resource-threat.jpg',
   },
   {
     id: 'ds-email-security',
@@ -123,10 +82,24 @@ const resourcesData: Resource[] = [
     useCase: 'Financial Services',
     date: '2024-05-15',
     link: '/resources/ds-email-security',
-    image: '/images/resource-email.jpg',
+    image: '/Kapak/kapaklar/datamessage1.jpg',
     fileUrls: {
       en: 'https://cdn.sanity.io/files/15oto8dp/production/be418709f8f967d2550d0b5d0415cb9c89874b13.pdf',
       tr: 'https://cdn.sanity.io/files/15oto8dp/production/2af19abc75e8fe789d3290b2eb37a5df959e7b6e.pdf',
+    },
+  },
+  {
+    id: 'guide-email-cyber-resilience',
+    title: 'When the Inbox Becomes the Breach: Email Cyber Resilience Guide',
+    description: 'Next-generation email threats, social engineering and multi-stage attack patterns targeting enterprise critical infrastructure — and how to stop them.',
+    type: 'Guide',
+    product: 'DFX Email Security Platform',
+    useCase: 'Financial Services',
+    date: '2026-07-09',
+    link: '/resources/guide-email-cyber-resilience',
+    image: '/Kapak/kapaklar/email-cyber-resilience.jpg',
+    fileUrls: {
+      en: 'https://cdn.sanity.io/files/15oto8dp/production/990ad08c6de00014dd7ae0ac2ae193b490447be5.pdf',
     },
   },
   {
@@ -153,7 +126,7 @@ const resourcesData: Resource[] = [
     useCase: 'Defense & Military',
     date: '2024-06-15',
     link: '/resources/ds-pass',
-    image: '/Kapak/kapaklar/databroker1.jpg',
+    image: '/Kapak/kapaklar/dataportx1.jpg',
     fileUrls: { en: 'https://cdn.sanity.io/files/15oto8dp/production/d2fa8ee1bd87320fd7504dd8d9ea7c34217ab3d4.pdf' },
   }
 ];
@@ -167,6 +140,11 @@ const allResourcesData: Resource[] = [
     if (uc.slug === 'defense-government-controlled-access') assignedUseCase = 'Defense & Military';
     if (uc.slug === 'manufacturing-industrial-production-floor') assignedUseCase = 'Manufacturing';
     if (uc.slug === 'oil-gas-physical-catastrophe') assignedUseCase = 'Critical Infrastructure';
+    if (uc.slug === 'energy-hydroelectric-ot-it-isolation') assignedUseCase = 'Energy & SCADA';
+    if (uc.slug === 'defense-supplier-zero-trust-remote-access') assignedUseCase = 'Defense & Military';
+    if (uc.slug === 'finance-bec-email-security') assignedUseCase = 'Financial Services';
+    if (uc.slug === 'manufacturing-cnc-zero-usb-policy') assignedUseCase = 'Manufacturing';
+    if (uc.slug === 'energy-ot-usb-threat-defense') assignedUseCase = 'Energy & SCADA';
 
     return {
       id: uc.slug,

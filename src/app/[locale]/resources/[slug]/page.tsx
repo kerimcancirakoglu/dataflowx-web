@@ -33,7 +33,7 @@ const MOCK_RESOURCES: Record<string, MockResource> = {
     excerpt: 'Detailed technical specifications for DataFlowX EAL4+ certified unidirectional gateway.',
     author: { name: 'DFX Product Team' },
     readingTime: '1 min read',
-    featuredImage: `/Kapak/kapaklar/datadiode1.jpg`,
+    featuredImage: '/Kapak/kapaklar/datadiode1.jpg',
     fileUrls: {
       en: 'https://cdn.sanity.io/files/15oto8dp/production/bb5414c1b49bad2a4a6a8c14d135d9c7e7b1c803.pdf',
       tr: 'https://cdn.sanity.io/files/15oto8dp/production/ca93d525146da686651471dd93aa1c8973fddb49.pdf',
@@ -46,38 +46,11 @@ const MOCK_RESOURCES: Record<string, MockResource> = {
     excerpt: 'Architecture and features of our secure remote access and cross-domain solution.',
     author: { name: 'DFX Product Team' },
     readingTime: '1 min read',
-    featuredImage: `/Kapak/kapaklar/databroker1.jpg`,
+    featuredImage: '/Kapak/kapaklar/databroker1.jpg',
     fileUrls: {
       en: 'https://cdn.sanity.io/files/15oto8dp/production/509b91b3b92053520d3feff09f3d94933caa089c.pdf',
       tr: 'https://cdn.sanity.io/files/15oto8dp/production/8f4d0ba10c9301795f006aaf8facfb72ac3efaa6.pdf',
     },
-  },
-  'wp-ot-security': {
-    title: 'Zero Trust in OT Environments',
-    date: '2024-01-20',
-    content: '<p>Comprehensive whitepaper on applying Zero Trust principles to industrial control systems using hardware isolation.</p><h2>Why IT Security Fails in OT</h2><p>Traditional firewalls are not enough for OT networks. Discover how hardware-based unidirectional gateways provide the ultimate security for critical infrastructure.</p><p><a href="#" class="downloadBtn">Download Whitepaper</a></p>',
-    excerpt: 'Comprehensive whitepaper on applying Zero Trust principles to industrial control systems using hardware isolation.',
-    author: { name: 'DFX Threat Intel' },
-    readingTime: '12 min read',
-    featuredImage: `/Kapak/kapaklar/data3.jpg`,
-  },
-  'cs-energy': {
-    title: 'Securing National Grid Infrastructure',
-    date: '2024-02-10',
-    content: '<p>Case study on how a major European energy provider achieved IEC 62443 compliance using DataFlowX.</p><h2>The Challenge</h2><p>The energy provider needed to transmit real-time SCADA data to their corporate network without exposing the ICS environment to cyber threats.</p><h2>The Solution</h2><p>By deploying DFX Unidirectional Gateways, they achieved 100% network isolation while maintaining real-time data flow.</p><p><a href="#" class="downloadBtn">Download Case Study</a></p>',
-    excerpt: 'Case study on how a major European energy provider achieved IEC 62443 compliance using DataFlowX.',
-    author: { name: 'DFX Case Studies' },
-    readingTime: '5 min read',
-    featuredImage: `/Kapak/kapaklar/datasecure1.jpg`,
-  },
-  'wp-nis2': {
-    title: 'NIS2 Compliance Guide for Critical Infrastructure',
-    date: '2024-03-05',
-    content: '<p>Understanding the OT security requirements of the NIS2 directive and how unidirectional gateways help.</p><h2>Meeting NIS2 Requirements</h2><p>Learn how physical network isolation helps organizations meet the strict security requirements of the European NIS2 directive.</p><p><a href="#" class="downloadBtn">Download Guide</a></p>',
-    excerpt: 'Understanding the OT security requirements of the NIS2 directive and how unidirectional gateways help.',
-    author: { name: 'DFX Compliance Team' },
-    readingTime: '8 min read',
-    featuredImage: `/Kapak/kapaklar/datastation1.jpg`,
   },
   'ds-media-transfer-station': {
     title: 'DFX Media Transfer Station Data Sheet',
@@ -86,20 +59,11 @@ const MOCK_RESOURCES: Record<string, MockResource> = {
     excerpt: 'Technical details about our secure USB kiosk featuring multi-engine AV and Deep CDR sanitization.',
     author: { name: 'DFX Product Team' },
     readingTime: '1 min read',
-    featuredImage: `/Kapak/kapaklar/datamessage1.jpg`,
+    featuredImage: '/Kapak/kapaklar/datastation1.jpg',
     fileUrls: {
       en: 'https://cdn.sanity.io/files/15oto8dp/production/696accc5bea7ff5a4587c93640cae548fd0a3398.pdf',
       tr: 'https://cdn.sanity.io/files/15oto8dp/production/5bef34b392aeaafa7a63392e202498e642637aab.pdf',
     },
-  },
-  'rep-threat-2024': {
-    title: '2024 ICS Threat Landscape Report',
-    date: '2024-05-01',
-    content: '<p>Analysis of emerging threats targeting industrial control systems and critical infrastructure.</p><h2>State of OT Security</h2><p>Ransomware attacks on OT networks are increasing. Read our comprehensive analysis of the latest threat vectors and defensive strategies.</p><p><a href="#" class="downloadBtn">Download Report</a></p>',
-    excerpt: 'Analysis of emerging threats targeting industrial control systems and critical infrastructure.',
-    author: { name: 'DFX Threat Intel' },
-    readingTime: '15 min read',
-    featuredImage: `/Kapak/kapaklar/data3.jpg`,
   },
   'ds-email-security': {
     title: 'DFX Email Security Platform Data Sheet',
@@ -108,10 +72,22 @@ const MOCK_RESOURCES: Record<string, MockResource> = {
     excerpt: 'Deep CDR and AI behavior detection for zero-trust email gateways.',
     author: { name: 'DFX Product Team' },
     readingTime: '1 min read',
-    featuredImage: `/Kapak/kapaklar/datamessage1.jpg`,
+    featuredImage: '/Kapak/kapaklar/datamessage1.jpg',
     fileUrls: {
       en: 'https://cdn.sanity.io/files/15oto8dp/production/be418709f8f967d2550d0b5d0415cb9c89874b13.pdf',
       tr: 'https://cdn.sanity.io/files/15oto8dp/production/2af19abc75e8fe789d3290b2eb37a5df959e7b6e.pdf',
+    },
+  },
+  'guide-email-cyber-resilience': {
+    title: 'When the Inbox Becomes the Breach: Email Cyber Resilience Guide',
+    date: '2026-07-09',
+    content: '<p>The baseline of enterprise defense has fundamentally shifted. Cybercriminals no longer seek only to frontally breach perimeter firewalls; instead, they compromise the human layer and abuse trusted workflows to gain an initial foothold.</p><h2>The Threat Landscape</h2><p>62% of global data breaches involve the human element. 49% year-over-year surge in ransomware groups targeting industrial infrastructure. 44% of AI-assisted initial access techniques are executed via phishing.</p><h2>Attack Vectors</h2><p>Business Email Compromise (BEC), AI-driven spear-phishing, visual format threats hidden in images, and supply chain compromise via trusted vendor emails.</p><h2>The Defense</h2><p>DFX Email Security Platform combines ML-based behavioral analysis, CDR, OCR scanning, and YARA-rule enforcement. DFX Malware Mitigation Sandbox provides isolated behavioral detonation for zero-day threats.</p><p><a href="#" class="downloadBtn">Download Guide</a></p>',
+    excerpt: 'Next-generation email threats, social engineering and multi-stage attack patterns targeting enterprise critical infrastructure — and how to stop them.',
+    author: { name: 'DFX Threat Intelligence' },
+    readingTime: '15 min read',
+    featuredImage: '/Kapak/kapaklar/email-cyber-resilience.jpg',
+    fileUrls: {
+      en: 'https://cdn.sanity.io/files/15oto8dp/production/990ad08c6de00014dd7ae0ac2ae193b490447be5.pdf',
     },
   },
   'ds-malware-sandbox': {
@@ -134,7 +110,7 @@ const MOCK_RESOURCES: Record<string, MockResource> = {
     excerpt: 'Portable Access Security Solution for secure, hardware-isolated media transfer and authentication.',
     author: { name: 'DFX Product Team' },
     readingTime: '1 min read',
-    featuredImage: '/Kapak/kapaklar/databroker1.jpg',
+    featuredImage: '/Kapak/kapaklar/dataportx1.jpg',
     fileUrls: { en: 'https://cdn.sanity.io/files/15oto8dp/production/d2fa8ee1bd87320fd7504dd8d9ea7c34217ab3d4.pdf' },
   }
 };

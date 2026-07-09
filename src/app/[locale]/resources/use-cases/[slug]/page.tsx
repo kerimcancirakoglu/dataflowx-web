@@ -158,7 +158,7 @@ export default async function UseCaseDetailPage({ params }: PageProps) {
             <div className={styles.sidebarLabel}>Products Used</div>
             <div className={styles.productList}>
               {useCase.products.map((product) => (
-                <Link key={product} href={getProductUrl(product)} className={styles.productPill}>
+                <Link key={product} href={`/${locale}${getProductUrl(product)}`} className={styles.productPill}>
                   {product}
                   <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                     <line x1="5" y1="12" x2="19" y2="12"></line>
