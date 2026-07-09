@@ -36,7 +36,6 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
       'isolated network access',
       'ICS remote access',
       'SCADA remote access',
-      'DataBrokerX',
       'güvenli uzak erişim',
     ],
     alternates: buildAlternates(locale, '/secure-remote-access'),
