@@ -1,7 +1,7 @@
 import { getTranslations } from 'next-intl/server';
 import ContactClient from './ContactClient';
 
-export default async function Contact() {
+export default async function Contact({ formOnly = false }: { formOnly?: boolean }) {
   const t = await getTranslations('Home.Contact');
   
   const translations = {
@@ -14,5 +14,5 @@ export default async function Contact() {
     submitBtn: t('submitBtn')
   };
 
-  return <ContactClient t={translations} />;
+  return <ContactClient t={translations} formOnly={formOnly} />;
 }

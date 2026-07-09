@@ -1,3 +1,4 @@
+import Script from 'next/script';
 import type { Metadata } from 'next';
 import ContactMini from '@/components/ContactMini/ContactMini';
 import styles from './page.module.css';
@@ -52,9 +53,10 @@ export default function DataDiodeBlogPost() {
   return (
     <main className={styles.main}>
       {/* JSON-LD — inside Server Component main, hoisted by React 19 */}
-      <script
+      <Script
+        id="article-schema-post"
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(articleSchema) }}
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(articleSchema) }} suppressHydrationWarning
       />
       <div className={styles.bgGlow} aria-hidden="true" />
 

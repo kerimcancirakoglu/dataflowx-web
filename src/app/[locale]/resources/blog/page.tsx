@@ -1,3 +1,4 @@
+import Script from 'next/script';
 import type { Metadata } from 'next';
 
 import ContactMini from '@/components/ContactMini/ContactMini';
@@ -93,13 +94,15 @@ export default async function BlogPage({
 
   return (
     <main>
-      <script
+      <Script
+        id="breadcrumb-schema-blog"
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }}
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }} suppressHydrationWarning
       />
-      <script
+      <Script
+        id="blog-listing-schema"
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(blogListingSchema) }}
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(blogListingSchema) }} suppressHydrationWarning
       />
       <VideoBackground />
       <BlogClient posts={posts} />

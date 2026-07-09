@@ -1,3 +1,4 @@
+import Script from 'next/script';
 import type { Metadata } from 'next';
 import { draftMode } from 'next/headers';
 
@@ -115,9 +116,10 @@ export default async function UnidirectionalGatewayPage({ params }: { params: Pr
         award="Gartner Hype Cycle for CPS Security — Sample Vendor, 3 Consecutive Years"
         certifications="Common Criteria EAL4+"
       />
-      <script
+      <Script
+        id="faq-schema-udg"
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }} suppressHydrationWarning
       />
       <VideoBackground />
 

@@ -1,5 +1,3 @@
-import React from 'react';
-
 interface ProductSchemaProps {
   name: string;
   description: string;
@@ -8,6 +6,7 @@ interface ProductSchemaProps {
   category?: string;
   award?: string;
   certifications?: string;
+  id?: string;
 }
 
 export default function ProductSchema({
@@ -18,6 +17,7 @@ export default function ProductSchema({
   category = 'OT/ICS Cybersecurity Software',
   award,
   certifications,
+  id = 'product-schema',
 }: ProductSchemaProps) {
   const schema: any = {
     '@context': 'https://schema.org',

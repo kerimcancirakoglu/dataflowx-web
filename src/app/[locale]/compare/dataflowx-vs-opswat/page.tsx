@@ -1,3 +1,4 @@
+import Script from 'next/script';
 import type { Metadata } from 'next';
 
 import ContactMini from '@/components/ContactMini/ContactMini';
@@ -151,13 +152,15 @@ const comparisonData = [
 export default function DataFlowXVsOpswatPage() {
   return (
     <main className={styles.main}>
-      <script
+      <Script
+        id="faq-schema-compare"
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }} suppressHydrationWarning
       />
-      <script
+      <Script
+        id="breadcrumb-schema-compare"
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }}
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }} suppressHydrationWarning
       />
       <VideoBackground />
 

@@ -1,3 +1,4 @@
+import Script from 'next/script';
 import type { Metadata } from 'next';
 
 import ContactMini from '@/components/ContactMini/ContactMini';
@@ -49,9 +50,10 @@ export default async function ResourcesPage({
 
   return (
     <main>
-      <script
+      <Script
+        id="breadcrumb-schema-resources"
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }}
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }} suppressHydrationWarning
       />
       <VideoBackground />
       <ResourcesClient />

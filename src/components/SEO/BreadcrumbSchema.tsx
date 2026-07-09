@@ -1,5 +1,3 @@
-import React from 'react';
-
 interface BreadcrumbItem {
   name: string;
   url: string;
@@ -7,9 +5,10 @@ interface BreadcrumbItem {
 
 interface BreadcrumbSchemaProps {
   items: BreadcrumbItem[];
+  id?: string;
 }
 
-export default function BreadcrumbSchema({ items }: BreadcrumbSchemaProps) {
+export default function BreadcrumbSchema({ items, id = 'breadcrumb-schema' }: BreadcrumbSchemaProps) {
   const schema = {
     '@context': 'https://schema.org',
     '@type': 'BreadcrumbList',

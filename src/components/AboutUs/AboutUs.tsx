@@ -2,6 +2,7 @@ import React from 'react';
 import Image from 'next/image';
 import styles from './AboutUs.module.css';
 import { getTranslations } from 'next-intl/server';
+import Contact from '../Contact/Contact';
 
 export default async function AboutUs() {
   const t = await getTranslations('AboutUs');
@@ -183,15 +184,7 @@ export default async function AboutUs() {
           </div>
 
           <div className={styles.imageContent}>
-            <div className={styles.imageWrapper}>
-              <Image
-                src="/images/aboutus.png"
-                alt="DataFlowX Team"
-                width={800} height={600} style={{ width: '100%', height: 'auto' }}
-                className={styles.aboutImage}
-              />
-              <div className={styles.xGlowOverlay} style={{ top: 'auto', bottom: '10%', right: '10%' }}></div>
-            </div>
+            <Contact formOnly={true} />
           </div>
         </div>
 

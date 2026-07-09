@@ -1,6 +1,5 @@
 import type { Metadata } from 'next';
 import AboutUs from '@/components/AboutUs/AboutUs';
-import Contact from '@/components/Contact/Contact';
 import VideoBackground from '@/components/VideoBackground/VideoBackground';
 import { buildAlternates } from '@/lib/seo-config';
 
@@ -40,8 +39,6 @@ export default function AboutUsPage() {
         <AboutUs />
       </div>
 
-      <div className="section-spacer" aria-hidden="true" />
-      <Contact />
     </main>
   );
 }

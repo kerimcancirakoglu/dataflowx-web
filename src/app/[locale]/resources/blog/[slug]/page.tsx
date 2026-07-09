@@ -1,3 +1,4 @@
+import Script from 'next/script';
 import type { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 import { redirect } from 'next/navigation';
@@ -133,8 +134,8 @@ export default async function BlogDetailPage({ params }: Props) {
 
   return (
     <main className={styles.main}>
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(articleSchema) }} />
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }} />
+      <Script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(articleSchema) }} id="article-schema-blog" />
+      <Script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }} id="breadcrumb-schema-blog-slug" />
       
       <div className={styles.bgGlow} aria-hidden="true" />
 

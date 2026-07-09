@@ -1,3 +1,4 @@
+import Script from 'next/script';
 import type { Metadata } from 'next';
 import Contact from '@/components/Contact/Contact';
 import VideoBackground from '@/components/VideoBackground/VideoBackground';
@@ -70,9 +71,10 @@ export default async function NewsPage({
 
   return (
     <main>
-      <script
+      <Script
+        id="breadcrumb-schema-news"
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }}
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }} suppressHydrationWarning
       />
       <VideoBackground />
       <NewsClient posts={posts} />
