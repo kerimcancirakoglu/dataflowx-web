@@ -1,9 +1,26 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
-  <!-- Dark background -->
-  <rect width="100" height="100" rx="18" fill="#0a0a0a"/>
-  <!-- DFX X mark — gold/amber color matching brand -->
-  <!-- Left diagonal line (top-left to bottom-right) -->
-  <line x1="20" y1="20" x2="80" y2="80" stroke="#F5A623" stroke-width="14" stroke-linecap="round"/>
-  <!-- Right diagonal line (top-right to bottom-left) -->
-  <line x1="80" y1="20" x2="20" y2="80" stroke="#F5A623" stroke-width="14" stroke-linecap="round"/>
+<?xml version="1.0" encoding="UTF-8"?>
+<svg id="katman_1" data-name="katman 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 368 378">
+  <defs>
+    <style>
+      .cls-1 {
+        fill: #53585a;
+      }
+
+      .cls-2 {
+        fill: #f5a705;
+      }
+    </style>
+  </defs>
+  <g>
+    <polygon class="cls-2" points="0 0 23.52 34 101 34 119 34 119 0 0 0"/>
+    <polygon class="cls-2" points="224.04 218 101 34 119 0 224.04 156 304.68 34 229.08 34 252 0 368 0 224.04 218"/>
+    <path class="cls-2" d="M50.12,12.7l76.5,110.85c5.33,7.73,3.39,18.31-4.34,23.65h0c-7.73,5.33-18.31,3.39-23.65-4.34L22.14,32.02c-5.33-7.73-3.39-18.31,4.34-23.65h0c7.73-5.33,18.31-3.39,23.65,4.34Z"/>
+    <path class="cls-2" d="M271.67,31.64l-41.03,61.59c-5.21,7.81-15.76,9.93-23.57,4.72h0c-7.81-5.21-9.93-15.76-4.72-23.57l41.03-61.59c5.21-7.81,15.76-9.93,23.57-4.72h0c7.81,5.21,9.93,15.76,4.72,23.57Z"/>
+  </g>
+  <g>
+    <polygon class="cls-1" points="368 378 344.48 344 267 344 249 344 249 378 368 378"/>
+    <polygon class="cls-1" points="143.96 160 267 344 249 378 143.96 222 63.32 344 138.92 344 116 378 0 378 143.96 160"/>
+    <path class="cls-1" d="M317.88,365.28l-76.5-110.85c-5.33-7.73-3.39-18.31,4.34-23.65h0c7.73-5.33,18.31-3.39,23.65,4.34l76.5,110.85c5.33,7.73,3.39,18.31-4.34,23.65h0c-7.73,5.33-18.31,3.39-23.65-4.34Z"/>
+    <path class="cls-1" d="M96.34,346.36l41.03-61.59c5.21-7.81,15.76-9.93,23.57-4.72h0c7.81,5.21,9.93,15.76,4.72,23.57l-41.03,61.59c-5.21,7.81-15.76,9.93-23.57,4.72h0c-7.81-5.21-9.93-15.76-4.72-23.57Z"/>
+  </g>
 </svg>
