@@ -50,7 +50,15 @@ export default async function Hero({ sanityData, locale }: HeroProps) {
 
   // Sanity SADECE EN locale'de kullanılır — TR/AR her zaman messages/ fallback alır
   const sanitySlides = locale === 'en' ? sanityData?.hero?.slides : undefined;
-  const slides = sanitySlides && sanitySlides.length > 0 ? sanitySlides : fallbackSlides;
+  
+  const processedSanitySlides = sanitySlides?.map((slide, index) => {
+    return {
+      ...slide,
+      buttonLink: index === 0 ? '#use-cases' : (index === 1 ? '#solutions' : slide.buttonLink)
+    };
+  });
+
+  const slides = processedSanitySlides && processedSanitySlides.length > 0 ? processedSanitySlides : fallbackSlides;
 
   return (
     <HeroClient

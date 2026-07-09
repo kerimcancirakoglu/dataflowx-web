@@ -188,11 +188,16 @@ const nextConfig: NextConfig = {
         permanent: true,
       },
 
-      // 7. Broken sitelinks — product renames + Turkish old slugs
+      // 7. Broken sitelinks — product renames + Turkish old slugs + missing pages from Google index
       { source: '/databrokerx', destination: '/secure-remote-access', permanent: true },
+      { source: '/datastationx', destination: '/media-transfer-station', permanent: true },
+      { source: '/datadiodex', destination: '/unidirectional-gateway', permanent: true },
       { source: '/hakkimizda', destination: '/tr/about-us', permanent: true },
       { source: '/partnerler', destination: '/tr/partners', permanent: true },
       { source: '/about', destination: '/about-us', permanent: true },
+      { source: '/contact-1', destination: '/contact', permanent: true },
+      { source: '/press-room', destination: '/news', permanent: true },
+      { source: '/gartner-hypecycle-cyber-physical-systems-2024', destination: '/en/resources', permanent: true },
 
       // 8a. Now in Sanity — redirect to specific post
       { source: '/en/post/industrial-architecture-reporting-and-network-visualization', destination: '/en/resources/blog/industrial-architecture-reporting-and-network-visualization', permanent: true },
