@@ -10,10 +10,14 @@ export default function GatewayFamily() {
   const t = useTranslations('GatewayFamily');
   const containerRef = useRef<HTMLDivElement>(null);
   const packet1Ref = useRef<HTMLDivElement>(null);
-  const packet1ReverseRef = useRef<HTMLDivElement>(null);
+  const packet1FileRef = useRef<HTMLDivElement>(null);
+  const packet1DataRevRef = useRef<HTMLDivElement>(null);
+  const packet1FileRevRef = useRef<HTMLDivElement>(null);
   const packet2Ref = useRef<HTMLDivElement>(null);
   const packet3Ref = useRef<HTMLDivElement>(null);
-  const packet3ReverseRef = useRef<HTMLDivElement>(null);
+  const packet3FileRef = useRef<HTMLDivElement>(null);
+  const packet3DataRevRef = useRef<HTMLDivElement>(null);
+  const packet3FileRevRef = useRef<HTMLDivElement>(null);
   const [activeElement, setActiveElement] = useState<ElementId | null>(null);
 
   const elementDetails = {
@@ -63,102 +67,73 @@ export default function GatewayFamily() {
     let ctx: any;
     import('gsap').then(({ gsap }) => {
       ctx = gsap.context(() => {
+      const fadeKf = { '0%': { opacity: 0 }, '15%': { opacity: 1 }, '85%': { opacity: 1 }, '100%': { opacity: 0 } };
+
+      // Source → TX (DATA, forward)
       if (packet1Ref.current) {
-        gsap.fromTo(
-          packet1Ref.current,
+        gsap.fromTo(packet1Ref.current,
           { left: '0%', opacity: 0 },
-          {
-            left: '100%',
-            duration: 2,
-            ease: 'none',
-            repeat: -1,
-            delay: 0,
-            keyframes: {
-              '0%': { opacity: 0, left: '0%' },
-              '15%': { opacity: 1 },
-              '85%': { opacity: 1 },
-              '100%': { opacity: 0, left: '100%' }
-            }
-          }
+          { left: '100%', duration: 2, ease: 'none', repeat: -1, delay: 0, keyframes: { ...fadeKf, '0%': { opacity: 0, left: '0%' }, '100%': { opacity: 0, left: '100%' } } }
         );
       }
-      if (packet1ReverseRef.current) {
-        gsap.fromTo(
-          packet1ReverseRef.current,
+      // Source → TX (PDF, forward)
+      if (packet1FileRef.current) {
+        gsap.fromTo(packet1FileRef.current,
           { left: '0%', opacity: 0 },
-          {
-            left: '100%',
-            duration: 2,
-            ease: 'none',
-            repeat: -1,
-            delay: 0.5,
-            keyframes: {
-              '0%': { opacity: 0, left: '0%' },
-              '15%': { opacity: 1 },
-              '85%': { opacity: 1 },
-              '100%': { opacity: 0, left: '100%' }
-            }
-          }
+          { left: '100%', duration: 2, ease: 'none', repeat: -1, delay: 0.5, keyframes: { ...fadeKf, '0%': { opacity: 0, left: '0%' }, '100%': { opacity: 0, left: '100%' } } }
         );
       }
-      // Packet 2: TX → Air Gap → RX (the long center section)
+      // TX → Source (DATA, reverse)
+      if (packet1DataRevRef.current) {
+        gsap.fromTo(packet1DataRevRef.current,
+          { left: '100%', opacity: 0 },
+          { left: '0%', duration: 2, ease: 'none', repeat: -1, delay: 1.0, keyframes: { ...fadeKf, '0%': { opacity: 0, left: '100%' }, '100%': { opacity: 0, left: '0%' } } }
+        );
+      }
+      // TX → Source (PDF, reverse)
+      if (packet1FileRevRef.current) {
+        gsap.fromTo(packet1FileRevRef.current,
+          { left: '100%', opacity: 0 },
+          { left: '0%', duration: 2, ease: 'none', repeat: -1, delay: 1.5, keyframes: { ...fadeKf, '0%': { opacity: 0, left: '100%' }, '100%': { opacity: 0, left: '0%' } } }
+        );
+      }
+
+      // TX → Air Gap → RX (one-way, unchanged)
       if (packet2Ref.current) {
-        gsap.fromTo(
-          packet2Ref.current,
+        gsap.fromTo(packet2Ref.current,
           { left: '0%', opacity: 0 },
-          {
-            left: '100%',
-            duration: 3.5,
-            ease: 'none',
-            repeat: -1,
-            delay: 1.2,
-            keyframes: {
-              '0%': { opacity: 0, left: '0%' },
-              '10%': { opacity: 1 },
-              '90%': { opacity: 1 },
-              '100%': { opacity: 0, left: '100%' }
-            }
+          { left: '100%', duration: 3.5, ease: 'none', repeat: -1, delay: 1.2,
+            keyframes: { '0%': { opacity: 0, left: '0%' }, '10%': { opacity: 1 }, '90%': { opacity: 1 }, '100%': { opacity: 0, left: '100%' } }
           }
         );
       }
-      // Packet 3: RX → Protected Network
+
+      // RX → Protected (DATA, forward)
       if (packet3Ref.current) {
-        gsap.fromTo(
-          packet3Ref.current,
+        gsap.fromTo(packet3Ref.current,
           { left: '0%', opacity: 0 },
-          {
-            left: '100%',
-            duration: 2,
-            ease: 'none',
-            repeat: -1,
-            delay: 3.5,
-            keyframes: {
-              '0%': { opacity: 0, left: '0%' },
-              '15%': { opacity: 1 },
-              '85%': { opacity: 1 },
-              '100%': { opacity: 0, left: '100%' }
-            }
-          }
+          { left: '100%', duration: 2, ease: 'none', repeat: -1, delay: 3.5, keyframes: { ...fadeKf, '0%': { opacity: 0, left: '0%' }, '100%': { opacity: 0, left: '100%' } } }
         );
       }
-      // Packet 3 File: RX → Protected Network
-      if (packet3ReverseRef.current) {
-        gsap.fromTo(
-          packet3ReverseRef.current,
+      // RX → Protected (PDF, forward)
+      if (packet3FileRef.current) {
+        gsap.fromTo(packet3FileRef.current,
           { left: '0%', opacity: 0 },
-          {
-            left: '100%',
-            duration: 2,
-            ease: 'none',
-            repeat: -1,
-            delay: 4.0,
-            keyframes: {
-              '0%': { opacity: 0, left: '0%' },
-              '15%': { opacity: 1 },
-              '85%': { opacity: 1 },
-              '100%': { opacity: 0, left: '100%' }
-            }
-          }
+          { left: '100%', duration: 2, ease: 'none', repeat: -1, delay: 4.0, keyframes: { ...fadeKf, '0%': { opacity: 0, left: '0%' }, '100%': { opacity: 0, left: '100%' } } }
+        );
+      }
+      // Protected → RX (DATA, reverse)
+      if (packet3DataRevRef.current) {
+        gsap.fromTo(packet3DataRevRef.current,
+          { left: '100%', opacity: 0 },
+          { left: '0%', duration: 2, ease: 'none', repeat: -1, delay: 4.5, keyframes: { ...fadeKf, '0%': { opacity: 0, left: '100%' }, '100%': { opacity: 0, left: '0%' } } }
+        );
+      }
+      // Protected → RX (PDF, reverse)
+      if (packet3FileRevRef.current) {
+        gsap.fromTo(packet3FileRevRef.current,
+          { left: '100%', opacity: 0 },
+          { left: '0%', duration: 2, ease: 'none', repeat: -1, delay: 5.0, keyframes: { ...fadeKf, '0%': { opacity: 0, left: '100%' }, '100%': { opacity: 0, left: '0%' } } }
         );
       }
     }, containerRef);
@@ -214,7 +189,7 @@ export default function GatewayFamily() {
             <div className={styles.clickHint}>{t('source.hint')}</div>
           </button>
 
-          {/* Line 1 (Source -> TX) */}
+          {/* Line 1 (Source ↔ TX) */}
           <div className={`${styles.channelContainer} ${styles.twoWayLine}`} style={{ flex: 1 }}>
             <div className={styles.channelRow}>
               <div className={styles.channelLine} />
@@ -224,7 +199,26 @@ export default function GatewayFamily() {
             </div>
             <div className={styles.channelRow}>
               <div className={styles.channelLine} />
-              <div className={`${styles.channelPacket} ${styles.packetFile}`} ref={packet1ReverseRef}>
+              <div className={`${styles.channelPacket} ${styles.packetFile}`} ref={packet1FileRef}>
+                <svg className={styles.packetIcon} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                  <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+                  <polyline points="14 2 14 8 20 8"></polyline>
+                  <line x1="16" y1="13" x2="8" y2="13"></line>
+                  <line x1="16" y1="17" x2="8" y2="17"></line>
+                  <polyline points="10 9 9 9 8 9"></polyline>
+                </svg>
+                <span className={styles.packetText}>PDF</span>
+              </div>
+            </div>
+            <div className={styles.channelRow}>
+              <div className={styles.channelLine} />
+              <div className={`${styles.channelPacket} ${styles.packetData}`} ref={packet1DataRevRef}>
+                <span className={styles.packetText}>DATA</span>
+              </div>
+            </div>
+            <div className={styles.channelRow}>
+              <div className={styles.channelLine} />
+              <div className={`${styles.channelPacket} ${styles.packetFile}`} ref={packet1FileRevRef}>
                 <svg className={styles.packetIcon} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
                   <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
                   <polyline points="14 2 14 8 20 8"></polyline>
@@ -308,7 +302,7 @@ export default function GatewayFamily() {
             </div>
           </div>
 
-          {/* Line 3: RX → Protected Network */}
+          {/* Line 3: RX ↔ Protected Network */}
           <div className={`${styles.channelContainer} ${styles.twoWayLine}`} style={{ flex: 1 }}>
             <div className={styles.channelRow}>
               <div className={styles.channelLine} />
@@ -318,7 +312,26 @@ export default function GatewayFamily() {
             </div>
             <div className={styles.channelRow}>
               <div className={styles.channelLine} />
-              <div className={`${styles.channelPacket} ${styles.packetFile}`} ref={packet3ReverseRef}>
+              <div className={`${styles.channelPacket} ${styles.packetFile}`} ref={packet3FileRef}>
+                <svg className={styles.packetIcon} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                  <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+                  <polyline points="14 2 14 8 20 8"></polyline>
+                  <line x1="16" y1="13" x2="8" y2="13"></line>
+                  <line x1="16" y1="17" x2="8" y2="17"></line>
+                  <polyline points="10 9 9 9 8 9"></polyline>
+                </svg>
+                <span className={styles.packetText}>PDF</span>
+              </div>
+            </div>
+            <div className={styles.channelRow}>
+              <div className={styles.channelLine} />
+              <div className={`${styles.channelPacket} ${styles.packetData}`} ref={packet3DataRevRef}>
+                <span className={styles.packetText}>DATA</span>
+              </div>
+            </div>
+            <div className={styles.channelRow}>
+              <div className={styles.channelLine} />
+              <div className={`${styles.channelPacket} ${styles.packetFile}`} ref={packet3FileRevRef}>
                 <svg className={styles.packetIcon} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
                   <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
                   <polyline points="14 2 14 8 20 8"></polyline>
