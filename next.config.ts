@@ -205,7 +205,13 @@ const nextConfig: NextConfig = {
       // Non-locale-prefixed catch-all (specific exceptions in section 6 still take priority)
       { source: '/post/:slug*', destination: '/en/resources/blog/:slug*', permanent: true },
 
-      // 9. Short /blog/ URLs for LinkedIn posts
+      // 9. Datasheet slug yenileme (301 kalıcı yönlendirme)
+      { source: '/resources/ds-datadiodex', destination: '/resources/ds-unidirectional-gateway', permanent: true },
+      { source: '/resources/ds-sra', destination: '/resources/ds-secure-remote-access', permanent: true },
+      { source: '/resources/ds-mts', destination: '/resources/ds-media-transfer-station', permanent: true },
+      { source: '/resources/ds-email', destination: '/resources/ds-email-security', permanent: true },
+
+      // 10. Short /blog/ URLs for LinkedIn posts
       // Usage: dataflowx.com/blog/{sanity-slug} → /en/resources/blog/{sanity-slug}
       { source: '/blog/:slug*', destination: '/en/resources/blog/:slug*', permanent: false },
     ];

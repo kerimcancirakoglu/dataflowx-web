@@ -12,6 +12,7 @@ export interface UseCase {
     text: string;
     author: string;
   };
+  pdfUrls?: { en?: string; tr?: string };
 }
 
 export const USE_CASES: UseCase[] = [
@@ -28,7 +29,8 @@ export const USE_CASES: UseCase[] = [
     quote: {
       text: 'The result was not simply a new security tool. It was a transformation of the institution\'s security operations model — from reactive incident response to a continuous, intelligence-driven defense posture.',
       author: 'Chief Information Security Officer'
-    }
+    },
+    pdfUrls: { en: '', tr: '' },
   },
   {
     slug: 'energy-utilities-critical-infrastructure',
@@ -43,7 +45,8 @@ export const USE_CASES: UseCase[] = [
     quote: {
       text: 'The deployment was certified to Common Criteria EAL4+ — one of the highest internationally recognized security assurance levels, giving the organization the independently verified evidence required to satisfy regulatory obligations and pass external audits without remediation.',
       author: 'Director of OT Security'
-    }
+    },
+    pdfUrls: { en: '', tr: '' },
   },
   {
     slug: 'defense-government-controlled-access',
@@ -54,7 +57,8 @@ export const USE_CASES: UseCase[] = [
     customer: 'Defense Industry Contractor',
     challenge: 'A defense industry contractor managing sensitive systems across multiple security domains faced a remote access problem that is endemic to the sector: field teams and external vendors required legitimate, operational access to protected systems — but every access pathway created exposure.\n\nConventional remote access architectures created direct connections between users and target systems — traversing internal networks, DMZ environments, and OT infrastructure in ways that expanded the attack surface with every session. A single compromised credential, a misconfigured tunnel, or an unmonitored vendor session could provide an adversary with direct, persistent access to the organization\'s most sensitive assets. Audit trails were incomplete. Session activity was difficult to monitor in real time. And the organization had no granular mechanism to govern what remote users could actually do once inside.',
     solutionAndImpact: 'The organization deployed DFX Secure Remote Access — a hardware-based cross-domain security gateway that fundamentally reframes the architecture of secure access between networks of different security classifications.\n\nRather than creating direct connections between remote users and target systems, DFX Secure Remote Access introduced a centralized, policy-governed intermediary layer operating at the hardware level. No user, regardless of role or credential level, ever establishes a direct path to a protected system. Every data exchange is brokered through a request-response architecture — where each transaction is explicitly authorized, inspected, and logged before it crosses a security domain boundary.\n\nActive Directory integration ensured that access rights were governed by existing identity infrastructure. Protocol-specific granular filtering defined precisely what data types and operations were permitted across each domain boundary. Sandbox integration via ICAP subjected suspicious content to deep inspection before it reached protected systems.\n\nKey Outcomes:\n• Complete elimination of direct network paths to sensitive systems\n• Hardware-enforced cross-domain access governance\n• Granular per-session and per-protocol controls\n• Full session and transfer logging\n• Zero operational disruption to field teams and external vendors\n• Compliance-ready audit trail',
-    products: ['DFX Secure Remote Access']
+    products: ['DFX Secure Remote Access'],
+    pdfUrls: { en: '', tr: '' },
   },
   {
     slug: 'manufacturing-industrial-production-floor',
@@ -65,7 +69,8 @@ export const USE_CASES: UseCase[] = [
     customer: 'Manufacturing Facility',
     challenge: 'A manufacturing facility operating CNC machines and HMI systems faced a threat vector that is both ubiquitous and underestimated: removable media. Engineers, vendors, and contractors routinely brought USB drives and optical media onto the production floor to transfer project files, firmware updates, and configuration data directly to industrial machines. Each transfer represented an uncontrolled entry point — a potential vehicle for ransomware, destructive malware, or espionage tools.\n\nConventional antivirus solutions offered limited protection: scan times were long enough to halt production workflows, detection capabilities were insufficient against sophisticated or zero-day variants, and there was no mechanism to enforce consistent security policy across contractors and visitors. The facility needed to eliminate the attack vector entirely — without eliminating the operational workflow it supported.',
     solutionAndImpact: 'The facility deployed an integrated solution combining DFX Media Transfer Station secure media transfer kiosks with DFX PASS — a hardware-based Zero Trust data bridge — creating a complete, end-to-end secure file transfer ecosystem for the production environment.\n\nDFX Media Transfer Station kiosks were positioned at all entry points where removable media was previously introduced. Physical access controls, user authentication, and on-device cameras established a verifiable chain of custody for every transfer event. Within the kiosk, every file was subjected to multi-engine antivirus scanning, sandbox analysis, and Content Disarm and Reconstruction (CDR) — stripping potentially malicious components from files while preserving their operational content. Files that passed inspection were cryptographically signed with a PKI certificate.\n\nAt the endpoint, DFX PASS enforced the final layer of control. Operating directly on the industrial machines, DFX PASS verified the PKI signature of every file before permitting execution or installation. Files without a valid certificate from the inspection pipeline were rejected at the hardware level.\n\nKey Outcomes:\n• Zero malware infections on production floor machines following deployment\n• Zero production downtime attributable to security operations\n• Full Zero USB policy enforcement achieved without operational disruption\n• End-to-end chain of custody for every file entering the production environment\n• Multi-layer threat prevention',
-    products: ['DFX Media Transfer Station', 'DFX PASS', 'DFX Malware Mitigation Sandbox']
+    products: ['DFX Media Transfer Station', 'DFX PASS', 'DFX Malware Mitigation Sandbox'],
+    pdfUrls: { en: '', tr: '' },
   },
   {
     slug: 'oil-gas-physical-catastrophe',
@@ -76,6 +81,7 @@ export const USE_CASES: UseCase[] = [
     customer: 'Oil and Gas Operator',
     challenge: 'Oil and gas operators face a security challenge that is structurally different from most enterprise environments. Their operational technology infrastructure is geographically dispersed — spanning remote onshore facilities, offshore platforms, and pipeline control stations that may be physically inaccessible for extended periods. These systems must remain isolated from external threats, yet they generate continuous streams of operational data that enterprise teams, regulators, and safety systems depend on in real time.\n\nAt the same time, maintaining and updating these systems requires regular intervention by engineers and contractors who arrive on-site with firmware updates stored on removable media. Each visit represents an uncontrolled introduction of external data into an environment that cannot tolerate compromise. Conventional security tools are often incompatible with legacy industrial systems, too slow for operational workflows, or simply absent at remote locations.',
     solutionAndImpact: 'The operator deployed an integrated architecture combining DFX Unidirectional Gateway for network boundary enforcement and DFX Media Transfer Station for removable media control — addressing both the connectivity risk and the physical media risk within a unified security framework.\n\nAt the network layer, DFX Unidirectional Gateway was deployed at the boundary between OT control networks and enterprise IT infrastructure. Operational telemetry flows continuously and automatically from the OT environment to enterprise monitoring systems without creating any inbound pathway. The hardware diode makes reverse communication physically impossible. At remote locations, Compact and Fusion form factor options provided the same hardware-enforced protection within a footprint engineered for field deployment.\n\nAt the physical access layer, DFX Media Transfer Station kiosks were deployed at facility entry points. Multi-engine antivirus scanning, CDR-based file sanitization, and sandbox analysis inspect every file — stripping potentially malicious content. Files that pass inspection are cryptographically signed with a PKI certificate, creating a verifiable chain of custody.\n\nKey Outcomes:\n• Hardware-enforced OT network isolation across geographically dispersed facilities\n• Continuous, automated operational data flow from OT to enterprise systems\n• Zero uncontrolled file introductions to production systems\n• Full chain of custody for every maintenance file transfer\n• Compliance alignment with IEC 62443, NIS2',
-    products: ['DFX Unidirectional Gateway', 'DFX Media Transfer Station', 'DFX Malware Mitigation Sandbox']
+    products: ['DFX Unidirectional Gateway', 'DFX Media Transfer Station', 'DFX Malware Mitigation Sandbox'],
+    pdfUrls: { en: '', tr: '' },
   }
 ];

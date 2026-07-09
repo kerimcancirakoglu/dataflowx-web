@@ -4,15 +4,17 @@ import Link from 'next/link';
 import Image from 'next/image';
 import styles from './page.module.css';
 import { USE_CASES } from '@/data/useCases';
+import LeadModalTrigger from '../../[slug]/LeadModalTrigger';
 
 interface PageProps {
   params: Promise<{
+    locale: string;
     slug: string;
   }>;
 }
 
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
-  const { slug } = await params;
+  const { locale, slug } = await params;
   const useCase = USE_CASES.find(u => u.slug === slug);
   if (!useCase) return { title: 'Not Found' };
 
@@ -69,12 +71,18 @@ const renderTextContent = (text: string, isChallenge: boolean = false) => {
 };
 
 export default async function UseCaseDetailPage({ params }: PageProps) {
-  const { slug } = await params;
+  const { locale, slug } = await params;
   const useCase = USE_CASES.find(u => u.slug === slug);
 
   if (!useCase) {
     notFound();
   }
+
+  const resolvedPdfUrl = useCase?.pdfUrls
+    ? (locale === 'tr'
+        ? useCase.pdfUrls.tr || useCase.pdfUrls.en
+        : useCase.pdfUrls.en || useCase.pdfUrls.tr) || undefined
+    : undefined;
 
   return (
     <div className={styles.pageWrapper}>
@@ -160,6 +168,18 @@ export default async function UseCaseDetailPage({ params }: PageProps) {
               ))}
             </div>
           </div>
+
+          {resolvedPdfUrl && (
+            <>
+              <div className={styles.sidebarBlock}>
+                <div className={styles.sidebarLabel}>Download</div>
+                <a href={resolvedPdfUrl} className={`${styles.downloadPdfBtn} downloadBtn`}>
+                  Download Use Case PDF
+                </a>
+              </div>
+              <LeadModalTrigger fileUrl={resolvedPdfUrl} documentName={useCase.title} />
+            </>
+          )}
 
         </aside>
 

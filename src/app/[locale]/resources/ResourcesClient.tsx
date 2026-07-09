@@ -1,11 +1,12 @@
 'use client';
 
-import { useState, useMemo } from 'react';
+import { useState, useMemo, Suspense } from 'react';
+import { useSearchParams } from 'next/navigation';
 import styles from './page.module.css';
 import Image from 'next/image';
 import { USE_CASES } from '@/data/useCases';
 import PdfLeadModal from '@/components/PdfLeadModal/PdfLeadModal';
-import { useTranslations } from 'next-intl';
+import { useTranslations, useLocale } from 'next-intl';
 
 type ResourceType = 'Data Sheet' | 'Whitepaper' | 'Case Study' | 'Guide' | 'Report' | 'Use Case';
 type ProductType = 'DFX Unidirectional Gateway' | 'DFX Malware Mitigation Sandbox' | 'DFX Email Security Platform' | 'DFX PASS' | 'DFX Secure Remote Access' | 'DFX Media Transfer Station' | 'DFX IntelRoom' | 'DFX CDR';
@@ -22,36 +23,40 @@ interface Resource {
   date: string;
   link: string;
   image: string;
-  /** Direct URL to the downloadable PDF on WP Engine */
-  fileUrl?: string;
+  /** Locale-specific PDF URLs. 'ar' falls back to 'en' if not set. */
+  fileUrls?: { en?: string; tr?: string; ar?: string };
 }
-
-const BROCHURE_DATA_DIODE_X =
-  '/resources/ds-datadiodex'; // PDF upload via Sanity once migrated
 
 const resourcesData: Resource[] = [
   {
-    id: 'ds-datadiodex',
+    id: 'ds-unidirectional-gateway',
     title: 'DFX Unidirectional Gateway Data Sheet',
     description: 'Detailed technical specifications for DataFlowX EAL4+ certified unidirectional gateway.',
     type: 'Data Sheet',
     product: 'DFX Unidirectional Gateway',
     useCase: 'Critical Infrastructure',
     date: '2023-11-15',
-    link: '/resources/ds-datadiodex',
+    link: '/resources/ds-unidirectional-gateway',
     image: '/images/resource-datadiode.jpg',
-    fileUrl: BROCHURE_DATA_DIODE_X,
+    fileUrls: {
+      en: 'https://cdn.sanity.io/files/15oto8dp/production/bb5414c1b49bad2a4a6a8c14d135d9c7e7b1c803.pdf',
+      tr: 'https://cdn.sanity.io/files/15oto8dp/production/ca93d525146da686651471dd93aa1c8973fddb49.pdf',
+    },
   },
   {
-    id: 'ds-sra',
-    title: 'DFX Secure Remote Access Features',
+    id: 'ds-secure-remote-access',
+    title: 'DFX Secure Remote Access Data Sheet',
     description: 'Architecture and features of our secure remote access and cross-domain solution.',
     type: 'Data Sheet',
     product: 'DFX Secure Remote Access',
     useCase: 'Defense & Military',
     date: '2023-12-01',
-    link: '/resources/ds-sra',
+    link: '/resources/ds-secure-remote-access',
     image: '/images/resource-sra.jpg',
+    fileUrls: {
+      en: 'https://cdn.sanity.io/files/15oto8dp/production/509b91b3b92053520d3feff09f3d94933caa089c.pdf',
+      tr: 'https://cdn.sanity.io/files/15oto8dp/production/8f4d0ba10c9301795f006aaf8facfb72ac3efaa6.pdf',
+    },
   },
   {
     id: 'wp-ot-security',
@@ -85,15 +90,19 @@ const resourcesData: Resource[] = [
     image: '/images/resource-nis2.jpg',
   },
   {
-    id: 'ds-mts',
+    id: 'ds-media-transfer-station',
     title: 'DFX Media Transfer Station Data Sheet',
     description: 'Technical details about our secure USB kiosk featuring multi-engine AV and Deep CDR sanitization.',
     type: 'Data Sheet',
     product: 'DFX Media Transfer Station',
     useCase: 'Defense & Military',
     date: '2024-04-12',
-    link: '/resources/ds-mts',
+    link: '/resources/ds-media-transfer-station',
     image: '/images/resource-mts.jpg',
+    fileUrls: {
+      en: 'https://cdn.sanity.io/files/15oto8dp/production/696accc5bea7ff5a4587c93640cae548fd0a3398.pdf',
+      tr: 'https://cdn.sanity.io/files/15oto8dp/production/5bef34b392aeaafa7a63392e202498e642637aab.pdf',
+    },
   },
   {
     id: 'rep-threat-2024',
@@ -106,15 +115,46 @@ const resourcesData: Resource[] = [
     image: '/images/resource-threat.jpg',
   },
   {
-    id: 'ds-email',
+    id: 'ds-email-security',
     title: 'DFX Email Security Platform Data Sheet',
     description: 'Deep CDR and AI behavior detection for zero-trust email gateways.',
     type: 'Data Sheet',
     product: 'DFX Email Security Platform',
     useCase: 'Financial Services',
     date: '2024-05-15',
-    link: '/resources/ds-email',
+    link: '/resources/ds-email-security',
     image: '/images/resource-email.jpg',
+    fileUrls: {
+      en: 'https://cdn.sanity.io/files/15oto8dp/production/be418709f8f967d2550d0b5d0415cb9c89874b13.pdf',
+      tr: 'https://cdn.sanity.io/files/15oto8dp/production/2af19abc75e8fe789d3290b2eb37a5df959e7b6e.pdf',
+    },
+  },
+  {
+    id: 'ds-malware-sandbox',
+    title: 'DFX Malware Mitigation Sandbox Data Sheet',
+    description: 'Deep content inspection and sandboxing to neutralize advanced malware before it enters secure networks.',
+    type: 'Data Sheet',
+    product: 'DFX Malware Mitigation Sandbox',
+    useCase: 'Critical Infrastructure',
+    date: '2024-06-01',
+    link: '/resources/ds-malware-sandbox',
+    image: '/Kapak/kapaklar/datasecure1.jpg',
+    fileUrls: {
+      en: 'https://cdn.sanity.io/files/15oto8dp/production/843f35a621b8426db2b05eeb9659bd021ae86ef9.pdf',
+      tr: 'https://cdn.sanity.io/files/15oto8dp/production/cc1123960c3ffd234fc0ea91e5ca5f4ff29d6af5.pdf',
+    },
+  },
+  {
+    id: 'ds-pass',
+    title: 'DFX PASS Data Sheet',
+    description: 'Portable Access Security Solution for secure, hardware-isolated media transfer and authentication.',
+    type: 'Data Sheet',
+    product: 'DFX PASS',
+    useCase: 'Defense & Military',
+    date: '2024-06-15',
+    link: '/resources/ds-pass',
+    image: '/Kapak/kapaklar/databroker1.jpg',
+    fileUrls: { en: 'https://cdn.sanity.io/files/15oto8dp/production/d2fa8ee1bd87320fd7504dd8d9ea7c34217ab3d4.pdf' },
   }
 ];
 
@@ -148,14 +188,32 @@ const allUseCases: UseCaseType[] = ['Energy & SCADA', 'Defense & Military', 'Fin
 
 
 
-export default function ResourcesClient() {
+function resolveFileUrl(fileUrls: Resource['fileUrls'], locale: string): string | undefined {
+  if (!fileUrls) return undefined;
+  if (locale === 'tr') return fileUrls.tr || fileUrls.en || undefined;
+  if (locale === 'ar') return fileUrls.ar || fileUrls.en || undefined;
+  return fileUrls.en || undefined;
+}
+
+function ResourcesContent() {
   const t = useTranslations('Resources');
+  const locale = useLocale();
+  const searchParams = useSearchParams();
+
+  // URL'den başlangıç filtrelerini oku
+  const initialType = searchParams.get('type') as ResourceType | null;
+  const initialUseCase = searchParams.get('useCase') as UseCaseType | null;
+
   const [searchQuery, setSearchQuery] = useState('');
   const [productSearchQuery, setProductSearchQuery] = useState('');
-  const [selectedTypes, setSelectedTypes] = useState<Set<ResourceType>>(new Set());
+  const [selectedTypes, setSelectedTypes] = useState<Set<ResourceType>>(
+    initialType ? new Set([initialType]) : new Set()
+  );
   const [selectedProducts, setSelectedProducts] = useState<Set<ProductType>>(new Set());
-  const [selectedUseCases, setSelectedUseCases] = useState<Set<UseCaseType>>(new Set());
-  
+  const [selectedUseCases, setSelectedUseCases] = useState<Set<UseCaseType>>(
+    initialUseCase ? new Set([initialUseCase]) : new Set()
+  );
+
   // PDF Lead Gen Modal State
   const [downloadTarget, setDownloadTarget] = useState<{ title: string; fileUrl?: string } | null>(null);
 
@@ -164,7 +222,7 @@ export default function ResourcesClient() {
 
     if (pdfTypes.includes(resource.type)) {
       e.preventDefault();
-      setDownloadTarget({ title: resource.title, fileUrl: resource.fileUrl });
+      setDownloadTarget({ title: resource.title, fileUrl: resolveFileUrl(resource.fileUrls, locale) });
     }
   };
 
@@ -429,5 +487,13 @@ export default function ResourcesClient() {
         fileUrl={downloadTarget?.fileUrl}
       />
     </div>
+  );
+}
+
+export default function ResourcesClient() {
+  return (
+    <Suspense fallback={<div style={{ minHeight: '100vh' }} />}>
+      <ResourcesContent />
+    </Suspense>
   );
 }

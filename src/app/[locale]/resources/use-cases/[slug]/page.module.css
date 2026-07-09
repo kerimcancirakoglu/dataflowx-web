@@ -276,3 +276,27 @@
   color: #F5A706;
   font-weight: bold;
 }
+
+/* PDF Download Button */
+.downloadPdfBtn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, #F5A706, #e09500);
+  padding: 0.75rem 1rem;
+  border-radius: 8px;
+  color: #050505;
+  font-weight: 700;
+  font-size: 0.9rem;
+  text-decoration: none;
+  transition: all 0.3s ease;
+  cursor: pointer;
+  border: none;
+  text-align: center;
+}
+
+.downloadPdfBtn:hover {
+  background: linear-gradient(135deg, #e09500, #c68200);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 15px rgba(245, 167, 6, 0.3);
+}

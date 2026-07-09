@@ -698,7 +698,7 @@
     },
     "hwIsolation": "Donanım Düzeyinde İzolasyon",
     "hwIsolationDesc": "Fiziksel diyot, verinin yalnızca tek yönde ilerlemesini sağlar.",
-    "airGapBridging": "Hava Boşluğu Köprüleme",
+    "airGapBridging": "Hava Boşluğu",
     "airGapBridgingDesc": "Ağ portlarını açmadan veri aktarımı yapın.",
     "zeroReverse": "Sıfır Ters Kanal",
     "zeroReverseDesc": "Saldırganların geri ulaşması matematiksel olarak imkânsız."

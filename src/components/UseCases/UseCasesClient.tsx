@@ -17,7 +17,7 @@ export default function UseCasesClient({ t }: { t: any }) {
       description: t.c1.description,
       image: '/svgler/server.svg',
       glowColor: '#00B4FF',
-      url: '/resources/use-cases/defense-government-controlled-access',
+      url: '/resources?type=Use+Case&useCase=Defense+%26+Military',
     },
     {
       id: '02',
@@ -25,7 +25,7 @@ export default function UseCasesClient({ t }: { t: any }) {
       description: t.c2.description,
       image: '/svgler/trafoyeni.svg',
       glowColor: '#FFFFFF',
-      url: '/resources/use-cases/energy-utilities-critical-infrastructure',
+      url: '/resources?type=Use+Case&useCase=Energy+%26+SCADA',
     },
     {
       id: '03',
@@ -33,7 +33,7 @@ export default function UseCasesClient({ t }: { t: any }) {
       description: t.c3.description,
       image: '/svgler/walletcrypto.svg',
       glowColor: '#FFD700',
-      url: '/resources/use-cases/financial-services-targeted-sector',
+      url: '/resources?type=Use+Case&useCase=Financial+Services',
     },
     {
       id: '04',
@@ -41,7 +41,7 @@ export default function UseCasesClient({ t }: { t: any }) {
       description: t.c4.description,
       image: '/svgler/robot.svg',
       glowColor: '#F5A706',
-      url: '/resources/use-cases/manufacturing-industrial-production-floor',
+      url: '/resources?type=Use+Case&useCase=Manufacturing',
     },
   ];
 

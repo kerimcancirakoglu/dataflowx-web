@@ -70,13 +70,18 @@ export default defineType({
       options: { hotspot: true },
     }),
     defineField({
-      name: 'file',
-      title: 'PDF / Dosya (File Upload)',
-      description: 'Eğer bir dosya yüklenecekse burayı kullanın.',
+      name: 'fileEn',
+      title: 'PDF — İngilizce (EN)',
+      description: 'İngilizce PDF dosyası. /en locale\'inde indirme butonuna basıldığında bu dosya indirilir.',
       type: 'file',
-      options: {
-        accept: '.pdf,.doc,.docx,.ppt,.pptx',
-      },
+      options: { accept: '.pdf,.doc,.docx,.ppt,.pptx' },
+    }),
+    defineField({
+      name: 'fileTr',
+      title: 'PDF — Türkçe (TR)',
+      description: 'Türkçe PDF dosyası. /tr locale\'inde indirme butonuna basıldığında bu dosya indirilir.',
+      type: 'file',
+      options: { accept: '.pdf,.doc,.docx,.ppt,.pptx' },
     }),
     defineField({
       name: 'externalLink',

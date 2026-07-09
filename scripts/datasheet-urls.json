@@ -1,0 +1,25 @@
+{
+  "ds-unidirectional-gateway": {
+    "en": "https://cdn.sanity.io/files/15oto8dp/production/bb5414c1b49bad2a4a6a8c14d135d9c7e7b1c803.pdf",
+    "tr": "https://cdn.sanity.io/files/15oto8dp/production/ca93d525146da686651471dd93aa1c8973fddb49.pdf"
+  },
+  "ds-secure-remote-access": {
+    "en": "https://cdn.sanity.io/files/15oto8dp/production/509b91b3b92053520d3feff09f3d94933caa089c.pdf",
+    "tr": "https://cdn.sanity.io/files/15oto8dp/production/8f4d0ba10c9301795f006aaf8facfb72ac3efaa6.pdf"
+  },
+  "ds-media-transfer-station": {
+    "en": "https://cdn.sanity.io/files/15oto8dp/production/696accc5bea7ff5a4587c93640cae548fd0a3398.pdf",
+    "tr": "https://cdn.sanity.io/files/15oto8dp/production/5bef34b392aeaafa7a63392e202498e642637aab.pdf"
+  },
+  "ds-email-security": {
+    "en": "https://cdn.sanity.io/files/15oto8dp/production/be418709f8f967d2550d0b5d0415cb9c89874b13.pdf",
+    "tr": "https://cdn.sanity.io/files/15oto8dp/production/2af19abc75e8fe789d3290b2eb37a5df959e7b6e.pdf"
+  },
+  "ds-malware-sandbox": {
+    "en": "https://cdn.sanity.io/files/15oto8dp/production/843f35a621b8426db2b05eeb9659bd021ae86ef9.pdf",
+    "tr": "https://cdn.sanity.io/files/15oto8dp/production/cc1123960c3ffd234fc0ea91e5ca5f4ff29d6af5.pdf"
+  },
+  "ds-pass": {
+    "en": "https://cdn.sanity.io/files/15oto8dp/production/d2fa8ee1bd87320fd7504dd8d9ea7c34217ab3d4.pdf"
+  }
+}

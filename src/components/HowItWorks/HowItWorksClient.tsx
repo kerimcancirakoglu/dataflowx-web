@@ -69,8 +69,8 @@ export default function HowItWorksClient({ t }: { t: any }) {
           <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" stroke="currentColor" strokeWidth="1.5" strokeLinejoin="round" />
         </svg>
       ),
-      image: '/Kapak/networksecurity.png',
-      overlay: 'linear-gradient(to bottom, rgba(10, 20, 30, 0.2) 0%, rgba(0, 5, 15, 0.92) 100%)',
+      image: '/Kapak/forex-trading-setup.jpg',
+      overlay: 'linear-gradient(to bottom, rgba(5, 10, 20, 0.35) 0%, rgba(0, 5, 15, 0.94) 100%)',
       description: t.ot.description,
       links: [
         { text: t.ot.l1, url: '/portx' }
