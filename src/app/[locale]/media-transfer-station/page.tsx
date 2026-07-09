@@ -143,7 +143,11 @@ export default async function MediaTransferStationPage({ params }: { params: Pro
 
       {/* 3D Model Viewer */}
       <section style={{ padding: '0 2rem', maxWidth: '1400px', margin: '0 auto' }}>
-        <MTSModelViewerWrapper />
+        <MTSModelViewerWrapper
+          datasheetUrl={locale === 'tr'
+            ? 'https://cdn.sanity.io/files/15oto8dp/production/5bef34b392aeaafa7a63392e202498e642637aab.pdf'
+            : 'https://cdn.sanity.io/files/15oto8dp/production/696accc5bea7ff5a4587c93640cae548fd0a3398.pdf'}
+        />
       </section>
 
       <div className="section-spacer" aria-hidden="true" />

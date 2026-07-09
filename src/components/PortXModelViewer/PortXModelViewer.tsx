@@ -5,8 +5,8 @@ import { Canvas } from '@react-three/fiber';
 import { OrbitControls, Environment, ContactShadows, Float, Html, Bounds, Center } from '@react-three/drei';
 import { Model as PortXModel } from '../PortXAnimation/PortxModel';
 import styles from './PortXModelViewer.module.css';
-
 import { useTranslations } from 'next-intl';
+import PdfLeadModal from '../PdfLeadModal/PdfLeadModal';
 
 // Fallback loader
 function Loader() {
@@ -19,13 +19,14 @@ function Loader() {
   );
 }
 
-export default function PortXModelViewer() {
+export default function PortXModelViewer({ datasheetUrl }: { datasheetUrl?: string }) {
   const t = useTranslations('PortXModelViewer');
   const features = ['f1', 'f2', 'f3', 'f4', 'f5', 'f6'] as const;
 
   // Lazy-load: only mount Canvas when visible in viewport
   const containerRef = useRef<HTMLDivElement>(null);
   const [isVisible, setIsVisible] = useState(false);
+  const [modalOpen, setModalOpen] = useState(false);
 
   useEffect(() => {
     const el = containerRef.current;
@@ -63,7 +64,7 @@ export default function PortXModelViewer() {
         </ul>
 
         <div className={styles.buttonGroup}>
-          <a href="#" className={styles.primaryButton}>{t('downloadBtn')}</a>
+          <button className={styles.primaryButton} onClick={() => setModalOpen(true)}>{t('downloadBtn')}</button>
           <a href="#" className={styles.secondaryLink}>{t('docsLink')} ➔</a>
         </div>
       </div>
@@ -111,6 +112,13 @@ export default function PortXModelViewer() {
         )}
       </div>
 
+      <PdfLeadModal
+        isOpen={modalOpen}
+        onClose={() => setModalOpen(false)}
+        onSubmit={() => {}}
+        documentName="DFX PASS Data Sheet"
+        fileUrl={datasheetUrl}
+      />
     </div>
   );
 }

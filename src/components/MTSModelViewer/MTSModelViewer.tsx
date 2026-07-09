@@ -5,6 +5,7 @@ import { Canvas } from '@react-three/fiber';
 import { OrbitControls, useGLTF, Environment, ContactShadows, Float, Html, Bounds, Center } from '@react-three/drei';
 import styles from './MTSModelViewer.module.css';
 import { useTranslations } from 'next-intl';
+import PdfLeadModal from '../PdfLeadModal/PdfLeadModal';
 
 function MTSModel() {
   const { scene } = useGLTF('/models/kiosk.glb');
@@ -35,13 +36,14 @@ function Loader() {
   );
 }
 
-export default function MTSModelViewer() {
+export default function MTSModelViewer({ datasheetUrl }: { datasheetUrl?: string }) {
   const t = useTranslations('MTSModelViewer');
   const features = ['f1', 'f2', 'f3', 'f4', 'f5', 'f6'] as const;
 
   // Lazy-load: only mount Canvas when visible in viewport
   const containerRef = useRef<HTMLDivElement>(null);
   const [isVisible, setIsVisible] = useState(false);
+  const [modalOpen, setModalOpen] = useState(false);
 
   useEffect(() => {
     const el = containerRef.current;
@@ -78,7 +80,7 @@ export default function MTSModelViewer() {
         </ul>
 
         <div className={styles.buttonGroup}>
-          <a href="#" className={styles.primaryButton}>{t('downloadBtn')}</a>
+          <button className={styles.primaryButton} onClick={() => setModalOpen(true)}>{t('downloadBtn')}</button>
           <a href="#" className={styles.secondaryLink}>{t('docsLink')} ➔</a>
         </div>
       </div>
@@ -118,6 +120,13 @@ export default function MTSModelViewer() {
           </div>
         )}
       </div>
+      <PdfLeadModal
+        isOpen={modalOpen}
+        onClose={() => setModalOpen(false)}
+        onSubmit={() => {}}
+        documentName="DFX Media Transfer Station Data Sheet"
+        fileUrl={datasheetUrl}
+      />
     </div>
   );
 }

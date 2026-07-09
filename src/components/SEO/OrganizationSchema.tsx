@@ -1,5 +1,3 @@
-import Script from 'next/script';
-
 const schema = {
   '@context': 'https://schema.org',
   '@type': 'Organization',
@@ -40,11 +38,9 @@ const schema = {
 
 export default function OrganizationSchema() {
   return (
-    <Script
-      id="organization-schema"
+    <script
       type="application/ld+json"
       dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }}
-      strategy="beforeInteractive"
     />
   );
 }

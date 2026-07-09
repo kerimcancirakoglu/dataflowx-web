@@ -140,7 +140,13 @@ export default async function SecureRemoteAccessPage({ params }: { params: Promi
 
       {/* Interactive 3D Model Viewer - keeping as Diode for now */}
       <section style={{ padding: '0 2rem', maxWidth: '1400px', margin: '0 auto' }}>
-        <DiodeModelViewerWrapper title="Secure Remote Access" modelPath="/models/secure-remote-access-opt.glb" />
+        <DiodeModelViewerWrapper
+          title="Secure Remote Access"
+          modelPath="/models/secure-remote-access-opt.glb"
+          datasheetUrl={locale === 'tr'
+            ? 'https://cdn.sanity.io/files/15oto8dp/production/8f4d0ba10c9301795f006aaf8facfb72ac3efaa6.pdf'
+            : 'https://cdn.sanity.io/files/15oto8dp/production/509b91b3b92053520d3feff09f3d94933caa089c.pdf'}
+        />
       </section>
 
       <div className="section-spacer" aria-hidden="true" />

@@ -9,8 +9,12 @@ export default function SecureRemoteAccessDiagram() {
   const responsePacketRef = useRef<HTMLDivElement>(null);
   const dataPacketRef = useRef<HTMLDivElement>(null);
   const filePacketRef = useRef<HTMLDivElement>(null);
+  const dataRevPacketRef = useRef<HTMLDivElement>(null);
+  const fileRevPacketRef = useRef<HTMLDivElement>(null);
   const smDataPacketRef = useRef<HTMLDivElement>(null);
   const smFilePacketRef = useRef<HTMLDivElement>(null);
+  const smDataRevPacketRef = useRef<HTMLDivElement>(null);
+  const smFileRevPacketRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     let ctx: any;
@@ -101,6 +105,25 @@ export default function SecureRemoteAccessDiagram() {
           }
         );
       }
+      // CM → Source reverse Data Packet
+      if (dataRevPacketRef.current) {
+        gsap.fromTo(dataRevPacketRef.current,
+          { left: '110%', opacity: 0 },
+          { left: '-10%', opacity: 1, duration: 2, delay: 1.2, ease: 'power1.inOut', repeat: -1,
+            keyframes: { '0%': { opacity: 0 }, '20%': { opacity: 1 }, '80%': { opacity: 1 }, '100%': { opacity: 0 } }
+          }
+        );
+      }
+      // CM → Source reverse File (PDF) Packet
+      if (fileRevPacketRef.current) {
+        gsap.fromTo(fileRevPacketRef.current,
+          { left: '110%', opacity: 0 },
+          { left: '-10%', opacity: 1, duration: 2.5, delay: 2.2, ease: 'power1.inOut', repeat: -1,
+            keyframes: { '0%': { opacity: 0 }, '20%': { opacity: 1 }, '80%': { opacity: 1 }, '100%': { opacity: 0 } }
+          }
+        );
+      }
+
       // SM to Protected Network Data Packet
       if (smDataPacketRef.current) {
         gsap.fromTo(
@@ -143,6 +166,25 @@ export default function SecureRemoteAccessDiagram() {
           }
         );
       }
+
+      // Protected → SM reverse Data Packet
+      if (smDataRevPacketRef.current) {
+        gsap.fromTo(smDataRevPacketRef.current,
+          { left: '110%', opacity: 0 },
+          { left: '-10%', opacity: 1, duration: 2, delay: 1.2, ease: 'power1.inOut', repeat: -1,
+            keyframes: { '0%': { opacity: 0 }, '20%': { opacity: 1 }, '80%': { opacity: 1 }, '100%': { opacity: 0 } }
+          }
+        );
+      }
+      // Protected → SM reverse File (PDF) Packet
+      if (smFileRevPacketRef.current) {
+        gsap.fromTo(smFileRevPacketRef.current,
+          { left: '110%', opacity: 0 },
+          { left: '-10%', opacity: 1, duration: 2.5, delay: 2.2, ease: 'power1.inOut', repeat: -1,
+            keyframes: { '0%': { opacity: 0 }, '20%': { opacity: 1 }, '80%': { opacity: 1 }, '100%': { opacity: 0 } }
+          }
+        );
+      }
       }, containerRef);
     });
     return () => ctx?.revert();
@@ -162,17 +204,30 @@ export default function SecureRemoteAccessDiagram() {
         <div className={styles.networkLabel}>Source<br />Network</div>
       </div>
 
-      {/* Source to CM Connection */}
+      {/* Source ↔ CM Connection */}
       <div className={styles.sourceToCmConnection}>
         <div className={styles.channelRow}>
           <div className={styles.channelLine} />
           <div className={`${styles.channelPacket} ${styles.packetData}`} ref={dataPacketRef}>
             <span className={styles.packetText}>DATA</span>
           </div>
+          <div className={`${styles.channelPacket} ${styles.packetData}`} ref={dataRevPacketRef}>
+            <span className={styles.packetText}>DATA</span>
+          </div>
         </div>
         <div className={styles.channelRow}>
           <div className={styles.channelLine} />
           <div className={`${styles.channelPacket} ${styles.packetFile}`} ref={filePacketRef}>
+            <svg className={styles.packetIcon} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+              <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+              <polyline points="14 2 14 8 20 8"></polyline>
+              <line x1="16" y1="13" x2="8" y2="13"></line>
+              <line x1="16" y1="17" x2="8" y2="17"></line>
+              <polyline points="10 9 9 9 8 9"></polyline>
+            </svg>
+            <span className={styles.packetText}>PDF</span>
+          </div>
+          <div className={`${styles.channelPacket} ${styles.packetFile}`} ref={fileRevPacketRef}>
             <svg className={styles.packetIcon} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
               <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
               <polyline points="14 2 14 8 20 8"></polyline>
@@ -250,17 +305,30 @@ export default function SecureRemoteAccessDiagram() {
 
       </div>
 
-      {/* SM to Protected Network Connection */}
+      {/* SM ↔ Protected Network Connection */}
       <div className={styles.sourceToCmConnection}>
         <div className={styles.channelRow}>
           <div className={styles.channelLine} />
           <div className={`${styles.channelPacket} ${styles.packetData}`} ref={smDataPacketRef}>
             <span className={styles.packetText}>DATA</span>
           </div>
+          <div className={`${styles.channelPacket} ${styles.packetData}`} ref={smDataRevPacketRef}>
+            <span className={styles.packetText}>DATA</span>
+          </div>
         </div>
         <div className={styles.channelRow}>
           <div className={styles.channelLine} />
           <div className={`${styles.channelPacket} ${styles.packetFile}`} ref={smFilePacketRef}>
+            <svg className={styles.packetIcon} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+              <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+              <polyline points="14 2 14 8 20 8"></polyline>
+              <line x1="16" y1="13" x2="8" y2="13"></line>
+              <line x1="16" y1="17" x2="8" y2="17"></line>
+              <polyline points="10 9 9 9 8 9"></polyline>
+            </svg>
+            <span className={styles.packetText}>PDF</span>
+          </div>
+          <div className={`${styles.channelPacket} ${styles.packetFile}`} ref={smFileRevPacketRef}>
             <svg className={styles.packetIcon} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
               <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
               <polyline points="14 2 14 8 20 8"></polyline>

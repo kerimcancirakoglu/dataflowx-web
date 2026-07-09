@@ -17,9 +17,13 @@ export default function DataFlowDiagram({ type }: DataFlowDiagramProps) {
   // Unidirectional refs
   const packetTop1Ref = useRef<HTMLDivElement>(null);
   const packetBot1Ref = useRef<HTMLDivElement>(null);
+  const packetTop1RevRef = useRef<HTMLDivElement>(null);
+  const packetBot1RevRef = useRef<HTMLDivElement>(null);
   const packetCenterRef = useRef<HTMLDivElement>(null);
   const packetTop2Ref = useRef<HTMLDivElement>(null);
   const packetBot2Ref = useRef<HTMLDivElement>(null);
+  const packetTop2RevRef = useRef<HTMLDivElement>(null);
+  const packetBot2RevRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     let ctx: any;
@@ -27,37 +31,34 @@ export default function DataFlowDiagram({ type }: DataFlowDiagramProps) {
       ctx = gsap.context(() => {
       if (type === 'unidirectional') {
         if (!packetTop1Ref.current) return;
-        const tl = gsap.timeline({ repeat: -1 });
+        const fadeKf = { '0%': { opacity: 0 }, '15%': { opacity: 1 }, '85%': { opacity: 1 }, '100%': { opacity: 0 } };
 
-        // Phase 1: Source to TX (Top and Bottom channels, left to right)
-        tl.fromTo(
-          [packetTop1Ref.current, packetBot1Ref.current],
+        // Source → TX (forward)
+        gsap.fromTo([packetTop1Ref.current, packetBot1Ref.current],
           { left: '10%', opacity: 0 },
-          { left: '32%', opacity: 1, duration: 1.2, ease: 'power1.inOut' }
-        ).to(
-          [packetTop1Ref.current, packetBot1Ref.current],
-          { opacity: 0, duration: 0.1 }
+          { left: '32%', opacity: 1, duration: 1.4, ease: 'power1.inOut', repeat: -1, repeatDelay: 1.6, keyframes: fadeKf }
+        );
+        // TX → Source (reverse)
+        gsap.fromTo([packetTop1RevRef.current, packetBot1RevRef.current],
+          { left: '32%', opacity: 0 },
+          { left: '10%', opacity: 1, duration: 1.4, delay: 1.5, ease: 'power1.inOut', repeat: -1, repeatDelay: 1.6, keyframes: fadeKf }
         );
 
-        // Phase 2: TX to RX (Center channel, left to right, single packet)
-        tl.fromTo(
-          packetCenterRef.current,
+        // TX → RX (one-way, single channel — unchanged)
+        gsap.fromTo(packetCenterRef.current,
           { left: '38%', opacity: 0 },
-          { left: '62%', opacity: 1, duration: 1.2, ease: 'none' }
-        ).to(
-          packetCenterRef.current,
-          { opacity: 0, duration: 0.1 }
+          { left: '62%', opacity: 1, duration: 1.4, delay: 0.4, ease: 'none', repeat: -1, repeatDelay: 1.6, keyframes: fadeKf }
         );
 
-        // Phase 3: RX to Protected (Top and Bottom channels, left to right)
-        tl.fromTo(
-          [packetTop2Ref.current, packetBot2Ref.current],
+        // RX → Protected (forward)
+        gsap.fromTo([packetTop2Ref.current, packetBot2Ref.current],
           { left: '68%', opacity: 0 },
-          { left: '90%', opacity: 1, duration: 1.2, ease: 'power1.inOut' }
-        ).to(
-          [packetTop2Ref.current, packetBot2Ref.current],
-          { opacity: 0, duration: 0.1 },
-          "+=0.2"
+          { left: '90%', opacity: 1, duration: 1.4, ease: 'power1.inOut', repeat: -1, repeatDelay: 1.6, keyframes: fadeKf }
+        );
+        // Protected → RX (reverse)
+        gsap.fromTo([packetTop2RevRef.current, packetBot2RevRef.current],
+          { left: '90%', opacity: 0 },
+          { left: '68%', opacity: 1, duration: 1.4, delay: 1.5, ease: 'power1.inOut', repeat: -1, repeatDelay: 1.6, keyframes: fadeKf }
         );
       } else {
         // Cross-domain logic
@@ -121,7 +122,7 @@ export default function DataFlowDiagram({ type }: DataFlowDiagramProps) {
             <div className={styles.lineBot} />
           </div>
 
-          {/* Phase 1 Packets */}
+          {/* Source ↔ TX forward packets */}
           <div className={styles.packetTop} ref={packetTop1Ref}>
             <div className={styles.packetIcons}>
               <svg viewBox="0 0 24 24" fill="none" stroke="#00E5FF" strokeWidth="1.5">
@@ -140,7 +141,26 @@ export default function DataFlowDiagram({ type }: DataFlowDiagramProps) {
             </div>
           </div>
 
-          {/* Phase 2 Packet */}
+          {/* TX → Source reverse packets */}
+          <div className={styles.packetTop} ref={packetTop1RevRef}>
+            <div className={styles.packetIcons}>
+              <svg viewBox="0 0 24 24" fill="none" stroke="#00E5FF" strokeWidth="1.5">
+                <path d="M13 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9z" />
+                <polyline points="13 2 13 9 20 9" />
+              </svg>
+            </div>
+          </div>
+          <div className={styles.packetBot} ref={packetBot1RevRef}>
+            <div className={styles.packetIcons}>
+              <svg viewBox="0 0 24 24" fill="none" stroke="#F5A706" strokeWidth="1.5">
+                <ellipse cx="12" cy="5" rx="9" ry="3" />
+                <path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3" />
+                <path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5" />
+              </svg>
+            </div>
+          </div>
+
+          {/* TX → RX single-channel one-way packet */}
           <div className={styles.packetCenter} ref={packetCenterRef}>
             <div className={styles.packetIcons}>
               <svg viewBox="0 0 24 24" fill="none" stroke="#00E5FF" strokeWidth="1.5">
@@ -155,7 +175,7 @@ export default function DataFlowDiagram({ type }: DataFlowDiagramProps) {
             </div>
           </div>
 
-          {/* Phase 3 Packets */}
+          {/* RX ↔ Protected forward packets */}
           <div className={styles.packetTop} ref={packetTop2Ref}>
             <div className={styles.packetIcons}>
               <svg viewBox="0 0 24 24" fill="none" stroke="#00E5FF" strokeWidth="1.5">
@@ -165,6 +185,25 @@ export default function DataFlowDiagram({ type }: DataFlowDiagramProps) {
             </div>
           </div>
           <div className={styles.packetBot} ref={packetBot2Ref}>
+            <div className={styles.packetIcons}>
+              <svg viewBox="0 0 24 24" fill="none" stroke="#F5A706" strokeWidth="1.5">
+                <ellipse cx="12" cy="5" rx="9" ry="3" />
+                <path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3" />
+                <path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5" />
+              </svg>
+            </div>
+          </div>
+
+          {/* Protected → RX reverse packets */}
+          <div className={styles.packetTop} ref={packetTop2RevRef}>
+            <div className={styles.packetIcons}>
+              <svg viewBox="0 0 24 24" fill="none" stroke="#00E5FF" strokeWidth="1.5">
+                <path d="M13 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9z" />
+                <polyline points="13 2 13 9 20 9" />
+              </svg>
+            </div>
+          </div>
+          <div className={styles.packetBot} ref={packetBot2RevRef}>
             <div className={styles.packetIcons}>
               <svg viewBox="0 0 24 24" fill="none" stroke="#F5A706" strokeWidth="1.5">
                 <ellipse cx="12" cy="5" rx="9" ry="3" />

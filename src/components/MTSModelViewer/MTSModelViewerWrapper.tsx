@@ -8,10 +8,10 @@ const MTSModelViewer = dynamic(
   { ssr: false }
 );
 
-export default function MTSModelViewerWrapper() {
+export default function MTSModelViewerWrapper({ datasheetUrl }: { datasheetUrl?: string }) {
   return (
     <CanvasErrorBoundary>
-      <MTSModelViewer />
+      <MTSModelViewer datasheetUrl={datasheetUrl} />
     </CanvasErrorBoundary>
   );
 }

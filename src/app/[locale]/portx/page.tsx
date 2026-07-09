@@ -98,7 +98,9 @@ export default async function PortXPage({ params }: { params: Promise<{ locale: 
 
         {/* 3D MODEL VIEWER */}
         <section style={{ padding: '0 2rem', maxWidth: '1400px', margin: '0 auto' }}>
-          <PortXModelViewerWrapper />
+          <PortXModelViewerWrapper
+            datasheetUrl="https://cdn.sanity.io/files/15oto8dp/production/d2fa8ee1bd87320fd7504dd8d9ea7c34217ab3d4.pdf"
+          />
         </section>
 
         <div className="section-spacer" aria-hidden="true" />

@@ -8,10 +8,10 @@ const DiodeModelViewer = dynamic(
   { ssr: false }
 );
 
-export default function DiodeModelViewerWrapper({ title, modelPath, hideInfoPanel }: { title?: string, modelPath?: string, hideInfoPanel?: boolean }) {
+export default function DiodeModelViewerWrapper({ title, modelPath, hideInfoPanel, datasheetUrl }: { title?: string, modelPath?: string, hideInfoPanel?: boolean, datasheetUrl?: string }) {
   return (
     <CanvasErrorBoundary>
-      <DiodeModelViewer title={title} modelPath={modelPath} hideInfoPanel={hideInfoPanel} />
+      <DiodeModelViewer title={title} modelPath={modelPath} hideInfoPanel={hideInfoPanel} datasheetUrl={datasheetUrl} />
     </CanvasErrorBoundary>
   );
 }

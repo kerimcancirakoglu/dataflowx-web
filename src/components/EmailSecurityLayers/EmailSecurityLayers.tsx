@@ -3,6 +3,7 @@
 import React, { useEffect, useRef, useState } from 'react';
 import Image from 'next/image';
 import styles from './EmailSecurityLayers.module.css';
+import PdfLeadModal from '../PdfLeadModal/PdfLeadModal';
 
 const LAYER_IMAGES = [
   {
@@ -29,10 +30,11 @@ const LAYER_IMAGES = [
 
 const COMBINED_IMAGE = '/emailassets/newemail/50001.png';
 
-export default function EmailSecurityLayers() {
+export default function EmailSecurityLayers({ datasheetUrl }: { datasheetUrl?: string }) {
   const containerRef = useRef<HTMLDivElement>(null);
   const [isInteractive, setIsInteractive] = useState(false);
   const [activeLayer, setActiveLayer] = useState<number | null>(null);
+  const [modalOpen, setModalOpen] = useState(false);
 
   useEffect(() => {
     let ctx: any;
@@ -102,6 +104,7 @@ export default function EmailSecurityLayers() {
   }, [activeLayer, isInteractive]);
 
   return (
+    <>
     <section className={styles.section} ref={containerRef}>
       <div className={styles.inner}>
         <div className={styles.header}>
@@ -134,9 +137,9 @@ export default function EmailSecurityLayers() {
 
             {/* CTA Buttons below Layer 04 */}
             <div className={styles.ctaRow}>
-              <a href="#" className={styles.ctaDownload}>
+              <button className={styles.ctaDownload} onClick={() => setModalOpen(true)}>
                 Download Datasheet
-              </a>
+              </button>
               <a href="#" className={styles.ctaDocs}>
                 View Documentation
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
@@ -172,6 +175,15 @@ export default function EmailSecurityLayers() {
         </div>
       </div>
     </section>
+
+    <PdfLeadModal
+      isOpen={modalOpen}
+      onClose={() => setModalOpen(false)}
+      onSubmit={() => {}}
+      documentName="DFX Email Security Platform Data Sheet"
+      fileUrl={datasheetUrl}
+    />
+    </>
   );
 }
 

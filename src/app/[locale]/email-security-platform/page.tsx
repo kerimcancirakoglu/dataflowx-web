@@ -111,7 +111,11 @@ export default async function EmailSecurityPage({ params }: { params: Promise<{ 
 
       {/* Vertical Isometric Layers (Image 5 reference) */}
       <section style={{ padding: '0 2rem', maxWidth: '1400px', margin: '0 auto' }}>
-        <EmailSecurityLayers />
+        <EmailSecurityLayers
+          datasheetUrl={locale === 'tr'
+            ? 'https://cdn.sanity.io/files/15oto8dp/production/2af19abc75e8fe789d3290b2eb37a5df959e7b6e.pdf'
+            : 'https://cdn.sanity.io/files/15oto8dp/production/be418709f8f967d2550d0b5d0415cb9c89874b13.pdf'}
+        />
       </section>
 
       <div className="section-spacer" aria-hidden="true" />

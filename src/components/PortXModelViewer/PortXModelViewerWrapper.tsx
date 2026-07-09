@@ -24,11 +24,11 @@ const PortXModelViewer = dynamic(() => import('./PortXModelViewer'), {
   ),
 });
 
-export default function PortXModelViewerWrapper() {
+export default function PortXModelViewerWrapper({ datasheetUrl }: { datasheetUrl?: string }) {
   return (
     <div style={{ width: '100%', height: '100%' }}>
       <CanvasErrorBoundary>
-        <PortXModelViewer />
+        <PortXModelViewer datasheetUrl={datasheetUrl} />
       </CanvasErrorBoundary>
     </div>
   );
