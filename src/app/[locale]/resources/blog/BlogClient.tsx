@@ -37,10 +37,21 @@ function stripHtml(html: string): string {
   return html.replace(/<[^>]*>/g, '').trim();
 }
 
-function getCoverImage(contentHtml?: string, fallback: string = '/og-image.jpg'): string {
-  if (!contentHtml) return fallback;
-  const match = contentHtml.match(/<img[^>]+src=["']([^"']+)["']/i);
-  return match ? match[1] : fallback;
+function FallbackCover({ title }: { title: string }) {
+  return (
+    <div style={{ 
+      width: '100%', height: '100%', 
+      backgroundColor: '#0a0a0a', 
+      backgroundImage: 'radial-gradient(circle at top right, rgba(0, 180, 255, 0.1), transparent 50%), radial-gradient(circle at bottom left, rgba(245, 167, 6, 0.1), transparent 50%)',
+      display: 'flex', alignItems: 'center', justifyContent: 'center', 
+      padding: '24px', textAlign: 'center',
+      position: 'absolute', top: 0, left: 0
+    }}>
+      <h3 style={{ color: '#fff', fontSize: '1.2rem', fontWeight: 600, margin: 0, lineHeight: 1.4 }}>
+        {title}
+      </h3>
+    </div>
+  );
 }
 
 // Format ISO date nicely
@@ -155,12 +166,16 @@ export default function BlogClient({ posts }: BlogClientProps) {
           {heroPost ? (
             <div className={styles.heroCard}>
               <div className={styles.heroImageWrapper}>
+                {heroPost.featuredImage?.node.sourceUrl ? (
                   <Image
-                    src={heroPost.featuredImage?.node.sourceUrl ?? getCoverImage(heroPost.content)}
+                    src={heroPost.featuredImage.node.sourceUrl}
                     alt={heroPost.featuredImage?.node.altText ?? decode(heroPost.title)}
                     fill style={{ objectFit: 'cover' }}
                     className={styles.heroImage}
                   />
+                ) : (
+                  <FallbackCover title={decode(heroPost.title)} />
+                )}
               </div>
               <div className={styles.heroContent}>
                 <span className={styles.metaData}>
@@ -191,12 +206,16 @@ export default function BlogClient({ posts }: BlogClientProps) {
                 : featuredSidebar.map(post => (
                   <Link href={`/${locale}/resources/blog/${post.slug}`} key={post.slug} className={styles.featuredListItem}>
                     <div className={styles.featuredListImageWrapper}>
-                        <Image
-                          src={post.featuredImage?.node.sourceUrl ?? getCoverImage(post.content)}
-                          alt={post.featuredImage?.node.altText ?? decode(post.title)}
-                          fill style={{ objectFit: 'cover' }}
-                          className={styles.featuredListImage}
-                        />
+                        {post.featuredImage?.node.sourceUrl ? (
+                          <Image
+                            src={post.featuredImage.node.sourceUrl}
+                            alt={post.featuredImage?.node.altText ?? decode(post.title)}
+                            fill style={{ objectFit: 'cover' }}
+                            className={styles.featuredListImage}
+                          />
+                        ) : (
+                          <FallbackCover title={decode(post.title)} />
+                        )}
                     </div>
                     <div className={styles.featuredListContent}>
                       <span className={styles.metaDataSmall}>
@@ -228,12 +247,16 @@ export default function BlogClient({ posts }: BlogClientProps) {
                   className={`${styles.card} ${isLarge ? styles.largeCard : ''}`}
                 >
                   <div className={styles.cardImageWrapper}>
-                    <Image
-                      src={post.featuredImage?.node.sourceUrl ?? getCoverImage(post.content)}
-                      alt={post.featuredImage?.node.altText ?? decode(post.title)}
-                      fill style={{ objectFit: 'cover' }}
-                      className={styles.cardImage}
-                    />
+                    {post.featuredImage?.node.sourceUrl ? (
+                      <Image
+                        src={post.featuredImage.node.sourceUrl}
+                        alt={post.featuredImage?.node.altText ?? decode(post.title)}
+                        fill style={{ objectFit: 'cover' }}
+                        className={styles.cardImage}
+                      />
+                    ) : (
+                      <FallbackCover title={decode(post.title)} />
+                    )}
                   </div>
                   <div className={styles.cardContent}>
                     <span className={styles.metaData}>

@@ -12,7 +12,7 @@ interface Post {
   title: string;
   date: string;
   category: string;
-  image: string;
+  image: string | null;
   link: string;
 }
 
@@ -22,7 +22,7 @@ const MOCK_POSTS: Post[] = [
     title: 'Beyond Network Visibility: Implementing Prevention-First Security for SCADA Environments',
     date: 'JUNE 2, 2026',
     category: 'CRITICAL INFRASTRUCTURE',
-    image: '/og-image.jpg',
+    image: null,
     link: '#',
   },
   {
@@ -30,7 +30,7 @@ const MOCK_POSTS: Post[] = [
     title: 'OT Security Alert: How the "Broken Windows Theory" Predicts Your Next Breach',
     date: 'MAY 18, 2026',
     category: 'OT SECURITY',
-    image: '/og-image.jpg',
+    image: null,
     link: '#',
   },
   {
@@ -38,10 +38,27 @@ const MOCK_POSTS: Post[] = [
     title: 'How AI Models Like Claude are Targeting SCADA Infrastructure: Monterrey Water Utility Breach',
     date: 'MAY 11, 2026',
     category: 'AI THREATS',
-    image: '/og-image.jpg',
+    image: null,
     link: '#',
   },
 ];
+
+function FallbackCover({ title }: { title: string }) {
+  return (
+    <div style={{ 
+      width: '100%', height: '100%', 
+      backgroundColor: '#0a0a0a', 
+      backgroundImage: 'radial-gradient(circle at top right, rgba(0, 180, 255, 0.1), transparent 50%), radial-gradient(circle at bottom left, rgba(245, 167, 6, 0.1), transparent 50%)',
+      display: 'flex', alignItems: 'center', justifyContent: 'center', 
+      padding: '24px', textAlign: 'center',
+      position: 'absolute', top: 0, left: 0
+    }}>
+      <h3 style={{ color: '#fff', fontSize: '1.2rem', fontWeight: 600, margin: 0, lineHeight: 1.4, zIndex: 2 }}>
+        {title}
+      </h3>
+    </div>
+  );
+}
 
 function stripHtml(html: string) {
   if (!html) return '';
@@ -73,7 +90,7 @@ async function getLatestPosts(locale: string): Promise<Post[]> {
           title: post.title,
           date: formattedDate,
           category,
-          image: post.featuredImage || '/og-image.jpg',
+          image: post.featuredImage || null,
           link: `/${locale}/resources/blog/${post.slug}`,
         };
       });
@@ -101,7 +118,7 @@ export default async function LatestNews() {
             <p className={styles.overline}>KNOWLEDGE HUB</p>
             <h2 className={styles.sectionTitle}>
               Latest from<br />
-              <span className={styles.titleHighlight}>DataFlowX</span>
+              Data<span className={styles.titleHighlight}>FlowX</span>
             </h2>
           </div>
 
@@ -133,13 +150,17 @@ export default async function LatestNews() {
           {featured && (
             <Link href={featured.link} className={styles.featuredCard}>
               <div className={styles.featuredImageWrapper}>
-                <Image
-                  src={featured.image}
-                  alt={featured.title}
-                  fill
-                  style={{ objectFit: 'cover' }}
-                  className={styles.featuredImage}
-                />
+                {featured.image ? (
+                  <Image
+                    src={featured.image}
+                    alt={featured.title}
+                    fill
+                    style={{ objectFit: 'cover' }}
+                    className={styles.featuredImage}
+                  />
+                ) : (
+                  <FallbackCover title={featured.title} />
+                )}
                 <div className={styles.featuredOverlay} />
               </div>
               <div className={styles.featuredBody}>
@@ -163,13 +184,17 @@ export default async function LatestNews() {
             {sidePosts.map((post) => (
               <Link key={post.id} href={post.link} className={styles.sideCard}>
                 <div className={styles.sideImageWrapper}>
-                  <Image
-                    src={post.image}
-                    alt={post.title}
-                    fill
-                    style={{ objectFit: 'cover' }}
-                    className={styles.sideImage}
-                  />
+                  {post.image ? (
+                    <Image
+                      src={post.image}
+                      alt={post.title}
+                      fill
+                      style={{ objectFit: 'cover' }}
+                      className={styles.sideImage}
+                    />
+                  ) : (
+                    <FallbackCover title={post.title} />
+                  )}
                   <div className={styles.sideOverlay} />
                 </div>
                 <div className={styles.sideBody}>
