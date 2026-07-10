@@ -17,7 +17,7 @@ export default function UseCasesClient({ t }: { t: any }) {
       description: t.c1.description,
       image: '/svgler/server.svg',
       glowColor: '#00B4FF',
-      url: '/resources?type=Use+Case',
+      url: '/resources?type=Use%20Case',
     },
     {
       id: '02',
@@ -25,7 +25,7 @@ export default function UseCasesClient({ t }: { t: any }) {
       description: t.c2.description,
       image: '/svgler/trafoyeni.svg',
       glowColor: '#FFFFFF',
-      url: '/resources?type=Use+Case',
+      url: '/resources?type=Use%20Case',
     },
     {
       id: '03',
@@ -33,7 +33,7 @@ export default function UseCasesClient({ t }: { t: any }) {
       description: t.c3.description,
       image: '/svgler/walletcrypto.svg',
       glowColor: '#FFD700',
-      url: '/resources?type=Use+Case',
+      url: '/resources?type=Use%20Case',
     },
     {
       id: '04',
@@ -41,7 +41,7 @@ export default function UseCasesClient({ t }: { t: any }) {
       description: t.c4.description,
       image: '/svgler/robot.svg',
       glowColor: '#F5A706',
-      url: '/resources?type=Use+Case',
+      url: '/resources?type=Use%20Case',
     },
   ];
 

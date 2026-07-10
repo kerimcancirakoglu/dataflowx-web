@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useMemo, Suspense } from 'react';
+import { useState, useMemo, useEffect, Suspense } from 'react';
 import { useSearchParams } from 'next/navigation';
 import styles from './page.module.css';
 import Image from 'next/image';
@@ -191,6 +191,15 @@ function ResourcesContent() {
   const [selectedUseCases, setSelectedUseCases] = useState<Set<UseCaseType>>(
     initialUseCase ? new Set([initialUseCase]) : new Set()
   );
+
+  // URL param değiştiğinde state'i güncelle (client-side navigation'da component remount olmayabilir)
+  useEffect(() => {
+    setSelectedTypes(initialType ? new Set([initialType]) : new Set());
+  }, [initialType]);
+
+  useEffect(() => {
+    setSelectedUseCases(initialUseCase ? new Set([initialUseCase]) : new Set());
+  }, [initialUseCase]);
 
   // PDF Lead Gen Modal State
   const [downloadTarget, setDownloadTarget] = useState<{ title: string; fileUrl?: string } | null>(null);
