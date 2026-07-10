@@ -42,8 +42,6 @@ export default function PdfLeadModal({
   }, [isOpen]);
 
   const triggerDownload = (url: string) => {
-    // Vercel deployment için en sağlıklı ve güvenilir yöntem:
-    // Dosyayı kendi sunucumuzdan değil, WP Engine'in hızlı CDN'i üzerinden indirtmek.
     window.location.href = url;
   };
 
@@ -63,6 +61,7 @@ export default function PdfLeadModal({
       website_url: formData.get('website_url'), // Honeypot
       turnstileToken: formData.get('cf-turnstile-response'),
       documentName,
+      fileUrl,
     };
 
     try {
@@ -81,9 +80,15 @@ export default function PdfLeadModal({
       // Show success tick
       setIsSuccess(true);
 
-      // After 2s: trigger download (if fileUrl provided), call callbacks, close modal
+      // After 2s: trigger download via signed proxy URL, then close modal
       setTimeout(() => {
-        if (fileUrl) {
+        if (result.downloadToken) {
+          const downloadUrl =
+            `/api/download?token=${encodeURIComponent(result.downloadToken)}` +
+            `&name=${encodeURIComponent(documentName)}`;
+          triggerDownload(downloadUrl);
+        } else if (fileUrl) {
+          // Fallback if DOWNLOAD_SECRET is not configured
           triggerDownload(fileUrl);
         }
         onSubmit();

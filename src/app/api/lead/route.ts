@@ -1,5 +1,84 @@
 import { NextResponse } from 'next/server';
 import { Resend } from 'resend';
+import { generateDownloadToken } from '@/lib/download-token';
+
+const SANITY_CDN_PREFIX = 'https://cdn.sanity.io/';
+
+async function syncToHubSpot(data: {
+  email: string;
+  fullName: string;
+  company: string;
+  documentName?: string;
+  token: string;
+}): Promise<void> {
+  const headers = {
+    Authorization: `Bearer ${data.token}`,
+    'Content-Type': 'application/json',
+  };
+
+  const [firstName, ...rest] = data.fullName.trim().split(' ');
+  const lastName = rest.join(' ') || '-';
+
+  // Create contact; if exists (409) fetch and patch instead
+  const createRes = await fetch('https://api.hubapi.com/crm/v3/objects/contacts', {
+    method: 'POST',
+    headers,
+    body: JSON.stringify({
+      properties: {
+        email: data.email,
+        firstname: firstName,
+        lastname: lastName,
+        company: data.company,
+        hs_lead_status: 'NEW',
+      },
+    }),
+  });
+
+  let contactId: string | undefined;
+
+  if (createRes.ok) {
+    contactId = (await createRes.json()).id;
+  } else if (createRes.status === 409) {
+    const findRes = await fetch(
+      `https://api.hubapi.com/crm/v3/objects/contacts/${encodeURIComponent(data.email)}?idProperty=email`,
+      { headers }
+    );
+    if (findRes.ok) {
+      const existing = await findRes.json();
+      contactId = existing.id;
+      if (data.company) {
+        await fetch(`https://api.hubapi.com/crm/v3/objects/contacts/${contactId}`, {
+          method: 'PATCH',
+          headers,
+          body: JSON.stringify({ properties: { company: data.company } }),
+        });
+      }
+    }
+  } else {
+    console.error('[HubSpot] Contact creation failed:', await createRes.text());
+    return;
+  }
+
+  // Add a timeline note with the downloaded document name
+  if (contactId && data.documentName) {
+    await fetch('https://api.hubapi.com/crm/v3/objects/notes', {
+      method: 'POST',
+      headers,
+      body: JSON.stringify({
+        properties: {
+          hs_note_body: `Downloaded: ${data.documentName}`,
+          hs_timestamp: new Date().toISOString(),
+        },
+        associations: [
+          {
+            to: { id: contactId },
+            types: [{ associationCategory: 'HUBSPOT_DEFINED', associationTypeId: 202 }],
+          },
+        ],
+      }),
+    });
+  }
+}
 
 const HONEYPOT_FIELD = 'website_url';
 
@@ -23,7 +102,12 @@ export async function POST(req: Request) {
       return NextResponse.json({ success: true, message: 'Received' }, { status: 200 });
     }
 
-    const { fullName, email, company, documentName, turnstileToken, country, message } = body;
+    const { fullName, email, company, documentName, fileUrl, turnstileToken, country, message } = body;
+
+    // Validate fileUrl is a Sanity CDN URL (prevent open-proxy abuse)
+    if (fileUrl && !String(fileUrl).startsWith(SANITY_CDN_PREFIX)) {
+      return NextResponse.json({ error: 'Invalid file URL' }, { status: 400 });
+    }
 
     // 2. Basic Validation
     if (!fullName || !email) {
@@ -126,11 +210,24 @@ export async function POST(req: Request) {
     
     console.log(`[Lead Captured] ${fullName} from ${company} (${email}) downloaded ${documentName}`);
 
-    // 5. Success
-    return NextResponse.json({ 
-      success: true, 
-      message: 'Lead captured successfully' 
-    });
+    // 4b. HubSpot CRM sync (non-blocking — failure doesn't affect lead capture)
+    if (process.env.HUBSPOT_ACCESS_TOKEN) {
+      syncToHubSpot({
+        email,
+        fullName,
+        company: company ?? '',
+        documentName,
+        token: process.env.HUBSPOT_ACCESS_TOKEN,
+      }).catch((err) => console.error('[HubSpot] Sync error:', err));
+    }
+
+    // 5. Generate a short-lived signed download token
+    let downloadToken: string | null = null;
+    if (fileUrl && process.env.DOWNLOAD_SECRET) {
+      downloadToken = await generateDownloadToken(String(fileUrl), process.env.DOWNLOAD_SECRET);
+    }
+
+    return NextResponse.json({ success: true, downloadToken });
 
   } catch (error) {
     console.error('Lead Generation API Error:', error);
