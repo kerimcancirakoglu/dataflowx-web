@@ -41,8 +41,7 @@ function FallbackCover({ title }: { title: string }) {
   return (
     <div style={{ 
       width: '100%', height: '100%', 
-      backgroundColor: '#0a0a0a', 
-      backgroundImage: 'radial-gradient(circle at top right, rgba(0, 180, 255, 0.1), transparent 50%), radial-gradient(circle at bottom left, rgba(245, 167, 6, 0.1), transparent 50%)',
+      backgroundColor: '#000000', 
       display: 'flex', alignItems: 'center', justifyContent: 'center', 
       padding: '24px', textAlign: 'center',
       position: 'absolute', top: 0, left: 0
