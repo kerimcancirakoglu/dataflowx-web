@@ -16,7 +16,9 @@ export default function SandboxDiagram() {
 
   useEffect(() => {
     let ctx: any;
+    let destroyed = false;
     import('gsap').then(({ gsap }) => {
+      if (destroyed) return;
       ctx = gsap.context(() => {
       // Hologram ikonlarının hafifçe süzülmesi
       gsap.to('.hologram-icon', {
@@ -138,7 +140,7 @@ export default function SandboxDiagram() {
     }, containerRef);
     });
 
-    return () => ctx.revert();
+    return () => { destroyed = true; ctx?.revert(); };
   }, []);
 
   // Hologram ikonları (AI, Kullanıcılar, Bulut vs.)

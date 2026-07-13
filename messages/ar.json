@@ -42,7 +42,8 @@
       "networkSecurity": "أمن الشبكات",
       "fileSecurity": "أمن الملفات",
       "emailSecurity": "أمن البريد الإلكتروني",
-      "otSecurity": "أمن التكنولوجيا التشغيلية"
+      "otSecurity": "أمن التكنولوجيا التشغيلية",
+      "dataSecurity": "أمن البيانات"
     },
     "items": {
       "unidirectional": {

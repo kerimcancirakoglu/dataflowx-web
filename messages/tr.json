@@ -42,7 +42,8 @@
       "networkSecurity": "Ağ Güvenliği",
       "fileSecurity": "Dosya Güvenliği",
       "emailSecurity": "E-Posta Güvenliği",
-      "otSecurity": "OT Güvenliği"
+      "otSecurity": "OT Güvenliği",
+      "dataSecurity": "Veri Güvenliği"
     },
     "items": {
       "unidirectional": {

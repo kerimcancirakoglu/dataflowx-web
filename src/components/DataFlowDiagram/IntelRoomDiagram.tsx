@@ -8,7 +8,9 @@ export default function IntelRoomDiagram() {
 
   useEffect(() => {
     let ctx: any;
+    let destroyed = false;
     import('gsap').then(({ gsap }) => {
+      if (destroyed) return;
       ctx = gsap.context(() => {
       // Rotate the radar dish/circle
       gsap.to('.radar-sweep', {
@@ -67,7 +69,7 @@ export default function IntelRoomDiagram() {
     }, containerRef);
     });
 
-    return () => ctx.revert();
+    return () => { destroyed = true; ctx?.revert(); };
   }, []);
 
   return (

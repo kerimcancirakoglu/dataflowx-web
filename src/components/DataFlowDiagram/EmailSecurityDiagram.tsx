@@ -8,7 +8,9 @@ export default function EmailSecurityDiagram() {
 
   useEffect(() => {
     let ctx: any;
+    let destroyed = false;
     import('gsap').then(({ gsap }) => {
+      if (destroyed) return;
       ctx = gsap.context(() => {
       const mails = gsap.utils.toArray<HTMLElement>('.mail-wrapper');
       const masterTl = gsap.timeline({ repeat: -1 });
@@ -95,7 +97,7 @@ export default function EmailSecurityDiagram() {
     }, containerRef);
     });
 
-    return () => ctx.revert();
+    return () => { destroyed = true; ctx?.revert(); };
   }, []);
 
   const mailItems = [

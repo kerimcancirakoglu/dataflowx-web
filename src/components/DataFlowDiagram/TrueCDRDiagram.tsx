@@ -8,7 +8,9 @@ export default function DfxCdrDiagram() {
 
   useEffect(() => {
     let ctx: any;
+    let destroyed = false;
     import('gsap').then(({ gsap }) => {
+      if (destroyed) return;
       ctx = gsap.context(() => {
       // Background elements floating
       gsap.to('.floating-element', {
@@ -131,7 +133,7 @@ export default function DfxCdrDiagram() {
     }, containerRef);
     });
 
-    return () => ctx.revert();
+    return () => { destroyed = true; ctx?.revert(); };
   }, []);
 
   return (
@@ -189,10 +191,10 @@ export default function DfxCdrDiagram() {
         </div>
 
         {/* Labels */}
-        <div className={`${styles.label} floating-element`} style={{ left: '-120px', top: '-60px' }}>
+        <div className={`${styles.label} ${styles.labelLeft} floating-element`}>
           <span>MALICIOUS FILE</span>
         </div>
-        <div className={`${styles.label} floating-element`} style={{ right: '-120px', top: '60px' }}>
+        <div className={`${styles.label} ${styles.labelRight} floating-element`}>
           <span>CLEAN RECONSTRUCTED</span>
         </div>
 
