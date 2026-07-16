@@ -1,0 +1,335 @@
+.wrapper {
+  position: relative;
+  min-height: 100dvh;
+  width: 100%;
+  overflow-x: hidden;
+  overflow-y: auto;
+  background: #000;
+  color: #fff;
+  font-family: var(--font-geist-sans), system-ui, sans-serif;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  padding: 48px 24px 40px;
+}
+
+/* --- Background layers --- */
+.bg {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+}
+
+/* Large DataFlowX X watermark — spans the full viewport height, animated */
+.xBackground {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  width: auto;
+  height: min(115vh, 1300px);
+  min-width: 100vw;
+  opacity: 0.9;
+  pointer-events: none;
+}
+
+.xBackground svg {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+.xStaticPaths * {
+  fill: none;
+  stroke: rgba(255, 255, 255, 0.16);
+  stroke-width: 2px;
+}
+
+.xAnimatedPathsOrange *,
+.xAnimatedPathsWhite * {
+  fill: none;
+  stroke-width: 3px;
+  stroke-dasharray: 80 160;
+  animation: xGlowRun 2.5s linear infinite;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  /* Forces its own compositing layer — without this, Safari/WebKit can
+     fail to re-tick the stroke-dashoffset animation on filtered SVG
+     shapes and the whole thing visually freezes. */
+  will-change: stroke-dashoffset;
+  transform: translateZ(0);
+}
+
+/* Filter must live on the animated element itself, not a shared parent —
+   Safari/WebKit fails to repaint a filtered ancestor's children when only
+   their stroke-dashoffset animates, which froze the whole animation there.
+   Kept to 2 shadow layers (not 4) to stay cheap for Chrome too. */
+.xAnimatedPathsOrange * {
+  stroke: #ffd166;
+  filter:
+    drop-shadow(0 0 5px rgba(255, 209, 102, 1))
+    drop-shadow(0 0 20px rgba(245, 167, 6, 0.75));
+}
+
+.xAnimatedPathsWhite * {
+  stroke: #ffffff;
+  filter:
+    drop-shadow(0 0 5px rgba(255, 255, 255, 1))
+    drop-shadow(0 0 20px rgba(160, 210, 255, 0.7));
+}
+
+/* Stagger animations for an overlapping runner effect (9 elements per group) */
+.xAnimatedPathsOrange *:nth-child(3n + 1) { animation-delay: 0s; }
+.xAnimatedPathsOrange *:nth-child(3n + 2) { animation-delay: 1.3s; }
+.xAnimatedPathsOrange *:nth-child(3n + 3) { animation-delay: 2.6s; }
+
+.xAnimatedPathsWhite *:nth-child(3n + 1) { animation-delay: 0.6s; }
+.xAnimatedPathsWhite *:nth-child(3n + 2) { animation-delay: 1.9s; }
+.xAnimatedPathsWhite *:nth-child(3n + 3) { animation-delay: 3.2s; }
+
+@keyframes xGlowRun {
+  0% { stroke-dashoffset: 240; }
+  100% { stroke-dashoffset: 0; }
+}
+
+/* Blurred glow blobs — pushed to the screen edges for a full-bleed feel */
+.glow {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(120px);
+}
+
+.glowAmberTL {
+  top: -12vh;
+  left: -8vw;
+  width: 42vw;
+  height: 42vw;
+  background: #f5a706;
+  opacity: 0.9;
+}
+
+.glowGrayBL {
+  bottom: -18vh;
+  left: 2vw;
+  width: 34vw;
+  height: 34vw;
+  background: #989898;
+  opacity: 0.5;
+}
+
+.glowWhiteTR {
+  top: -6vh;
+  right: 2vw;
+  width: 26vw;
+  height: 26vw;
+  background: #f2f2f2;
+  opacity: 0.3;
+}
+
+/* Soft amber bokeh across the top */
+.glowAmberTop {
+  top: -8vh;
+  left: 38%;
+  width: 30vw;
+  height: 24vh;
+  border-radius: 40px;
+  background: #f5a706;
+  opacity: 0.5;
+  filter: blur(110px);
+}
+
+.glowAmberMid {
+  top: 22%;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 80vw;
+  height: 16vh;
+  border-radius: 60px;
+  background: linear-gradient(90deg, rgba(245, 167, 6, 0) 0%, rgba(245, 167, 6, 0.5) 50%, rgba(245, 167, 6, 0) 100%);
+  filter: blur(90px);
+}
+
+/* Subtle vignette — only the extreme edges, so the scene fills the screen */
+.vignette {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(140% 120% at 50% 42%, rgba(0, 0, 0, 0) 62%, rgba(0, 0, 0, 0.55) 100%);
+}
+
+/* --- Foreground content --- */
+.content {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  max-width: 480px;
+  margin: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 44px 40px 36px;
+  border-radius: 32px;
+  background: rgba(6, 6, 6, 0.78);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  /* Kept modest (no saturate boost, moderate radius): enough for a glass
+     feel in Safari without the heavy per-frame recompute that lagged
+     Chrome, and without the amber-bleed saturate caused before. */
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.5);
+}
+
+@media (max-width: 520px) {
+  .content {
+    padding: 32px 24px 28px;
+    border-radius: 24px;
+  }
+}
+
+.title {
+  font-size: 52px;
+  font-weight: 800;
+  letter-spacing: -1px;
+  margin: 0 0 32px;
+  text-align: center;
+  text-shadow: 0 2px 30px rgba(0, 0, 0, 0.5);
+}
+
+.form {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 22px;
+}
+
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.label {
+  font-size: 14px;
+  font-weight: 400;
+  color: #e5e5e5;
+  padding-left: 4px;
+}
+
+.input {
+  width: 100%;
+  height: 58px;
+  border: none;
+  border-radius: 30px;
+  background: #fff;
+  color: #111;
+  font-size: 16px;
+  padding: 0 26px;
+  outline: none;
+  transition: box-shadow 0.18s ease;
+}
+
+.input::placeholder {
+  color: #9a9a9a;
+}
+
+.input:focus {
+  box-shadow: 0 0 0 3px rgba(245, 167, 6, 0.6);
+}
+
+.submit {
+  margin-top: 18px;
+  align-self: center;
+  width: 290px;
+  max-width: 100%;
+  height: 56px;
+  border: none;
+  border-radius: 30px;
+  background: #f5a706;
+  color: #1a1400;
+  font-size: 17px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background 0.18s ease, transform 0.1s ease;
+}
+
+.submit:hover {
+  background: #ffb92a;
+}
+
+.submit:active {
+  transform: translateY(1px);
+}
+
+.submit:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+}
+
+.error {
+  color: #ff8a8a;
+  font-size: 14px;
+  text-align: center;
+  min-height: 18px;
+}
+
+.consent {
+  margin-top: 20px;
+  display: flex;
+  gap: 10px;
+  font-size: 13px;
+  line-height: 1.5;
+  color: #cfcfcf;
+}
+
+.consent input {
+  margin-top: 2px;
+  accent-color: #f5a706;
+  width: 15px;
+  height: 15px;
+  flex-shrink: 0;
+}
+
+.consent a {
+  color: #e9e9e9;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+.consent a:hover {
+  color: #f5a706;
+}
+
+/* --- Footer brand --- */
+.brand {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  margin-top: 24px;
+}
+
+.brandLogo {
+  width: 170px;
+  height: auto;
+}
+
+.tagline {
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.3px;
+  color: #d4d4d4;
+}
+
+@media (max-width: 520px) {
+  .title {
+    font-size: 40px;
+    margin: 24px 0 32px;
+  }
+
+  .brandLogo {
+    width: 140px;
+  }
+}
